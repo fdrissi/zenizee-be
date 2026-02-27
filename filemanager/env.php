@@ -24,7 +24,8 @@ function loadEnv($path) {
             $val = substr($val, 1, -1);
         }
         $_ENV[$key] = $val;
-        putenv("$key=$val");
+        // putenv disabled on this host
+        if (function_exists("putenv")) { putenv("$key=$val"); }
     }
 }
 
