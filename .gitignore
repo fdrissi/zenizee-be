@@ -1,2 +1,25 @@
+# Environment
+.env
+
+# Sessions
 sessions/
+
+# Backups
 backup_public_html_*
+*.bak
+
+# Uploaded images
+images/event/
+images/category/
+images/artist/
+images/gallery/
+images/organizer/
+images/sponsore/
+images/cover/
+images/facility/
+images/restriction/
+images/coupon/
+images/user/
+images/profile/
+images/qr/
+images/website/

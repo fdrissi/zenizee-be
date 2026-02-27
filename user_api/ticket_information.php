@@ -1,8 +1,9 @@
-<?php 
+<?php
+error_reporting(E_ALL & ~E_DEPRECATED);
 require dirname(dirname(__FILE__)) . '/filemanager/evconfing.php';
 require_once dirname( dirname(__FILE__) ).'/qr/qrlib.php';
 
-header('Content-type: text/json');
+header('Content-type: application/json');
 $data = json_decode(file_get_contents('php://input'), true);
 $uid = $data['uid'];
 $tid = $data['ticket_id'];
@@ -24,8 +25,7 @@ else
 	$datav['ticket_title'] =  $eve['title'];
 	
 	
-	setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
-	$datav['start_time'] = strftime("%A", strtotime($eve['sdate'])).', '.strftime("%I:%M %p", strtotime($eve['stime'])).' à '.strftime("%I:%M %p", strtotime($eve['etime']));
+	$datav['start_time'] = date("l", strtotime($eve['sdate'])).', '.date("h:i A", strtotime($eve['stime'])).' à '.date("h:i A", strtotime($eve['etime']));
 	$datav['event_address'] = $eve['address'];
 	$datav['event_address_title'] = $eve['place_name'];
 	$datav['event_latitude'] = $eve['latitude'];
@@ -48,8 +48,7 @@ $filepath = dirname( dirname(__FILE__) ).'/images/qr/' . $filename;
 
 // Generate QR code and save it to the server
 QRcode::png($data_print, $filepath);
-$server_url = 'server_url'; // Your server URL
-$qrcode_url = $server_url.'images/qr/'.$filename;
+$qrcode_url = '/images/qr/'.$filename;
 
 	$datav['qrcode'] = $qrcode_url;
     $datav['unique_code'] = $ticket['uniq_id'];

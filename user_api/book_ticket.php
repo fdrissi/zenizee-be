@@ -44,19 +44,19 @@ $getcommission = $evmulti
 $commission = $getcommission["commission"];
 
 if (
-    $pmethodid == "" ||
-    $transactionid == "" ||
-    $typeid == "" ||
-    $uid == "" ||
-    $tax == "" ||
-    $eid == "" ||
-    $type == "" ||
-    $price == "" ||
-    $subtotal == "" ||
-    $couamt == "" ||
-    $totalticket == "" ||
-    $totalamt == "" ||
-    $sponsoreid == ""
+    $pmethodid === "" || $pmethodid === null ||
+    $transactionid === "" || $transactionid === null ||
+    $typeid === "" || $typeid === null ||
+    $uid === "" || $uid === null ||
+    $tax === "" || $tax === null ||
+    $eid === "" || $eid === null ||
+    $type === "" || $type === null ||
+    $price === "" || $price === null ||
+    $subtotal === "" || $subtotal === null ||
+    $couamt === "" || $couamt === null ||
+    $totalticket === "" || $totalticket === null ||
+    $totalamt === "" || $totalamt === null ||
+    $sponsoreid === "" || $sponsoreid === null
 ) {
     $returnArr = [
         "ResponseCode" => "401",
