@@ -36,7 +36,7 @@ if ($uid == "" or $longs == "" || $lats == "") {
     $event = $evmulti->query(
         "select id,title,img,place_name,sdate,stime,etime from tbl_event
  where event_status='Pending'
-  and status=1".$cityFilter." order by id desc"
+  and status=1 AND sdate >= CURDATE()".$cityFilter." order by id desc"
     );
     $ev = [];
     while ($row = $event->fetch_assoc()) {
@@ -57,7 +57,7 @@ if ($uid == "" or $longs == "" || $lats == "") {
     $event = $evmulti->query(
         "select id,title,img,place_name,sdate,stime,etime from tbl_event
  where event_status='Pending'
-  and status=1".$cityFilter." order by sdate desc"
+  and status=1 AND sdate >= CURDATE()".$cityFilter." order by sdate desc"
     );
     $ev = [];
     while ($row = $event->fetch_assoc()) {
@@ -113,7 +113,7 @@ if ($uid == "" or $longs == "" || $lats == "") {
 ,img,place_name,sdate,stime,etime,latitude,longtitude
  FROM tbl_event
  where status=1
-  and event_status='Pending'".$cityFilter."
+  and event_status='Pending' AND sdate >= CURDATE()".$cityFilter."
    order by distance"
     );
     $evs = [];

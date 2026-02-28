@@ -18,10 +18,14 @@ function validate_booking_input($input) {
         'tax', 'sponsore_id', 'p_method_id', 'plimit'
     ];
 
+    $missing = [];
     foreach ($required as $field) {
         if (!isset($input[$field]) || $input[$field] === '' || $input[$field] === null) {
-            json_error("Something Went wrong  try again !");
+            $missing[] = $field;
         }
+    }
+    if (!empty($missing)) {
+        json_error("Missing fields: " . implode(", ", $missing));
     }
 
     return [

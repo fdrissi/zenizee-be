@@ -14,10 +14,16 @@ require_once __DIR__ . '/../filemanager/event.php';
 function check_booking_eligibility($booking, $evmulti) {
     // Event exists?
     $event = $evmulti->query(
-        "SELECT title FROM tbl_event WHERE id=" . $booking['eid']
+        "SELECT title, edate, etime FROM tbl_event WHERE id=" . $booking['eid']
     )->fetch_assoc();
     if (!$event) {
         json_error("Event not found");
+    }
+
+    // Event already passed?
+    $end_datetime = $event['edate'] . ' ' . $event['etime'];
+    if (strtotime($end_datetime) !== false && strtotime($end_datetime) < time()) {
+        json_error("This event has already ended.");
     }
 
     // User exists?

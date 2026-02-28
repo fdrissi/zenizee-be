@@ -19,7 +19,7 @@ if ($uid == "" or $keyword == "") {
   and status=1
    and title COLLATE utf8mb4_general_ci like '%" .
             $keyword .
-            "%' order by sdate desc"
+            "%' AND sdate >= CURDATE() order by sdate desc"
     );
     $ev = [];
     while ($row = $event->fetch_assoc()) {

@@ -13,7 +13,7 @@ $event = $evmulti->query(
 where event_status='Pending'
 and status=1
 and cid=".$cat_id."
- order by sdate desc"
+ AND sdate >= CURDATE() order by sdate desc"
 );
 $ev = array();
 while ($row = $event->fetch_assoc()) {
