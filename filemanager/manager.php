@@ -982,7 +982,17 @@ else if($_POST['type'] == 'add_events')
 	$cid = $_POST['cid'];
 	$latitude = $_POST['latitude'];
 	$longtitude = $_POST['longtitude'];
-	
+	$city = $evmulti->real_escape_string($_POST['city'] ?? '');
+
+	// If lat/lng empty, keep existing values from DB
+	if ($latitude == '' || $longtitude == '') {
+		$existing = $evmulti->query("SELECT latitude, longtitude FROM tbl_event WHERE id=".(int)$id)->fetch_assoc();
+		if ($existing) {
+			if ($latitude == '') $latitude = $existing['latitude'] ?? '0';
+			if ($longtitude == '') $longtitude = $existing['longtitude'] ?? '0';
+		}
+	}
+
 	$target_dir = dirname( dirname(__FILE__) )."/images/event/";
 			$url = "images/event/";
 			$temp = explode(".", $_FILES["cat_img"]["name"]);
@@ -1001,8 +1011,8 @@ $urls = $urls . basename($newfilenames);
 	move_uploaded_file($_FILES["cat_img"]["tmp_name"], $target_file);
 	move_uploaded_file($_FILES["cover_img"]["tmp_name"], $target_files);
 	$table="tbl_event";
-  $field_values=array("tags","vurls","cid","title","img","cover_img","sdate","stime","etime","address","status","description","disclaimer","latitude","longtitude","place_name","sponsore_id","facility_id","restict_id");
-  $data_values=array("$tags","$vurls","$cid","$title","$url","$urls","$sdate","$stime","$etime","$address","$status","$description","$disclaimer","$latitude","$longtitude","$place_name","$sponsore_id","$facility_id","$restict_id");
+  $field_values=array("tags","vurls","cid","title","img","cover_img","sdate","stime","etime","address","status","description","disclaimer","latitude","longtitude","place_name","sponsore_id","facility_id","restict_id","city");
+  $data_values=array("$tags","$vurls","$cid","$title","$url","$urls","$sdate","$stime","$etime","$address","$status","$description","$disclaimer","$latitude","$longtitude","$place_name","$sponsore_id","$facility_id","$restict_id","$city");
   
 $h = new Event();
 	  $check = $h->evmultiinsertdata($field_values,$data_values,$table);
@@ -1036,7 +1046,17 @@ else if($_POST['type'] == 'edit_event')
 	$cid = $_POST['cid'];
 	$latitude = $_POST['latitude'];
 	$longtitude = $_POST['longtitude'];
-	
+	$city = $evmulti->real_escape_string($_POST['city'] ?? '');
+
+	// If lat/lng empty, keep existing values from DB
+	if ($latitude == '' || $longtitude == '') {
+		$existing = $evmulti->query("SELECT latitude, longtitude FROM tbl_event WHERE id=".(int)$id)->fetch_assoc();
+		if ($existing) {
+			if ($latitude == '') $latitude = $existing['latitude'] ?? '0';
+			if ($longtitude == '') $longtitude = $existing['longtitude'] ?? '0';
+		}
+	}
+
 	$target_dir = dirname( dirname(__FILE__) )."/images/event/";
 			$url = "images/event/";
 			$temp = explode(".", $_FILES["cat_img"]["name"]);
@@ -1056,16 +1076,16 @@ if($_FILES["cat_img"]["name"] != '' and $_FILES["cover_img"]["name"] == '')
 
 	move_uploaded_file($_FILES["cat_img"]["tmp_name"], $target_file);
 	$table="tbl_event";
-  $field = array('tags'=>$tags,'vurls'=>$vurls,'place_name'=>$place_name,'facility_id'=>$facility_id,'restict_id'=>$restict_id,'status'=>$status,'img'=>$url,'title'=>$title,'cid'=>$cid,'sdate'=>$sdate,'stime'=>$stime,'etime'=>$etime,'address'=>$address,'description'=>$description,'disclaimer'=>$disclaimer,'latitude'=>$latitude,'longtitude'=>$longtitude);
+  $field = array('tags'=>$tags,'vurls'=>$vurls,'place_name'=>$place_name,'facility_id'=>$facility_id,'restict_id'=>$restict_id,'status'=>$status,'img'=>$url,'title'=>$title,'cid'=>$cid,'sdate'=>$sdate,'stime'=>$stime,'etime'=>$etime,'address'=>$address,'description'=>$description,'disclaimer'=>$disclaimer,'latitude'=>$latitude,'longtitude'=>$longtitude,'city'=>$city);
   $where = "where id=".$id." and sponsore_id=".$sponsore_id."";
 $h = new Event();
 	  $check = $h->evmultiupdateDatanull_Api($field,$table,$where);
-  
+
 	  if($check == 1)
 {
 	$returnArr = array("ResponseCode"=>"200","Result"=>"true","title"=>"Event Update Successfully!!","message"=>"Event section!","action"=>"list_event.php");
 }
-else 
+else
 {
 	$returnArr = array("ResponseCode"=>"200","Result"=>"false","title"=>"For Demo purpose all  Insert/Update/Delete are DISABLED !!","message"=>"Operation DISABLED!!","action"=>"add_event.php?id=".$id."");
 }
@@ -1075,16 +1095,16 @@ else if($_FILES["cat_img"]["name"] == '' and $_FILES["cover_img"]["name"] != '')
 
 	move_uploaded_file($_FILES["cover_img"]["tmp_name"], $target_files);
 	$table="tbl_event";
-  $field = array('tags'=>$tags,'vurls'=>$vurls,'place_name'=>$place_name,'facility_id'=>$facility_id,'restict_id'=>$restict_id,'status'=>$status,'cover_img'=>$urls,'title'=>$title,'cid'=>$cid,'sdate'=>$sdate,'stime'=>$stime,'etime'=>$etime,'address'=>$address,'description'=>$description,'disclaimer'=>$disclaimer,'latitude'=>$latitude,'longtitude'=>$longtitude);
+  $field = array('tags'=>$tags,'vurls'=>$vurls,'place_name'=>$place_name,'facility_id'=>$facility_id,'restict_id'=>$restict_id,'status'=>$status,'cover_img'=>$urls,'title'=>$title,'cid'=>$cid,'sdate'=>$sdate,'stime'=>$stime,'etime'=>$etime,'address'=>$address,'description'=>$description,'disclaimer'=>$disclaimer,'latitude'=>$latitude,'longtitude'=>$longtitude,'city'=>$city);
   $where = "where id=".$id." and sponsore_id=".$sponsore_id."";
 $h = new Event();
 	  $check = $h->evmultiupdateDatanull_Api($field,$table,$where);
-  
+
 	  if($check == 1)
 {
 	$returnArr = array("ResponseCode"=>"200","Result"=>"true","title"=>"Event Update Successfully!!","message"=>"Event section!","action"=>"list_event.php");
 }
-else 
+else
 {
 	$returnArr = array("ResponseCode"=>"200","Result"=>"false","title"=>"For Demo purpose all  Insert/Update/Delete are DISABLED !!","message"=>"Operation DISABLED!!","action"=>"add_event.php?id=".$id."");
 }
@@ -1095,7 +1115,7 @@ else if($_FILES["cat_img"]["name"] != '' and $_FILES["cover_img"]["name"] != '')
 	move_uploaded_file($_FILES["cover_img"]["tmp_name"], $target_files);
 	move_uploaded_file($_FILES["cat_img"]["tmp_name"], $target_file);
 	$table="tbl_event";
-  $field = array('tags'=>$tags,'vurls'=>$vurls,'place_name'=>$place_name,'facility_id'=>$facility_id,'restict_id'=>$restict_id,'status'=>$status,'cover_img'=>$urls,'img'=>$url,'title'=>$title,'cid'=>$cid,'sdate'=>$sdate,'stime'=>$stime,'etime'=>$etime,'address'=>$address,'description'=>$description,'disclaimer'=>$disclaimer,'latitude'=>$latitude,'longtitude'=>$longtitude);
+  $field = array('tags'=>$tags,'vurls'=>$vurls,'place_name'=>$place_name,'facility_id'=>$facility_id,'restict_id'=>$restict_id,'status'=>$status,'cover_img'=>$urls,'img'=>$url,'title'=>$title,'cid'=>$cid,'sdate'=>$sdate,'stime'=>$stime,'etime'=>$etime,'address'=>$address,'description'=>$description,'disclaimer'=>$disclaimer,'latitude'=>$latitude,'longtitude'=>$longtitude,'city'=>$city);
   $where = "where id=".$id." and sponsore_id=".$sponsore_id."";
 $h = new Event();
 	  $check = $h->evmultiupdateDatanull_Api($field,$table,$where);
@@ -1112,7 +1132,7 @@ else
 else 
 {
 	$table="tbl_event";
-  $field = array('tags'=>$tags,'vurls'=>$vurls,'place_name'=>$place_name,'facility_id'=>$facility_id,'restict_id'=>$restict_id,'status'=>$status,'title'=>$title,'cid'=>$cid,'sdate'=>$sdate,'stime'=>$stime,'etime'=>$etime,'address'=>$address,'description'=>$description,'disclaimer'=>$disclaimer,'latitude'=>$latitude,'longtitude'=>$longtitude);
+  $field = array('tags'=>$tags,'vurls'=>$vurls,'place_name'=>$place_name,'facility_id'=>$facility_id,'restict_id'=>$restict_id,'status'=>$status,'title'=>$title,'cid'=>$cid,'sdate'=>$sdate,'stime'=>$stime,'etime'=>$etime,'address'=>$address,'description'=>$description,'disclaimer'=>$disclaimer,'latitude'=>$latitude,'longtitude'=>$longtitude,'city'=>$city);
   $where = "where id=".$id." and sponsore_id=".$sponsore_id."";
 $h = new Event();
 	  $check = $h->evmultiupdateDatanull_Api($field,$table,$where);
@@ -1120,7 +1140,7 @@ $h = new Event();
 {
 	$returnArr = array("ResponseCode"=>"200","Result"=>"true","title"=>"Event Update Successfully!!","message"=>"Event section!","action"=>"list_event.php");
 }
-else 
+else
 {
 	$returnArr = array("ResponseCode"=>"200","Result"=>"false","title"=>"For Demo purpose all  Insert/Update/Delete are DISABLED !!","message"=>"Operation DISABLED!!","action"=>"add_event.php?id=".$id."");
 }

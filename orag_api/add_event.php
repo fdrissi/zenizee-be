@@ -21,6 +21,7 @@ $etime = $data["etime"];
 $cid = $data["cat_id"];
 $latitude = $data["latitude"];
 $longtitude = $data["longtitude"];
+$city = $evmulti->real_escape_string($data["city"] ?? "");
 
 if (
     $status == "" ||
@@ -80,6 +81,7 @@ if (
         "sponsore_id",
         "facility_id",
         "restict_id",
+        "city",
     ];
     $data_values = [
         "$tags",
@@ -101,6 +103,7 @@ if (
         "$orag_id",
         "$facility_id",
         "$restict_id",
+        "$city",
     ];
 
     $h = new Event();

@@ -159,7 +159,7 @@ include "filemanager/head.php"; ?>
                               <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Event Latitude</label>
-                                    <input type="text" class="form-control " name="latitude" value="<?php echo $data[
+                                    <input type="text" class="form-control " name="latitude" id="lat" value="<?php echo $data[
                                         "latitude"
                                     ]; ?>" placeholder="Enter Latitude"  required="" readonly>
                                  </div>
@@ -167,7 +167,7 @@ include "filemanager/head.php"; ?>
                               <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12">
                                  <div class="form-group mb-3">
                                     <label class="form-label">Event Longtitude</label>
-                                    <input type="text" class="form-control " name="longtitude" value="<?php echo $data[
+                                    <input type="text" class="form-control " name="longtitude" id="lng" value="<?php echo $data[
                                         "longtitude"
                                     ]; ?>" placeholder="Enter Longtitude"  required="" readonly>
                                  </div>
@@ -180,9 +180,15 @@ include "filemanager/head.php"; ?>
                                     ]; ?>" placeholder="Enter Place Name"required="">
                                  </div>
                                  <div class="form-group mb-3">
+                                    <label class="form-label">Event City</label>
+                                    <input type="text" class="form-control" name="city" value="<?php echo $data[
+                                        "city"
+                                    ]; ?>" placeholder="Enter City" required="">
+                                 </div>
+                                 <div class="form-group mb-3">
                                     <label class="form-label">Event Full Address</label>
                                     <textarea class="form-control" rows="10" name="address"
-                                       style="resize:none;" required><?php echo $data[
+                                       id="location" style="resize:none;" required><?php echo $data[
                                            "address"
                                        ]; ?></textarea>
                                  </div>
@@ -406,6 +412,10 @@ include "filemanager/head.php"; ?>
                                        name="pname" placeholder="Enter Place Name"required="">
                                  </div>
                                  <div class="form-group mb-3">
+                                    <label class="form-label">Event City</label>
+                                    <input type="text" class="form-control" name="city" placeholder="Enter City" required="">
+                                 </div>
+                                 <div class="form-group mb-3">
                                     <label class="form-label">Event Full Address</label>
                                     <textarea class="form-control" rows="10" name="address"
                                        id="location" style="resize:none;" required></textarea>
@@ -513,10 +523,11 @@ include "filemanager/head.php"; ?>
 <script>
    /* script */
    function initialize() {
-<?php if (isset($_GET["id"])) { ?>
-var latlng = new google.maps.LatLng(<?php echo $data[
-         "latitude"
-     ]; ?>,<?php echo $data["longtitude"]; ?>);
+<?php if (isset($_GET["id"])) {
+   $elat = !empty($data["latitude"]) ? $data["latitude"] : "0";
+   $elng = !empty($data["longtitude"]) ? $data["longtitude"] : "0";
+?>
+var latlng = new google.maps.LatLng(<?php echo $elat; ?>,<?php echo $elng; ?>);
 <?php } else { ?>
       var latlng = new google.maps.LatLng(28.5355161,77.39102649999995);
 <?php } ?>

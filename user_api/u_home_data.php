@@ -7,6 +7,8 @@ $data = json_decode(file_get_contents("php://input"), true);
 $uid = $data["uid"];
 $lats = $data["lats"];
 $longs = $data["longs"];
+$city = isset($data["city"]) ? $evmulti->real_escape_string($data["city"]) : "";
+$cityFilter = ($city !== "" && $city !== "all") ? " and city='".$city."'" : "";
 if ($uid == "" or $longs == "" || $lats == "") {
     $returnArr = [
         "ResponseCode" => "401",
@@ -34,7 +36,7 @@ if ($uid == "" or $longs == "" || $lats == "") {
     $event = $evmulti->query(
         "select id,title,img,place_name,sdate,stime,etime from tbl_event
  where event_status='Pending'
-  and status=1 order by id desc"
+  and status=1".$cityFilter." order by id desc"
     );
     $ev = [];
     while ($row = $event->fetch_assoc()) {
@@ -55,7 +57,7 @@ if ($uid == "" or $longs == "" || $lats == "") {
     $event = $evmulti->query(
         "select id,title,img,place_name,sdate,stime,etime from tbl_event
  where event_status='Pending'
-  and status=1 order by sdate desc"
+  and status=1".$cityFilter." order by sdate desc"
     );
     $ev = [];
     while ($row = $event->fetch_assoc()) {
@@ -81,7 +83,7 @@ if ($uid == "" or $longs == "" || $lats == "") {
             $month .
             "' and YEAR(sdate) = '" .
             $year .
-            "' order by sdate desc"
+            "'".$cityFilter." order by sdate desc"
     );
     $ev = [];
     $pops = [];
@@ -111,7 +113,7 @@ if ($uid == "" or $longs == "" || $lats == "") {
 ,img,place_name,sdate,stime,etime,latitude,longtitude
  FROM tbl_event
  where status=1
-  and event_status='Pending'
+  and event_status='Pending'".$cityFilter."
    order by distance"
     );
     $evs = [];
