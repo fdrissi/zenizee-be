@@ -37,7 +37,7 @@ include 'evconfing.php';
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	
-	<link rel="stylesheet" type="text/css" href="assets/summernote/summernote-bs4.css">
+	<link rel="stylesheet" type="text/css" href="assets/summernote/summernote-lite.min.css">
     
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
