@@ -4,6 +4,8 @@ header('Content-type: text/json');
 $data = json_decode(file_get_contents('php://input'), true);
 $uid = $data['uid'];
 $cat_id = $data['cat_id'];
+$today = date('Y-m-d');
+$now_time = date('H:i:s');
 if ($uid == '' || $cat_id == '') {
 $returnArr = array("ResponseCode"=>"401","Result"=>"false","ResponseMsg"=>"Something Went wrong  try again !");
 } else {
@@ -13,7 +15,7 @@ $event = $evmulti->query(
 where event_status='Pending'
 and status=1
 and cid=".$cat_id."
- AND sdate >= CURDATE() order by sdate desc"
+ AND (sdate > '{$today}' OR (sdate = '{$today}' AND (etime < stime OR etime >= '{$now_time}'))) order by sdate desc"
 );
 $ev = array();
 while ($row = $event->fetch_assoc()) {

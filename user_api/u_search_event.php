@@ -4,6 +4,8 @@ header("Content-type: text/json");
 $data = json_decode(file_get_contents("php://input"), true);
 $uid = $data["uid"];
 $keyword = $data["keyword"];
+$today = date('Y-m-d');
+$now_time = date('H:i:s');
 if ($uid == "" or $keyword == "") {
     $returnArr = [
         "ResponseCode" => "401",
@@ -19,7 +21,7 @@ if ($uid == "" or $keyword == "") {
   and status=1
    and title COLLATE utf8mb4_general_ci like '%" .
             $keyword .
-            "%' AND sdate >= CURDATE() order by sdate desc"
+            "%' AND (sdate > '{$today}' OR (sdate = '{$today}' AND (etime < stime OR etime >= '{$now_time}'))) order by sdate desc"
     );
     $ev = [];
     while ($row = $event->fetch_assoc()) {

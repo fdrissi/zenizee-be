@@ -9,6 +9,8 @@ $lats = $data["lats"];
 $longs = $data["longs"];
 $city = isset($data["city"]) ? $evmulti->real_escape_string($data["city"]) : "";
 $cityFilter = ($city !== "" && $city !== "all") ? " and city='".$city."'" : "";
+$today = date('Y-m-d');
+$now_time = date('H:i:s');
 if ($uid == "" or $longs == "" || $lats == "") {
     $returnArr = [
         "ResponseCode" => "401",
@@ -36,7 +38,7 @@ if ($uid == "" or $longs == "" || $lats == "") {
     $event = $evmulti->query(
         "select id,title,img,place_name,sdate,stime,etime from tbl_event
  where event_status='Pending'
-  and status=1 AND sdate >= CURDATE()".$cityFilter." order by id desc"
+  and status=1 AND (sdate > '{$today}' OR (sdate = '{$today}' AND (etime < stime OR etime >= '{$now_time}')))".$cityFilter." order by id desc"
     );
     $ev = [];
     while ($row = $event->fetch_assoc()) {
@@ -57,7 +59,7 @@ if ($uid == "" or $longs == "" || $lats == "") {
     $event = $evmulti->query(
         "select id,title,img,place_name,sdate,stime,etime from tbl_event
  where event_status='Pending'
-  and status=1 AND sdate >= CURDATE()".$cityFilter." order by sdate desc"
+  and status=1 AND (sdate > '{$today}' OR (sdate = '{$today}' AND (etime < stime OR etime >= '{$now_time}')))".$cityFilter." order by sdate desc"
     );
     $ev = [];
     while ($row = $event->fetch_assoc()) {
@@ -113,7 +115,7 @@ if ($uid == "" or $longs == "" || $lats == "") {
 ,img,place_name,sdate,stime,etime,latitude,longtitude
  FROM tbl_event
  where status=1
-  and event_status='Pending' AND sdate >= CURDATE()".$cityFilter."
+  and event_status='Pending' AND (sdate > '{$today}' OR (sdate = '{$today}' AND (etime < stime OR etime >= '{$now_time}')))".$cityFilter."
    order by distance"
     );
     $evs = [];
