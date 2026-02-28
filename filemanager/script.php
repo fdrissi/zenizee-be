@@ -13,10 +13,11 @@ require 'filemanager/evconfing.php';
 <script src="assets/js/tooltip-init.js"></script>
 <script src="assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
 <script src="assets/js/datatable/datatables/datatable.custom.js"></script>
-<script src="assets/js/editor/summernote/summernote.js"></script>
-<script src="assets/js/editor/summernote/summernote-custom.js"></script>
+<script src="assets/summernote/summernote-bs4.min.js"></script>
+<script src="assets/js/editor/summernote/summernote.custom.js"></script>
 <script src="assets/js/sweet-alert/sweetalert.min.js"></script>
 <script src="assets/js/form-validation.js"></script>
 <script src="assets/js/select2/select2.full.min.js"></script>
+<script src="assets/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
 <script src="assets/js/script.js"></script>
 <script src="assets/js/admin-handlers.js"></script>

@@ -1,8 +1,11 @@
 var summernote_custom = {
     init: function() {
-        $('.summernote').summernote({
-            height: 300,
-            tabsize: 2
+        $('.summernote').each(function() {
+            $(this).summernote({
+                height: 300,
+                tabsize: 2
+            });
+            $(this).hide();
         });
         $('.inline-editor').summernote({
             airMode: true

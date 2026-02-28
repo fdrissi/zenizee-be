@@ -70,7 +70,7 @@
                            </div>
                            <div class="form-group mb-3">
                               <label for="cname">Page Description </label>
-                              <textarea class="form-control" rows="5"
+                              <textarea class="form-control summernote" rows="5"
                                id="cdesc" name="cdesc" style="resize: none;"><?php echo $data[
                                  "description"
                                  ]; ?></textarea>
@@ -98,7 +98,7 @@
                            </div>
                            <div class="form-group mb-3">
                               <label for="cname">Page Description </label>
-                              <textarea class="form-control" rows="5"
+                              <textarea class="form-control summernote" rows="5"
                                id="cdesc" name="cdesc" style="resize: none;"></textarea>
                            </div>
                            <button type="submit" class="btn btn-primary">Add Pages</button>

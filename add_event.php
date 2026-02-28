@@ -280,7 +280,7 @@ include "filemanager/head.php"; ?>
                               <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12">
                                  <div class="form-group mb-3">
                                     <label>Event Description</label>
-                                    <textarea class="form-control" rows="5" id="cdesc" name="cdesc"
+                                    <textarea class="form-control summernote" rows="5" id="cdesc" name="cdesc"
                                        style="resize: none;" required><?php echo $data[
                                            "description"
                                        ]; ?></textarea>
@@ -289,7 +289,7 @@ include "filemanager/head.php"; ?>
                               <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12">
                                  <div class="form-group mb-3">
                                     <label>Event Disclaimer</label>
-                                    <textarea class="form-control" rows="5" id="disclaimer"
+                                    <textarea class="form-control summernote" rows="5" id="disclaimer"
                                        name="disclaimer" style="resize: none;" required><?php echo $data[
                                            "disclaimer"
                                        ]; ?></textarea>
@@ -486,14 +486,14 @@ include "filemanager/head.php"; ?>
                               <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12">
                                  <div class="form-group mb-3">
                                     <label>Event Description</label>
-                                    <textarea class="form-control" rows="5" id="cdesc" name="cdesc"
+                                    <textarea class="form-control summernote" rows="5" id="cdesc" name="cdesc"
                                        style="resize: none;" required></textarea>
                                  </div>
                               </div>
                               <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12">
                                  <div class="form-group mb-3">
                                     <label>Event Disclaimer</label>
-                                    <textarea class="form-control" rows="5" id="disclaimer" name="disclaimer"
+                                    <textarea class="form-control summernote" rows="5" id="disclaimer" name="disclaimer"
                                        style="resize: none;" required></textarea>
                                  </div>
                               </div>
@@ -569,12 +569,16 @@ var latlng = new google.maps.LatLng(<?php echo $elat; ?>,<?php echo $elng; ?>);
            infowindow.open(map, marker);
        });
        
-       google.maps.event.addListener(marker, 'dragend', function() {
-           geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+       google.maps.event.addListener(marker, 'dragend', function(event) {
+           // Always update lat/lng from marker position, even if geocoding fails
+           document.getElementById('lat').value = this.getPosition().lat();
+           document.getElementById('lng').value = this.getPosition().lng();
+
+           // Try to reverse geocode for the address (may fail without Geocoding API billing)
+           geocoder.geocode({'latLng': this.getPosition()}, function(results, status) {
            if (status == google.maps.GeocoderStatus.OK) {
              if (results[0]) {
-   
-                 bindDataToForm(results[0].formatted_address,marker.getPosition().lat(),marker.getPosition().lng());
+                 document.getElementById('location').value = results[0].formatted_address;
                  infowindow.setContent(results[0].formatted_address);
                  infowindow.open(map, marker);
              }
