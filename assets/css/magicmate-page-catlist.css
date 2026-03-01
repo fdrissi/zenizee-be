@@ -1,0 +1,818 @@
+/* =====================================================================
+   MagicMate — Category List Page
+   A premium visual card grid for category management.
+   Uses design tokens from magicmate-tokens.css exclusively.
+   BEM prefix: mm-catlist__*
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-catlist {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER — Title bar with action
+   ============================================================= */
+
+.mm-catlist__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--mm-space-8);
+  animation: mm-catlist-fadeIn 0.45s ease both;
+}
+
+.mm-catlist__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+.mm-catlist__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-catlist__subtitle {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mm-catlist__add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-3) var(--mm-space-5);
+  background: var(--mm-gradient-primary);
+  color: #fff;
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--mm-duration-base) ease;
+  box-shadow: 0 4px 16px rgba(216, 136, 39, 0.2);
+  white-space: nowrap;
+}
+
+.mm-catlist__add-btn:hover {
+  background: var(--mm-gradient-primary-hover);
+  box-shadow: 0 8px 24px rgba(216, 136, 39, 0.3);
+  transform: translateY(-1px);
+  color: #fff;
+  text-decoration: none;
+}
+
+.mm-catlist__add-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-catlist__add-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+
+/* =============================================================
+   2. STATS BAR — Quick summary strip
+   ============================================================= */
+
+.mm-catlist__stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-6);
+  padding: var(--mm-space-4) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-catlist-fadeUp 0.45s ease 0.05s both;
+}
+
+.mm-catlist__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-catlist__stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-catlist__stat-dot--total {
+  background: var(--mm-primary-500);
+}
+
+.mm-catlist__stat-dot--published {
+  background: var(--mm-success);
+}
+
+.mm-catlist__stat-dot--unpublished {
+  background: var(--mm-neutral-400);
+}
+
+.mm-catlist__stat-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1;
+}
+
+.mm-catlist__stat-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-left: -4px;
+}
+
+.mm-catlist__stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================
+   3. SEARCH BAR
+   ============================================================= */
+
+.mm-catlist__search-wrap {
+  position: relative;
+  margin-bottom: var(--mm-space-6);
+  animation: mm-catlist-fadeUp 0.45s ease 0.1s both;
+}
+
+.mm-catlist__search-icon {
+  position: absolute;
+  left: var(--mm-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.mm-catlist__search-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+}
+
+.mm-catlist__search-input {
+  width: 100%;
+  padding: var(--mm-space-3) var(--mm-space-4) var(--mm-space-3) 44px;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-900);
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-catlist__search-input::placeholder {
+  color: var(--mm-neutral-400);
+  font-weight: 400;
+}
+
+.mm-catlist__search-input:focus {
+  border-color: var(--mm-primary-300);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.08);
+}
+
+
+/* =============================================================
+   4. CARD GRID — Responsive category cards
+   ============================================================= */
+
+.mm-catlist__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--mm-space-5);
+  animation: mm-catlist-fadeUp 0.45s ease 0.15s both;
+}
+
+
+/* =============================================================
+   5. CATEGORY CARD
+   ============================================================= */
+
+.mm-catlist__card {
+  position: relative;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  overflow: hidden;
+  transition: all var(--mm-duration-base) ease;
+  animation: mm-catlist-cardIn 0.5s var(--mm-ease-spring) both;
+  animation-delay: calc(var(--card-index, 0) * 0.06s + 0.15s);
+}
+
+.mm-catlist__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mm-shadow-card-hover);
+  border-color: var(--mm-primary-200);
+}
+
+/* ── Card image area ── */
+.mm-catlist__card-visual {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 65%;
+  overflow: hidden;
+  background: var(--mm-neutral-100);
+}
+
+.mm-catlist__card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--mm-duration-slow) ease;
+}
+
+.mm-catlist__card:hover .mm-catlist__card-img {
+  transform: scale(1.05);
+}
+
+/* Image placeholder when no image */
+.mm-catlist__card-no-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--mm-neutral-100) 0%, var(--mm-neutral-200) 100%);
+}
+
+.mm-catlist__card-no-img svg {
+  width: 48px;
+  height: 48px;
+  stroke: var(--mm-neutral-300);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+/* ── Status badge (overlays the image) ── */
+.mm-catlist__status-badge {
+  position: absolute;
+  top: var(--mm-space-3);
+  right: var(--mm-space-3);
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--mm-radius-full);
+  line-height: 1.4;
+  z-index: 2;
+}
+
+.mm-catlist__status-badge--published {
+  background: var(--mm-success);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+}
+
+.mm-catlist__status-badge--unpublished {
+  background: var(--mm-neutral-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(120, 113, 108, 0.3);
+}
+
+/* ── Card index number (top-left, subtle) ── */
+.mm-catlist__card-index {
+  position: absolute;
+  top: var(--mm-space-3);
+  left: var(--mm-space-3);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 25, 23, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--mm-radius-md);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 2;
+}
+
+/* ── Card body (below image) ── */
+.mm-catlist__card-body {
+  padding: var(--mm-space-4) var(--mm-space-4) var(--mm-space-3);
+}
+
+.mm-catlist__card-name {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--mm-space-2) 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mm-catlist__card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  line-height: 1;
+}
+
+.mm-catlist__card-meta svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+
+/* ── Card footer (actions) ── */
+.mm-catlist__card-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-3) var(--mm-space-4);
+  border-top: 1px solid var(--mm-border-subtle);
+}
+
+.mm-catlist__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-3);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--mm-radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--mm-duration-fast) ease;
+  line-height: 1;
+}
+
+.mm-catlist__action-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* Edit button */
+.mm-catlist__action-btn--edit {
+  background: var(--mm-primary-50);
+  color: var(--mm-primary-700);
+}
+
+.mm-catlist__action-btn--edit svg {
+  stroke: var(--mm-primary-600);
+}
+
+.mm-catlist__action-btn--edit:hover {
+  background: var(--mm-primary-100);
+  color: var(--mm-primary-800);
+  text-decoration: none;
+}
+
+/* Delete button */
+.mm-catlist__action-btn--delete {
+  background: var(--mm-error-light);
+  color: var(--mm-error-dark);
+}
+
+.mm-catlist__action-btn--delete svg {
+  stroke: var(--mm-error);
+}
+
+.mm-catlist__action-btn--delete:hover {
+  background: #fecaca;
+  color: var(--mm-error-dark);
+}
+
+/* Spacer to push delete to right */
+.mm-catlist__action-spacer {
+  flex: 1;
+}
+
+
+/* =============================================================
+   6. EMPTY STATE
+   ============================================================= */
+
+.mm-catlist__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  text-align: center;
+  animation: mm-catlist-fadeIn 0.5s ease 0.2s both;
+}
+
+.mm-catlist__empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border-radius: var(--mm-radius-2xl);
+  margin-bottom: var(--mm-space-5);
+}
+
+.mm-catlist__empty-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.mm-catlist__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-700);
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-catlist__empty-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+
+/* =============================================================
+   7. DELETE CONFIRMATION MODAL
+   ============================================================= */
+
+.mm-catlist__modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 25, 23, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: mm-catlist-fadeIn 0.2s ease both;
+}
+
+.mm-catlist__modal-overlay--active {
+  display: flex;
+}
+
+.mm-catlist__modal {
+  background: var(--mm-neutral-0);
+  border-radius: var(--mm-radius-2xl);
+  padding: var(--mm-space-8);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--mm-shadow-xl);
+  animation: mm-catlist-modalIn 0.3s var(--mm-ease-spring) both;
+}
+
+.mm-catlist__modal-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-error-light);
+  border-radius: var(--mm-radius-xl);
+  margin: 0 auto var(--mm-space-5) auto;
+}
+
+.mm-catlist__modal-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--mm-error);
+  fill: none;
+  stroke-width: 2;
+}
+
+.mm-catlist__modal-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-catlist__modal-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0 0 var(--mm-space-6) 0;
+  line-height: 1.5;
+}
+
+.mm-catlist__modal-actions {
+  display: flex;
+  gap: var(--mm-space-3);
+  justify-content: center;
+}
+
+.mm-catlist__modal-btn {
+  padding: var(--mm-space-3) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  line-height: 1;
+}
+
+.mm-catlist__modal-btn--cancel {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-700);
+}
+
+.mm-catlist__modal-btn--cancel:hover {
+  background: var(--mm-neutral-200);
+}
+
+.mm-catlist__modal-btn--confirm {
+  background: var(--mm-error);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+}
+
+.mm-catlist__modal-btn--confirm:hover {
+  background: var(--mm-error-dark);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.3);
+}
+
+
+/* =============================================================
+   8. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-catlist-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mm-catlist-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mm-catlist-cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mm-catlist-modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE — Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-catlist {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-catlist__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   10. RESPONSIVE — Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-catlist {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-catlist__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mm-space-4);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-catlist__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-catlist__stats-bar {
+    gap: var(--mm-space-4);
+    padding: var(--mm-space-3) var(--mm-space-4);
+    flex-wrap: wrap;
+  }
+
+  .mm-catlist__stat-separator {
+    display: none;
+  }
+
+  .mm-catlist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-3);
+  }
+
+  .mm-catlist__card-visual {
+    padding-bottom: 55%;
+  }
+
+  .mm-catlist__card-body {
+    padding: var(--mm-space-3);
+  }
+
+  .mm-catlist__card-name {
+    font-size: var(--mm-text-sm);
+  }
+
+  .mm-catlist__card-actions {
+    padding: var(--mm-space-2) var(--mm-space-3);
+  }
+}
+
+
+/* =============================================================
+   11. RESPONSIVE — Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-catlist {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-catlist__grid {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-4);
+  }
+
+  .mm-catlist__card-visual {
+    padding-bottom: 50%;
+  }
+}
+
+
+/* =============================================================
+   12. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-catlist__card,
+body.dark-only .mm-catlist__stats-bar {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-catlist__card-name,
+body.dark-only .mm-catlist__title,
+body.dark-only .mm-catlist__stat-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-catlist__subtitle,
+body.dark-only .mm-catlist__stat-label,
+body.dark-only .mm-catlist__card-meta {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .mm-catlist__search-input {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-catlist__modal {
+  background: var(--mm-neutral-0) !important;
+}
+
+body.dark-only .mm-catlist__action-btn--edit {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+body.dark-only .mm-catlist__action-btn--delete {
+  background: var(--mm-error-light) !important;
+  color: var(--mm-error-dark) !important;
+}
+
+
+/* =============================================================
+   13. CUBA OVERRIDES — Scoped to .mm-catlist
+   ============================================================= */
+
+.mm-catlist .page-title,
+.mm-catlist .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.mm-catlist .page-title::before {
+  display: none !important;
+}
+
+.mm-catlist .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.mm-catlist .page-title {
+  display: none !important;
+}
+
+.mm-catlist .blink_me {
+  display: none !important;
+}
+
+.mm-catlist .size-column {
+  display: none !important;
+}
+
+.mm-catlist .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}

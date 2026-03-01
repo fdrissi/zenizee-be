@@ -1,0 +1,719 @@
+/* =====================================================================
+   MagicMate — Category Form Page
+   Custom-built form layout for add/edit category.
+   BEM prefix: mm-catform__*
+   Uses design tokens from magicmate-tokens.css exclusively.
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-catform {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER (title + back link)
+   ============================================================= */
+
+.mm-catform__header {
+  margin-bottom: var(--mm-space-8);
+  animation: mm-catform-fadeIn 0.4s ease both;
+}
+
+.mm-catform__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+  margin-bottom: var(--mm-space-4);
+}
+
+.mm-catform__back:hover {
+  color: var(--mm-primary-600);
+}
+
+.mm-catform__back svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.mm-catform__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-3xl);
+  font-weight: 800;
+  color: var(--mm-text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-catform__subtitle {
+  font-size: var(--mm-text-base);
+  font-weight: 400;
+  color: var(--mm-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+
+/* =============================================================
+   2. FORM CARD
+   ============================================================= */
+
+.mm-catform__card {
+  background: var(--mm-surface-card);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-2xl);
+  padding: var(--mm-space-10);
+  box-shadow: var(--mm-shadow-sm);
+  animation: mm-catform-slideUp 0.5s ease 0.1s both;
+  transition: box-shadow var(--mm-duration-slow) ease;
+}
+
+.mm-catform__card:hover {
+  box-shadow: var(--mm-shadow-md);
+}
+
+
+/* =============================================================
+   3. FORM LAYOUT
+   ============================================================= */
+
+.mm-catform__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-8);
+}
+
+
+/* =============================================================
+   4. FIELD GROUP
+   ============================================================= */
+
+.mm-catform__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+.mm-catform__label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  letter-spacing: 0.01em;
+}
+
+.mm-catform__label-hint {
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  margin-left: var(--mm-space-1);
+}
+
+
+/* =============================================================
+   5. TEXT INPUT
+   ============================================================= */
+
+.mm-catform__input {
+  width: 100%;
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 500;
+  color: var(--mm-text-primary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  outline: none;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-catform__input::placeholder {
+  color: var(--mm-text-tertiary);
+  font-weight: 400;
+}
+
+.mm-catform__input:hover {
+  border-color: var(--mm-neutral-300);
+}
+
+.mm-catform__input:focus {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-neutral-0);
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1);
+}
+
+/* Large variant for the category name */
+.mm-catform__input--lg {
+  padding: var(--mm-space-5) var(--mm-space-6);
+  font-size: var(--mm-text-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-radius: var(--mm-radius-xl);
+}
+
+
+/* =============================================================
+   6. IMAGE UPLOAD (drag-and-drop style)
+   ============================================================= */
+
+.mm-catform__upload {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-8) var(--mm-space-6);
+  background: var(--mm-neutral-50);
+  border: 2px dashed var(--mm-neutral-300);
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+  text-align: center;
+}
+
+.mm-catform__upload:hover {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-primary-50);
+  transform: translateY(-1px);
+}
+
+.mm-catform__upload:hover .mm-catform__upload-icon {
+  color: var(--mm-primary-500);
+  transform: scale(1.05);
+}
+
+.mm-catform__upload-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.mm-catform__upload-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--mm-radius-full);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  color: var(--mm-neutral-400);
+  transition:
+    color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+}
+
+.mm-catform__upload-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.8;
+}
+
+.mm-catform__upload-label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+}
+
+.mm-catform__upload-label span {
+  color: var(--mm-primary-500);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mm-catform__upload-hint {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+  margin: 0;
+}
+
+/* Compact upload variant for icon */
+.mm-catform__upload--compact {
+  padding: var(--mm-space-6) var(--mm-space-5);
+}
+
+.mm-catform__upload--compact .mm-catform__upload-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.mm-catform__upload--compact .mm-catform__upload-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+
+/* =============================================================
+   7. IMAGE PREVIEW (edit mode)
+   ============================================================= */
+
+.mm-catform__preview {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-4);
+  padding: var(--mm-space-4);
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  margin-top: var(--mm-space-3);
+}
+
+.mm-catform__preview-thumb {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: var(--mm-radius-md);
+  border: 1px solid var(--mm-border-default);
+  background: var(--mm-neutral-0);
+  flex-shrink: 0;
+}
+
+/* Small variant for icon preview */
+.mm-catform__preview-thumb--sm {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--mm-radius-sm);
+}
+
+.mm-catform__preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mm-catform__preview-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mm-catform__preview-note {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+}
+
+
+/* =============================================================
+   8. STATUS TOGGLE (segmented control)
+   ============================================================= */
+
+.mm-catform__status-group {
+  display: flex;
+  gap: var(--mm-space-3);
+}
+
+.mm-catform__status-option {
+  flex: 1;
+  position: relative;
+}
+
+.mm-catform__status-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mm-catform__status-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  transition:
+    color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    border-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  user-select: none;
+}
+
+.mm-catform__status-label:hover {
+  border-color: var(--mm-neutral-300);
+  background: var(--mm-neutral-0);
+}
+
+.mm-catform__status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform var(--mm-duration-fast) var(--mm-ease-spring);
+}
+
+.mm-catform__status-dot--publish {
+  background: var(--mm-success);
+}
+
+.mm-catform__status-dot--unpublish {
+  background: var(--mm-neutral-400);
+}
+
+/* Selected state — Published */
+.mm-catform__status-option input[type="radio"]:checked + .mm-catform__status-label--publish {
+  color: var(--mm-success-dark);
+  background: var(--mm-success-light);
+  border-color: var(--mm-success);
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.08);
+}
+
+.mm-catform__status-option input[type="radio"]:checked + .mm-catform__status-label--publish .mm-catform__status-dot {
+  transform: scale(1.3);
+}
+
+/* Selected state — Unpublished */
+.mm-catform__status-option input[type="radio"]:checked + .mm-catform__status-label--unpublish {
+  color: var(--mm-neutral-700);
+  background: var(--mm-neutral-100);
+  border-color: var(--mm-neutral-400);
+  box-shadow: 0 0 0 4px rgba(120, 113, 108, 0.06);
+}
+
+.mm-catform__status-option input[type="radio"]:checked + .mm-catform__status-label--unpublish .mm-catform__status-dot {
+  transform: scale(1.3);
+}
+
+
+/* =============================================================
+   9. DIVIDER
+   ============================================================= */
+
+.mm-catform__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--mm-border-subtle);
+  border: none;
+  margin: 0;
+}
+
+
+/* =============================================================
+   10. SUBMIT AREA
+   ============================================================= */
+
+.mm-catform__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+  padding-top: var(--mm-space-2);
+}
+
+.mm-catform__submit {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-5) var(--mm-space-8);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring),
+    box-shadow var(--mm-duration-base) ease;
+  box-shadow: 0 4px 16px rgba(216, 136, 39, 0.25), 0 1px 4px rgba(216, 136, 39, 0.15);
+}
+
+.mm-catform__submit:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(216, 136, 39, 0.35), 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-catform__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-catform__submit svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.mm-catform__cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-3) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+}
+
+.mm-catform__cancel:hover {
+  color: var(--mm-text-primary);
+}
+
+
+/* =============================================================
+   11. FIELD ROW (two fields side-by-side)
+   ============================================================= */
+
+.mm-catform__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--mm-space-6);
+}
+
+
+/* =============================================================
+   12. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-catform-fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mm-catform-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =============================================================
+   13. RESPONSIVE — Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-catform {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-catform__card {
+    padding: var(--mm-space-8);
+  }
+}
+
+
+/* =============================================================
+   14. RESPONSIVE — Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-catform {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    max-width: 100%;
+  }
+
+  .mm-catform__card {
+    padding: var(--mm-space-6);
+    border-radius: var(--mm-radius-xl);
+  }
+
+  .mm-catform__title {
+    font-size: var(--mm-text-2xl);
+  }
+
+  .mm-catform__input--lg {
+    padding: var(--mm-space-4) var(--mm-space-5);
+    font-size: var(--mm-text-lg);
+  }
+
+  .mm-catform__row {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-6);
+  }
+
+  .mm-catform__status-group {
+    flex-direction: column;
+  }
+
+  .mm-catform__upload {
+    padding: var(--mm-space-6) var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   15. RESPONSIVE — Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-catform {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-catform__header {
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-catform__card {
+    padding: var(--mm-space-5);
+    border-radius: var(--mm-radius-lg);
+  }
+
+  .mm-catform__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-catform__form {
+    gap: var(--mm-space-6);
+  }
+
+  .mm-catform__input--lg {
+    font-size: var(--mm-text-md);
+  }
+
+  .mm-catform__preview-thumb {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+
+/* =============================================================
+   16. DARK MODE KILL (light only)
+   ============================================================= */
+
+body.dark-only .mm-catform__card {
+  background: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-catform__input {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-catform__upload {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-neutral-300) !important;
+}
+
+body.dark-only .mm-catform__title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-catform__label {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-catform__status-label {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-secondary) !important;
+}
+
+body.dark-only .mm-catform__status-option input[type="radio"]:checked + .mm-catform__status-label--publish {
+  background: var(--mm-success-light) !important;
+  border-color: var(--mm-success) !important;
+  color: var(--mm-success-dark) !important;
+}
+
+body.dark-only .mm-catform__status-option input[type="radio"]:checked + .mm-catform__status-label--unpublish {
+  background: var(--mm-neutral-100) !important;
+  border-color: var(--mm-neutral-400) !important;
+  color: var(--mm-neutral-700) !important;
+}
+
+body.dark-only .mm-catform__preview {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+}
+
+
+/* =============================================================
+   17. CUBA OVERRIDE — Scoped to .mm-catform
+   ============================================================= */
+
+/* Kill any inherited Cuba card/form styles */
+.mm-catform .card,
+.mm-catform .card-body,
+.mm-catform .card-footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.mm-catform .form-group {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mm-catform .form-control {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.mm-catform .page-title {
+  display: none !important;
+}
+
+.mm-catform .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.mm-catform .size-column {
+  display: contents !important;
+}
+
+.mm-catform .col-sm-12 {
+  display: contents !important;
+  padding: 0 !important;
+  max-width: none !important;
+  flex: none !important;
+}
+
+.mm-catform .row {
+  display: contents !important;
+}
