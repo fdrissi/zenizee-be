@@ -86,3 +86,537 @@ a:hover {
   background-color: var(--mm-primary-200);
   color: var(--mm-primary-900);
 }
+
+/* =============================================
+   Phase 0B: Comprehensive Color Overrides
+   Eliminates all hardcoded purple/pink from Cuba
+   ============================================= */
+
+/* --- Buttons --- */
+.btn-primary,
+.btn-primary.disabled,
+.btn-primary:disabled {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-text-inverse) !important;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:not(:disabled):not(.disabled):active {
+  background-color: var(--mm-primary-600) !important;
+  border-color: var(--mm-primary-600) !important;
+}
+.btn-primary:focus {
+  box-shadow: 0 0 0 0.2rem rgba(216, 136, 39, 0.35) !important;
+}
+
+.btn-secondary,
+.btn-secondary.disabled,
+.btn-secondary:disabled {
+  background-color: var(--mm-primary-600) !important;
+  border-color: var(--mm-primary-600) !important;
+  color: var(--mm-text-inverse) !important;
+}
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active,
+.btn-secondary:not(:disabled):not(.disabled):active {
+  background-color: var(--mm-primary-700) !important;
+  border-color: var(--mm-primary-700) !important;
+}
+.btn-secondary:focus {
+  box-shadow: 0 0 0 0.2rem rgba(184, 114, 31, 0.35) !important;
+}
+
+.btn-light,
+.btn-light:hover {
+  background-color: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-100) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+.btn-outline-primary,
+.btn-outline-primary-2x {
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-primary-500) !important;
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:active,
+.btn-outline-primary:focus,
+.btn-outline-primary:not([disabled]):not(.disabled).active,
+.btn-outline-primary-2x:hover,
+.btn-outline-primary-2x:active,
+.btn-outline-primary-2x:not([disabled]):not(.disabled).active {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-text-inverse) !important;
+}
+.btn-outline-primary.disabled {
+  color: var(--mm-primary-500) !important;
+}
+
+.btn-outline-secondary,
+.btn-outline-secondary-2x {
+  border-color: var(--mm-primary-600) !important;
+  color: var(--mm-primary-600) !important;
+}
+.btn-outline-secondary:hover,
+.btn-outline-secondary:active,
+.btn-outline-secondary:focus,
+.btn-outline-secondary:not([disabled]):not(.disabled).active,
+.btn-outline-secondary-2x:hover,
+.btn-outline-secondary-2x:active,
+.btn-outline-secondary-2x:not([disabled]):not(.disabled).active {
+  background-color: var(--mm-primary-600) !important;
+  border-color: var(--mm-primary-600) !important;
+  color: var(--mm-text-inverse) !important;
+}
+.btn-outline-secondary.disabled {
+  color: var(--mm-primary-600) !important;
+}
+
+/* --- Badges --- */
+.badge-primary,
+.badge.bg-primary {
+  background-color: var(--mm-primary-500) !important;
+  color: var(--mm-text-inverse) !important;
+}
+.badge-secondary,
+.badge.bg-secondary {
+  background-color: var(--mm-primary-600) !important;
+  color: var(--mm-text-inverse) !important;
+}
+.badge-light-primary {
+  background-color: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+.badge-light-secondary {
+  background-color: var(--mm-primary-100) !important;
+  color: var(--mm-primary-800) !important;
+}
+
+/* --- Labels --- */
+.label-theme,
+.label-primary {
+  background-color: var(--mm-primary-500) !important;
+}
+.label-secondary {
+  background-color: var(--mm-primary-600) !important;
+}
+
+/* --- Text Colors --- */
+.font-primary,
+.txt-primary {
+  color: var(--mm-primary-500) !important;
+}
+.font-secondary,
+.txt-secondary {
+  color: var(--mm-primary-600) !important;
+}
+
+/* --- Background Colors --- */
+.bg-primary {
+  background-color: var(--mm-primary-500) !important;
+}
+.bg-secondary {
+  background-color: var(--mm-primary-600) !important;
+}
+.bg-light-primary {
+  background-color: rgba(216, 136, 39, 0.1) !important;
+}
+.bg-light-secondary {
+  background-color: rgba(184, 114, 31, 0.1) !important;
+}
+
+/* --- Borders --- */
+.b-primary,
+.border-primary {
+  border-color: var(--mm-primary-500) !important;
+}
+.b-t-primary,
+.border-t-primary {
+  border-top-color: var(--mm-primary-500) !important;
+}
+.b-b-primary,
+.border-b-primary {
+  border-bottom-color: var(--mm-primary-500) !important;
+}
+.b-l-primary,
+.border-l-primary {
+  border-left-color: var(--mm-primary-500) !important;
+}
+.b-r-primary,
+.border-r-primary {
+  border-right-color: var(--mm-primary-500) !important;
+}
+
+.b-secondary,
+.border-secondary {
+  border-color: var(--mm-primary-600) !important;
+}
+.b-t-secondary,
+.border-t-secondary {
+  border-top-color: var(--mm-primary-600) !important;
+}
+.b-b-secondary,
+.border-b-secondary {
+  border-bottom-color: var(--mm-primary-600) !important;
+}
+.b-l-secondary,
+.border-l-secondary {
+  border-left-color: var(--mm-primary-600) !important;
+}
+.b-r-secondary,
+.border-r-secondary {
+  border-right-color: var(--mm-primary-600) !important;
+}
+
+/* --- Table Borders --- */
+table tbody .border-bottom-primary th,
+table tbody .border-bottom-primary td {
+  border-bottom-color: var(--mm-primary-500) !important;
+}
+table tbody .border-bottom-secondary th,
+table tbody .border-bottom-secondary td {
+  border-bottom-color: var(--mm-primary-600) !important;
+}
+
+/* --- Table Styling --- */
+.table-styling .table-primary,
+.table-styling.table-primary {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+}
+.table-styling .table-secondary,
+.table-styling.table-secondary {
+  background-color: var(--mm-primary-600) !important;
+  border-color: var(--mm-primary-600) !important;
+}
+
+/* --- Alerts --- */
+.alert-primary {
+  background-color: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-200) !important;
+  color: var(--mm-primary-800) !important;
+}
+.alert-primary .alert-link {
+  color: var(--mm-primary-700) !important;
+}
+.alert-primary hr {
+  border-top-color: var(--mm-primary-200) !important;
+}
+.alert-primary.dark {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-text-inverse) !important;
+}
+.alert-primary.outline,
+.alert-primary.outline-2x {
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-primary-500) !important;
+}
+
+.alert-secondary {
+  background-color: var(--mm-primary-100) !important;
+  border-color: var(--mm-primary-300) !important;
+  color: var(--mm-primary-900) !important;
+}
+.alert-secondary .alert-link {
+  color: var(--mm-primary-800) !important;
+}
+.alert-secondary hr {
+  border-top-color: var(--mm-primary-300) !important;
+}
+
+/* --- Toasts --- */
+.toast-primary {
+  color: var(--mm-primary-500) !important;
+}
+.toast-secondary {
+  color: var(--mm-primary-600) !important;
+}
+
+/* --- SVG Fill/Stroke --- */
+.fill-primary {
+  fill: var(--mm-primary-500) !important;
+}
+.fill-secondary {
+  fill: var(--mm-primary-600) !important;
+}
+svg.stroke-primary,
+.stroke-primary {
+  stroke: var(--mm-primary-500) !important;
+}
+
+/* --- Accordion --- */
+.accordion-wrapper:active {
+  border-color: var(--mm-primary-500) !important;
+}
+.faq-section .accordion-button:not(.collapsed) {
+  color: var(--mm-primary-500) !important;
+}
+
+/* --- Blockquote --- */
+blockquote {
+  border-left-color: var(--mm-primary-500) !important;
+}
+.figure.text-end blockquote {
+  border-right-color: var(--mm-primary-500) !important;
+}
+
+/* --- Form Focus States --- */
+.form-control:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--mm-primary-400) !important;
+  box-shadow: 0 0 0 0.2rem rgba(216, 136, 39, 0.25) !important;
+}
+input:focus {
+  outline-color: rgba(216, 136, 39, 0.25) !important;
+}
+
+/* --- Checkboxes & Radios --- */
+.checkbox-primary label::before,
+.radio-primary input[type=radio] + label::before {
+  border-color: var(--mm-primary-500) !important;
+}
+.checkbox-primary input:checked + label::before,
+.checkbox-solid-primary input:checked + label::before,
+.radio-primary input[type=radio]:checked + label::before {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+}
+.radio-primary input[type=radio]:checked + label::after {
+  background-color: var(--mm-primary-500) !important;
+}
+.checkbox-secondary label::before,
+.radio-secondary input[type=radio] + label::before {
+  border-color: var(--mm-primary-600) !important;
+}
+.checkbox-secondary input:checked + label::before,
+.checkbox-solid-secondary input:checked + label::before,
+.checkbox-solid-secondary label:before,
+.radio-secondary input[type=radio]:checked + label::before {
+  background-color: var(--mm-primary-600) !important;
+  border-color: var(--mm-primary-600) !important;
+}
+.radio-secondary input[type=radio]:checked + label::after,
+.radio-secondary input[type=radio] + label::after {
+  background-color: var(--mm-primary-600) !important;
+}
+
+/* --- List Group --- */
+.list-group-horizontal .list-group-item.border-left-primary,
+.list-group-horizontal-sm .list-group-item.border-left-primary,
+.list-group-horizontal-md .list-group-item.border-left-primary,
+.list-group-horizontal-lg .list-group-item.border-left-primary {
+  border-left-color: var(--mm-primary-500) !important;
+}
+.list-group [type=radio].checkbox-primary {
+  border-color: var(--mm-primary-500) !important;
+}
+.list-group [type=radio].checkbox-primary:active,
+.list-group [type=radio].checkbox-primary.active {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+}
+
+/* --- Pagination --- */
+.pagination-primary .page-item.active .page-link,
+.pagination-primary .page-item .page-link:hover {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-text-inverse) !important;
+}
+.pagination-secondary .page-item .page-link {
+  color: var(--mm-primary-600) !important;
+}
+.pagination-secondary .page-item.active .page-link {
+  background-color: var(--mm-primary-600) !important;
+  border-color: var(--mm-primary-600) !important;
+  color: var(--mm-text-inverse) !important;
+}
+
+/* --- Tabs --- */
+.border-tab .nav-tabs .nav-item .nav-link.active,
+.border-tab .nav-tabs .nav-item .nav-link.show,
+.border-tab .nav-tabs .nav-item .nav-link:focus {
+  border-bottom-color: var(--mm-primary-500) !important;
+  color: var(--mm-primary-500) !important;
+}
+
+/* --- Sidebar Active States --- */
+.page-wrapper.compact-sidebar .sidebar-main .sidebar-links li a.active,
+.page-wrapper.compact-sidebar .sidebar-main .sidebar-links li .mega-menu-container li a.active {
+  background: rgba(216, 136, 39, 0.1) !important;
+  color: var(--mm-primary-500) !important;
+}
+.page-wrapper.compact-sidebar .sidebar-main .sidebar-links li a.active span {
+  color: var(--mm-primary-500) !important;
+}
+
+/* General sidebar link active/hover */
+.sidebar-link.active,
+.sidebar-link:hover,
+.sidebar-list .sidebar-link.active {
+  color: var(--mm-primary-600) !important;
+}
+.sidebar-link.active svg,
+.sidebar-link:hover svg {
+  color: var(--mm-primary-600) !important;
+  stroke: var(--mm-primary-600) !important;
+}
+.sidebar-submenu li a.active,
+.sidebar-submenu li a:hover {
+  color: var(--mm-primary-600) !important;
+}
+
+/* --- Dropzone --- */
+.dropzone .dz-preview .dz-error-message {
+  color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+}
+.dropzone .dz-preview .dz-error-message:after {
+  border-bottom-color: var(--mm-primary-500) !important;
+}
+.dropzone.dropzone-secondary {
+  border-color: var(--mm-primary-600) !important;
+}
+
+/* --- Notification Badge --- */
+.page-header .notification-box .badge {
+  background-color: var(--mm-primary-500) !important;
+}
+
+/* --- Popover & Tooltip --- */
+.popover .popover-header {
+  background-color: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+.tooltip .tooltip-inner {
+  background-color: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+/* --- Email Wrap --- */
+.email-wrap .dropdown .dropdown-toggle {
+  background-color: rgba(216, 136, 39, 0.08) !important;
+  color: var(--mm-primary-500) !important;
+}
+
+/* --- Product Social --- */
+.product-social li a:hover {
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-primary-500) !important;
+}
+
+/* --- User Icon --- */
+.user-list .user-icon.primary {
+  border-color: var(--mm-primary-500) !important;
+}
+
+/* --- Mesh Loader --- */
+.mesh-loader .circle {
+  background: var(--mm-primary-500) !important;
+}
+
+/* --- Filepond --- */
+.filepond--list .filepond--file {
+  background-color: var(--mm-primary-500) !important;
+}
+
+/* --- Search Page --- */
+.search-page .theme-form input::placeholder {
+  color: var(--mm-primary-500) !important;
+}
+.search-page .info-block h6 {
+  color: var(--mm-primary-500) !important;
+}
+
+/* --- Datepicker --- */
+.datepicker .datepicker--cell.-current- {
+  color: var(--mm-primary-500) !important;
+}
+
+/* --- Footer --- */
+footer .sub-footer ul li a:hover {
+  color: var(--mm-primary-500) !important;
+}
+
+/* --- Testimonial --- */
+.testimonial-slider .slick-dots li.slick-active button {
+  background: var(--mm-primary-500) !important;
+}
+
+/* --- Progress Bars --- */
+.progress-gradient-primary .progress-bar {
+  background-image: linear-gradient(to right, var(--mm-primary-500), transparent) !important;
+}
+.progress-gradient-secondary .progress-bar {
+  background-image: linear-gradient(to right, var(--mm-primary-600), transparent) !important;
+}
+
+/* --- Box Shadows (override purple/pink tinted) --- */
+.alert-primary {
+  box-shadow: 0 3px 5px 1px rgba(216, 136, 39, 0.1) !important;
+}
+.alert-secondary {
+  box-shadow: 0 3px 5px 1px rgba(184, 114, 31, 0.1) !important;
+}
+
+/* --- Gradient Overrides --- */
+.bg-gradient {
+  background: var(--mm-gradient-primary) !important;
+}
+
+/* --- Customizer (theme color picker) --- */
+.customizer-contain .customizer-body .color-layout > div {
+  background-color: var(--mm-primary-500) !important;
+}
+
+/* --- Dark Mode overrides (force light with gold) --- */
+body.dark-only .page-body .b-primary,
+body.dark-only .page-body .border-primary {
+  border-color: var(--mm-primary-500) !important;
+}
+body.dark-only .page-body .b-secondary,
+body.dark-only .page-body .border-secondary {
+  border-color: var(--mm-primary-600) !important;
+}
+body.dark-only .page-body .border-t-primary { border-top-color: var(--mm-primary-500) !important; }
+body.dark-only .page-body .border-b-primary { border-bottom-color: var(--mm-primary-500) !important; }
+body.dark-only .page-body .border-l-primary { border-left-color: var(--mm-primary-500) !important; }
+body.dark-only .page-body .border-r-primary { border-right-color: var(--mm-primary-500) !important; }
+body.dark-only .page-body .border-t-secondary { border-top-color: var(--mm-primary-600) !important; }
+body.dark-only .page-body .border-b-secondary { border-bottom-color: var(--mm-primary-600) !important; }
+body.dark-only .page-body .border-l-secondary { border-left-color: var(--mm-primary-600) !important; }
+body.dark-only .page-body .border-r-secondary { border-right-color: var(--mm-primary-600) !important; }
+
+body.dark-only .radio-secondary input[type=radio] + label::before,
+body.dark-only .radio-secondary input[type=radio]:checked + label::before {
+  border-color: var(--mm-primary-600) !important;
+}
+body.dark-only .radio-secondary input[type=radio] + label::after,
+body.dark-only .radio-secondary input[type=radio]:checked + label::after {
+  background-color: var(--mm-primary-600) !important;
+}
+body.dark-only .checkbox-secondary label::before {
+  border-color: var(--mm-primary-600) !important;
+}
+body.dark-only .checkbox-solid-secondary label:before,
+body.dark-only .checkbox-solid-secondary input[type=checkbox]:checked + label::before {
+  background-color: var(--mm-primary-600) !important;
+  border-color: var(--mm-primary-600) !important;
+}
+
+body.dark-only .datepicker .datepicker--cell.-current- {
+  color: var(--mm-primary-500) !important;
+}
+
+/* --- Catch-all: override any inline style or JS-set purple --- */
+[style*="7366ff"],
+[style*="7366FF"] {
+  color: var(--mm-primary-500) !important;
+}
