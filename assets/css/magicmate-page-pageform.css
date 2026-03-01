@@ -206,7 +206,17 @@
   border-radius: var(--mm-radius-sm) !important;
   color: var(--mm-text-secondary) !important;
   font-size: var(--mm-text-xs) !important;
+  font-family: inherit !important;
   padding: 4px 8px !important;
+}
+
+/* Preserve Summernote icon font on toolbar icon elements */
+.mm-pageform__editor-wrap .note-toolbar .note-btn i,
+.mm-pageform__editor-wrap .note-toolbar .note-btn .note-icon-caret,
+.mm-pageform__editor-wrap .note-toolbar .note-icon-magic,
+.mm-pageform__editor-wrap .note-toolbar [class^="note-icon"],
+.mm-pageform__editor-wrap .note-toolbar [class*=" note-icon"] {
+  font-family: "summernote" !important;
   transition:
     background var(--mm-duration-fast) ease,
     border-color var(--mm-duration-fast) ease,
