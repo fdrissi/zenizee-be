@@ -1,0 +1,936 @@
+/* =====================================================================
+   MagicMate — Payment Gateway List Page
+   A premium card grid for payment gateway management.
+   Uses design tokens from magicmate-tokens.css exclusively.
+   BEM prefix: mm-paylist__*
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-paylist {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER — Title bar
+   ============================================================= */
+
+.mm-paylist__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--mm-space-8);
+  animation: mm-paylist-fadeIn 0.45s ease both;
+}
+
+.mm-paylist__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+.mm-paylist__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-paylist__subtitle {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Header icon accent */
+.mm-paylist__header-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  border-radius: var(--mm-radius-xl);
+  flex-shrink: 0;
+}
+
+.mm-paylist__header-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--mm-primary-600);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =============================================================
+   2. INFO NOTICE — Replaces blinking warning
+   ============================================================= */
+
+.mm-paylist__notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  background: var(--mm-info-light);
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  border-radius: var(--mm-radius-lg);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-paylist-fadeUp 0.45s ease 0.03s both;
+}
+
+.mm-paylist__notice-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.mm-paylist__notice-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--mm-info);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-paylist__notice-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-info-dark);
+  line-height: 1.55;
+  margin: 0;
+}
+
+
+/* =============================================================
+   3. STATS BAR — Quick summary strip
+   ============================================================= */
+
+.mm-paylist__stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-6);
+  padding: var(--mm-space-4) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-paylist-fadeUp 0.45s ease 0.05s both;
+}
+
+.mm-paylist__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-paylist__stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-paylist__stat-dot--total {
+  background: var(--mm-primary-500);
+}
+
+.mm-paylist__stat-dot--active {
+  background: var(--mm-success);
+}
+
+.mm-paylist__stat-dot--inactive {
+  background: var(--mm-neutral-400);
+}
+
+.mm-paylist__stat-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1;
+}
+
+.mm-paylist__stat-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-left: -4px;
+}
+
+.mm-paylist__stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================
+   4. TOOLBAR — Search + Filter
+   ============================================================= */
+
+.mm-paylist__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-paylist-fadeUp 0.45s ease 0.1s both;
+}
+
+.mm-paylist__search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.mm-paylist__search-icon {
+  position: absolute;
+  left: var(--mm-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.mm-paylist__search-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-paylist__search-input {
+  width: 100%;
+  padding: var(--mm-space-3) var(--mm-space-4) var(--mm-space-3) 44px;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-900);
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-paylist__search-input::placeholder {
+  color: var(--mm-neutral-400);
+  font-weight: 400;
+}
+
+.mm-paylist__search-input:focus {
+  border-color: var(--mm-primary-300);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.08);
+}
+
+/* Filter buttons group */
+.mm-paylist__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-paylist__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-full);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-600);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.mm-paylist__filter-btn:hover {
+  border-color: var(--mm-primary-200);
+  color: var(--mm-primary-700);
+  background: var(--mm-primary-50);
+}
+
+.mm-paylist__filter-btn--active {
+  background: var(--mm-primary-500);
+  border-color: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+}
+
+.mm-paylist__filter-btn--active:hover {
+  background: var(--mm-primary-600);
+  border-color: var(--mm-primary-600);
+  color: #fff;
+}
+
+.mm-paylist__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--mm-radius-full);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mm-paylist__filter-btn:not(.mm-paylist__filter-btn--active) .mm-paylist__filter-count {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-paylist__filter-btn--active .mm-paylist__filter-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+
+/* =============================================================
+   5. CARD GRID
+   ============================================================= */
+
+.mm-paylist__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--mm-space-5);
+  animation: mm-paylist-fadeUp 0.45s ease 0.15s both;
+}
+
+
+/* =============================================================
+   6. PAYMENT GATEWAY CARD
+   ============================================================= */
+
+.mm-paylist__card {
+  position: relative;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  overflow: hidden;
+  transition: all var(--mm-duration-base) ease;
+  animation: mm-paylist-cardIn 0.5s var(--mm-ease-spring) both;
+  animation-delay: calc(var(--card-index, 0) * 0.06s + 0.15s);
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-paylist__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mm-shadow-card-hover);
+  border-color: var(--mm-primary-200);
+}
+
+/* ── Card top section: logo area ── */
+.mm-paylist__card-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%);
+  border-bottom: 1px solid var(--mm-border-subtle);
+  min-height: 120px;
+}
+
+.mm-paylist__card-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: var(--mm-radius-lg);
+  transition: transform var(--mm-duration-slow) var(--mm-ease-spring);
+  filter: drop-shadow(0 2px 8px rgba(28, 25, 23, 0.08));
+}
+
+.mm-paylist__card:hover .mm-paylist__card-logo {
+  transform: scale(1.08);
+}
+
+/* Logo placeholder when image missing */
+.mm-paylist__card-no-logo {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-200);
+  border-radius: var(--mm-radius-lg);
+}
+
+.mm-paylist__card-no-logo svg {
+  width: 32px;
+  height: 32px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Status indicator (top-right of visual area) ── */
+.mm-paylist__status-dot {
+  position: absolute;
+  top: var(--mm-space-3);
+  right: var(--mm-space-3);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--mm-neutral-0);
+  z-index: 2;
+}
+
+.mm-paylist__status-dot--active {
+  background: var(--mm-success);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+}
+
+.mm-paylist__status-dot--inactive {
+  background: var(--mm-neutral-400);
+  box-shadow: 0 0 0 3px rgba(120, 113, 108, 0.1);
+}
+
+/* ── Card index (top-left) ── */
+.mm-paylist__card-index {
+  position: absolute;
+  top: var(--mm-space-3);
+  left: var(--mm-space-3);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 25, 23, 0.06);
+  border-radius: var(--mm-radius-md);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--mm-neutral-500);
+  z-index: 2;
+}
+
+
+/* ── Card body ── */
+.mm-paylist__card-body {
+  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+}
+
+.mm-paylist__card-name {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mm-paylist__card-subtitle {
+  font-size: var(--mm-text-xs);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(var(--mm-text-xs) * 1.5 * 2);
+}
+
+/* ── Badge row ── */
+.mm-paylist__card-badges {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.mm-paylist__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--mm-radius-full);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.mm-paylist__badge svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* Status badge variants */
+.mm-paylist__badge--published {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+}
+
+.mm-paylist__badge--published svg {
+  stroke: var(--mm-success);
+}
+
+.mm-paylist__badge--unpublished {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-paylist__badge--unpublished svg {
+  stroke: var(--mm-neutral-500);
+}
+
+/* Wallet badge variants */
+.mm-paylist__badge--wallet-on {
+  background: var(--mm-primary-50);
+  color: var(--mm-primary-700);
+}
+
+.mm-paylist__badge--wallet-on svg {
+  stroke: var(--mm-primary-500);
+}
+
+.mm-paylist__badge--wallet-off {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-500);
+}
+
+.mm-paylist__badge--wallet-off svg {
+  stroke: var(--mm-neutral-400);
+}
+
+
+/* ── Card footer (actions) ── */
+.mm-paylist__card-actions {
+  display: flex;
+  align-items: center;
+  padding: var(--mm-space-3) var(--mm-space-5);
+  border-top: 1px solid var(--mm-border-subtle);
+}
+
+.mm-paylist__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--mm-radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--mm-duration-fast) ease;
+  line-height: 1;
+}
+
+.mm-paylist__action-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Edit / Configure button */
+.mm-paylist__action-btn--edit {
+  background: var(--mm-primary-50);
+  color: var(--mm-primary-700);
+}
+
+.mm-paylist__action-btn--edit svg {
+  stroke: var(--mm-primary-600);
+}
+
+.mm-paylist__action-btn--edit:hover {
+  background: var(--mm-primary-100);
+  color: var(--mm-primary-800);
+  text-decoration: none;
+}
+
+
+/* =============================================================
+   7. EMPTY STATE
+   ============================================================= */
+
+.mm-paylist__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  text-align: center;
+  animation: mm-paylist-fadeIn 0.5s ease 0.2s both;
+}
+
+.mm-paylist__empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border-radius: var(--mm-radius-2xl);
+  margin-bottom: var(--mm-space-5);
+}
+
+.mm-paylist__empty-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-paylist__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-700);
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-paylist__empty-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+
+/* =============================================================
+   8. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-paylist-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mm-paylist-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mm-paylist-cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE — Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-paylist {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-paylist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   10. RESPONSIVE — Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-paylist {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-paylist__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mm-space-4);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-paylist__header-icon {
+    display: none;
+  }
+
+  .mm-paylist__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-paylist__stats-bar {
+    gap: var(--mm-space-4);
+    padding: var(--mm-space-3) var(--mm-space-4);
+    flex-wrap: wrap;
+  }
+
+  .mm-paylist__stat-separator {
+    display: none;
+  }
+
+  .mm-paylist__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mm-paylist__search-wrap {
+    max-width: none;
+  }
+
+  .mm-paylist__filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: var(--mm-space-1);
+  }
+
+  .mm-paylist__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mm-paylist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-3);
+  }
+
+  .mm-paylist__card-visual {
+    padding: var(--mm-space-6) var(--mm-space-4);
+    min-height: 100px;
+  }
+
+  .mm-paylist__card-logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .mm-paylist__card-body {
+    padding: var(--mm-space-4);
+  }
+
+  .mm-paylist__card-actions {
+    padding: var(--mm-space-2) var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   11. RESPONSIVE — Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-paylist {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-paylist__grid {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-4);
+  }
+
+  .mm-paylist__card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .mm-paylist__card-visual {
+    width: 100px;
+    min-height: auto;
+    padding: var(--mm-space-4);
+    border-bottom: none;
+    border-right: 1px solid var(--mm-border-subtle);
+    flex-shrink: 0;
+  }
+
+  .mm-paylist__card-logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .mm-paylist__card-no-logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .mm-paylist__status-dot {
+    top: var(--mm-space-2);
+    right: var(--mm-space-2);
+    width: 8px;
+    height: 8px;
+  }
+
+  .mm-paylist__card-index {
+    display: none;
+  }
+
+  .mm-paylist__card-body {
+    padding: var(--mm-space-3) var(--mm-space-4);
+    gap: var(--mm-space-2);
+  }
+
+  .mm-paylist__card-subtitle {
+    -webkit-line-clamp: 1;
+    min-height: auto;
+  }
+
+  .mm-paylist__card-actions {
+    border-top: none;
+    border-left: 1px solid var(--mm-border-subtle);
+    padding: var(--mm-space-3);
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .mm-paylist__notice {
+    padding: var(--mm-space-3) var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   12. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-paylist__card,
+body.dark-only .mm-paylist__stats-bar {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-paylist__card-visual {
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%) !important;
+}
+
+body.dark-only .mm-paylist__card-name,
+body.dark-only .mm-paylist__title,
+body.dark-only .mm-paylist__stat-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-paylist__subtitle,
+body.dark-only .mm-paylist__stat-label,
+body.dark-only .mm-paylist__card-subtitle {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .mm-paylist__search-input {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-paylist__filter-btn:not(.mm-paylist__filter-btn--active) {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-600) !important;
+}
+
+body.dark-only .mm-paylist__notice {
+  background: var(--mm-info-light) !important;
+}
+
+body.dark-only .mm-paylist__action-btn--edit {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+
+/* =============================================================
+   13. CUBA OVERRIDES — Scoped to .mm-paylist
+   ============================================================= */
+
+.mm-paylist .page-title,
+.mm-paylist .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.mm-paylist .page-title::before {
+  display: none !important;
+}
+
+.mm-paylist .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.mm-paylist .page-title {
+  display: none !important;
+}
+
+.mm-paylist .blink_me {
+  display: none !important;
+}
+
+.mm-paylist .size-column {
+  display: none !important;
+}
+
+.mm-paylist .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}

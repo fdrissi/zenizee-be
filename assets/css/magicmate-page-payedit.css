@@ -1,0 +1,881 @@
+/* =====================================================================
+   MagicMate — Edit Payment Gateway Page
+   Custom-built form layout for editing payment gateways.
+   BEM prefix: mm-payedit__*
+   Uses design tokens from magicmate-tokens.css exclusively.
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-payedit {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER (back link + title + subtitle)
+   ============================================================= */
+
+.mm-payedit__header {
+  margin-bottom: var(--mm-space-8);
+  animation: mm-payedit-fadeIn 0.4s ease both;
+}
+
+.mm-payedit__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+  margin-bottom: var(--mm-space-4);
+}
+
+.mm-payedit__back:hover {
+  color: var(--mm-primary-600);
+}
+
+.mm-payedit__back svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.mm-payedit__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-3xl);
+  font-weight: 800;
+  color: var(--mm-text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-payedit__subtitle {
+  font-size: var(--mm-text-base);
+  font-weight: 400;
+  color: var(--mm-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mm-payedit__subtitle strong {
+  font-weight: 600;
+  color: var(--mm-text-primary);
+}
+
+
+/* =============================================================
+   2. FORM CARD
+   ============================================================= */
+
+.mm-payedit__card {
+  background: var(--mm-surface-card);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-2xl);
+  padding: var(--mm-space-10);
+  box-shadow: var(--mm-shadow-sm);
+  animation: mm-payedit-slideUp 0.5s ease 0.1s both;
+  transition: box-shadow var(--mm-duration-slow) ease;
+}
+
+.mm-payedit__card:hover {
+  box-shadow: var(--mm-shadow-md);
+}
+
+
+/* =============================================================
+   3. FORM LAYOUT
+   ============================================================= */
+
+.mm-payedit__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-8);
+}
+
+
+/* =============================================================
+   4. SECTIONS (grouped fields with icon header)
+   ============================================================= */
+
+.mm-payedit__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-6);
+}
+
+.mm-payedit__section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-4);
+}
+
+.mm-payedit__section-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--mm-radius-lg);
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-border-accent);
+  color: var(--mm-primary-600);
+  flex-shrink: 0;
+}
+
+.mm-payedit__section-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.8;
+}
+
+.mm-payedit__section-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 2px;
+}
+
+.mm-payedit__section-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.mm-payedit__section-desc {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+
+/* =============================================================
+   5. FIELD GROUP
+   ============================================================= */
+
+.mm-payedit__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+.mm-payedit__label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  letter-spacing: 0.01em;
+}
+
+.mm-payedit__hint {
+  font-size: var(--mm-text-xs);
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  line-height: 1.4;
+}
+
+
+/* =============================================================
+   6. TEXT INPUT
+   ============================================================= */
+
+.mm-payedit__input {
+  width: 100%;
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 500;
+  color: var(--mm-text-primary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  outline: none;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-payedit__input::placeholder {
+  color: var(--mm-text-tertiary);
+  font-weight: 400;
+}
+
+.mm-payedit__input:hover {
+  border-color: var(--mm-neutral-300);
+}
+
+.mm-payedit__input:focus {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-neutral-0);
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1);
+}
+
+
+/* =============================================================
+   7. READ-ONLY FIELD (gateway name, locked)
+   ============================================================= */
+
+.mm-payedit__readonly {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  background: var(--mm-neutral-100);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  cursor: not-allowed;
+}
+
+.mm-payedit__readonly-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--mm-neutral-400);
+  flex-shrink: 0;
+}
+
+.mm-payedit__readonly-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.mm-payedit__readonly-value {
+  flex: 1;
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  letter-spacing: -0.01em;
+}
+
+.mm-payedit__readonly-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-500);
+  background: var(--mm-neutral-200);
+  border-radius: var(--mm-radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+}
+
+
+/* =============================================================
+   8. CALLOUT / INFO BOX (PayPal note)
+   ============================================================= */
+
+.mm-payedit__callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  background: var(--mm-info-light);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: var(--mm-radius-lg);
+  margin-top: var(--mm-space-1);
+}
+
+.mm-payedit__callout-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--mm-info);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.mm-payedit__callout-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.mm-payedit__callout-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-info-dark);
+  line-height: 1.5;
+}
+
+.mm-payedit__callout-text strong {
+  font-weight: 600;
+}
+
+.mm-payedit__callout-text code {
+  display: inline-block;
+  padding: 1px 6px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Mono', monospace;
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-info-dark);
+  background: rgba(37, 99, 235, 0.08);
+  border-radius: var(--mm-radius-xs);
+}
+
+
+/* =============================================================
+   9. IMAGE UPLOAD (drag-and-drop style)
+   ============================================================= */
+
+.mm-payedit__upload {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-8) var(--mm-space-6);
+  background: var(--mm-neutral-50);
+  border: 2px dashed var(--mm-neutral-300);
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+  text-align: center;
+}
+
+.mm-payedit__upload:hover {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-primary-50);
+  transform: translateY(-1px);
+}
+
+.mm-payedit__upload:hover .mm-payedit__upload-icon {
+  color: var(--mm-primary-500);
+  transform: scale(1.05);
+}
+
+.mm-payedit__upload-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.mm-payedit__upload-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--mm-radius-full);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  color: var(--mm-neutral-400);
+  transition:
+    color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+}
+
+.mm-payedit__upload-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.8;
+}
+
+.mm-payedit__upload-label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  margin: 0;
+}
+
+.mm-payedit__upload-label span {
+  color: var(--mm-primary-500);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mm-payedit__upload-hint {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+  margin: 0;
+}
+
+
+/* =============================================================
+   10. IMAGE PREVIEW (current gateway image)
+   ============================================================= */
+
+.mm-payedit__preview {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-4);
+  padding: var(--mm-space-4);
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  margin-top: var(--mm-space-3);
+}
+
+.mm-payedit__preview-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: var(--mm-radius-md);
+  border: 1px solid var(--mm-border-default);
+  background: var(--mm-neutral-0);
+  flex-shrink: 0;
+  padding: var(--mm-space-2);
+}
+
+.mm-payedit__preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mm-payedit__preview-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mm-payedit__preview-note {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+}
+
+
+/* =============================================================
+   11. TOGGLE GROUP (segmented radio buttons)
+   ============================================================= */
+
+.mm-payedit__toggle-group {
+  display: flex;
+  gap: var(--mm-space-3);
+}
+
+.mm-payedit__toggle-option {
+  flex: 1;
+  position: relative;
+}
+
+.mm-payedit__toggle-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mm-payedit__toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  transition:
+    color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    border-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  user-select: none;
+}
+
+.mm-payedit__toggle-label:hover {
+  border-color: var(--mm-neutral-300);
+  background: var(--mm-neutral-0);
+}
+
+.mm-payedit__toggle-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform var(--mm-duration-fast) var(--mm-ease-spring);
+}
+
+.mm-payedit__toggle-dot--publish {
+  background: var(--mm-success);
+}
+
+.mm-payedit__toggle-dot--unpublish {
+  background: var(--mm-neutral-400);
+}
+
+/* Selected state — Published / Yes */
+.mm-payedit__toggle-option input[type="radio"]:checked + .mm-payedit__toggle-label--publish {
+  color: var(--mm-success-dark);
+  background: var(--mm-success-light);
+  border-color: var(--mm-success);
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.08);
+}
+
+.mm-payedit__toggle-option input[type="radio"]:checked + .mm-payedit__toggle-label--publish .mm-payedit__toggle-dot {
+  transform: scale(1.3);
+}
+
+/* Selected state — Unpublished / No */
+.mm-payedit__toggle-option input[type="radio"]:checked + .mm-payedit__toggle-label--unpublish {
+  color: var(--mm-neutral-700);
+  background: var(--mm-neutral-100);
+  border-color: var(--mm-neutral-400);
+  box-shadow: 0 0 0 4px rgba(120, 113, 108, 0.06);
+}
+
+.mm-payedit__toggle-option input[type="radio"]:checked + .mm-payedit__toggle-label--unpublish .mm-payedit__toggle-dot {
+  transform: scale(1.3);
+}
+
+
+/* =============================================================
+   12. DIVIDER
+   ============================================================= */
+
+.mm-payedit__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--mm-border-subtle);
+  border: none;
+  margin: 0;
+}
+
+
+/* =============================================================
+   13. SUBMIT AREA
+   ============================================================= */
+
+.mm-payedit__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+  padding-top: var(--mm-space-2);
+}
+
+.mm-payedit__submit {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-5) var(--mm-space-8);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring),
+    box-shadow var(--mm-duration-base) ease;
+  box-shadow: 0 4px 16px rgba(216, 136, 39, 0.25), 0 1px 4px rgba(216, 136, 39, 0.15);
+}
+
+.mm-payedit__submit:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(216, 136, 39, 0.35), 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-payedit__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-payedit__submit svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.mm-payedit__cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-3) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+}
+
+.mm-payedit__cancel:hover {
+  color: var(--mm-text-primary);
+}
+
+
+/* =============================================================
+   14. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-payedit-fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mm-payedit-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =============================================================
+   15. RESPONSIVE — Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-payedit {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-payedit__card {
+    padding: var(--mm-space-8);
+  }
+}
+
+
+/* =============================================================
+   16. RESPONSIVE — Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-payedit {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    max-width: 100%;
+  }
+
+  .mm-payedit__card {
+    padding: var(--mm-space-6);
+    border-radius: var(--mm-radius-xl);
+  }
+
+  .mm-payedit__title {
+    font-size: var(--mm-text-2xl);
+  }
+
+  .mm-payedit__toggle-group {
+    flex-direction: column;
+  }
+
+  .mm-payedit__upload {
+    padding: var(--mm-space-6) var(--mm-space-4);
+  }
+
+  .mm-payedit__section-header {
+    gap: var(--mm-space-3);
+  }
+
+  .mm-payedit__section-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mm-payedit__section-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+
+/* =============================================================
+   17. RESPONSIVE — Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-payedit {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-payedit__header {
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-payedit__card {
+    padding: var(--mm-space-5);
+    border-radius: var(--mm-radius-lg);
+  }
+
+  .mm-payedit__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-payedit__form {
+    gap: var(--mm-space-6);
+  }
+
+  .mm-payedit__section {
+    gap: var(--mm-space-4);
+  }
+
+  .mm-payedit__preview-thumb {
+    width: 48px;
+    height: 48px;
+  }
+
+  .mm-payedit__callout {
+    padding: var(--mm-space-3) var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   18. DARK MODE KILL (light only)
+   ============================================================= */
+
+body.dark-only .mm-payedit__card {
+  background: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-payedit__input {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-payedit__readonly {
+  background: var(--mm-neutral-100) !important;
+  border-color: var(--mm-border-default) !important;
+}
+
+body.dark-only .mm-payedit__upload {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-neutral-300) !important;
+}
+
+body.dark-only .mm-payedit__title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-payedit__label {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-payedit__section-title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-payedit__section-icon {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-border-accent) !important;
+}
+
+body.dark-only .mm-payedit__toggle-label {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-secondary) !important;
+}
+
+body.dark-only .mm-payedit__toggle-option input[type="radio"]:checked + .mm-payedit__toggle-label--publish {
+  background: var(--mm-success-light) !important;
+  border-color: var(--mm-success) !important;
+  color: var(--mm-success-dark) !important;
+}
+
+body.dark-only .mm-payedit__toggle-option input[type="radio"]:checked + .mm-payedit__toggle-label--unpublish {
+  background: var(--mm-neutral-100) !important;
+  border-color: var(--mm-neutral-400) !important;
+  color: var(--mm-neutral-700) !important;
+}
+
+body.dark-only .mm-payedit__preview {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+}
+
+body.dark-only .mm-payedit__callout {
+  background: var(--mm-info-light) !important;
+}
+
+
+/* =============================================================
+   19. CUBA OVERRIDE — Scoped to .mm-payedit
+   ============================================================= */
+
+/* Kill any inherited Cuba card/form styles */
+.mm-payedit .card,
+.mm-payedit .card-body,
+.mm-payedit .card-footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.mm-payedit .form-group {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mm-payedit .form-control {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.mm-payedit .page-title {
+  display: none !important;
+}
+
+.mm-payedit .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.mm-payedit .size-column {
+  display: contents !important;
+}
+
+.mm-payedit .col-sm-12 {
+  display: contents !important;
+  padding: 0 !important;
+  max-width: none !important;
+  flex: none !important;
+}
+
+.mm-payedit .row {
+  display: contents !important;
+}
