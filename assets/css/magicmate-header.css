@@ -58,12 +58,14 @@
 }
 
 /* ── 4. SIDEBAR TOGGLE ───────────────────────────────────────── */
-.mm-header .header-logo-wrapper .toggle-sidebar {
+.mm-header .header-logo-wrapper .toggle-sidebar,
+.mm-header .toggle-sidebar {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   width: 36px !important;
   height: 36px !important;
+  min-width: 36px !important;
   border-radius: var(--mm-radius-full) !important;
   background: var(--mm-neutral-50) !important;
   border: 1px solid transparent !important;
@@ -72,15 +74,23 @@
   flex-shrink: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
+  position: relative !important;
+  float: none !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
 }
 
-.mm-header .header-logo-wrapper .toggle-sidebar:hover {
+.mm-header .header-logo-wrapper .toggle-sidebar:hover,
+.mm-header .toggle-sidebar:hover {
   background: var(--mm-primary-50) !important;
   border-color: var(--mm-primary-100) !important;
 }
 
 .mm-header .header-logo-wrapper .toggle-sidebar svg,
-.mm-header .header-logo-wrapper .toggle-sidebar i {
+.mm-header .header-logo-wrapper .toggle-sidebar i,
+.mm-header .toggle-sidebar svg,
+.mm-header .toggle-sidebar i {
   color: var(--mm-neutral-500) !important;
   stroke: var(--mm-neutral-500) !important;
   width: 18px !important;
@@ -88,7 +98,9 @@
 }
 
 .mm-header .header-logo-wrapper .toggle-sidebar:hover svg,
-.mm-header .header-logo-wrapper .toggle-sidebar:hover i {
+.mm-header .header-logo-wrapper .toggle-sidebar:hover i,
+.mm-header .toggle-sidebar:hover svg,
+.mm-header .toggle-sidebar:hover i {
   color: var(--mm-primary-600) !important;
   stroke: var(--mm-primary-600) !important;
 }
