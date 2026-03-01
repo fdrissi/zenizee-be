@@ -1,0 +1,757 @@
+/* ========== PHASE 3D — FORM & SETTINGS PAGES ========== */
+/* Overrides Cuba theme for all add/edit forms, settings,    */
+/* payment gateway, coupon, artist, organizer, payout, etc.  */
+
+/* ── 1. FORM CARD CONTAINERS ───────────────────────────── */
+
+/* Cards that contain forms */
+.page-body .card {
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+  overflow: hidden;
+}
+
+.page-body .card .card-body {
+  padding: var(--mm-space-8) !important;
+}
+
+.page-body .card .card-footer {
+  background-color: var(--mm-neutral-50) !important;
+  border-top: 1px solid var(--mm-border-default) !important;
+  padding: var(--mm-space-5) var(--mm-space-8) !important;
+  border-bottom-left-radius: var(--mm-radius-lg) !important;
+  border-bottom-right-radius: var(--mm-radius-lg) !important;
+}
+
+/* ── 2. SECTION HEADINGS (.h5_set) ─────────────────────── */
+
+.h5_set {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg) !important;
+  font-weight: 600 !important;
+  color: var(--mm-text-primary) !important;
+  border-bottom: 2px solid var(--mm-primary-200) !important;
+  padding-bottom: var(--mm-space-3) !important;
+  margin-bottom: var(--mm-space-6) !important;
+  margin-top: var(--mm-space-8) !important;
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.h5_set:first-child {
+  margin-top: 0 !important;
+}
+
+.h5_set svg,
+.h5_set i {
+  color: var(--mm-primary-500) !important;
+  width: 20px;
+  height: 20px;
+}
+
+/* ── 3. PAGE TITLE ─────────────────────────────────────── */
+
+.page-body .page-title h3 {
+  font-family: var(--mm-font-display) !important;
+  font-weight: 700 !important;
+  font-size: var(--mm-text-2xl) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+/* ── 4. LABELS ─────────────────────────────────────────── */
+
+.form-group label,
+.form-label,
+.card-body label {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  font-weight: 600 !important;
+  color: var(--mm-text-primary) !important;
+  margin-bottom: var(--mm-space-1) !important;
+  letter-spacing: 0.01em;
+}
+
+.form-group label .text-danger,
+.card-body label .text-danger {
+  color: var(--mm-error) !important;
+  font-weight: 700 !important;
+}
+
+/* ── 5. FORM CONTROLS (inputs, selects, textareas) ─────── */
+
+.form-control,
+.card-body .form-control,
+.page-body .form-control {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+  color: var(--mm-text-primary) !important;
+  background-color: var(--mm-neutral-0) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  padding: 10px 14px !important;
+  transition: border-color var(--mm-duration-fast) ease,
+              box-shadow var(--mm-duration-fast) ease !important;
+  box-shadow: none !important;
+  min-height: 44px;
+}
+
+.form-control:hover {
+  border-color: var(--mm-neutral-300) !important;
+}
+
+.form-control:focus {
+  border-color: var(--mm-primary-400) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.12) !important;
+  outline: none !important;
+}
+
+.form-control::placeholder {
+  color: var(--mm-neutral-400) !important;
+  font-weight: 400 !important;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: var(--mm-neutral-100) !important;
+  border-color: var(--mm-border-subtle) !important;
+  color: var(--mm-text-secondary) !important;
+  cursor: not-allowed;
+}
+
+/* Textarea */
+textarea.form-control {
+  min-height: 100px;
+  line-height: 1.6;
+  resize: vertical !important;
+}
+
+/* Select */
+select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2378716C' d='M6 8.825L0.575 3.4 1.4 2.575 6 7.175 10.6 2.575 11.425 3.4z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  padding-right: 36px !important;
+}
+
+/* Input rounded variant used in organizer form */
+.form-control.input-rounded {
+  border-radius: var(--mm-radius-md) !important;
+}
+
+/* ── 6. FORM GROUP SPACING ─────────────────────────────── */
+
+.form-group {
+  margin-bottom: var(--mm-space-5) !important;
+}
+
+.form-group.mb-3 {
+  margin-bottom: var(--mm-space-5) !important;
+}
+
+/* ── 7. INPUT GROUP ────────────────────────────────────── */
+
+.input-group {
+  border-radius: var(--mm-radius-md) !important;
+}
+
+.input-group .form-control {
+  border-radius: var(--mm-radius-md) !important;
+}
+
+.input-group-text {
+  background-color: var(--mm-neutral-50) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  color: var(--mm-text-secondary) !important;
+  font-family: var(--mm-font-sans) !important;
+}
+
+/* ── 8. FILE UPLOAD INPUTS ─────────────────────────────── */
+
+input[type="file"].form-control,
+.custom-file-input.form-control {
+  padding: 8px 14px !important;
+  border: 2px dashed var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  background-color: var(--mm-neutral-50) !important;
+  cursor: pointer;
+  transition: border-color var(--mm-duration-fast) ease,
+              background-color var(--mm-duration-fast) ease !important;
+}
+
+input[type="file"].form-control:hover,
+.custom-file-input.form-control:hover {
+  border-color: var(--mm-primary-300) !important;
+  background-color: var(--mm-primary-50) !important;
+}
+
+input[type="file"].form-control:focus,
+.custom-file-input.form-control:focus {
+  border-color: var(--mm-primary-400) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.12) !important;
+}
+
+/* File input without form-control class (add_event.php style) */
+input[type="file"]:not(.form-control) {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  padding: 8px !important;
+  border: 2px dashed var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  background-color: var(--mm-neutral-50) !important;
+  cursor: pointer;
+  width: 100%;
+  transition: border-color var(--mm-duration-fast) ease !important;
+}
+
+input[type="file"]:not(.form-control):hover {
+  border-color: var(--mm-primary-300) !important;
+}
+
+/* Custom file label */
+.custom-file-label {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  color: var(--mm-text-secondary) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  padding: 10px 14px !important;
+  background-color: var(--mm-neutral-0) !important;
+}
+
+.custom-file-label::after {
+  background-color: var(--mm-primary-500) !important;
+  color: var(--mm-neutral-0) !important;
+  border-radius: 0 var(--mm-radius-md) var(--mm-radius-md) 0 !important;
+  padding: 10px 16px !important;
+  font-weight: 600 !important;
+}
+
+/* ── 9. IMAGE PREVIEWS ─────────────────────────────────── */
+
+.card-body img[width="100"],
+.card-body img[width="100px"],
+.card-body img[width="60"] {
+  border-radius: var(--mm-radius-md) !important;
+  border: 2px solid var(--mm-border-default) !important;
+  object-fit: cover;
+  margin-top: var(--mm-space-2);
+  box-shadow: var(--mm-shadow-xs);
+  background-color: var(--mm-neutral-50);
+}
+
+/* ── 10. SELECT2 DROPDOWNS ─────────────────────────────── */
+
+.select2-container .select2-selection--single,
+.select2-container .select2-selection--multiple {
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  min-height: 44px !important;
+  background-color: var(--mm-neutral-0) !important;
+  transition: border-color var(--mm-duration-fast) ease !important;
+}
+
+.select2-container--default .select2-selection--single:hover,
+.select2-container--default .select2-selection--multiple:hover {
+  border-color: var(--mm-neutral-300) !important;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--single,
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default.select2-container--open .select2-selection--single,
+.select2-container--default.select2-container--open .select2-selection--multiple {
+  border-color: var(--mm-primary-400) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.12) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+  color: var(--mm-text-primary) !important;
+  line-height: 42px !important;
+  padding-left: 14px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+  color: var(--mm-neutral-400) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 42px !important;
+  top: 0 !important;
+  right: 8px !important;
+}
+
+/* Multi-select choices (tags) */
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-600) !important;
+  color: var(--mm-neutral-0) !important;
+  border-radius: var(--mm-radius-sm) !important;
+  padding: 4px 10px !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-xs) !important;
+  font-weight: 500 !important;
+  margin: 4px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  color: rgba(255, 255, 255, 0.8) !important;
+  margin-right: 4px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+  color: var(--mm-neutral-0) !important;
+}
+
+/* Dropdown results */
+.select2-dropdown {
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+  overflow: hidden;
+}
+
+.select2-container--default .select2-results__option {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  padding: 10px 14px !important;
+  color: var(--mm-text-primary) !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+.select2-container--default .select2-results__options .select2-results__option[aria-selected=true] {
+  background-color: var(--mm-primary-100) !important;
+  color: var(--mm-primary-800) !important;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  font-family: var(--mm-font-sans) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-sm) !important;
+  padding: 8px 12px !important;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field:focus {
+  border-color: var(--mm-primary-400) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.12) !important;
+  outline: none !important;
+}
+
+/* ── 11. BOOTSTRAP TAGSINPUT ───────────────────────────── */
+
+.bootstrap-tagsinput {
+  font-family: var(--mm-font-sans) !important;
+  background-color: var(--mm-neutral-0) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  padding: 6px 10px !important;
+  min-height: 44px;
+  width: 100%;
+  box-shadow: none !important;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  transition: border-color var(--mm-duration-fast) ease !important;
+}
+
+.bootstrap-tagsinput:focus-within {
+  border-color: var(--mm-primary-400) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.12) !important;
+}
+
+.bootstrap-tagsinput .tag {
+  background-color: var(--mm-primary-500) !important;
+  color: var(--mm-neutral-0) !important;
+  border-radius: var(--mm-radius-sm) !important;
+  padding: 3px 8px !important;
+  font-size: var(--mm-text-xs) !important;
+  font-weight: 500 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bootstrap-tagsinput .tag [data-role="remove"] {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.bootstrap-tagsinput .tag [data-role="remove"]:hover {
+  opacity: 1;
+}
+
+.bootstrap-tagsinput input {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 4px !important;
+  flex: 1;
+  min-width: 100px;
+}
+
+/* ── 12. SUMMERNOTE RICH TEXT EDITOR ───────────────────── */
+
+.note-editor.note-frame {
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  overflow: hidden;
+}
+
+.note-editor .note-toolbar {
+  background-color: var(--mm-neutral-50) !important;
+  border-bottom: 1px solid var(--mm-border-default) !important;
+  padding: var(--mm-space-2) var(--mm-space-3) !important;
+}
+
+.note-editor .note-toolbar .note-btn-group .note-btn {
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-xs) !important;
+  background-color: var(--mm-neutral-0) !important;
+  color: var(--mm-text-secondary) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-xs) !important;
+}
+
+.note-editor .note-toolbar .note-btn-group .note-btn:hover {
+  background-color: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-200) !important;
+}
+
+.note-editor .note-toolbar .note-btn-group .note-btn.active,
+.note-editor .note-toolbar .note-btn-group .note-btn:active {
+  background-color: var(--mm-primary-100) !important;
+  border-color: var(--mm-primary-400) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+.note-editor .note-editing-area .note-editable {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+  color: var(--mm-text-primary) !important;
+  padding: var(--mm-space-4) !important;
+  background-color: var(--mm-neutral-0) !important;
+  line-height: 1.6;
+}
+
+.note-editor .note-statusbar {
+  background-color: var(--mm-neutral-50) !important;
+  border-top: 1px solid var(--mm-border-default) !important;
+}
+
+/* ── 13. BUTTONS ───────────────────────────────────────── */
+
+/* Primary submit buttons */
+.card-body .btn-primary,
+.card-footer .btn-primary,
+.form-group .btn-primary {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+  font-weight: 600 !important;
+  background: var(--mm-gradient-primary) !important;
+  border: none !important;
+  border-radius: var(--mm-radius-md) !important;
+  padding: 10px 28px !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+  transition: all var(--mm-duration-base) ease !important;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.card-body .btn-primary:hover,
+.card-footer .btn-primary:hover,
+.form-group .btn-primary:hover {
+  background: var(--mm-gradient-primary-hover) !important;
+  box-shadow: var(--mm-shadow-md) !important;
+  transform: translateY(-1px);
+}
+
+.card-body .btn-primary:active,
+.card-footer .btn-primary:active,
+.form-group .btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--mm-shadow-xs) !important;
+}
+
+.card-body .btn-primary:focus,
+.card-footer .btn-primary:focus,
+.form-group .btn-primary:focus {
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.25) !important;
+}
+
+/* Rounded buttons */
+.btn-rounded {
+  border-radius: var(--mm-radius-full) !important;
+  padding: 10px 28px !important;
+}
+
+/* Button icon start */
+.btn .btn-icon-start {
+  margin-right: var(--mm-space-2);
+}
+
+.btn .btn-icon-start .text-primary {
+  color: var(--mm-neutral-0) !important;
+}
+
+/* Coupon code generator badge */
+#gen_code.badge-success {
+  background-color: var(--mm-primary-500) !important;
+  border: none !important;
+  border-radius: var(--mm-radius-md) !important;
+  padding: 10px 16px !important;
+  cursor: pointer;
+  transition: background-color var(--mm-duration-fast) ease !important;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#gen_code.badge-success:hover {
+  background-color: var(--mm-primary-600) !important;
+}
+
+/* ── 14. MAP CONTAINER ─────────────────────────────────── */
+
+#map {
+  border-radius: var(--mm-radius-lg) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  overflow: hidden;
+  box-shadow: var(--mm-shadow-xs);
+}
+
+#searchInput {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  padding: 8px 14px !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+  background-color: var(--mm-neutral-0) !important;
+}
+
+#searchInput:focus {
+  border-color: var(--mm-primary-400) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.12) !important;
+  outline: none !important;
+}
+
+.input-controls {
+  border-radius: var(--mm-radius-md) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+
+/* ── 15. BLINK / BULLET HELP TEXT ──────────────────────── */
+
+.blink_me {
+  color: var(--mm-text-secondary) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  background-color: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  border-radius: var(--mm-radius-md);
+  padding: var(--mm-space-3) var(--mm-space-4);
+  padding-left: var(--mm-space-8);
+  animation: none !important;
+  line-height: 1.6;
+}
+
+.blink_me.bullet {
+  list-style-type: disc !important;
+  color: var(--mm-text-secondary) !important;
+}
+
+.blink_me.bullet li {
+  margin-bottom: var(--mm-space-1);
+  color: var(--mm-text-secondary) !important;
+}
+
+/* ── 16. SMALL WIDGET CARDS (Payout balance) ───────────── */
+
+.small-widget {
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+
+.small-widget .card-body.warning {
+  background: var(--mm-primary-50) !important;
+  border-radius: var(--mm-radius-lg) !important;
+}
+
+.small-widget .card-body .f-light {
+  color: var(--mm-text-secondary) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  font-weight: 500;
+}
+
+.small-widget .card-body h4 {
+  font-family: var(--mm-font-display) !important;
+  color: var(--mm-text-primary) !important;
+  font-weight: 700 !important;
+}
+
+.small-widget .bg-gradient {
+  background: var(--mm-gradient-primary) !important;
+  border-radius: var(--mm-radius-md) !important;
+}
+
+/* ── 17. DATE, TIME, NUMBER INPUTS ─────────────────────── */
+
+input[type="date"].form-control,
+input[type="time"].form-control,
+input[type="datetime-local"].form-control,
+input[type="number"].form-control {
+  font-family: var(--mm-font-sans) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+/* Color the calendar/clock icons on Webkit browsers */
+input[type="date"].form-control::-webkit-calendar-picker-indicator,
+input[type="time"].form-control::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--mm-duration-fast) ease;
+}
+
+input[type="date"].form-control::-webkit-calendar-picker-indicator:hover,
+input[type="time"].form-control::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* ── 18. TOGGLE SWITCHES (if present) ──────────────────── */
+
+.form-check-input:checked {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+}
+
+.form-check-input:focus {
+  border-color: var(--mm-primary-300) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.15) !important;
+}
+
+.form-switch .form-check-input:checked {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+}
+
+/* ── 19. ROW / COLUMN SPACING IN FORMS ─────────────────── */
+
+.card-body form .row {
+  row-gap: 0;
+}
+
+.card-body form .row > [class*="col-"] {
+  margin-bottom: 0;
+}
+
+/* ── 20. REQUIRED FIELD INDICATOR ──────────────────────── */
+
+.text-danger {
+  color: var(--mm-error) !important;
+  font-size: var(--mm-text-sm) !important;
+}
+
+/* ── 21. FORM VALIDATION STATES ────────────────────────── */
+
+.form-control.is-invalid,
+.form-control:invalid:not(:placeholder-shown) {
+  border-color: var(--mm-error) !important;
+}
+
+.form-control.is-valid,
+.form-control:valid:not(:placeholder-shown):not([type="file"]):not(select) {
+  border-color: var(--mm-success) !important;
+}
+
+.invalid-feedback {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-xs) !important;
+  color: var(--mm-error) !important;
+}
+
+/* ── 22. DISABLED SELECT2 ──────────────────────────────── */
+
+.select2-container--default.select2-container--disabled .select2-selection--single,
+.select2-container--default.select2-container--disabled .select2-selection--multiple {
+  background-color: var(--mm-neutral-100) !important;
+  border-color: var(--mm-border-subtle) !important;
+  cursor: not-allowed;
+}
+
+/* ── 23. RESPONSIVE ADJUSTMENTS ────────────────────────── */
+
+@media (max-width: 767.98px) {
+  .page-body .card .card-body {
+    padding: var(--mm-space-5) !important;
+  }
+
+  .page-body .card .card-footer {
+    padding: var(--mm-space-4) var(--mm-space-5) !important;
+  }
+
+  .h5_set {
+    font-size: var(--mm-text-md) !important;
+    margin-bottom: var(--mm-space-4) !important;
+    margin-top: var(--mm-space-6) !important;
+  }
+
+  .card-body .btn-primary,
+  .card-footer .btn-primary,
+  .form-group .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ── 24. SETTING PAGE SPECIFIC ─────────────────────────── */
+
+/* Group SMS/OTP/Notification sections visually */
+.card-body > form > .row > .col-12:has(.h5_set) {
+  margin-top: var(--mm-space-4);
+}
+
+/* ── 25. FILEPOND (if used) ────────────────────────────── */
+
+.filepond--drop-label .filepond--label-action {
+  color: var(--mm-primary-600) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-weight: 600 !important;
+}
+
+.filepond--list .filepond--file {
+  background-color: var(--mm-primary-500) !important;
+}
+
+.filepond--panel-root {
+  border-radius: var(--mm-radius-md) !important;
+  border: 2px dashed var(--mm-border-default) !important;
+  background-color: var(--mm-neutral-50) !important;
+}
+
+/* ── 26. NUMBER-ONLY INPUT VISUAL HINT ─────────────────── */
+
+.numberonly {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 27. GLOBAL FONT INHERITANCE ───────────────────────── */
+
+.page-body,
+.page-body * {
+  font-family: var(--mm-font-sans);
+}

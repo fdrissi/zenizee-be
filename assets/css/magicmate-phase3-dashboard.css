@@ -1,0 +1,571 @@
+/* ========== PHASE 3B — DASHBOARD PAGE ========== */
+/*
+ * Restyled dashboard for MagicMate admin panel.
+ * Overrides Cuba theme defaults for:
+ *   - Page title / greeting area
+ *   - Stat widget cards (.small-widget)
+ *   - Size-column grid layout
+ *   - bg-gradient icon containers
+ *   - Blink/warning text
+ *   - Chart / widget containers (if present)
+ *   - General card styling on dashboard
+ *
+ * Uses design tokens from magicmate-tokens.css exclusively.
+ */
+
+
+/* =============================================================
+   1. PAGE TITLE / GREETING AREA
+   ============================================================= */
+
+/* Override the blinking red text — make it a calm, styled subtitle */
+.blink_me {
+  animation: none !important;
+  -webkit-animation: none !important;
+  color: var(--mm-neutral-500) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  margin-top: var(--mm-space-2) !important;
+  list-style-type: none !important;
+  padding-left: 0 !important;
+}
+
+/* Enhance page title area specifically on dashboard */
+.page-body > .container-fluid:first-child .page-title {
+  background: linear-gradient(135deg, var(--mm-primary-50) 0%, var(--mm-neutral-0) 60%) !important;
+  border: 1px solid var(--mm-border-accent) !important;
+  border-radius: var(--mm-radius-xl) !important;
+  padding: var(--mm-space-8) var(--mm-space-8) var(--mm-space-6) !important;
+  margin: 0 0 var(--mm-space-6) 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Subtle decorative element behind the title */
+.page-body > .container-fluid:first-child .page-title::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, var(--mm-primary-200) 0%, transparent 70%);
+  opacity: 0.3;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.page-body > .container-fluid:first-child .page-title .row h3 {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-3xl) !important;
+  font-weight: 800 !important;
+  color: var(--mm-neutral-900) !important;
+  letter-spacing: -0.03em !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Add a gold underline accent beneath heading */
+.page-body > .container-fluid:first-child .page-title .row h3::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--mm-gradient-primary);
+  border-radius: var(--mm-radius-full);
+  margin-top: var(--mm-space-2);
+}
+
+
+/* =============================================================
+   2. STAT WIDGET CARDS (.small-widget)
+   ============================================================= */
+
+/* Grid row container */
+.size-column {
+  gap: 0 !important;
+  row-gap: var(--mm-space-4) !important;
+}
+
+/* Each column holding a widget — force consistent sizing */
+.size-column > [class*="col-"] {
+  padding-left: var(--mm-space-2) !important;
+  padding-right: var(--mm-space-2) !important;
+  margin-bottom: var(--mm-space-2) !important;
+}
+
+/* The card itself */
+.card.small-widget {
+  background: var(--mm-surface-card) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+  border-radius: var(--mm-radius-xl) !important;
+  box-shadow: var(--mm-shadow-xs) !important;
+  transition: all var(--mm-duration-base) ease, box-shadow var(--mm-duration-slow) ease !important;
+  overflow: hidden !important;
+  margin-bottom: 0 !important;
+  position: relative !important;
+}
+
+.card.small-widget:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: var(--mm-shadow-md) !important;
+  border-color: var(--mm-border-accent) !important;
+}
+
+/* Card body */
+.card.small-widget .card-body {
+  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4) !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Stat label (f-light) */
+.card.small-widget .card-body .f-light {
+  font-family: var(--mm-font-sans) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--mm-neutral-500) !important;
+  margin-bottom: var(--mm-space-2) !important;
+  display: block !important;
+  line-height: 1.4 !important;
+}
+
+/* Stat number */
+.card.small-widget .card-body h4 {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-xl) !important;
+  font-weight: 700 !important;
+  color: var(--mm-neutral-900) !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.2 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Value container */
+.card.small-widget .card-body .d-flex.align-items-end {
+  margin-top: var(--mm-space-1) !important;
+}
+
+
+/* =============================================================
+   3. ICON GRADIENT CONTAINER (.bg-gradient)
+   ============================================================= */
+
+/* Reset and restyle the gradient icon circle */
+.card.small-widget .bg-gradient {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: var(--mm-radius-lg) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: absolute !important;
+  top: 50% !important;
+  right: var(--mm-space-4) !important;
+  transform: translateY(-50%) !important;
+  z-index: 1 !important;
+}
+
+/* Override the warning variant bg-gradient specifically */
+.card.small-widget .card-body.warning .bg-gradient {
+  background: var(--mm-primary-50) !important;
+  background-image: none !important;
+  border: 1px solid var(--mm-primary-100) !important;
+}
+
+/* Fallback for any bg-gradient in small-widget */
+.card.small-widget .bg-gradient {
+  background: var(--mm-primary-50) !important;
+  background-image: none !important;
+  border: 1px solid var(--mm-primary-100) !important;
+}
+
+/* Icon SVG inside the gradient container */
+.card.small-widget .bg-gradient svg {
+  width: 22px !important;
+  height: 22px !important;
+  stroke: var(--mm-primary-600) !important;
+  fill: none !important;
+}
+
+/* Override .warning .svg-fill color to gold */
+.card.small-widget .card-body.warning .svg-fill {
+  fill: var(--mm-primary-500) !important;
+  stroke: var(--mm-primary-600) !important;
+}
+
+/* Hover state: icon container highlights */
+.card.small-widget:hover .bg-gradient {
+  background: var(--mm-primary-100) !important;
+  border-color: var(--mm-primary-200) !important;
+}
+
+.card.small-widget:hover .bg-gradient svg {
+  stroke: var(--mm-primary-700) !important;
+}
+
+/* Disable the aggressive tada animation on hover */
+.card.small-widget:hover .bg-gradient svg {
+  animation: none !important;
+}
+
+
+/* =============================================================
+   4. COLOR-CODED STAT VARIANTS
+   ============================================================= */
+
+/* Different card-body color variants — override Cuba's palette */
+
+/* Primary (gold) — default for .warning */
+.small-widget .card-body.warning .bg-gradient,
+.small-widget .card-body.primary .bg-gradient {
+  background: var(--mm-primary-50) !important;
+  background-image: none !important;
+  border-color: var(--mm-primary-100) !important;
+}
+
+.small-widget .card-body.warning .bg-gradient svg,
+.small-widget .card-body.primary .bg-gradient svg {
+  stroke: var(--mm-primary-500) !important;
+}
+
+/* Success variant */
+.small-widget .card-body.success .bg-gradient {
+  background: var(--mm-success-light) !important;
+  background-image: none !important;
+  border-color: rgba(22, 163, 74, 0.15) !important;
+}
+
+.small-widget .card-body.success .bg-gradient svg {
+  stroke: var(--mm-success) !important;
+  fill: var(--mm-success) !important;
+}
+
+/* Info variant */
+.small-widget .card-body.info .bg-gradient {
+  background: var(--mm-info-light) !important;
+  background-image: none !important;
+  border-color: rgba(37, 99, 235, 0.15) !important;
+}
+
+.small-widget .card-body.info .bg-gradient svg {
+  stroke: var(--mm-info) !important;
+}
+
+/* Error/danger variant */
+.small-widget .card-body.danger .bg-gradient {
+  background: var(--mm-error-light) !important;
+  background-image: none !important;
+  border-color: rgba(220, 38, 38, 0.15) !important;
+}
+
+.small-widget .card-body.danger .bg-gradient svg {
+  stroke: var(--mm-error) !important;
+}
+
+/* Secondary variant */
+.small-widget .card-body.secondary .bg-gradient {
+  background: rgba(184, 114, 31, 0.08) !important;
+  background-image: none !important;
+  border-color: rgba(184, 114, 31, 0.12) !important;
+}
+
+.small-widget .card-body.secondary .bg-gradient svg {
+  stroke: var(--theme-secondary) !important;
+}
+
+
+/* =============================================================
+   5. EARNINGS / MONETARY VALUE EMPHASIS
+   ============================================================= */
+
+/* Cards containing monetary values — detect via the icon type */
+/* "Total Earning" and "Total Payout" and "After Payout" use target/thumbs-up icons */
+/* Give financial values a gold tint for emphasis */
+.card.small-widget .card-body h4 {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+
+/* =============================================================
+   6. DASHBOARD GENERAL CARDS & WIDGETS
+   ============================================================= */
+
+/* General card styling within the dashboard page body */
+.page-body > .container-fluid .card {
+  border-radius: var(--mm-radius-lg) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+}
+
+.page-body > .container-fluid .card .card-header {
+  background: transparent !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4) !important;
+}
+
+.page-body > .container-fluid .card .card-header h5,
+.page-body > .container-fluid .card .card-header h4 {
+  font-family: var(--mm-font-display) !important;
+  font-weight: 700 !important;
+  color: var(--mm-neutral-800) !important;
+  font-size: var(--mm-text-md) !important;
+  letter-spacing: -0.01em !important;
+}
+
+.page-body > .container-fluid .card .card-body {
+  font-family: var(--mm-font-sans) !important;
+  color: var(--mm-neutral-700) !important;
+}
+
+/* Widget card header decorative left border */
+.page-body > .container-fluid .card .card-header::before {
+  content: none !important;
+}
+
+
+/* =============================================================
+   7. CHART CONTAINERS
+   ============================================================= */
+
+/* ApexCharts container cleanup */
+.page-body .apexcharts-canvas {
+  font-family: var(--mm-font-sans) !important;
+}
+
+.page-body .apexcharts-legend-text {
+  font-family: var(--mm-font-sans) !important;
+  color: var(--mm-neutral-600) !important;
+  font-size: var(--mm-text-xs) !important;
+}
+
+.page-body .apexcharts-title-text {
+  font-family: var(--mm-font-display) !important;
+  fill: var(--mm-neutral-800) !important;
+}
+
+.page-body .apexcharts-yaxis-label,
+.page-body .apexcharts-xaxis-label {
+  font-family: var(--mm-font-sans) !important;
+  fill: var(--mm-neutral-500) !important;
+}
+
+.page-body .apexcharts-gridline {
+  stroke: var(--mm-neutral-100) !important;
+}
+
+.page-body .apexcharts-tooltip {
+  font-family: var(--mm-font-sans) !important;
+  border-radius: var(--mm-radius-md) !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+}
+
+.page-body .apexcharts-tooltip .apexcharts-tooltip-title {
+  font-family: var(--mm-font-sans) !important;
+  background: var(--mm-neutral-50) !important;
+  border-bottom-color: var(--mm-border-subtle) !important;
+}
+
+
+/* =============================================================
+   8. OVERVIEW / RECENT ACTIVITY SECTIONS
+   ============================================================= */
+
+/* General widget containers from Cuba */
+.general-widget .card,
+.chart-widget-top .card {
+  border-radius: var(--mm-radius-lg) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+  box-shadow: var(--mm-shadow-xs) !important;
+}
+
+/* Overview stat numbers within widget cards */
+.general-widget h2,
+.general-widget h3,
+.general-widget .counter {
+  font-family: var(--mm-font-display) !important;
+  font-weight: 700 !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+/* Revenue / income styled containers */
+.o-income .card-body,
+.o-income .card {
+  border-radius: var(--mm-radius-lg) !important;
+}
+
+/* Recent order / activity list items */
+.recent-activity .media,
+.timeline-content {
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  padding-bottom: var(--mm-space-3) !important;
+  margin-bottom: var(--mm-space-3) !important;
+}
+
+.recent-activity .media:last-child,
+.timeline-content:last-child {
+  border-bottom: none !important;
+}
+
+
+/* =============================================================
+   9. KNOB / PROGRESS / COUNTER WIDGETS
+   ============================================================= */
+
+.knob-block .chart-overflow {
+  font-family: var(--mm-font-sans) !important;
+}
+
+.counter-block h4,
+.counter-block h2 {
+  font-family: var(--mm-font-display) !important;
+  font-weight: 700 !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+.counter-block span {
+  font-family: var(--mm-font-sans) !important;
+  color: var(--mm-neutral-500) !important;
+}
+
+
+/* =============================================================
+   10. RESPONSIVE ADJUSTMENTS
+   ============================================================= */
+
+/* Tablet: show 3 per row */
+@media (max-width: 1199px) {
+  .size-column > .col-2 {
+    flex: 0 0 33.333% !important;
+    max-width: 33.333% !important;
+  }
+
+  .card.small-widget .bg-gradient {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .card.small-widget .bg-gradient svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
+
+/* Mobile landscape: show 2 per row */
+@media (max-width: 767px) {
+  .size-column > .col-2 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+
+  .page-body > .container-fluid:first-child .page-title {
+    padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4) !important;
+  }
+
+  .page-body > .container-fluid:first-child .page-title .row h3 {
+    font-size: var(--mm-text-2xl) !important;
+  }
+
+  .card.small-widget .card-body {
+    padding: var(--mm-space-4) !important;
+  }
+
+  .card.small-widget .card-body .f-light {
+    font-size: 0.625rem !important;
+  }
+
+  .card.small-widget .card-body h4 {
+    font-size: var(--mm-text-lg) !important;
+  }
+}
+
+/* Mobile portrait: stack single column */
+@media (max-width: 480px) {
+  .size-column > .col-2 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .page-body > .container-fluid:first-child .page-title::before {
+    display: none;
+  }
+
+  .page-body > .container-fluid:first-child .page-title {
+    border-radius: var(--mm-radius-lg) !important;
+  }
+}
+
+
+/* =============================================================
+   11. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .card.small-widget {
+  background: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .card.small-widget .card-body .f-light {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .card.small-widget .card-body h4 {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .card.small-widget .bg-gradient {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-100) !important;
+}
+
+body.dark-only .blink_me {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .page-body > .container-fluid:first-child .page-title {
+  background: linear-gradient(135deg, var(--mm-primary-50) 0%, var(--mm-neutral-0) 60%) !important;
+  border-color: var(--mm-border-accent) !important;
+}
+
+
+/* =============================================================
+   12. SMOOTH ENTRANCE ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-dashboard-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.size-column .card.small-widget {
+  animation: mm-dashboard-fadeUp var(--mm-duration-slow) ease both;
+}
+
+/* Stagger the widget cards for a cascading effect */
+.size-column > [class*="col-"]:nth-child(1) .small-widget { animation-delay: 0ms; }
+.size-column > [class*="col-"]:nth-child(2) .small-widget { animation-delay: 40ms; }
+.size-column > [class*="col-"]:nth-child(3) .small-widget { animation-delay: 80ms; }
+.size-column > [class*="col-"]:nth-child(4) .small-widget { animation-delay: 120ms; }
+.size-column > [class*="col-"]:nth-child(5) .small-widget { animation-delay: 160ms; }
+.size-column > [class*="col-"]:nth-child(6) .small-widget { animation-delay: 200ms; }
+.size-column > [class*="col-"]:nth-child(7) .small-widget { animation-delay: 240ms; }
+.size-column > [class*="col-"]:nth-child(8) .small-widget { animation-delay: 280ms; }
+.size-column > [class*="col-"]:nth-child(9) .small-widget { animation-delay: 320ms; }
+.size-column > [class*="col-"]:nth-child(10) .small-widget { animation-delay: 360ms; }
+.size-column > [class*="col-"]:nth-child(11) .small-widget { animation-delay: 400ms; }
+.size-column > [class*="col-"]:nth-child(12) .small-widget { animation-delay: 440ms; }
+.size-column > [class*="col-"]:nth-child(13) .small-widget { animation-delay: 480ms; }
+.size-column > [class*="col-"]:nth-child(14) .small-widget { animation-delay: 520ms; }
+.size-column > [class*="col-"]:nth-child(15) .small-widget { animation-delay: 560ms; }
