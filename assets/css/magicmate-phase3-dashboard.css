@@ -229,11 +229,11 @@
 }
 
 .mm-dash__hero-currency {
-  font-size: 1rem;
+  font-size: inherit;
   font-weight: 600;
-  margin-left: 2px;
-  vertical-align: super;
-  opacity: 0.7;
+  margin-right: 4px;
+  vertical-align: baseline;
+  opacity: 1;
 }
 
 .mm-dash__hero-icon {
