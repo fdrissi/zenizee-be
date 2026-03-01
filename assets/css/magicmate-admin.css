@@ -53,9 +53,35 @@ a:hover {
   color: var(--mm-primary-700);
 }
 
-/* Loader override */
+/* Loader override - Modern Zenizee-branded spinner */
 .loader-wrapper {
   background-color: var(--mm-surface-page) !important;
+  z-index: 9999 !important;
+}
+
+.loader-wrapper .loader {
+  /* Replace Cuba's blue bouncing ball animation with modern spinner */
+  width: 44px !important;
+  height: 44px !important;
+  margin: 0 !important;
+  border: 3px solid var(--mm-neutral-200) !important;
+  border-top-color: var(--mm-primary-500) !important;
+  border-radius: 50% !important;
+  animation: mm-spin 0.8s linear infinite !important;
+  background: none !important;
+}
+
+/* Kill Cuba's pseudo-elements (blue ball and stepping boxes) */
+.loader-wrapper .loader::before,
+.loader-wrapper .loader::after {
+  display: none !important;
+  content: none !important;
+}
+
+@keyframes mm-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Override Cuba's f-light utility */
