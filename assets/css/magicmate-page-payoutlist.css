@@ -1,0 +1,1204 @@
+/* =====================================================================
+   MagicMate — Payout List Page
+   Admin payout request management with card grid layout.
+   Uses design tokens from magicmate-tokens.css exclusively.
+   BEM prefix: mm-payoutlist__*
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-payoutlist {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER — Title bar
+   ============================================================= */
+
+.mm-payoutlist__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--mm-space-8);
+  animation: mm-payoutlist-fadeIn 0.45s ease both;
+}
+
+.mm-payoutlist__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+.mm-payoutlist__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-payoutlist__subtitle {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Header icon accent */
+.mm-payoutlist__header-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  border-radius: var(--mm-radius-xl);
+  flex-shrink: 0;
+}
+
+.mm-payoutlist__header-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--mm-primary-600);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =============================================================
+   2. PROOF UPLOAD PANEL — shown when ?payout= is set
+   ============================================================= */
+
+.mm-payoutlist__upload-panel {
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-left: 4px solid var(--mm-primary-500);
+  border-radius: var(--mm-radius-xl);
+  padding: var(--mm-space-6);
+  margin-bottom: var(--mm-space-8);
+  animation: mm-payoutlist-fadeUp 0.4s ease both;
+  box-shadow: var(--mm-shadow-md);
+}
+
+.mm-payoutlist__upload-panel-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-4);
+  margin-bottom: var(--mm-space-6);
+}
+
+.mm-payoutlist__upload-panel-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  border-radius: var(--mm-radius-lg);
+  flex-shrink: 0;
+}
+
+.mm-payoutlist__upload-panel-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--mm-primary-600);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-payoutlist__upload-panel-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--mm-space-1) 0;
+  line-height: 1.3;
+}
+
+.mm-payoutlist__upload-panel-desc {
+  font-size: var(--mm-text-sm);
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Upload drop zone */
+.mm-payoutlist__upload-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  background: var(--mm-neutral-50);
+  border: 2px dashed var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  transition: border-color var(--mm-duration-fast) ease, background var(--mm-duration-fast) ease;
+  gap: var(--mm-space-2);
+  margin-bottom: var(--mm-space-5);
+}
+
+.mm-payoutlist__upload-area:hover,
+.mm-payoutlist__upload-area--drag {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-primary-50);
+}
+
+.mm-payoutlist__upload-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.mm-payoutlist__upload-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-100);
+  border-radius: var(--mm-radius-lg);
+  margin-bottom: var(--mm-space-1);
+}
+
+.mm-payoutlist__upload-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--mm-primary-600);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-payoutlist__upload-label {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-600);
+  margin: 0;
+  text-align: center;
+}
+
+.mm-payoutlist__upload-label span {
+  color: var(--mm-primary-600);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.mm-payoutlist__upload-hint {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-neutral-400);
+  margin: 0;
+  text-align: center;
+}
+
+/* Upload actions row */
+.mm-payoutlist__upload-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-payoutlist__upload-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-3) var(--mm-space-6);
+  background: var(--mm-primary-500);
+  color: #fff;
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+  line-height: 1;
+}
+
+.mm-payoutlist__upload-submit svg {
+  width: 16px;
+  height: 16px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-payoutlist__upload-submit:hover {
+  background: var(--mm-primary-600);
+  box-shadow: 0 4px 16px rgba(216, 136, 39, 0.35);
+}
+
+.mm-payoutlist__upload-cancel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-3) var(--mm-space-5);
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  line-height: 1;
+}
+
+.mm-payoutlist__upload-cancel svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--mm-neutral-500);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.mm-payoutlist__upload-cancel:hover {
+  background: var(--mm-neutral-200);
+  color: var(--mm-neutral-700);
+  text-decoration: none;
+}
+
+
+/* =============================================================
+   3. STATS BAR — Quick summary strip
+   ============================================================= */
+
+.mm-payoutlist__stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-6);
+  padding: var(--mm-space-4) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-payoutlist-fadeUp 0.45s ease 0.05s both;
+}
+
+.mm-payoutlist__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-payoutlist__stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-payoutlist__stat-dot--total {
+  background: var(--mm-primary-500);
+}
+
+.mm-payoutlist__stat-dot--pending {
+  background: var(--mm-warning);
+}
+
+.mm-payoutlist__stat-dot--completed {
+  background: var(--mm-success);
+}
+
+.mm-payoutlist__stat-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1;
+}
+
+.mm-payoutlist__stat-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-left: -4px;
+}
+
+.mm-payoutlist__stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================
+   4. TOOLBAR — Search + Filter
+   ============================================================= */
+
+.mm-payoutlist__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-payoutlist-fadeUp 0.45s ease 0.1s both;
+}
+
+.mm-payoutlist__search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.mm-payoutlist__search-icon {
+  position: absolute;
+  left: var(--mm-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.mm-payoutlist__search-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-payoutlist__search-input {
+  width: 100%;
+  padding: var(--mm-space-3) var(--mm-space-4) var(--mm-space-3) 44px;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-900);
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-payoutlist__search-input::placeholder {
+  color: var(--mm-neutral-400);
+  font-weight: 400;
+}
+
+.mm-payoutlist__search-input:focus {
+  border-color: var(--mm-primary-300);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.08);
+}
+
+/* Filter buttons group */
+.mm-payoutlist__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-payoutlist__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-full);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-600);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.mm-payoutlist__filter-btn:hover {
+  border-color: var(--mm-primary-200);
+  color: var(--mm-primary-700);
+  background: var(--mm-primary-50);
+}
+
+.mm-payoutlist__filter-btn--active {
+  background: var(--mm-primary-500);
+  border-color: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+}
+
+.mm-payoutlist__filter-btn--active:hover {
+  background: var(--mm-primary-600);
+  border-color: var(--mm-primary-600);
+  color: #fff;
+}
+
+.mm-payoutlist__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--mm-radius-full);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mm-payoutlist__filter-btn:not(.mm-payoutlist__filter-btn--active) .mm-payoutlist__filter-count {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-payoutlist__filter-btn--active .mm-payoutlist__filter-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+
+/* =============================================================
+   5. CARD GRID
+   ============================================================= */
+
+.mm-payoutlist__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--mm-space-5);
+  animation: mm-payoutlist-fadeUp 0.45s ease 0.15s both;
+}
+
+
+/* =============================================================
+   6. PAYOUT CARD
+   ============================================================= */
+
+.mm-payoutlist__card {
+  position: relative;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  overflow: hidden;
+  transition: all var(--mm-duration-base) ease;
+  animation: mm-payoutlist-cardIn 0.5s var(--mm-ease-spring) both;
+  animation-delay: calc(var(--card-index, 0) * 0.06s + 0.15s);
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-payoutlist__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mm-shadow-card-hover);
+  border-color: var(--mm-primary-200);
+}
+
+/* ── Card top section: amount display ── */
+.mm-payoutlist__card-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-8) var(--mm-space-6) var(--mm-space-6);
+  background: linear-gradient(135deg, var(--mm-primary-50) 0%, var(--mm-primary-100) 100%);
+  border-bottom: 1px solid var(--mm-primary-100);
+  min-height: 110px;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+}
+
+/* Amount display */
+.mm-payoutlist__card-amount {
+  display: flex;
+  align-items: baseline;
+  gap: var(--mm-space-1);
+  line-height: 1;
+}
+
+.mm-payoutlist__card-currency {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-primary-700);
+}
+
+.mm-payoutlist__card-amt-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-3xl);
+  font-weight: 800;
+  color: var(--mm-primary-600);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+/* Transfer type badge */
+.mm-payoutlist__type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  border-radius: var(--mm-radius-full);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.mm-payoutlist__type-badge svg {
+  width: 11px;
+  height: 11px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* UPI — blue/info */
+.mm-payoutlist__type-badge--upi {
+  background: var(--mm-info-light);
+  color: var(--mm-info-dark);
+}
+
+.mm-payoutlist__type-badge--upi svg {
+  stroke: var(--mm-info);
+}
+
+/* Bank — neutral/dark */
+.mm-payoutlist__type-badge--bank {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-700);
+}
+
+.mm-payoutlist__type-badge--bank svg {
+  stroke: var(--mm-neutral-600);
+}
+
+/* PayPal — primary gold */
+.mm-payoutlist__type-badge--paypal {
+  background: var(--mm-primary-100);
+  color: var(--mm-primary-800);
+}
+
+.mm-payoutlist__type-badge--paypal svg {
+  stroke: var(--mm-primary-600);
+}
+
+/* ── Status indicator (top-right of visual) ── */
+.mm-payoutlist__status-dot {
+  position: absolute;
+  top: var(--mm-space-3);
+  right: var(--mm-space-3);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--mm-neutral-0);
+  z-index: 2;
+}
+
+.mm-payoutlist__status-dot--pending {
+  background: var(--mm-warning);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.18);
+}
+
+.mm-payoutlist__status-dot--completed {
+  background: var(--mm-success);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+}
+
+/* ── Card index (top-left) ── */
+.mm-payoutlist__card-index {
+  position: absolute;
+  top: var(--mm-space-3);
+  left: var(--mm-space-3);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 25, 23, 0.06);
+  border-radius: var(--mm-radius-md);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--mm-neutral-500);
+  z-index: 2;
+}
+
+
+/* ── Card body ── */
+.mm-payoutlist__card-body {
+  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+}
+
+/* Organizer row */
+.mm-payoutlist__organizer {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-payoutlist__organizer-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mm-payoutlist__organizer-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-payoutlist__organizer-name {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+/* Transfer details block */
+.mm-payoutlist__transfer-details {
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-md);
+  padding: var(--mm-space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+.mm-payoutlist__detail-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-xs);
+  line-height: 1.4;
+}
+
+.mm-payoutlist__detail-key {
+  font-weight: 600;
+  color: var(--mm-neutral-500);
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 72px;
+}
+
+.mm-payoutlist__detail-val {
+  font-weight: 500;
+  color: var(--mm-neutral-700);
+  word-break: break-all;
+}
+
+/* Status + proof thumbnail row */
+.mm-payoutlist__card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+/* Status badges */
+.mm-payoutlist__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--mm-radius-full);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.mm-payoutlist__badge svg {
+  width: 11px;
+  height: 11px;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.mm-payoutlist__badge--pending {
+  background: var(--mm-warning-light);
+  color: var(--mm-warning-dark);
+}
+
+.mm-payoutlist__badge--pending svg {
+  stroke: var(--mm-warning);
+}
+
+.mm-payoutlist__badge--completed {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+}
+
+.mm-payoutlist__badge--completed svg {
+  stroke: var(--mm-success);
+}
+
+/* Proof thumbnail */
+.mm-payoutlist__proof-thumb {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  margin-left: auto;
+}
+
+.mm-payoutlist__proof-thumb img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: var(--mm-radius-sm);
+  border: 1px solid var(--mm-border-default);
+}
+
+.mm-payoutlist__proof-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-400);
+}
+
+
+/* ── Card footer (actions) ── */
+.mm-payoutlist__card-actions {
+  display: flex;
+  align-items: center;
+  padding: var(--mm-space-3) var(--mm-space-5);
+  border-top: 1px solid var(--mm-border-subtle);
+}
+
+.mm-payoutlist__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--mm-radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--mm-duration-fast) ease;
+  line-height: 1;
+}
+
+.mm-payoutlist__action-btn svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Process Payout button — amber/warning */
+.mm-payoutlist__action-btn--process {
+  background: var(--mm-warning-light);
+  color: var(--mm-warning-dark);
+  width: 100%;
+  justify-content: center;
+}
+
+.mm-payoutlist__action-btn--process svg {
+  stroke: var(--mm-warning);
+}
+
+.mm-payoutlist__action-btn--process:hover {
+  background: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+  text-decoration: none;
+}
+
+.mm-payoutlist__action-btn--process:hover svg {
+  stroke: #fff;
+}
+
+/* Completed badge-button — non-interactive */
+.mm-payoutlist__action-btn--done {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+  cursor: default;
+  width: 100%;
+  justify-content: center;
+}
+
+.mm-payoutlist__action-btn--done svg {
+  stroke: var(--mm-success);
+}
+
+
+/* =============================================================
+   7. EMPTY STATE
+   ============================================================= */
+
+.mm-payoutlist__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  text-align: center;
+  animation: mm-payoutlist-fadeIn 0.5s ease 0.2s both;
+}
+
+.mm-payoutlist__empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border-radius: var(--mm-radius-2xl);
+  margin-bottom: var(--mm-space-5);
+}
+
+.mm-payoutlist__empty-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-payoutlist__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-700);
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-payoutlist__empty-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  max-width: 340px;
+  line-height: 1.6;
+}
+
+
+/* =============================================================
+   8. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-payoutlist-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mm-payoutlist-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mm-payoutlist-cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE — Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-payoutlist {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-payoutlist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   10. RESPONSIVE — Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-payoutlist {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-payoutlist__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mm-space-4);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-payoutlist__header-icon {
+    display: none;
+  }
+
+  .mm-payoutlist__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-payoutlist__stats-bar {
+    gap: var(--mm-space-4);
+    padding: var(--mm-space-3) var(--mm-space-4);
+    flex-wrap: wrap;
+  }
+
+  .mm-payoutlist__stat-separator {
+    display: none;
+  }
+
+  .mm-payoutlist__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mm-payoutlist__search-wrap {
+    max-width: none;
+  }
+
+  .mm-payoutlist__filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: var(--mm-space-1);
+  }
+
+  .mm-payoutlist__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mm-payoutlist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-3);
+  }
+
+  .mm-payoutlist__card-visual {
+    padding: var(--mm-space-6) var(--mm-space-4);
+    min-height: 96px;
+  }
+
+  .mm-payoutlist__card-amt-value {
+    font-size: var(--mm-text-2xl);
+  }
+
+  .mm-payoutlist__card-body {
+    padding: var(--mm-space-4);
+  }
+
+  .mm-payoutlist__card-actions {
+    padding: var(--mm-space-2) var(--mm-space-4);
+  }
+
+  .mm-payoutlist__upload-panel {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-payoutlist__upload-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mm-payoutlist__upload-submit,
+  .mm-payoutlist__upload-cancel {
+    justify-content: center;
+  }
+}
+
+
+/* =============================================================
+   11. RESPONSIVE — Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-payoutlist {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-payoutlist__grid {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-4);
+  }
+
+  .mm-payoutlist__card-visual {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    min-height: auto;
+  }
+
+  .mm-payoutlist__card-amt-value {
+    font-size: var(--mm-text-2xl);
+  }
+
+  .mm-payoutlist__card-body {
+    padding: var(--mm-space-3) var(--mm-space-4);
+    gap: var(--mm-space-2);
+  }
+
+  .mm-payoutlist__card-actions {
+    border-top-color: var(--mm-border-subtle);
+    padding: var(--mm-space-3) var(--mm-space-4);
+  }
+
+  .mm-payoutlist__upload-panel-header {
+    flex-direction: column;
+    gap: var(--mm-space-3);
+  }
+
+  .mm-payoutlist__detail-key {
+    min-width: 60px;
+  }
+}
+
+
+/* =============================================================
+   12. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-payoutlist__card,
+body.dark-only .mm-payoutlist__stats-bar {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-payoutlist__card-visual {
+  background: linear-gradient(135deg, var(--mm-primary-50) 0%, var(--mm-primary-100) 100%) !important;
+}
+
+body.dark-only .mm-payoutlist__organizer-name,
+body.dark-only .mm-payoutlist__title,
+body.dark-only .mm-payoutlist__stat-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-payoutlist__subtitle,
+body.dark-only .mm-payoutlist__stat-label {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .mm-payoutlist__search-input {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-payoutlist__filter-btn:not(.mm-payoutlist__filter-btn--active) {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-600) !important;
+}
+
+body.dark-only .mm-payoutlist__upload-panel {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  border-left-color: var(--mm-primary-500) !important;
+}
+
+body.dark-only .mm-payoutlist__transfer-details {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-payoutlist__upload-area {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+}
+
+
+/* =============================================================
+   13. CUBA OVERRIDES — Scoped to .mm-payoutlist
+   ============================================================= */
+
+.mm-payoutlist .page-title,
+.mm-payoutlist .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.mm-payoutlist .page-title::before {
+  display: none !important;
+}
+
+.mm-payoutlist .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.mm-payoutlist .page-title {
+  display: none !important;
+}
+
+.mm-payoutlist .size-column {
+  display: none !important;
+}
+
+.mm-payoutlist .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
