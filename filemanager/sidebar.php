@@ -1,346 +1,229 @@
-<link rel="stylesheet" href="assets/css/magicmate-sidebar.css">
 <?php
    if (!isset($_SESSION["evename"])) {
-?>
+   
+        ?>
 <script>
    window.location.href="/";
 </script>
 <?php
    }
-
-   // ── Determine current page for active state ──
-   $mm_current_page = basename($_SERVER['PHP_SELF']);
-
    if ($_SESSION["stype"] == "mowner") { ?>
-<!-- ═══════════════════════════════════════════════════════════════
-     MAGICMATE SIDEBAR — Master Admin
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="sidebar-wrapper mm-sidebar" sidebar-layout="stroke-svg">
-   <div class="mm-sidebar__inner">
-
-      <!-- ── Logo Area ──────────────────────────────────────── -->
-      <div class="logo-wrapper mm-sidebar__logo">
-         <a href="dashboard.php" class="mm-sidebar__logo-link">
-            <img class="img-fluid for-light mm-sidebar__logo-img" src="<?php echo $set["weblogo"]; ?>" alt="MagicMate">
-            <img class="img-fluid for-dark mm-sidebar__logo-img" src="<?php echo $set["weblogo"]; ?>" alt="MagicMate">
-         </a>
+<div class="sidebar-wrapper" sidebar-layout="stroke-svg">
+   <div>
+      <div class="logo-wrapper">
+         <a href="dashboard.php"><img class="img-fluid for-light" src="<?php echo $set[
+            "weblogo"
+            ]; ?>" alt=""><img class="img-fluid for-dark" src="<?php echo $set[
+            "weblogo"
+            ]; ?>" alt=""></a>
          <div class="back-btn"><i class="fa fa-angle-left"></i></div>
-         <div class="toggle-sidebar mm-sidebar__toggle">
-            <i class="status_toggle middle sidebar-toggle" data-feather="chevrons-left"> </i>
-         </div>
+         <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
       </div>
-      <div class="logo-icon-wrapper mm-sidebar__logo-collapsed">
-         <a href="dashboard.php"><img class="img-fluid" src="<?php echo $set["weblogo"]; ?>" width="50px" alt="MagicMate"></a>
-      </div>
-
-      <!-- ── Navigation ─────────────────────────────────────── -->
-      <nav class="sidebar-main mm-sidebar__nav" aria-label="Main navigation">
+      <div class="logo-icon-wrapper"><a href="dashboard.php"><img class="img-fluid" src="<?php echo $set[
+         "weblogo"
+         ]; ?>" width="50px" alt=""></a></div>
+      <nav class="sidebar-main" aria-label="">
          <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
          <div id="sidebar-menu">
-            <ul class="sidebar-links mm-sidebar__menu" id="simple-bar">
-
-               <!-- Back button (mobile) -->
+            <ul class="sidebar-links" id="simple-bar">
                <li class="back-btn">
-                  <a href="dashboard.php"><img class="img-fluid" src="<?php echo $set["weblogo"]; ?>" alt="MagicMate"></a>
+                  <a href="dashboard.php"><img class="img-fluid" src="<?php echo $set[
+                     "weblogo"
+                     ]; ?>" alt=""></a>
                   <div class="mobile-back text-end">
-                     <span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i>
-                  </div>
+                    <span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                </li>
-
-               <!-- ── Section: General ─────────────────────── -->
-               <li class="sidebar-main-title mm-sidebar__section">
+               <li class="sidebar-main-title">
                   <div>
-                     <h6 class="mm-sidebar__section-label">General</h6>
+                     <h6 class="lan-1">General</h6>
                   </div>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Dashboard">
-                  <a class="sidebar-link sidebar-title link-nav mm-sidebar__link <?php echo ($mm_current_page === 'dashboard.php') ? 'mm-sidebar__link--active' : ''; ?>" href="dashboard.php">
-                     <i data-feather="home" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Dashboard</span>
-                  </a>
+               <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="dashboard.php">
+                  <i data-feather="home"></i><span>DashBoard</span></a>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Category">
-                  <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_category.php','list_category.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
-                     <i data-feather="list" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Category</span>
-                  </a>
-                  <ul class="sidebar-submenu mm-sidebar__submenu">
-                     <li class="mm-sidebar__submenu-item"><a href="add_category.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'add_category.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">Add Category</a></li>
-                     <li class="mm-sidebar__submenu-item"><a href="list_category.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'list_category.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">List Category</a></li>
+               <li class="sidebar-list">
+                  <a class="sidebar-link sidebar-title" href="javascript:void(0);">
+                  <i data-feather="list"></i><span >Category</span></a>
+                  <ul class="sidebar-submenu">
+                     <li><a href="add_category.php">Add Category</a></li>
+                     <li><a href="list_category.php">List Category</a></li>
                   </ul>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Pages">
-                  <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_page.php','list_page.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
-                     <i data-feather="book-open" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Pages</span>
-                  </a>
-                  <ul class="sidebar-submenu mm-sidebar__submenu">
-                     <li class="mm-sidebar__submenu-item"><a href="add_page.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'add_page.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">Add Pages</a></li>
-                     <li class="mm-sidebar__submenu-item"><a href="list_page.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'list_page.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">List Pages</a></li>
+               <li class="sidebar-list">
+                  <a class="sidebar-link sidebar-title" href="javascript:void(0);">
+                  <i data-feather="book-open"></i><span >Pages</span></a>
+                  <ul class="sidebar-submenu">
+                     <li><a href="add_page.php">Add Pages</a></li>
+                     <li><a href="list_page.php">List Pages</a></li>
                   </ul>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="FAQ">
-                  <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_faq.php','list_faq.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
-                     <i data-feather="help-circle" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">FAQ</span>
-                  </a>
-                  <ul class="sidebar-submenu mm-sidebar__submenu">
-                     <li class="mm-sidebar__submenu-item"><a href="add_faq.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'add_faq.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">Add FAQ</a></li>
-                     <li class="mm-sidebar__submenu-item"><a href="list_faq.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'list_faq.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">List FAQ</a></li>
+               <li class="sidebar-list">
+                  <a class="sidebar-link sidebar-title" href="javascript:void(0);">
+                  <i data-feather="help-circle"></i><span >FAQ</span></a>
+                  <ul class="sidebar-submenu">
+                     <li><a href="add_faq.php">Add FAQ</a></li>
+                     <li><a href="list_faq.php">List FAQ</a></li>
                   </ul>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Payment List">
-                  <a class="sidebar-link sidebar-title link-nav mm-sidebar__link <?php echo ($mm_current_page === 'payment_list.php') ? 'mm-sidebar__link--active' : ''; ?>" href="payment_list.php">
-                     <i data-feather="database" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Payment List</span>
-                  </a>
+               <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="payment_list.php">
+                  <i data-feather="database"></i><span>Payment List</span></a>
                </li>
-
-               <!-- ── Section: Sponsors & Payout ──────────── -->
-               <li class="sidebar-main-title mm-sidebar__section">
+               <li class="sidebar-main-title">
                   <div>
-                     <h6 class="mm-sidebar__section-label">Sponsors & Payout</h6>
+                     <h6>Sponsores & Payout </h6>
                   </div>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Organizer">
-                  <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_sponsore.php','list_sponsore.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
-                     <i data-feather="speaker" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Organizer</span>
-                  </a>
-                  <ul class="sidebar-submenu mm-sidebar__submenu">
-                     <li class="mm-sidebar__submenu-item"><a href="add_sponsore.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'add_sponsore.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">Add Organizer</a></li>
-                     <li class="mm-sidebar__submenu-item"><a href="list_sponsore.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'list_sponsore.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">List Organizer</a></li>
+               <li class="sidebar-list">
+                  <a class="sidebar-link sidebar-title" href="javascript:void(0);">
+                  <i data-feather="speaker"></i><span >Organizer</span></a>
+                  <ul class="sidebar-submenu">
+                     <li><a href="add_sponsore.php">Add Organizer</a></li>
+                     <li><a href="list_sponsore.php">List Organizer</a></li>
                   </ul>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Payout List">
-                  <a class="sidebar-link sidebar-title link-nav mm-sidebar__link <?php echo ($mm_current_page === 'list_payout.php') ? 'mm-sidebar__link--active' : ''; ?>" href="list_payout.php">
-                     <i data-feather="file-plus" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Payout List</span>
-                  </a>
+               <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="list_payout.php">
+                  <i data-feather="file-plus"></i><span>Payout List</span></a>
                </li>
-
-               <!-- ── Section: Facility & Restriction ─────── -->
-               <li class="sidebar-main-title mm-sidebar__section">
+               <li class="sidebar-main-title">
                   <div>
-                     <h6 class="mm-sidebar__section-label">Facility & Restriction</h6>
+                     <h6>Facility & Restrication </h6>
                   </div>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event Facility">
-                  <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_facility.php','list_facility.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
-                     <i data-feather="globe" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Event Facility</span>
-                  </a>
-                  <ul class="sidebar-submenu mm-sidebar__submenu">
-                     <li class="mm-sidebar__submenu-item"><a href="add_facility.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'add_facility.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">Add Facility</a></li>
-                     <li class="mm-sidebar__submenu-item"><a href="list_facility.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'list_facility.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">List Facility</a></li>
+               <li class="sidebar-list">
+                  <a class="sidebar-link sidebar-title" href="javascript:void(0);">
+                  <i data-feather="globe"></i><span >Event Facility</span></a>
+                  <ul class="sidebar-submenu">
+                     <li><a href="add_facility.php">Add Facility</a></li>
+                     <li><a href="list_facility.php">List Facility</a></li>
                   </ul>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event Restriction">
-                  <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_restriction.php','list_restriction.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
-                     <i data-feather="shield-off" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Event Restriction</span>
-                  </a>
-                  <ul class="sidebar-submenu mm-sidebar__submenu">
-                     <li class="mm-sidebar__submenu-item"><a href="add_restriction.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'add_restriction.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">Add Restriction</a></li>
-                     <li class="mm-sidebar__submenu-item"><a href="list_restriction.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'list_restriction.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">List Restriction</a></li>
+               <li class="sidebar-list">
+                  <a class="sidebar-link sidebar-title" href="javascript:void(0);">
+                  <i data-feather="shield-off"></i><span >Event Restrication</span></a>
+                  <ul class="sidebar-submenu">
+                     <li><a href="add_restriction.php">Add Restrication</a></li>
+                     <li><a href="list_restriction.php">List Restrication</a></li>
                   </ul>
                </li>
-
-               <!-- ── Section: User ───────────────────────── -->
-               <li class="sidebar-main-title mm-sidebar__section">
+               <li class="sidebar-main-title">
                   <div>
-                     <h6 class="mm-sidebar__section-label">User</h6>
+                     <h6>User </h6>
                   </div>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="User List">
-                  <a class="sidebar-link sidebar-title link-nav mm-sidebar__link <?php echo ($mm_current_page === 'list_user.php') ? 'mm-sidebar__link--active' : ''; ?>" href="list_user.php">
-                     <i data-feather="users" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">User List</span>
-                  </a>
+               <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="list_user.php">
+                  <i data-feather="users"></i><span>User List</span></a>
                </li>
-
             </ul>
          </div>
          <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
       </nav>
-
-      <!-- ── Sidebar Footer ─────────────────────────────────── -->
-      <div class="mm-sidebar__footer">
-         <div class="mm-sidebar__footer-brand">
-            <span class="mm-sidebar__footer-dot"></span>
-            <span class="mm-sidebar__footer-text">Powered by MagicMate</span>
-         </div>
-         <span class="mm-sidebar__footer-version">v2.0</span>
-      </div>
-
    </div>
 </div>
-
 <?php } else { ?>
-<!-- ═══════════════════════════════════════════════════════════════
-     MAGICMATE SIDEBAR — Organizer
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="sidebar-wrapper mm-sidebar" sidebar-layout="stroke-svg">
-   <div class="mm-sidebar__inner">
-
-      <!-- ── Logo Area ──────────────────────────────────────── -->
-      <div class="logo-wrapper mm-sidebar__logo">
-         <a href="dashboard.php" class="mm-sidebar__logo-link">
-            <img class="img-fluid for-light mm-sidebar__logo-img" src="<?php echo $set["weblogo"]; ?>" alt="MagicMate">
-            <img class="img-fluid for-dark mm-sidebar__logo-img" src="<?php echo $set["weblogo"]; ?>" alt="MagicMate">
-         </a>
+<div class="sidebar-wrapper" sidebar-layout="stroke-svg">
+   <div>
+      <div class="logo-wrapper">
+         <a href="dashboard.php"><img class="img-fluid for-light" src="<?php echo $set[
+            "weblogo"
+            ]; ?>" alt=""><img class="img-fluid for-dark" src="<?php echo $set[
+            "weblogo"
+            ]; ?>" alt=""></a>
          <div class="back-btn"><i class="fa fa-angle-left"></i></div>
-         <div class="toggle-sidebar mm-sidebar__toggle">
-            <i class="status_toggle middle sidebar-toggle" data-feather="chevrons-left"> </i>
-         </div>
+         <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
       </div>
-      <div class="logo-icon-wrapper mm-sidebar__logo-collapsed">
-         <a href="dashboard.php"><img class="img-fluid" src="<?php echo $set["weblogo"]; ?>" width="50px" alt="MagicMate"></a>
-      </div>
-
-      <!-- ── Navigation ─────────────────────────────────────── -->
-      <nav class="sidebar-main mm-sidebar__nav" aria-label="Main navigation">
+      <div class="logo-icon-wrapper"><a href="dashboard.php"><img class="img-fluid" src="<?php echo $set[
+         "weblogo"
+         ]; ?>" width="50px" alt=""></a></div>
+      <nav class="sidebar-main" aria-label="">
          <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
          <div id="sidebar-menu">
-            <ul class="sidebar-links mm-sidebar__menu" id="simple-bar">
-
-               <!-- Back button (mobile) -->
+            <ul class="sidebar-links" id="simple-bar">
                <li class="back-btn">
-                  <a href="dashboard.php"><img class="img-fluid" src="<?php echo $set["weblogo"]; ?>" alt="MagicMate"></a>
+                  <a href="dashboard.php"><img class="img-fluid" src="<?php echo $set[
+                     "weblogo"
+                     ]; ?>" alt=""></a>
                   <div class="mobile-back text-end">
-                     <span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i>
-                  </div>
+                    <span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                </li>
-
-               <!-- ── Section: General ─────────────────────── -->
-               <li class="sidebar-main-title mm-sidebar__section">
+               <li class="sidebar-main-title">
                   <div>
-                     <h6 class="mm-sidebar__section-label">General</h6>
+                     <h6 >General</h6>
                   </div>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Dashboard">
-                  <a class="sidebar-link sidebar-title link-nav mm-sidebar__link <?php echo ($mm_current_page === 'dashboard.php') ? 'mm-sidebar__link--active' : ''; ?>" href="dashboard.php">
-                     <i data-feather="home" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Dashboard</span>
-                  </a>
+               <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav" href="dashboard.php">
+                  <i data-feather="home"></i><span>DashBoard</span></a>
                </li>
-
-               <!-- ── Section: Event ──────────────────────── -->
-               <li class="sidebar-main-title mm-sidebar__section">
+               <li class="sidebar-main-title">
                   <div>
-                     <h6 class="mm-sidebar__section-label">Event</h6>
+                     <h6 >Event</h6>
                   </div>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event">
-                  <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_event.php','list_event.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
-                     <i data-feather="cast" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Event</span>
-                  </a>
-                  <ul class="sidebar-submenu mm-sidebar__submenu">
-                     <li class="mm-sidebar__submenu-item"><a href="add_event.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'add_event.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">Add Event</a></li>
-                     <li class="mm-sidebar__submenu-item"><a href="list_event.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'list_event.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">List Event</a></li>
+               <li class="sidebar-list">
+                  <a class="sidebar-link sidebar-title" href="javascript:void(0);">
+                  <i data-feather="cast"></i><span >Event</span></a>
+                  <ul class="sidebar-submenu">
+                     <li><a href="add_event.php">Add Event</a></li>
+                     <li><a href="list_event.php">List Event</a></li>
                   </ul>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event Type & Price">
-                  <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_etype.php','list_etype.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
-                     <i data-feather="cast" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Event Type & Price</span>
-                  </a>
-                  <ul class="sidebar-submenu mm-sidebar__submenu">
-                     <li class="mm-sidebar__submenu-item"><a href="add_etype.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'add_etype.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">Add Price</a></li>
-                     <li class="mm-sidebar__submenu-item"><a href="list_etype.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'list_etype.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">List Price</a></li>
+               <li class="sidebar-list">
+                  <a class="sidebar-link sidebar-title" href="javascript:void(0);">
+                  <i data-feather="cast"></i><span >Event Type & Price</span></a>
+                  <ul class="sidebar-submenu">
+                     <li><a href="add_etype.php">Add Price</a></li>
+                     <li><a href="list_etype.php">List Price</a></li>
                   </ul>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Cover Images">
-                  <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_cover.php','list_cover.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
-                     <i data-feather="image" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Cover Images</span>
-                  </a>
-                  <ul class="sidebar-submenu mm-sidebar__submenu">
-                     <li class="mm-sidebar__submenu-item"><a href="add_cover.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'add_cover.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">Add Cover</a></li>
-                     <li class="mm-sidebar__submenu-item"><a href="list_cover.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'list_cover.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">List Cover</a></li>
+               <li class="sidebar-list">
+                  <a class="sidebar-link sidebar-title" href="javascript:void(0);">
+                  <i data-feather="image"></i><span >Cover Images</span></a>
+                  <ul class="sidebar-submenu">
+                     <li><a href="add_cover.php">Add Cover</a></li>
+                     <li><a href="list_cover.php">List Cover</a></li>
                   </ul>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event Gallery">
-                  <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_gallery.php','list_gallery.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
-                     <i data-feather="image" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Event Gallery</span>
-                  </a>
-                  <ul class="sidebar-submenu mm-sidebar__submenu">
-                     <li class="mm-sidebar__submenu-item"><a href="add_gallery.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'add_gallery.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">Add Gallery</a></li>
-                     <li class="mm-sidebar__submenu-item"><a href="list_gallery.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'list_gallery.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">List Gallery</a></li>
+               <li class="sidebar-list">
+                  <a class="sidebar-link sidebar-title" href="javascript:void(0);">
+                  <i data-feather="image"></i><span >Event Gallery</span></a>
+                  <ul class="sidebar-submenu">
+                     <li><a href="add_gallery.php">Add Gallery</a></li>
+                     <li><a href="list_gallery.php">List Gallery</a></li>
                   </ul>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event Artist">
-                  <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_artist.php','list_artist.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
-                     <i data-feather="users" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Event Artist</span>
-                  </a>
-                  <ul class="sidebar-submenu mm-sidebar__submenu">
-                     <li class="mm-sidebar__submenu-item"><a href="add_artist.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'add_artist.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">Add Artist</a></li>
-                     <li class="mm-sidebar__submenu-item"><a href="list_artist.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'list_artist.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">List Artist</a></li>
+               <li class="sidebar-list">
+                  <a class="sidebar-link sidebar-title" href="javascript:void(0);">
+                  <i data-feather="users"></i><span >Event Artist</span></a>
+                  <ul class="sidebar-submenu">
+                     <li><a href="add_artist.php">Add Artist</a></li>
+                     <li><a href="list_artist.php">List Artist</a></li>
                   </ul>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event Coupon">
-                  <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_coupon.php','list_coupon.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
-                     <i data-feather="gift" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Event Coupon</span>
-                  </a>
-                  <ul class="sidebar-submenu mm-sidebar__submenu">
-                     <li class="mm-sidebar__submenu-item"><a href="add_coupon.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'add_coupon.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">Add Coupon</a></li>
-                     <li class="mm-sidebar__submenu-item"><a href="list_coupon.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'list_coupon.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">List Coupon</a></li>
+               <li class="sidebar-list">
+                  <a class="sidebar-link sidebar-title" href="javascript:void(0);">
+                  <i data-feather="gift"></i><span >Event Coupon</span></a>
+                  <ul class="sidebar-submenu">
+                     <li><a href="add_coupon.php">Add Coupon</a></li>
+                     <li><a href="list_coupon.php">List Coupon</a></li>
                   </ul>
                </li>
-
-               <!-- ── Section: Payout ─────────────────────── -->
-               <li class="sidebar-main-title mm-sidebar__section">
+               <li class="sidebar-main-title">
                   <div>
-                     <h6 class="mm-sidebar__section-label">Payout</h6>
+                     <h6>Payout </h6>
                   </div>
                </li>
-
-               <li class="sidebar-list mm-sidebar__item" data-tooltip="Payout">
-                  <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_payout.php','list_epayout.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
-                     <i data-feather="file-plus" class="mm-sidebar__icon"></i>
-                     <span class="mm-sidebar__label">Payout</span>
-                  </a>
-                  <ul class="sidebar-submenu mm-sidebar__submenu">
-                     <li class="mm-sidebar__submenu-item"><a href="add_payout.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'add_payout.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">Add Payout</a></li>
-                     <li class="mm-sidebar__submenu-item"><a href="list_epayout.php" class="mm-sidebar__submenu-link <?php echo ($mm_current_page === 'list_epayout.php') ? 'mm-sidebar__submenu-link--active' : ''; ?>">List Payout</a></li>
+               <li class="sidebar-list">
+                  <a class="sidebar-link sidebar-title" href="javascript:void(0);">
+                  <i data-feather="file-plus"></i><span >Payout</span></a>
+                  <ul class="sidebar-submenu">
+                     <li><a href="add_payout.php">Add Payout</a></li>
+                     <li><a href="list_epayout.php">List Payout</a></li>
                   </ul>
                </li>
-
             </ul>
          </div>
          <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
       </nav>
-
-      <!-- ── Sidebar Footer ─────────────────────────────────── -->
-      <div class="mm-sidebar__footer">
-         <div class="mm-sidebar__footer-brand">
-            <span class="mm-sidebar__footer-dot"></span>
-            <span class="mm-sidebar__footer-text">Powered by MagicMate</span>
-         </div>
-         <span class="mm-sidebar__footer-version">v2.0</span>
-      </div>
-
    </div>
 </div>
-<?php } ?>
+<?php }
+   ?>
