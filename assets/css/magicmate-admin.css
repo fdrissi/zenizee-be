@@ -914,3 +914,644 @@ body.dark-only .pricing-block {
 .border-dashed-primary {
   border-color: var(--mm-primary-500) !important;
 }
+
+
+/* ========================================================================
+   PHASE 1 — LAYOUT SHELL
+   Sidebar, Header, and Page Wrapper reskin
+   Clean, warm, modern layout replacing Cuba's default look
+   ======================================================================== */
+
+
+/* -----------------------------------------------------------------------
+   1. SIDEBAR
+   Light warm background, clean nav items, gold active states
+   ----------------------------------------------------------------------- */
+
+/* --- 1a. Sidebar Container --- */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper {
+  background: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+  border-right: 1px solid var(--mm-border-subtle) !important;
+}
+
+/* --- 1b. Logo Area --- */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-wrapper,
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-icon-wrapper {
+  padding: var(--mm-space-6) var(--mm-space-6) !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  background: var(--mm-neutral-0) !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-wrapper a img,
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-icon-wrapper a img {
+  max-height: 38px !important;
+  width: auto !important;
+  transition: opacity var(--mm-duration-base) ease !important;
+}
+
+/* --- 1c. Toggle Sidebar Button --- */
+.sidebar-wrapper .toggle-sidebar {
+  background: transparent !important;
+}
+
+.sidebar-wrapper .toggle-sidebar i,
+.sidebar-wrapper .toggle-sidebar svg {
+  color: var(--mm-neutral-500) !important;
+  stroke: var(--mm-neutral-500) !important;
+  transition: color var(--mm-duration-base) ease, stroke var(--mm-duration-base) ease !important;
+}
+
+.sidebar-wrapper .toggle-sidebar:hover i,
+.sidebar-wrapper .toggle-sidebar:hover svg {
+  color: var(--mm-primary-500) !important;
+  stroke: var(--mm-primary-500) !important;
+}
+
+/* --- 1d. Sidebar Main Title (section headers) --- */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-main-title {
+  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-2) var(--mm-space-5) !important;
+  margin-top: var(--mm-space-2) !important;
+}
+
+.sidebar-main-title h6,
+.sidebar-main-title div h6 {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-xs) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--mm-neutral-400) !important;
+  margin-bottom: 0 !important;
+}
+
+.sidebar-main-title p {
+  color: var(--mm-neutral-400) !important;
+  font-size: 10px !important;
+}
+
+/* Section divider line (replace Cuba's pseudo-element) */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-main-title::before {
+  background: var(--mm-border-subtle) !important;
+}
+
+/* --- 1e. Sidebar Links (nav items) --- */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links {
+  margin-top: var(--mm-space-3) !important;
+  margin-bottom: var(--mm-space-6) !important;
+}
+
+/* Main nav link */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li a {
+  padding: 10px var(--mm-space-5) !important;
+  margin: 2px var(--mm-space-3) !important;
+  border-radius: var(--mm-radius-md) !important;
+  color: var(--mm-neutral-700) !important;
+  transition: all var(--mm-duration-base) ease !important;
+  font-weight: 500 !important;
+  font-size: var(--mm-text-sm) !important;
+}
+
+/* Nav link text color */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li a span {
+  color: var(--mm-neutral-600) !important;
+  font-weight: 500 !important;
+  font-size: var(--mm-text-sm) !important;
+  transition: color var(--mm-duration-base) ease !important;
+}
+
+/* Nav link icon color */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li a svg,
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li a i {
+  color: var(--mm-neutral-400) !important;
+  stroke: var(--mm-neutral-400) !important;
+  width: 18px !important;
+  height: 18px !important;
+  transition: all var(--mm-duration-base) ease !important;
+}
+
+/* --- 1f. Hover State --- */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-list:hover > a:hover,
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li a:hover {
+  background-color: var(--mm-primary-50) !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li:hover .sidebar-link:not(.active):hover span,
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li a:hover span {
+  color: var(--mm-primary-600) !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li:hover .sidebar-link:not(.active):hover svg,
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li a:hover svg,
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li a:hover i {
+  color: var(--mm-primary-500) !important;
+  stroke: var(--mm-primary-500) !important;
+}
+
+/* --- 1g. Active State --- */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active {
+  background-color: var(--mm-primary-50) !important;
+  border-left: 3px solid var(--mm-primary-500) !important;
+  border-radius: 0 var(--mm-radius-md) var(--mm-radius-md) 0 !important;
+  margin-left: var(--mm-space-3) !important;
+}
+
+.sidebar-link.active,
+.sidebar-list .sidebar-link.active {
+  color: var(--mm-primary-600) !important;
+}
+
+.sidebar-link.active span,
+.sidebar-list .sidebar-link.active span {
+  color: var(--mm-primary-700) !important;
+  font-weight: 600 !important;
+}
+
+.sidebar-link.active svg,
+.sidebar-link.active i,
+.sidebar-list .sidebar-link.active svg {
+  color: var(--mm-primary-500) !important;
+  stroke: var(--mm-primary-500) !important;
+}
+
+/* --- 1h. Submenu Styling --- */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu {
+  background: transparent !important;
+  border-left: 1px solid var(--mm-border-subtle) !important;
+  margin-left: 32px !important;
+  padding-left: 0 !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu li a {
+  color: var(--mm-neutral-500) !important;
+  font-size: var(--mm-text-sm) !important;
+  font-weight: 400 !important;
+  padding: 6px var(--mm-space-4) 6px var(--mm-space-5) !important;
+  margin: 1px 0 !important;
+  border-radius: 0 var(--mm-radius-sm) var(--mm-radius-sm) 0 !important;
+  transition: all var(--mm-duration-base) ease !important;
+  letter-spacing: 0.02em !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu li a:hover {
+  color: var(--mm-primary-600) !important;
+  background-color: var(--mm-primary-50) !important;
+  padding-left: calc(var(--mm-space-5) + 2px) !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu li a.active {
+  color: var(--mm-primary-600) !important;
+  font-weight: 600 !important;
+  background-color: var(--mm-primary-50) !important;
+}
+
+/* Remove Cuba's default submenu dot/pseudo-element */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu li a::after,
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .mega-menu-container .mega-box .link-section .submenu-title h5::after {
+  display: none !important;
+}
+
+/* --- 1i. According menu (dropdown chevron) --- */
+.page-wrapper.compact-wrapper .page-body-wrapper .according-menu i {
+  color: var(--mm-neutral-400) !important;
+  font-size: 14px !important;
+  transition: color var(--mm-duration-base) ease !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li:hover .according-menu i {
+  color: var(--mm-primary-500) !important;
+}
+
+/* --- 1j. Sidebar Scrollbar --- */
+.sidebar-wrapper ::-webkit-scrollbar,
+.sidebar-main ::-webkit-scrollbar {
+  width: 4px !important;
+}
+
+.sidebar-wrapper ::-webkit-scrollbar-track,
+.sidebar-main ::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.sidebar-wrapper ::-webkit-scrollbar-thumb,
+.sidebar-main ::-webkit-scrollbar-thumb {
+  background: var(--mm-neutral-200) !important;
+  border-radius: var(--mm-radius-full) !important;
+}
+
+.sidebar-wrapper ::-webkit-scrollbar-thumb:hover,
+.sidebar-main ::-webkit-scrollbar-thumb:hover {
+  background: var(--mm-neutral-300) !important;
+}
+
+/* Simplebar scrollbar */
+.sidebar-wrapper .simplebar-scrollbar::before {
+  background: var(--mm-neutral-200) !important;
+  width: 4px !important;
+  border-radius: var(--mm-radius-full) !important;
+}
+
+/* --- 1k. Sidebar close_icon state (collapsed) --- */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper.close_icon {
+  box-shadow: var(--mm-shadow-xs) !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper.close_icon:hover {
+  box-shadow: var(--mm-shadow-md) !important;
+}
+
+/* --- 1l. Mobile back button styling --- */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .back-btn .mobile-back {
+  color: var(--mm-neutral-700) !important;
+  border-bottom-color: var(--mm-border-subtle) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-weight: 600 !important;
+}
+
+/* --- 1m. Dark sidebar overrides (force light) --- */
+body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper,
+.page-wrapper.compact-wrapper.dark-sidebar div.sidebar-wrapper,
+.page-wrapper.compact-wrapper.color-sidebar div.sidebar-wrapper {
+  background-color: var(--mm-neutral-0) !important;
+}
+
+body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li a span,
+.page-wrapper.compact-wrapper.dark-sidebar div.sidebar-wrapper .sidebar-main .sidebar-links li a span,
+.page-wrapper.compact-wrapper.color-sidebar div.sidebar-wrapper .sidebar-main .sidebar-links li a span {
+  color: var(--mm-neutral-600) !important;
+}
+
+body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li a svg,
+.page-wrapper.compact-wrapper.dark-sidebar div.sidebar-wrapper .sidebar-main .sidebar-links li a svg,
+.page-wrapper.compact-wrapper.color-sidebar div.sidebar-wrapper .sidebar-main .sidebar-links li a svg {
+  stroke: var(--mm-neutral-400) !important;
+}
+
+body.dark-sidebar .sidebar-main-title h6,
+body.dark-sidebar .sidebar-main-title div h6,
+.page-wrapper.compact-wrapper.dark-sidebar .sidebar-main-title h6,
+.page-wrapper.compact-wrapper.color-sidebar .sidebar-main-title h6 {
+  color: var(--mm-neutral-400) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2. HEADER / TOP NAVBAR
+   Light, clean, minimal with subtle bottom border
+   ----------------------------------------------------------------------- */
+
+/* --- 2a. Header Container --- */
+.page-wrapper .page-header {
+  background-color: var(--mm-surface-header) !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* --- 2b. Header Wrapper (inner padding) --- */
+.page-wrapper .page-header .header-wrapper {
+  padding: var(--mm-space-4) var(--mm-space-6) !important;
+}
+
+/* --- 2c. Header Logo (visible on mobile / in header area) --- */
+.page-header .header-logo-wrapper .logo-wrapper {
+  background: transparent !important;
+}
+
+.page-header .header-logo-wrapper .logo-wrapper a img {
+  max-height: 34px !important;
+}
+
+/* --- 2d. Header Toggle Sidebar Button --- */
+.page-header .toggle-sidebar {
+  background: transparent !important;
+}
+
+.page-header .toggle-sidebar svg,
+.page-header .toggle-sidebar i {
+  color: var(--mm-neutral-500) !important;
+  stroke: var(--mm-neutral-500) !important;
+  transition: color var(--mm-duration-base) ease !important;
+}
+
+.page-header .toggle-sidebar:hover svg,
+.page-header .toggle-sidebar:hover i {
+  color: var(--mm-primary-500) !important;
+  stroke: var(--mm-primary-500) !important;
+}
+
+/* --- 2e. Nav Right (action icons area) --- */
+.page-wrapper .page-header .header-wrapper .nav-right ul li svg {
+  stroke: var(--mm-neutral-500) !important;
+  transition: stroke var(--mm-duration-base) ease !important;
+}
+
+.page-wrapper .page-header .header-wrapper .nav-right ul li svg path {
+  color: var(--mm-neutral-500) !important;
+}
+
+.page-wrapper .page-header .header-wrapper .nav-right ul li:hover svg {
+  stroke: var(--mm-primary-500) !important;
+}
+
+/* --- 2f. Profile Dropdown in Header --- */
+.page-wrapper .page-header .header-wrapper .nav-right.right-header ul li .profile-media .media-body span {
+  font-family: var(--mm-font-sans) !important;
+  font-weight: 600 !important;
+  font-size: var(--mm-text-sm) !important;
+  color: var(--mm-neutral-800) !important;
+}
+
+.page-wrapper .page-header .header-wrapper .nav-right.right-header ul li .profile-media .media-body p {
+  font-family: var(--mm-font-sans) !important;
+  color: var(--mm-neutral-400) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+}
+
+.page-wrapper .page-header .header-wrapper .nav-right.right-header ul li .profile-media img {
+  border-radius: var(--mm-radius-lg) !important;
+  border: 2px solid var(--mm-primary-100) !important;
+  transition: border-color var(--mm-duration-base) ease !important;
+}
+
+.page-wrapper .page-header .header-wrapper .nav-right.right-header ul li .profile-media:hover img {
+  border-color: var(--mm-primary-300) !important;
+}
+
+/* --- 2g. Profile Dropdown Menu --- */
+.page-wrapper .page-header .header-wrapper .nav-right .profile-dropdown {
+  background: var(--mm-neutral-0) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+  padding: var(--mm-space-2) !important;
+  overflow: hidden !important;
+}
+
+.page-wrapper .page-header .header-wrapper .nav-right .profile-dropdown li {
+  padding: var(--mm-space-2) var(--mm-space-3) !important;
+  border-radius: var(--mm-radius-md) !important;
+  transition: background-color var(--mm-duration-base) ease !important;
+}
+
+.page-wrapper .page-header .header-wrapper .nav-right .profile-dropdown li:hover {
+  background-color: var(--mm-primary-50) !important;
+}
+
+.page-wrapper .page-header .header-wrapper .nav-right .profile-dropdown li a {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  color: var(--mm-neutral-700) !important;
+  font-weight: 500 !important;
+}
+
+.page-wrapper .page-header .header-wrapper .nav-right .profile-dropdown li a span {
+  color: var(--mm-neutral-700) !important;
+}
+
+.page-wrapper .page-header .header-wrapper .nav-right .profile-dropdown li:hover a span {
+  color: var(--mm-primary-600) !important;
+}
+
+.page-wrapper .page-header .header-wrapper .nav-right .profile-dropdown li a svg,
+.page-wrapper .page-header .header-wrapper .nav-right .profile-dropdown li a i {
+  color: var(--mm-neutral-400) !important;
+  stroke: var(--mm-neutral-400) !important;
+  margin-right: var(--mm-space-2) !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.page-wrapper .page-header .header-wrapper .nav-right .profile-dropdown li:hover a svg,
+.page-wrapper .page-header .header-wrapper .nav-right .profile-dropdown li:hover a i {
+  color: var(--mm-primary-500) !important;
+  stroke: var(--mm-primary-500) !important;
+}
+
+/* --- 2h. General onhover dropdowns in header --- */
+.page-header .onhover-show-div {
+  background: var(--mm-neutral-0) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+}
+
+/* --- 2i. Search bar (when present) --- */
+.page-wrapper .page-header .header-wrapper .search-full {
+  background-color: var(--mm-neutral-0) !important;
+}
+
+.page-wrapper .page-header .header-wrapper .search-full input {
+  font-family: var(--mm-font-sans) !important;
+  color: var(--mm-neutral-800) !important;
+}
+
+/* --- 2j. Dark mode header override (force light) --- */
+body.dark-only .page-wrapper .page-header {
+  background-color: var(--mm-surface-header) !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+}
+
+body.dark-only .page-wrapper .page-header .header-wrapper {
+  background: transparent !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   3. PAGE WRAPPER / MAIN CONTENT AREA
+   Clean background, proper padding, polished page titles and cards
+   ----------------------------------------------------------------------- */
+
+/* --- 3a. Page Body --- */
+.page-wrapper .page-body-wrapper .page-body {
+  background-color: var(--mm-surface-page) !important;
+  padding: var(--mm-space-4) var(--mm-space-5) !important;
+}
+
+/* --- 3b. Page Title Area --- */
+.page-wrapper .page-body-wrapper .page-title {
+  background-color: transparent !important;
+  padding: var(--mm-space-5) var(--mm-space-2) !important;
+  margin: 0 0 var(--mm-space-5) 0 !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+}
+
+.page-wrapper .page-body-wrapper .page-title .row h3 {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl) !important;
+  font-weight: 700 !important;
+  color: var(--mm-neutral-900) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.page-wrapper .page-body-wrapper .page-title .row h3 small {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-xs) !important;
+  color: var(--mm-neutral-400) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  font-weight: 500 !important;
+}
+
+.page-wrapper .page-body-wrapper .page-title p {
+  font-family: var(--mm-font-sans) !important;
+  color: var(--mm-neutral-500) !important;
+  font-size: var(--mm-text-sm) !important;
+  margin-top: var(--mm-space-1) !important;
+}
+
+/* --- 3c. Breadcrumb --- */
+.page-wrapper .page-body-wrapper .page-title .breadcrumb {
+  background: transparent !important;
+}
+
+.page-wrapper .page-body-wrapper .page-title .breadcrumb li {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-xs) !important;
+  letter-spacing: 0.04em !important;
+  color: var(--mm-neutral-400) !important;
+}
+
+.page-wrapper .page-body-wrapper .page-title .breadcrumb .breadcrumb-item a svg {
+  stroke: var(--mm-neutral-400) !important;
+}
+
+.page-wrapper .page-body-wrapper .page-title .breadcrumb .breadcrumb-item.active {
+  color: var(--mm-primary-600) !important;
+  font-weight: 600 !important;
+}
+
+/* --- 3d. Content Cards --- */
+.page-body .card {
+  background: var(--mm-surface-card) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  box-shadow: var(--mm-shadow-xs) !important;
+  transition: box-shadow var(--mm-duration-base) ease !important;
+  overflow: hidden !important;
+}
+
+.page-body .card:hover {
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+
+.page-body .card .card-header {
+  background: transparent !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4) !important;
+}
+
+.page-body .card .card-header h4,
+.page-body .card .card-header h5,
+.page-body .card .card-header h6 {
+  font-family: var(--mm-font-display) !important;
+  font-weight: 600 !important;
+  color: var(--mm-neutral-800) !important;
+}
+
+.page-body .card .card-body {
+  padding: var(--mm-space-5) !important;
+}
+
+.page-body .card .card-footer {
+  background: var(--mm-neutral-50) !important;
+  border-top: 1px solid var(--mm-border-subtle) !important;
+  padding: var(--mm-space-4) var(--mm-space-5) !important;
+}
+
+/* --- 3e. Small Widget Cards (dashboard stats) --- */
+.page-body .card.small-widget {
+  border-radius: var(--mm-radius-lg) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+  transition: all var(--mm-duration-base) ease !important;
+}
+
+.page-body .card.small-widget:hover {
+  box-shadow: var(--mm-shadow-md) !important;
+  transform: translateY(-1px) !important;
+}
+
+.page-body .card.small-widget .card-body {
+  padding: var(--mm-space-5) !important;
+}
+
+.page-body .card.small-widget .card-body .f-light {
+  font-size: var(--mm-text-xs) !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  color: var(--mm-neutral-500) !important;
+}
+
+.page-body .card.small-widget .card-body h4 {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-xl) !important;
+  font-weight: 700 !important;
+  color: var(--mm-neutral-900) !important;
+  margin-top: var(--mm-space-2) !important;
+}
+
+/* --- 3f. Container Fluid max-width for readability --- */
+.page-body > .container-fluid {
+  max-width: 1600px !important;
+}
+
+/* --- 3g. Dark mode page body override --- */
+body.dark-only .page-wrapper .page-body-wrapper .page-body {
+  background-color: var(--mm-surface-page) !important;
+}
+
+body.dark-only .page-wrapper .page-body-wrapper .page-title {
+  background-color: transparent !important;
+  border-bottom-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .page-wrapper .page-body-wrapper .page-body .card:not(.email-body) {
+  background-color: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+  box-shadow: var(--mm-shadow-xs) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   4. RESPONSIVE ADJUSTMENTS
+   Ensure clean layout on smaller screens
+   ----------------------------------------------------------------------- */
+
+@media (max-width: 991.98px) {
+  /* Mobile header adjustments */
+  .page-wrapper .page-header .header-wrapper {
+    padding: var(--mm-space-3) var(--mm-space-4) !important;
+  }
+
+  /* Mobile page body padding */
+  .page-wrapper .page-body-wrapper .page-body {
+    padding: var(--mm-space-3) var(--mm-space-3) !important;
+  }
+
+  /* Mobile page title */
+  .page-wrapper .page-body-wrapper .page-title {
+    padding: var(--mm-space-4) var(--mm-space-1) !important;
+    margin-bottom: var(--mm-space-4) !important;
+  }
+
+  .page-wrapper .page-body-wrapper .page-title .row h3 {
+    font-size: var(--mm-text-xl) !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  /* Extra small header */
+  .page-wrapper .page-header .header-wrapper {
+    padding: var(--mm-space-3) var(--mm-space-3) !important;
+  }
+
+  /* Card body padding on small screens */
+  .page-body .card .card-body {
+    padding: var(--mm-space-4) !important;
+  }
+}
