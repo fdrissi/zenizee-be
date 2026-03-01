@@ -99,17 +99,17 @@
             <section class="mm-dash__hero-row">
                <div class="mm-dash__hero-card mm-dash__hero-card--primary">
                   <div class="mm-dash__hero-label">Total Earning</div>
-                  <div class="mm-dash__hero-value"><?php echo $earn; ?><span class="mm-dash__hero-currency"><?php echo $currency; ?></span></div>
+                  <div class="mm-dash__hero-value"><span class="mm-dash__hero-currency"><?php echo $currency; ?></span><?php echo $earn; ?></div>
                   <div class="mm-dash__hero-icon"><i data-feather="trending-up"></i></div>
                </div>
                <div class="mm-dash__hero-card mm-dash__hero-card--accent">
                   <div class="mm-dash__hero-label">Total Payout</div>
-                  <div class="mm-dash__hero-value"><?php echo $payout; ?><span class="mm-dash__hero-currency"><?php echo $currency; ?></span></div>
+                  <div class="mm-dash__hero-value"><span class="mm-dash__hero-currency"><?php echo $currency; ?></span><?php echo $payout; ?></div>
                   <div class="mm-dash__hero-icon"><i data-feather="credit-card"></i></div>
                </div>
                <div class="mm-dash__hero-card mm-dash__hero-card--muted">
                   <div class="mm-dash__hero-label">After Payout</div>
-                  <div class="mm-dash__hero-value"><?php echo $afterPayout; ?><span class="mm-dash__hero-currency"><?php echo $currency; ?></span></div>
+                  <div class="mm-dash__hero-value"><span class="mm-dash__hero-currency"><?php echo $currency; ?></span><?php echo $afterPayout; ?></div>
                   <div class="mm-dash__hero-icon"><i data-feather="pocket"></i></div>
                </div>
             </section>
@@ -193,17 +193,17 @@
             <section class="mm-dash__hero-row">
                <div class="mm-dash__hero-card mm-dash__hero-card--primary">
                   <div class="mm-dash__hero-label">Total Revenue</div>
-                  <div class="mm-dash__hero-value"><?php echo $earn; ?><span class="mm-dash__hero-currency"><?php echo $currency; ?></span></div>
+                  <div class="mm-dash__hero-value"><span class="mm-dash__hero-currency"><?php echo $currency; ?></span><?php echo $earn; ?></div>
                   <div class="mm-dash__hero-icon"><i data-feather="trending-up"></i></div>
                </div>
                <div class="mm-dash__hero-card mm-dash__hero-card--accent">
                   <div class="mm-dash__hero-label">Pending Payouts</div>
-                  <div class="mm-dash__hero-value"><?php echo $pendingPayout; ?><span class="mm-dash__hero-currency"><?php echo $currency; ?></span></div>
+                  <div class="mm-dash__hero-value"><span class="mm-dash__hero-currency"><?php echo $currency; ?></span><?php echo $pendingPayout; ?></div>
                   <div class="mm-dash__hero-icon"><i data-feather="clock"></i></div>
                </div>
                <div class="mm-dash__hero-card mm-dash__hero-card--muted">
                   <div class="mm-dash__hero-label">Completed Payouts</div>
-                  <div class="mm-dash__hero-value"><?php echo $completedPayout; ?><span class="mm-dash__hero-currency"><?php echo $currency; ?></span></div>
+                  <div class="mm-dash__hero-value"><span class="mm-dash__hero-currency"><?php echo $currency; ?></span><?php echo $completedPayout; ?></div>
                   <div class="mm-dash__hero-icon"><i data-feather="check-circle"></i></div>
                </div>
             </section>
