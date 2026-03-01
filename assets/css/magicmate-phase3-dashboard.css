@@ -1,511 +1,569 @@
-/* ========== PHASE 3B — DASHBOARD PAGE ========== */
-/*
- * Restyled dashboard for MagicMate admin panel.
- * Overrides Cuba theme defaults for:
- *   - Page title / greeting area
- *   - Stat widget cards (.small-widget)
- *   - Size-column grid layout
- *   - bg-gradient icon containers
- *   - Blink/warning text
- *   - Chart / widget containers (if present)
- *   - General card styling on dashboard
- *
- * Uses design tokens from magicmate-tokens.css exclusively.
- */
+/* =====================================================================
+   MagicMate Dashboard — Complete Custom Design
+   A premium, modern SaaS-style dashboard. No Cuba Admin DNA remaining.
+   Uses design tokens from magicmate-tokens.css exclusively.
+   ===================================================================== */
 
 
 /* =============================================================
-   1. PAGE TITLE / GREETING AREA
+   0. DASHBOARD CONTAINER
    ============================================================= */
 
-/* Override the blinking red text — make it a calm, styled subtitle */
-.blink_me {
-  animation: none !important;
-  -webkit-animation: none !important;
-  color: var(--mm-neutral-500) !important;
-  font-family: var(--mm-font-sans) !important;
-  font-size: var(--mm-text-sm) !important;
-  font-weight: 400 !important;
-  line-height: 1.6 !important;
-  margin-top: var(--mm-space-2) !important;
-  list-style-type: none !important;
-  padding-left: 0 !important;
-  padding-inline: var(--mm-space-4) !important;
+.mm-dash {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
 }
 
-/* Page title — clean, no gradient */
-.page-body > .container-fluid:first-child .page-title {
-  background: transparent !important;
+/* Kill any Cuba page-title / container-fluid styling on dashboard */
+.mm-dash .page-title,
+.mm-dash .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
   border: none !important;
-  padding: var(--mm-space-6) 0 var(--mm-space-4) !important;
-  margin: 0 0 var(--mm-space-5) 0 !important;
 }
 
-.page-body > .container-fluid:first-child .page-title::before {
+.mm-dash .page-title::before {
   display: none !important;
-  content: none !important;
 }
 
 
 /* =============================================================
-   2. STAT WIDGET CARDS (.small-widget)
+   1. WELCOME BANNER
    ============================================================= */
 
-/* Grid row container */
-.size-column {
-  gap: 0 !important;
-  row-gap: var(--mm-space-4) !important;
+.mm-dash__welcome {
+  position: relative;
+  background: var(--mm-neutral-900);
+  border-radius: var(--mm-radius-2xl);
+  padding: var(--mm-space-10) var(--mm-space-8);
+  margin-bottom: var(--mm-space-8);
+  overflow: hidden;
+  animation: mm-fadeIn 0.5s ease both;
 }
 
-/* Each column holding a widget — force consistent sizing */
-.size-column > [class*="col-"] {
-  padding-left: var(--mm-space-2) !important;
-  padding-right: var(--mm-space-2) !important;
-  margin-bottom: var(--mm-space-2) !important;
+.mm-dash__welcome-text {
+  position: relative;
+  z-index: 2;
 }
 
-/* The card itself */
-.card.small-widget {
-  background: var(--mm-surface-card) !important;
-  border: 1px solid var(--mm-border-subtle) !important;
-  border-radius: var(--mm-radius-xl) !important;
-  box-shadow: var(--mm-shadow-xs) !important;
-  transition: all var(--mm-duration-base) ease, box-shadow var(--mm-duration-slow) ease !important;
-  overflow: hidden !important;
-  margin-bottom: 0 !important;
-  position: relative !important;
-}
-
-.card.small-widget:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: var(--mm-shadow-md) !important;
-  border-color: var(--mm-border-accent) !important;
-}
-
-/* Card body */
-.card.small-widget .card-body {
-  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4) !important;
-  position: relative !important;
-  z-index: 1 !important;
-}
-
-/* Stat label (f-light) */
-.card.small-widget .card-body .f-light {
-  font-family: var(--mm-font-sans) !important;
-  font-size: 0.6875rem !important;
-  font-weight: 600 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.06em !important;
-  color: var(--mm-neutral-500) !important;
-  margin-bottom: var(--mm-space-2) !important;
-  display: block !important;
-  line-height: 1.4 !important;
-}
-
-/* Stat number */
-.card.small-widget .card-body h4 {
+.mm-dash__greeting {
   font-family: var(--mm-font-display) !important;
-  font-size: var(--mm-text-xl) !important;
-  font-weight: 700 !important;
-  color: var(--mm-neutral-900) !important;
-  letter-spacing: -0.02em !important;
-  line-height: 1.2 !important;
-  margin-bottom: 0 !important;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--mm-neutral-0);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 var(--mm-space-2) 0;
 }
 
-/* Value container */
-.card.small-widget .card-body .d-flex.align-items-end {
-  margin-top: var(--mm-space-1) !important;
+.mm-dash__date {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-400);
+  letter-spacing: 0.01em;
+  margin: 0 0 var(--mm-space-1) 0;
 }
 
-
-/* =============================================================
-   3. ICON GRADIENT CONTAINER (.bg-gradient)
-   ============================================================= */
-
-/* Reset and restyle the gradient icon circle */
-.card.small-widget .bg-gradient {
-  width: 52px !important;
-  height: 52px !important;
-  border-radius: var(--mm-radius-lg) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  position: absolute !important;
-  top: 50% !important;
-  right: var(--mm-space-4) !important;
-  transform: translateY(-50%) !important;
-  z-index: 1 !important;
+.mm-dash__subtitle {
+  font-size: var(--mm-text-base);
+  font-weight: 400;
+  color: var(--mm-neutral-400);
+  margin: 0;
+  line-height: 1.5;
 }
 
-/* Override the warning variant bg-gradient specifically */
-.card.small-widget .card-body.warning .bg-gradient {
-  background: var(--mm-primary-50) !important;
-  background-image: none !important;
-  border: 1px solid var(--mm-primary-100) !important;
+/* Decorative orbs */
+.mm-dash__welcome-visual {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* Fallback for any bg-gradient in small-widget */
-.card.small-widget .bg-gradient {
-  background: var(--mm-primary-50) !important;
-  background-image: none !important;
-  border: 1px solid var(--mm-primary-100) !important;
+.mm-dash__welcome-orb {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(216, 136, 39, 0.25) 0%, transparent 70%);
+  top: -60px;
+  right: -40px;
+  animation: mm-orbFloat 8s ease-in-out infinite;
 }
 
-/* Icon SVG inside the gradient container */
-.card.small-widget .bg-gradient svg {
-  width: 22px !important;
-  height: 22px !important;
-  stroke: var(--mm-primary-600) !important;
-  fill: none !important;
+.mm-dash__welcome-orb--secondary {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(233, 160, 62, 0.15) 0%, transparent 70%);
+  top: auto;
+  bottom: -40px;
+  right: 120px;
+  animation-delay: -4s;
+  animation-duration: 10s;
 }
 
-/* Override .warning .svg-fill color to gold */
-.card.small-widget .card-body.warning .svg-fill {
-  fill: var(--mm-primary-500) !important;
-  stroke: var(--mm-primary-600) !important;
-}
-
-/* Hover state: icon container highlights */
-.card.small-widget:hover .bg-gradient {
-  background: var(--mm-primary-100) !important;
-  border-color: var(--mm-primary-200) !important;
-}
-
-.card.small-widget:hover .bg-gradient svg {
-  stroke: var(--mm-primary-700) !important;
-}
-
-/* Disable the aggressive tada animation on hover */
-.card.small-widget:hover .bg-gradient svg {
-  animation: none !important;
+@keyframes mm-orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-12px, 8px) scale(1.05); }
 }
 
 
 /* =============================================================
-   4. COLOR-CODED STAT VARIANTS
+   2. HERO METRIC CARDS (Financial / top-level KPIs)
    ============================================================= */
 
-/* Different card-body color variants — override Cuba's palette */
-
-/* Primary (gold) — default for .warning */
-.small-widget .card-body.warning .bg-gradient,
-.small-widget .card-body.primary .bg-gradient {
-  background: var(--mm-primary-50) !important;
-  background-image: none !important;
-  border-color: var(--mm-primary-100) !important;
+.mm-dash__hero-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--mm-space-5);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-fadeUp 0.5s ease 0.1s both;
 }
 
-.small-widget .card-body.warning .bg-gradient svg,
-.small-widget .card-body.primary .bg-gradient svg {
-  stroke: var(--mm-primary-500) !important;
+.mm-dash__hero-card {
+  position: relative;
+  border-radius: var(--mm-radius-xl);
+  padding: var(--mm-space-6) var(--mm-space-6) var(--mm-space-5);
+  overflow: hidden;
+  transition: transform var(--mm-duration-base) ease, box-shadow var(--mm-duration-slow) ease;
 }
 
-/* Success variant */
-.small-widget .card-body.success .bg-gradient {
-  background: var(--mm-success-light) !important;
-  background-image: none !important;
-  border-color: rgba(22, 163, 74, 0.15) !important;
+.mm-dash__hero-card:hover {
+  transform: translateY(-2px);
 }
 
-.small-widget .card-body.success .bg-gradient svg {
-  stroke: var(--mm-success) !important;
-  fill: var(--mm-success) !important;
+/* ── Primary variant (gold gradient) */
+.mm-dash__hero-card--primary {
+  background: linear-gradient(135deg, #D88827 0%, #E9A03E 60%, #F5BE6A 100%);
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(216, 136, 39, 0.25), 0 2px 8px rgba(216, 136, 39, 0.15);
 }
 
-/* Info variant */
-.small-widget .card-body.info .bg-gradient {
-  background: var(--mm-info-light) !important;
-  background-image: none !important;
-  border-color: rgba(37, 99, 235, 0.15) !important;
+.mm-dash__hero-card--primary:hover {
+  box-shadow: 0 16px 48px rgba(216, 136, 39, 0.3), 0 4px 12px rgba(216, 136, 39, 0.2);
 }
 
-.small-widget .card-body.info .bg-gradient svg {
-  stroke: var(--mm-info) !important;
+.mm-dash__hero-card--primary .mm-dash__hero-label {
+  color: rgba(255, 255, 255, 0.85);
 }
 
-/* Error/danger variant */
-.small-widget .card-body.danger .bg-gradient {
-  background: var(--mm-error-light) !important;
-  background-image: none !important;
-  border-color: rgba(220, 38, 38, 0.15) !important;
+.mm-dash__hero-card--primary .mm-dash__hero-value {
+  color: #fff;
 }
 
-.small-widget .card-body.danger .bg-gradient svg {
-  stroke: var(--mm-error) !important;
+.mm-dash__hero-card--primary .mm-dash__hero-icon svg {
+  stroke: rgba(255, 255, 255, 0.35);
 }
 
-/* Secondary variant */
-.small-widget .card-body.secondary .bg-gradient {
-  background: rgba(184, 114, 31, 0.08) !important;
-  background-image: none !important;
-  border-color: rgba(184, 114, 31, 0.12) !important;
+/* ── Accent variant (warm tint) */
+.mm-dash__hero-card--accent {
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  color: var(--mm-neutral-900);
+  box-shadow: var(--mm-shadow-sm);
 }
 
-.small-widget .card-body.secondary .bg-gradient svg {
-  stroke: var(--theme-secondary) !important;
+.mm-dash__hero-card--accent:hover {
+  box-shadow: var(--mm-shadow-md);
+  border-color: var(--mm-primary-200);
 }
 
-
-/* =============================================================
-   5. EARNINGS / MONETARY VALUE EMPHASIS
-   ============================================================= */
-
-/* Cards containing monetary values — detect via the icon type */
-/* "Total Earning" and "Total Payout" and "After Payout" use target/thumbs-up icons */
-/* Give financial values a gold tint for emphasis */
-.card.small-widget .card-body h4 {
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
+.mm-dash__hero-card--accent .mm-dash__hero-label {
+  color: var(--mm-primary-700);
 }
 
-
-/* =============================================================
-   6. DASHBOARD GENERAL CARDS & WIDGETS
-   ============================================================= */
-
-/* General card styling within the dashboard page body */
-.page-body > .container-fluid .card {
-  border-radius: var(--mm-radius-lg) !important;
-  border: 1px solid var(--mm-border-subtle) !important;
+.mm-dash__hero-card--accent .mm-dash__hero-value {
+  color: var(--mm-neutral-900);
 }
 
-.page-body > .container-fluid .card .card-header {
-  background: transparent !important;
-  border-bottom: 1px solid var(--mm-border-subtle) !important;
-  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4) !important;
+.mm-dash__hero-card--accent .mm-dash__hero-icon svg {
+  stroke: var(--mm-primary-200);
 }
 
-.page-body > .container-fluid .card .card-header h5,
-.page-body > .container-fluid .card .card-header h4 {
+/* ── Muted variant (neutral) */
+.mm-dash__hero-card--muted {
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  color: var(--mm-neutral-900);
+  box-shadow: var(--mm-shadow-xs);
+}
+
+.mm-dash__hero-card--muted:hover {
+  box-shadow: var(--mm-shadow-md);
+  border-color: var(--mm-neutral-200);
+}
+
+.mm-dash__hero-card--muted .mm-dash__hero-label {
+  color: var(--mm-neutral-500);
+}
+
+.mm-dash__hero-card--muted .mm-dash__hero-value {
+  color: var(--mm-neutral-800);
+}
+
+.mm-dash__hero-card--muted .mm-dash__hero-icon svg {
+  stroke: var(--mm-neutral-200);
+}
+
+/* ── Hero card inner elements */
+.mm-dash__hero-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--mm-space-3);
+}
+
+.mm-dash__hero-value {
   font-family: var(--mm-font-display) !important;
-  font-weight: 700 !important;
-  color: var(--mm-neutral-800) !important;
-  font-size: var(--mm-text-md) !important;
-  letter-spacing: -0.01em !important;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
-.page-body > .container-fluid .card .card-body {
-  font-family: var(--mm-font-sans) !important;
-  color: var(--mm-neutral-700) !important;
+.mm-dash__hero-currency {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 2px;
+  vertical-align: super;
+  opacity: 0.7;
 }
 
-/* Widget card header decorative left border */
-.page-body > .container-fluid .card .card-header::before {
-  content: none !important;
+.mm-dash__hero-icon {
+  position: absolute;
+  bottom: var(--mm-space-4);
+  right: var(--mm-space-5);
+}
+
+.mm-dash__hero-icon svg {
+  width: 48px;
+  height: 48px;
+  fill: none;
+  stroke-width: 1.2;
 }
 
 
 /* =============================================================
-   7. CHART CONTAINERS
+   3. STAT CARDS (Event counts — 4-column grid)
    ============================================================= */
 
-/* ApexCharts container cleanup */
-.page-body .apexcharts-canvas {
-  font-family: var(--mm-font-sans) !important;
+.mm-dash__stats-grid {
+  display: grid;
+  gap: var(--mm-space-4);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-fadeUp 0.5s ease 0.2s both;
 }
 
-.page-body .apexcharts-legend-text {
-  font-family: var(--mm-font-sans) !important;
-  color: var(--mm-neutral-600) !important;
-  font-size: var(--mm-text-xs) !important;
+.mm-dash__stats-grid--4 {
+  grid-template-columns: repeat(4, 1fr);
 }
 
-.page-body .apexcharts-title-text {
+.mm-dash__stat-card {
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  padding: var(--mm-space-6);
+  transition: all var(--mm-duration-base) ease;
+  position: relative;
+}
+
+.mm-dash__stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--mm-shadow-md);
+  border-color: var(--mm-border-default);
+}
+
+.mm-dash__stat-top {
+  margin-bottom: var(--mm-space-4);
+}
+
+.mm-dash__stat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--mm-radius-lg);
+}
+
+.mm-dash__stat-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+/* Icon color variants */
+.mm-dash__stat-icon--blue {
+  background: var(--mm-info-light);
+}
+.mm-dash__stat-icon--blue svg {
+  stroke: var(--mm-info);
+}
+
+.mm-dash__stat-icon--green {
+  background: var(--mm-success-light);
+}
+.mm-dash__stat-icon--green svg {
+  stroke: var(--mm-success);
+}
+
+.mm-dash__stat-icon--amber {
+  background: var(--mm-warning-light);
+}
+.mm-dash__stat-icon--amber svg {
+  stroke: var(--mm-warning);
+}
+
+.mm-dash__stat-icon--red {
+  background: var(--mm-error-light);
+}
+.mm-dash__stat-icon--red svg {
+  stroke: var(--mm-error);
+}
+
+.mm-dash__stat-value {
   font-family: var(--mm-font-display) !important;
-  fill: var(--mm-neutral-800) !important;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: var(--mm-space-1);
 }
 
-.page-body .apexcharts-yaxis-label,
-.page-body .apexcharts-xaxis-label {
-  font-family: var(--mm-font-sans) !important;
-  fill: var(--mm-neutral-500) !important;
-}
-
-.page-body .apexcharts-gridline {
-  stroke: var(--mm-neutral-100) !important;
-}
-
-.page-body .apexcharts-tooltip {
-  font-family: var(--mm-font-sans) !important;
-  border-radius: var(--mm-radius-md) !important;
-  box-shadow: var(--mm-shadow-lg) !important;
-  border: 1px solid var(--mm-border-subtle) !important;
-}
-
-.page-body .apexcharts-tooltip .apexcharts-tooltip-title {
-  font-family: var(--mm-font-sans) !important;
-  background: var(--mm-neutral-50) !important;
-  border-bottom-color: var(--mm-border-subtle) !important;
+.mm-dash__stat-label {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  letter-spacing: 0;
 }
 
 
 /* =============================================================
-   8. OVERVIEW / RECENT ACTIVITY SECTIONS
+   4. SECONDARY / MINI STATS ROW (Organizer dashboard)
    ============================================================= */
 
-/* General widget containers from Cuba */
-.general-widget .card,
-.chart-widget-top .card {
-  border-radius: var(--mm-radius-lg) !important;
-  border: 1px solid var(--mm-border-subtle) !important;
-  box-shadow: var(--mm-shadow-xs) !important;
+.mm-dash__secondary-row {
+  display: flex;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-5) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-fadeUp 0.5s ease 0.3s both;
 }
 
-/* Overview stat numbers within widget cards */
-.general-widget h2,
-.general-widget h3,
-.general-widget .counter {
+.mm-dash__mini-stat {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-3) var(--mm-space-4);
+  border-radius: var(--mm-radius-lg);
+  transition: background var(--mm-duration-fast) ease;
+}
+
+.mm-dash__mini-stat:hover {
+  background: var(--mm-neutral-50);
+}
+
+.mm-dash__mini-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-dash__mini-dot--purple { background: #8B5CF6; }
+.mm-dash__mini-dot--blue   { background: var(--mm-info); }
+.mm-dash__mini-dot--green  { background: var(--mm-success); }
+.mm-dash__mini-dot--amber  { background: var(--mm-warning); }
+.mm-dash__mini-dot--pink   { background: #EC4899; }
+
+.mm-dash__mini-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.mm-dash__mini-value {
   font-family: var(--mm-font-display) !important;
-  font-weight: 700 !important;
-  color: var(--mm-neutral-900) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1.2;
 }
 
-/* Revenue / income styled containers */
-.o-income .card-body,
-.o-income .card {
-  border-radius: var(--mm-radius-lg) !important;
-}
-
-/* Recent order / activity list items */
-.recent-activity .media,
-.timeline-content {
-  border-bottom: 1px solid var(--mm-border-subtle) !important;
-  padding-bottom: var(--mm-space-3) !important;
-  margin-bottom: var(--mm-space-3) !important;
-}
-
-.recent-activity .media:last-child,
-.timeline-content:last-child {
-  border-bottom: none !important;
+.mm-dash__mini-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  line-height: 1.3;
 }
 
 
 /* =============================================================
-   9. KNOB / PROGRESS / COUNTER WIDGETS
+   5. PLATFORM OVERVIEW (Admin — 2-col asymmetric layout)
    ============================================================= */
 
-.knob-block .chart-overflow {
-  font-family: var(--mm-font-sans) !important;
+.mm-dash__overview {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: var(--mm-space-5);
+  animation: mm-fadeUp 0.5s ease 0.3s both;
 }
 
-.counter-block h4,
-.counter-block h2 {
+.mm-dash__section-title {
   font-family: var(--mm-font-display) !important;
-  font-weight: 700 !important;
-  color: var(--mm-neutral-900) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-800);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--mm-space-5) 0;
 }
 
-.counter-block span {
-  font-family: var(--mm-font-sans) !important;
-  color: var(--mm-neutral-500) !important;
+/* ── Main overview card (left) */
+.mm-dash__overview-main {
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  padding: var(--mm-space-6);
+}
+
+.mm-dash__overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--mm-space-4);
+}
+
+.mm-dash__ov-item {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-4);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  background: var(--mm-neutral-50);
+  border-radius: var(--mm-radius-lg);
+  transition: all var(--mm-duration-fast) ease;
+}
+
+.mm-dash__ov-item:hover {
+  background: var(--mm-primary-50);
+  transform: translateX(2px);
+}
+
+.mm-dash__ov-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--mm-radius-md);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  flex-shrink: 0;
+}
+
+.mm-dash__ov-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--mm-primary-500);
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.mm-dash__ov-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-dash__ov-num {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.mm-dash__ov-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-top: 2px;
+}
+
+/* ── Side config list (right) */
+.mm-dash__overview-side {
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  padding: var(--mm-space-6);
+}
+
+.mm-dash__config-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mm-dash__config-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--mm-space-4) 0;
+  border-bottom: 1px solid var(--mm-border-subtle);
+}
+
+.mm-dash__config-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.mm-dash__config-item:first-child {
+  padding-top: 0;
+}
+
+.mm-dash__config-label {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-600);
+}
+
+.mm-dash__config-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  background: var(--mm-neutral-50);
+  padding: var(--mm-space-1) var(--mm-space-3);
+  border-radius: var(--mm-radius-md);
+  min-width: 40px;
+  text-align: center;
 }
 
 
 /* =============================================================
-   10. RESPONSIVE ADJUSTMENTS
+   6. ANIMATIONS
    ============================================================= */
 
-/* Tablet: show 3 per row */
-@media (max-width: 1199px) {
-  .size-column > .col-2 {
-    flex: 0 0 33.333% !important;
-    max-width: 33.333% !important;
-  }
-
-  .card.small-widget .bg-gradient {
-    width: 46px !important;
-    height: 46px !important;
-  }
-
-  .card.small-widget .bg-gradient svg {
-    width: 20px !important;
-    height: 20px !important;
-  }
+@keyframes mm-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-/* Mobile landscape: show 2 per row */
-@media (max-width: 767px) {
-  .size-column > .col-2 {
-    flex: 0 0 50% !important;
-    max-width: 50% !important;
-  }
-
-  .page-body > .container-fluid:first-child .page-title {
-    padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4) !important;
-  }
-
-  .page-body > .container-fluid:first-child .page-title .row h3 {
-    font-size: var(--mm-text-2xl) !important;
-  }
-
-  .card.small-widget .card-body {
-    padding: var(--mm-space-4) !important;
-  }
-
-  .card.small-widget .card-body .f-light {
-    font-size: 0.625rem !important;
-  }
-
-  .card.small-widget .card-body h4 {
-    font-size: var(--mm-text-lg) !important;
-  }
-}
-
-/* Mobile portrait: stack single column */
-@media (max-width: 480px) {
-  .size-column > .col-2 {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-  }
-
-  .page-body > .container-fluid:first-child .page-title::before {
-    display: none;
-  }
-}
-
-
-/* =============================================================
-   11. DARK MODE KILL (keep light)
-   ============================================================= */
-
-body.dark-only .card.small-widget {
-  background: var(--mm-surface-card) !important;
-  border-color: var(--mm-border-subtle) !important;
-}
-
-body.dark-only .card.small-widget .card-body .f-light {
-  color: var(--mm-neutral-500) !important;
-}
-
-body.dark-only .card.small-widget .card-body h4 {
-  color: var(--mm-neutral-900) !important;
-}
-
-body.dark-only .card.small-widget .bg-gradient {
-  background: var(--mm-primary-50) !important;
-  border-color: var(--mm-primary-100) !important;
-}
-
-body.dark-only .blink_me {
-  color: var(--mm-neutral-500) !important;
-}
-
-body.dark-only .page-body > .container-fluid:first-child .page-title {
-  background: transparent !important;
-  border: none !important;
-}
-
-
-/* =============================================================
-   12. SMOOTH ENTRANCE ANIMATIONS
-   ============================================================= */
-
-@keyframes mm-dashboard-fadeUp {
+@keyframes mm-fadeUp {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -513,23 +571,226 @@ body.dark-only .page-body > .container-fluid:first-child .page-title {
   }
 }
 
-.size-column .card.small-widget {
-  animation: mm-dashboard-fadeUp var(--mm-duration-slow) ease both;
+
+/* =============================================================
+   7. RESPONSIVE — Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-dash {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-dash__hero-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--mm-space-4);
+  }
+
+  .mm-dash__hero-value {
+    font-size: 1.75rem;
+  }
+
+  .mm-dash__stats-grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mm-dash__secondary-row {
+    flex-wrap: wrap;
+  }
+
+  .mm-dash__mini-stat {
+    flex: 0 0 calc(33.333% - var(--mm-space-3));
+  }
+
+  .mm-dash__overview {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* Stagger the widget cards for a cascading effect */
-.size-column > [class*="col-"]:nth-child(1) .small-widget { animation-delay: 0ms; }
-.size-column > [class*="col-"]:nth-child(2) .small-widget { animation-delay: 40ms; }
-.size-column > [class*="col-"]:nth-child(3) .small-widget { animation-delay: 80ms; }
-.size-column > [class*="col-"]:nth-child(4) .small-widget { animation-delay: 120ms; }
-.size-column > [class*="col-"]:nth-child(5) .small-widget { animation-delay: 160ms; }
-.size-column > [class*="col-"]:nth-child(6) .small-widget { animation-delay: 200ms; }
-.size-column > [class*="col-"]:nth-child(7) .small-widget { animation-delay: 240ms; }
-.size-column > [class*="col-"]:nth-child(8) .small-widget { animation-delay: 280ms; }
-.size-column > [class*="col-"]:nth-child(9) .small-widget { animation-delay: 320ms; }
-.size-column > [class*="col-"]:nth-child(10) .small-widget { animation-delay: 360ms; }
-.size-column > [class*="col-"]:nth-child(11) .small-widget { animation-delay: 400ms; }
-.size-column > [class*="col-"]:nth-child(12) .small-widget { animation-delay: 440ms; }
-.size-column > [class*="col-"]:nth-child(13) .small-widget { animation-delay: 480ms; }
-.size-column > [class*="col-"]:nth-child(14) .small-widget { animation-delay: 520ms; }
-.size-column > [class*="col-"]:nth-child(15) .small-widget { animation-delay: 560ms; }
+
+/* =============================================================
+   8. RESPONSIVE — Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-dash {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-dash__welcome {
+    padding: var(--mm-space-6) var(--mm-space-5);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-dash__greeting {
+    font-size: 1.5rem;
+  }
+
+  .mm-dash__welcome-visual {
+    display: none;
+  }
+
+  .mm-dash__hero-row {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-3);
+    margin-bottom: var(--mm-space-5);
+  }
+
+  .mm-dash__hero-card {
+    padding: var(--mm-space-5);
+  }
+
+  .mm-dash__hero-value {
+    font-size: 1.5rem;
+  }
+
+  .mm-dash__hero-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mm-dash__stats-grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-3);
+  }
+
+  .mm-dash__stat-card {
+    padding: var(--mm-space-5);
+  }
+
+  .mm-dash__stat-value {
+    font-size: 1.5rem;
+  }
+
+  .mm-dash__secondary-row {
+    flex-direction: column;
+    padding: var(--mm-space-4);
+  }
+
+  .mm-dash__mini-stat {
+    flex: 0 0 100%;
+  }
+
+  .mm-dash__overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE — Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-dash {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-dash__welcome {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    border-radius: var(--mm-radius-xl);
+    margin-bottom: var(--mm-space-5);
+  }
+
+  .mm-dash__greeting {
+    font-size: 1.25rem;
+  }
+
+  .mm-dash__stats-grid--4 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mm-dash__stat-card {
+    padding: var(--mm-space-4);
+  }
+
+  .mm-dash__stat-value {
+    font-size: 1.25rem;
+  }
+
+  .mm-dash__overview-main,
+  .mm-dash__overview-side {
+    padding: var(--mm-space-5);
+  }
+}
+
+
+/* =============================================================
+   10. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-dash__welcome {
+  background: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-dash__stat-card,
+body.dark-only .mm-dash__secondary-row,
+body.dark-only .mm-dash__overview-main,
+body.dark-only .mm-dash__overview-side {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-dash__hero-card--accent {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-100) !important;
+}
+
+body.dark-only .mm-dash__hero-card--muted {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-dash__stat-value,
+body.dark-only .mm-dash__mini-value,
+body.dark-only .mm-dash__ov-num,
+body.dark-only .mm-dash__config-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-dash__stat-label,
+body.dark-only .mm-dash__mini-label,
+body.dark-only .mm-dash__ov-label,
+body.dark-only .mm-dash__config-label,
+body.dark-only .mm-dash__date,
+body.dark-only .mm-dash__subtitle {
+  color: var(--mm-neutral-500) !important;
+}
+
+
+/* =============================================================
+   11. CUBA OVERRIDE — Scoped to dashboard only (.mm-dash parent)
+   ============================================================= */
+
+/* Override Cuba's card defaults inside our dashboard */
+.mm-dash .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Prevent Cuba's small-widget from ever showing inside mm-dash */
+.mm-dash .small-widget {
+  display: none !important;
+}
+
+/* Hide old Cuba page-title if it somehow appears inside mm-dash */
+.mm-dash .page-title {
+  display: none !important;
+}
+
+/* Kill blinking text inside dashboard only */
+.mm-dash .blink_me {
+  display: none !important;
+}
+
+/* Kill size-column inside dashboard only */
+.mm-dash .size-column {
+  display: none !important;
+}
+
+/* Suppress Cuba container-fluid padding inside our layout */
+.mm-dash .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
