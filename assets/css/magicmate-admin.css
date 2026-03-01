@@ -620,3 +620,297 @@ body.dark-only .datepicker .datepicker--cell.-current- {
 [style*="7366FF"] {
   color: var(--mm-primary-500) !important;
 }
+
+/* =============================================
+   Phase 0C: Remaining Purple RGBA & Light Tones
+   #eae8ff, #f1f0ff, #ababff, rgba(115,102,255,X)
+   ============================================= */
+
+/* --- Popover & Tooltip (light purple backgrounds #eae8ff) --- */
+.popover {
+  box-shadow: 0 0 20px rgba(216, 136, 39, 0.1) !important;
+  -webkit-box-shadow: 0 0 20px rgba(216, 136, 39, 0.1) !important;
+}
+.popover .popover-header {
+  background-color: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+.tooltip.bs-tooltip-top .tooltip-arrow:before {
+  border-top-color: var(--mm-primary-50) !important;
+}
+.tooltip.bs-tooltip-bottom .tooltip-arrow:before {
+  border-bottom-color: var(--mm-primary-50) !important;
+}
+.tooltip.bs-tooltip-start .tooltip-arrow:before {
+  border-left-color: var(--mm-primary-50) !important;
+}
+.tooltip.bs-tooltip-end .tooltip-arrow:before {
+  border-right-color: var(--mm-primary-50) !important;
+}
+.tooltip .tooltip-inner {
+  background-color: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+.tooltip .tooltip-arrow:before {
+  border-top-color: var(--mm-primary-50) !important;
+}
+
+/* --- Sidebar active (#f1f0ff → warm primary-50) --- */
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active {
+  background-color: var(--mm-primary-50) !important;
+}
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-list:hover > a:hover {
+  background-color: rgba(216, 136, 39, 0.07) !important;
+}
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li:hover .sidebar-link:not(.active):hover svg {
+  fill: rgba(216, 136, 39, 0.001) !important;
+}
+
+/* --- Dark sidebar active states --- */
+body.dark-only .page-wrapper .page-body-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active,
+body.dark-only .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active,
+body.dark-only .page-wrapper.compact-sidebar .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active,
+body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active,
+body.dark-sidebar .page-wrapper.compact-sidebar .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active,
+.page-wrapper.compact-wrapper.dark-sidebar div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active,
+.page-wrapper.compact-wrapper.color-sidebar div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active {
+  background-color: rgba(216, 136, 39, 0.2) !important;
+}
+
+/* --- Compact sidebar active --- */
+.page-wrapper.compact-sidebar .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li a.active {
+  background: rgba(216, 136, 39, 0.1) !important;
+}
+.page-wrapper.compact-sidebar .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li .sidebar-submenu li a.active,
+.page-wrapper.compact-sidebar .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links li .mega-menu-container li a.active {
+  background-color: rgba(216, 136, 39, 0.1) !important;
+}
+
+/* --- Horizontal sidebar hover --- */
+.page-wrapper.horizontal-wrapper .page-body-wrapper .sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li:hover a {
+  background-color: rgba(216, 136, 39, 0.0015) !important;
+}
+
+/* --- Widget gradients (dashboard stat cards) --- */
+.primary .bg-gradient {
+  background-image: linear-gradient(144.16deg, rgba(216, 136, 39, 0.1) 19.06%, rgba(216, 136, 39, 0) 79.03%) !important;
+}
+.secondary .bg-gradient {
+  background-image: linear-gradient(144.16deg, rgba(184, 114, 31, 0.1) 19.06%, rgba(184, 114, 31, 0) 79.03%) !important;
+}
+.warning .bg-gradient {
+  background-image: linear-gradient(144.16deg, rgba(216, 136, 39, 0.15) 19.06%, rgba(245, 158, 11, 0) 79.03%) !important;
+}
+.warning .svg-fill {
+  fill: var(--mm-primary-300) !important;
+}
+
+/* --- Currency widget gradient --- */
+.currency-widget.primary .currency-icon-widget {
+  background-image: linear-gradient(to right, var(--mm-primary-500) 80%, rgba(216, 136, 39, 0.2)) !important;
+}
+
+/* --- Progress bar gradient --- */
+.progress-gradient-primary {
+  background-image: linear-gradient(to right, var(--mm-primary-500), transparent) !important;
+}
+.progress-gradient-secondary {
+  background-image: linear-gradient(to right, var(--mm-primary-600), transparent) !important;
+}
+
+/* --- SVG fill in primary context --- */
+.primary .svg-fill {
+  fill: var(--mm-primary-500) !important;
+}
+.primary .svg-fill:not(.half-circle) {
+  stroke: var(--mm-primary-500) !important;
+}
+.secondary .svg-fill {
+  fill: var(--mm-primary-600) !important;
+}
+.secondary .svg-fill:not(.half-circle) {
+  stroke: var(--mm-primary-600) !important;
+}
+
+/* --- Light purple rgba backgrounds → warm gold rgba --- */
+.bg-light-primary,
+.badge-light-primary,
+select.crypto-select.primary {
+  background-color: rgba(216, 136, 39, 0.1) !important;
+}
+
+.btn-light {
+  background-color: rgba(216, 136, 39, 0.06) !important;
+  border-color: rgba(216, 136, 39, 0.06) !important;
+}
+.btn-light:hover {
+  background-color: rgba(216, 136, 39, 0.1) !important;
+  border-color: rgba(216, 136, 39, 0.1) !important;
+}
+
+/* --- Table hover --- */
+.table-hover tbody tr:hover {
+  background-color: rgba(216, 136, 39, 0.08) !important;
+}
+
+/* --- Scrollbar --- */
+.simplebar-scrollbar:before {
+  background: rgba(216, 136, 39, 0.2) !important;
+}
+
+/* --- Peity charts --- */
+.peity-charts.peity-chart-primary svg polygon {
+  fill: rgba(216, 136, 39, 0.2) !important;
+}
+
+/* --- Page builder --- */
+.page-builder .ge-canvas.ge-editing .row {
+  background-color: rgba(216, 136, 39, 0.02) !important;
+}
+
+/* --- Pre/code --- */
+pre {
+  background-color: rgba(216, 136, 39, 0.03) !important;
+}
+
+/* --- Clock picker --- */
+.clockpicker-popover .popover-content {
+  background-color: rgba(216, 136, 39, 0.05) !important;
+}
+
+/* --- Contacts tabs --- */
+.contacts-tabs .nav-pills .nav-link > .nav-link,
+.contacts-tabs .nav-pills .show.active,
+.contacts-tabs .nav-pills .show > .nav-link {
+  background-color: rgba(216, 136, 39, 0.05) !important;
+}
+
+/* --- Dot indicators --- */
+.input-air-primary {
+  box-shadow: 0 3px 5px 1px rgba(216, 136, 39, 0.1) !important;
+}
+
+/* --- Social img wrap --- */
+.social-img-wrap {
+  background: linear-gradient(253deg, var(--mm-primary-500) 11.51%, rgba(216, 136, 39, 0) 82.07%) !important;
+}
+
+/* --- FC button (calendar) --- */
+.fc .fc-button-primary:focus {
+  box-shadow: 0 0 0 0.2rem rgba(216, 136, 39, 0.5) !important;
+}
+
+/* --- Dropdown toggle --- */
+.dropdown .dropdown-toggle {
+  background-color: rgba(216, 136, 39, 0.08) !important;
+}
+
+/* --- Wizard --- */
+.wizard-4 ul.anchor li h4 {
+  background-color: rgba(216, 136, 39, 0.2) !important;
+}
+
+/* --- Icon box --- */
+.icon-box {
+  background-color: rgba(216, 136, 39, 0.08) !important;
+}
+
+/* --- Appointment sec --- */
+.appointment-sec .card-header-right-icon select,
+.appointment-sec .card-header-right-icon select:hover {
+  background-color: rgba(216, 136, 39, 0.08) !important;
+}
+
+/* --- Apex charts tooltip --- */
+.current-sale-container .apexcharts-xaxistooltip,
+.current-sale-container .apexcharts-tooltip.light .apexcharts-tooltip-title {
+  background: rgba(216, 136, 39, 0.1) !important;
+}
+
+/* --- Product social hover bg --- */
+.product-social li a:hover {
+  background-color: rgba(216, 136, 39, 0.1) !important;
+}
+
+/* --- Search list nav items --- */
+.search-list .nav-item,
+.search-list .nav-item .nav-link.active,
+.search-list .nav-item.show,
+.search-list .nav-item.active {
+  background-color: rgba(216, 136, 39, 0.1) !important;
+}
+
+/* --- Outline indicators --- */
+[class*="outline"] {
+  outline-color: rgba(216, 136, 39, 0.25);
+}
+
+/* --- Material icon card shadow --- */
+.page-wrapper.material-icon .card {
+  box-shadow: 0 0 20px rgba(216, 136, 39, 0.1) !important;
+}
+
+/* --- Customizer container shadow --- */
+.customizer-contain {
+  background-color: rgba(216, 136, 39, 0.1) !important;
+}
+
+/* --- Dark mode remaining purple rgba --- */
+body.dark-only .kanban-container .kanban-item .kanban-box,
+body.dark-only .project-box,
+body.dark-only .file-content .files .file-box,
+body.dark-only .file-content .files .file-box .file-top,
+body.dark-only .file-content .folder .folder-box {
+  border-color: rgba(216, 136, 39, 0.15) !important;
+}
+body.dark-only .file-sidebar .pricing-plan {
+  border-color: rgba(216, 136, 39, 0.15) !important;
+}
+body.dark-only .file-sidebar .btn-light {
+  border-color: rgba(216, 136, 39, 0.15) !important;
+}
+body.dark-only .alert-primary {
+  background-color: rgba(216, 136, 39, 0.8) !important;
+  border-color: rgba(216, 136, 39, 0.9) !important;
+}
+body.dark-only .pricing-block {
+  box-shadow: 0 0 10px 5px rgba(216, 136, 39, 0.05) !important;
+}
+
+/* --- Landing page gradients --- */
+.landing-page .buy-btn {
+  background: linear-gradient(90deg, var(--mm-primary-500) -18.33%, var(--mm-primary-700) 62.78%) !important;
+}
+.landing-title .gradient-1 {
+  background: linear-gradient(90.78deg, var(--mm-primary-500) 49.33%, var(--mm-primary-600) 82.24%) !important;
+  -webkit-background-clip: text !important;
+}
+
+/* --- Background color tweaks for misc components --- */
+.customizer-contain .customizer-body .color-layout > div {
+  background-color: var(--mm-primary-500) !important;
+}
+
+/* --- Alert deep states --- */
+.alert-primary {
+  background-color: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-200) !important;
+}
+.list-group .alert-primary {
+  background-color: rgba(216, 136, 39, 0.4) !important;
+  border-color: rgba(216, 136, 39, 0.7) !important;
+}
+.list-group .alert-primary.light {
+  background-color: rgba(216, 136, 39, 0.4) !important;
+  border-color: rgba(216, 136, 39, 0.7) !important;
+}
+
+/* --- Box shadow on focused step indicators --- */
+.step-container .step.active {
+  box-shadow: 0px 0px 13px 0 rgba(216, 136, 39, 0.5) !important;
+}
+
+/* --- Dashed borders --- */
+.border-dashed-primary {
+  border-color: var(--mm-primary-500) !important;
+}
