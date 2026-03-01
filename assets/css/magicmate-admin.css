@@ -983,6 +983,13 @@ body.dark-only .pricing-block {
   stroke: var(--mm-primary-500) !important;
 }
 
+/* Hide sidebar toggle on desktop (keep on mobile) */
+@media (min-width: 992px) {
+  .sidebar-wrapper .toggle-sidebar {
+    display: none !important;
+  }
+}
+
 /* --- 1d. Sidebar Main Title (section headers) --- */
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-main-title {
   padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-2) var(--mm-space-5) !important;
