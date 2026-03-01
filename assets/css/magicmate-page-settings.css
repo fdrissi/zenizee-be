@@ -1,0 +1,1062 @@
+/* =====================================================================
+   MagicMate — Settings Page
+   Custom-built form layout for the main admin settings form.
+   BEM prefix: mm-settings__*
+   Uses design tokens from magicmate-tokens.css exclusively.
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-settings {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER (icon + title + subtitle)
+   ============================================================= */
+
+.mm-settings__header {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-5);
+  margin-bottom: var(--mm-space-8);
+  animation: mm-settings-fadeIn 0.4s ease both;
+}
+
+.mm-settings__header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--mm-radius-xl);
+  background: var(--mm-gradient-primary);
+  color: var(--mm-neutral-0);
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(216, 136, 39, 0.25);
+}
+
+.mm-settings__header-icon svg {
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.8;
+}
+
+.mm-settings__header-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+.mm-settings__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-3xl);
+  font-weight: 800;
+  color: var(--mm-text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-settings__subtitle {
+  font-size: var(--mm-text-base);
+  font-weight: 400;
+  color: var(--mm-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+
+/* =============================================================
+   2. FORM CARD
+   ============================================================= */
+
+.mm-settings__card {
+  background: var(--mm-surface-card);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-2xl);
+  padding: var(--mm-space-10);
+  box-shadow: var(--mm-shadow-sm);
+  animation: mm-settings-slideUp 0.5s ease 0.1s both;
+  transition: box-shadow var(--mm-duration-slow) ease;
+}
+
+.mm-settings__card:hover {
+  box-shadow: var(--mm-shadow-md);
+}
+
+
+/* =============================================================
+   3. FORM LAYOUT
+   ============================================================= */
+
+.mm-settings__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-8);
+}
+
+
+/* =============================================================
+   4. SECTIONS (grouped fields with icon header)
+   ============================================================= */
+
+.mm-settings__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-6);
+}
+
+.mm-settings__section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-4);
+}
+
+.mm-settings__section-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--mm-radius-lg);
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-border-accent);
+  color: var(--mm-primary-600);
+  flex-shrink: 0;
+}
+
+.mm-settings__section-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.8;
+}
+
+.mm-settings__section-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 2px;
+}
+
+.mm-settings__section-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.mm-settings__section-desc {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Staggered section animations */
+.mm-settings__section--anim-1 { animation: mm-settings-fadeIn 0.4s ease 0.10s both; }
+.mm-settings__section--anim-2 { animation: mm-settings-fadeIn 0.4s ease 0.18s both; }
+.mm-settings__section--anim-3 { animation: mm-settings-fadeIn 0.4s ease 0.26s both; }
+.mm-settings__section--anim-4 { animation: mm-settings-fadeIn 0.4s ease 0.34s both; }
+.mm-settings__section--anim-5 { animation: mm-settings-fadeIn 0.4s ease 0.42s both; }
+.mm-settings__section--anim-6 { animation: mm-settings-fadeIn 0.4s ease 0.50s both; }
+
+
+/* =============================================================
+   5. FIELD GROUP
+   ============================================================= */
+
+.mm-settings__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+.mm-settings__label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  letter-spacing: 0.01em;
+}
+
+.mm-settings__hint {
+  font-size: var(--mm-text-xs);
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  line-height: 1.4;
+}
+
+
+/* =============================================================
+   6. TEXT INPUT & SELECT
+   ============================================================= */
+
+.mm-settings__input {
+  width: 100%;
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 500;
+  color: var(--mm-text-primary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  outline: none;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.mm-settings__input::placeholder {
+  color: var(--mm-text-tertiary);
+  font-weight: 400;
+}
+
+.mm-settings__input:hover {
+  border-color: var(--mm-neutral-300);
+}
+
+.mm-settings__input:focus {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-neutral-0);
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1);
+}
+
+/* Select specific */
+.mm-settings__select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A8A29E' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--mm-space-4) center;
+  background-size: 16px;
+  padding-right: var(--mm-space-10);
+}
+
+/* Monospace for API keys */
+.mm-settings__input--mono {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Mono', 'Courier New', monospace;
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Input with % suffix */
+.mm-settings__input--suffix {
+  padding-right: var(--mm-space-12);
+}
+
+
+/* =============================================================
+   7. INPUT WITH SUFFIX BADGE (% for tax)
+   ============================================================= */
+
+.mm-settings__input-suffix-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.mm-settings__input-suffix-wrap .mm-settings__input {
+  flex: 1;
+}
+
+.mm-settings__input-badge {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  bottom: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--mm-space-4);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 700;
+  color: var(--mm-text-secondary);
+  background: var(--mm-neutral-100);
+  border-left: 1px solid var(--mm-border-default);
+  border-radius: 0 calc(var(--mm-radius-lg) - 2px) calc(var(--mm-radius-lg) - 2px) 0;
+  pointer-events: none;
+  transition: background-color var(--mm-duration-fast) ease;
+  min-width: 40px;
+}
+
+.mm-settings__input-suffix-wrap:focus-within .mm-settings__input-badge {
+  background: var(--mm-primary-50);
+  color: var(--mm-primary-600);
+  border-left-color: var(--mm-primary-400);
+}
+
+
+/* =============================================================
+   8. IMAGE UPLOAD (drag-and-drop style)
+   ============================================================= */
+
+.mm-settings__upload {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-8) var(--mm-space-6);
+  background: var(--mm-neutral-50);
+  border: 2px dashed var(--mm-neutral-300);
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+  text-align: center;
+}
+
+.mm-settings__upload:hover {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-primary-50);
+  transform: translateY(-1px);
+}
+
+.mm-settings__upload:hover .mm-settings__upload-icon {
+  color: var(--mm-primary-500);
+  transform: scale(1.05);
+}
+
+.mm-settings__upload-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.mm-settings__upload-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--mm-radius-full);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  color: var(--mm-neutral-400);
+  transition:
+    color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+}
+
+.mm-settings__upload-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.8;
+}
+
+.mm-settings__upload-label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  margin: 0;
+}
+
+.mm-settings__upload-label span {
+  color: var(--mm-primary-500);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mm-settings__upload-hint {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+  margin: 0;
+}
+
+
+/* =============================================================
+   9. IMAGE PREVIEW (current logo)
+   ============================================================= */
+
+.mm-settings__preview {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-4);
+  padding: var(--mm-space-4);
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  margin-top: var(--mm-space-3);
+}
+
+.mm-settings__preview-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: var(--mm-radius-md);
+  border: 1px solid var(--mm-border-default);
+  background: var(--mm-neutral-0);
+  flex-shrink: 0;
+  padding: var(--mm-space-2);
+}
+
+.mm-settings__preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mm-settings__preview-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mm-settings__preview-note {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+}
+
+
+/* =============================================================
+   10. CALLOUT / INFO BOX
+   ============================================================= */
+
+.mm-settings__callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  background: var(--mm-info-light);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-left: 3px solid var(--mm-info);
+  border-radius: var(--mm-radius-lg);
+}
+
+.mm-settings__callout-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--mm-info);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.mm-settings__callout-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.mm-settings__callout-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-info-dark);
+  line-height: 1.5;
+}
+
+.mm-settings__callout-text strong {
+  font-weight: 600;
+}
+
+
+/* =============================================================
+   11. PUSH NOTIFICATION SUB-GROUPS
+   ============================================================= */
+
+.mm-settings__subgroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-4);
+  padding: var(--mm-space-5);
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+}
+
+.mm-settings__subgroup-label {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: var(--mm-text-xs);
+  font-weight: 700;
+  color: var(--mm-primary-700);
+  background: var(--mm-primary-100);
+  border: 1px solid var(--mm-primary-200);
+  border-radius: var(--mm-radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  align-self: flex-start;
+}
+
+
+/* =============================================================
+   12. TOGGLE GROUP (segmented radio: Yes / No for OTP auth)
+   ============================================================= */
+
+.mm-settings__toggle-group {
+  display: flex;
+  gap: var(--mm-space-3);
+}
+
+.mm-settings__toggle-option {
+  flex: 1;
+  position: relative;
+  max-width: 160px;
+}
+
+.mm-settings__toggle-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mm-settings__toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  transition:
+    color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    border-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  user-select: none;
+}
+
+.mm-settings__toggle-label:hover {
+  border-color: var(--mm-neutral-300);
+  background: var(--mm-neutral-0);
+}
+
+.mm-settings__toggle-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform var(--mm-duration-fast) var(--mm-ease-spring);
+}
+
+.mm-settings__toggle-dot--yes {
+  background: var(--mm-success);
+}
+
+.mm-settings__toggle-dot--no {
+  background: var(--mm-neutral-400);
+}
+
+/* Selected: Yes */
+.mm-settings__toggle-option input[type="radio"]:checked + .mm-settings__toggle-label--yes {
+  color: var(--mm-success-dark);
+  background: var(--mm-success-light);
+  border-color: var(--mm-success);
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.08);
+}
+
+.mm-settings__toggle-option input[type="radio"]:checked + .mm-settings__toggle-label--yes .mm-settings__toggle-dot {
+  transform: scale(1.3);
+}
+
+/* Selected: No */
+.mm-settings__toggle-option input[type="radio"]:checked + .mm-settings__toggle-label--no {
+  color: var(--mm-neutral-700);
+  background: var(--mm-neutral-100);
+  border-color: var(--mm-neutral-400);
+  box-shadow: 0 0 0 4px rgba(120, 113, 108, 0.06);
+}
+
+.mm-settings__toggle-option input[type="radio"]:checked + .mm-settings__toggle-label--no .mm-settings__toggle-dot {
+  transform: scale(1.3);
+}
+
+
+/* =============================================================
+   13. REWARDS TWO-COLUMN GRID
+   ============================================================= */
+
+.mm-settings__rewards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--mm-space-5);
+}
+
+
+/* =============================================================
+   14. DIVIDER
+   ============================================================= */
+
+.mm-settings__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--mm-border-subtle);
+  border: none;
+  margin: 0;
+}
+
+
+/* =============================================================
+   15. SUBMIT AREA
+   ============================================================= */
+
+.mm-settings__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+  padding-top: var(--mm-space-2);
+}
+
+.mm-settings__submit {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-5) var(--mm-space-8);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring),
+    box-shadow var(--mm-duration-base) ease;
+  box-shadow: 0 4px 16px rgba(216, 136, 39, 0.25), 0 1px 4px rgba(216, 136, 39, 0.15);
+}
+
+.mm-settings__submit:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(216, 136, 39, 0.35), 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-settings__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-settings__submit svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+
+/* =============================================================
+   16. SELECT2 CONTAINER OVERRIDES
+   ============================================================= */
+
+.mm-settings .select2-container {
+  width: 100% !important;
+}
+
+.mm-settings .select2-container--default .select2-selection--single {
+  height: auto;
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 500;
+  color: var(--mm-text-primary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  outline: none;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+}
+
+.mm-settings .select2-container--default .select2-selection--single:hover {
+  border-color: var(--mm-neutral-300) !important;
+}
+
+.mm-settings .select2-container--default.select2-container--open .select2-selection--single,
+.mm-settings .select2-container--default.select2-container--focus .select2-selection--single {
+  border-color: var(--mm-primary-400) !important;
+  background: var(--mm-neutral-0) !important;
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1) !important;
+}
+
+.mm-settings .select2-container--default .select2-selection--single .select2-selection__rendered {
+  padding: 0;
+  line-height: 1.5;
+  color: var(--mm-text-primary);
+  font-size: var(--mm-text-md);
+  font-weight: 500;
+}
+
+.mm-settings .select2-container--default .select2-selection--single .select2-selection__placeholder {
+  color: var(--mm-text-tertiary);
+  font-weight: 400;
+}
+
+.mm-settings .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 100%;
+  top: 0;
+  right: var(--mm-space-4);
+}
+
+.mm-settings .select2-container--default .select2-selection--single .select2-selection__arrow b {
+  border-color: var(--mm-neutral-400) transparent transparent transparent;
+}
+
+.mm-settings .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+  border-color: transparent transparent var(--mm-neutral-400) transparent;
+}
+
+.select2-dropdown {
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  box-shadow: var(--mm-shadow-md) !important;
+  background: var(--mm-neutral-0) !important;
+  font-family: var(--mm-font-sans) !important;
+}
+
+.select2-results__option {
+  font-size: var(--mm-text-sm) !important;
+  color: var(--mm-text-primary) !important;
+  padding: var(--mm-space-3) var(--mm-space-4) !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+  background: var(--mm-primary-100) !important;
+  color: var(--mm-primary-800) !important;
+  font-weight: 600;
+}
+
+.select2-search--dropdown .select2-search__field {
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  padding: var(--mm-space-2) var(--mm-space-3) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  color: var(--mm-text-primary) !important;
+  outline: none !important;
+}
+
+.select2-search--dropdown .select2-search__field:focus {
+  border-color: var(--mm-primary-400) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.1) !important;
+}
+
+
+/* =============================================================
+   17. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-settings-fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mm-settings-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =============================================================
+   18. RESPONSIVE — Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-settings {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-settings__card {
+    padding: var(--mm-space-8);
+  }
+}
+
+
+/* =============================================================
+   19. RESPONSIVE — Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-settings {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    max-width: 100%;
+  }
+
+  .mm-settings__header {
+    gap: var(--mm-space-4);
+  }
+
+  .mm-settings__header-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .mm-settings__header-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .mm-settings__card {
+    padding: var(--mm-space-6);
+    border-radius: var(--mm-radius-xl);
+  }
+
+  .mm-settings__title {
+    font-size: var(--mm-text-2xl);
+  }
+
+  .mm-settings__rewards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mm-settings__toggle-group {
+    flex-direction: row;
+  }
+
+  .mm-settings__toggle-option {
+    max-width: none;
+  }
+
+  .mm-settings__upload {
+    padding: var(--mm-space-6) var(--mm-space-4);
+  }
+
+  .mm-settings__section-header {
+    gap: var(--mm-space-3);
+  }
+
+  .mm-settings__section-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mm-settings__section-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+
+/* =============================================================
+   20. RESPONSIVE — Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-settings {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-settings__header {
+    margin-bottom: var(--mm-space-6);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mm-space-3);
+  }
+
+  .mm-settings__card {
+    padding: var(--mm-space-5);
+    border-radius: var(--mm-radius-lg);
+  }
+
+  .mm-settings__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-settings__form {
+    gap: var(--mm-space-6);
+  }
+
+  .mm-settings__section {
+    gap: var(--mm-space-4);
+  }
+
+  .mm-settings__preview-thumb {
+    width: 48px;
+    height: 48px;
+  }
+
+  .mm-settings__callout {
+    padding: var(--mm-space-3) var(--mm-space-4);
+  }
+
+  .mm-settings__subgroup {
+    padding: var(--mm-space-4);
+  }
+
+  .mm-settings__rewards-grid {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   21. DARK MODE KILL (light only)
+   ============================================================= */
+
+body.dark-only .mm-settings__card {
+  background: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-settings__input {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-settings__upload {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-neutral-300) !important;
+}
+
+body.dark-only .mm-settings__title,
+body.dark-only .mm-settings__section-title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-settings__label {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-settings__section-icon {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-border-accent) !important;
+}
+
+body.dark-only .mm-settings__toggle-label {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-secondary) !important;
+}
+
+body.dark-only .mm-settings__toggle-option input[type="radio"]:checked + .mm-settings__toggle-label--yes {
+  background: var(--mm-success-light) !important;
+  border-color: var(--mm-success) !important;
+  color: var(--mm-success-dark) !important;
+}
+
+body.dark-only .mm-settings__toggle-option input[type="radio"]:checked + .mm-settings__toggle-label--no {
+  background: var(--mm-neutral-100) !important;
+  border-color: var(--mm-neutral-400) !important;
+  color: var(--mm-neutral-700) !important;
+}
+
+body.dark-only .mm-settings__preview {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+}
+
+body.dark-only .mm-settings__callout {
+  background: var(--mm-info-light) !important;
+}
+
+body.dark-only .mm-settings__subgroup {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-settings__input-badge {
+  background: var(--mm-neutral-100) !important;
+  color: var(--mm-text-secondary) !important;
+  border-left-color: var(--mm-border-default) !important;
+}
+
+body.dark-only .mm-settings__header-icon {
+  box-shadow: none !important;
+}
+
+
+/* =============================================================
+   22. CUBA OVERRIDE — Scoped to .mm-settings
+   ============================================================= */
+
+/* Kill inherited Cuba card/form styles */
+.mm-settings .card,
+.mm-settings .card-body,
+.mm-settings .card-footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.mm-settings .form-group {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mm-settings .form-control {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.mm-settings .page-title {
+  display: none !important;
+}
+
+.mm-settings .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.mm-settings .size-column {
+  display: contents !important;
+}
+
+.mm-settings .col-sm-12 {
+  display: contents !important;
+  padding: 0 !important;
+  max-width: none !important;
+  flex: none !important;
+}
+
+.mm-settings .row {
+  display: contents !important;
+}
+
+/* Hide the legacy Cuba page-title block that sits above our header */
+.page-body > .container-fluid:first-child .page-title {
+  display: none !important;
+}
