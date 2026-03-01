@@ -211,16 +211,10 @@
 }
 
 /* Preserve Summernote icon font on toolbar icon elements */
-.mm-pageform__editor-wrap .note-toolbar .note-btn i,
-.mm-pageform__editor-wrap .note-toolbar .note-btn .note-icon-caret,
-.mm-pageform__editor-wrap .note-toolbar .note-icon-magic,
-.mm-pageform__editor-wrap .note-toolbar [class^="note-icon"],
-.mm-pageform__editor-wrap .note-toolbar [class*=" note-icon"] {
+.mm-pageform__editor-wrap .note-toolbar [class^="note-icon"]::before,
+.mm-pageform__editor-wrap .note-toolbar [class*=" note-icon"]::before,
+.mm-pageform__editor-wrap .note-toolbar .note-btn i::before {
   font-family: "summernote" !important;
-  transition:
-    background var(--mm-duration-fast) ease,
-    border-color var(--mm-duration-fast) ease,
-    color var(--mm-duration-fast) ease !important;
 }
 
 .mm-pageform__editor-wrap .note-toolbar .note-btn:hover {

@@ -9,7 +9,21 @@
 *,
 *::before,
 *::after {
-  font-family: var(--mm-font-sans) !important;
+  font-family: var(--mm-font-sans);
+}
+
+/* Preserve icon fonts on pseudo-elements */
+[class^="note-icon"]::before,
+[class*=" note-icon"]::before,
+[class^="icofont-"]::before,
+[class*=" icofont-"]::before,
+[data-feather]::before,
+.feather::before,
+.fa::before,
+.fas::before,
+.far::before,
+.fab::before {
+  font-family: inherit !important;
 }
 
 body {
