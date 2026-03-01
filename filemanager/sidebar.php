@@ -26,7 +26,7 @@
          </a>
          <div class="back-btn"><i class="fa fa-angle-left"></i></div>
          <div class="toggle-sidebar mm-sidebar__toggle">
-            <i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i>
+            <i class="status_toggle middle sidebar-toggle" data-feather="chevrons-left"> </i>
          </div>
       </div>
       <div class="logo-icon-wrapper mm-sidebar__logo-collapsed">
@@ -54,14 +54,14 @@
                   </div>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Dashboard">
                   <a class="sidebar-link sidebar-title link-nav mm-sidebar__link <?php echo ($mm_current_page === 'dashboard.php') ? 'mm-sidebar__link--active' : ''; ?>" href="dashboard.php">
                      <i data-feather="home" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Dashboard</span>
                   </a>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Category">
                   <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_category.php','list_category.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
                      <i data-feather="list" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Category</span>
@@ -72,7 +72,7 @@
                   </ul>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Pages">
                   <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_page.php','list_page.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
                      <i data-feather="book-open" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Pages</span>
@@ -83,7 +83,7 @@
                   </ul>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="FAQ">
                   <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_faq.php','list_faq.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
                      <i data-feather="help-circle" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">FAQ</span>
@@ -94,7 +94,7 @@
                   </ul>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Payment List">
                   <a class="sidebar-link sidebar-title link-nav mm-sidebar__link <?php echo ($mm_current_page === 'payment_list.php') ? 'mm-sidebar__link--active' : ''; ?>" href="payment_list.php">
                      <i data-feather="database" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Payment List</span>
@@ -108,7 +108,7 @@
                   </div>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Organizer">
                   <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_sponsore.php','list_sponsore.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
                      <i data-feather="speaker" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Organizer</span>
@@ -119,7 +119,7 @@
                   </ul>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Payout List">
                   <a class="sidebar-link sidebar-title link-nav mm-sidebar__link <?php echo ($mm_current_page === 'list_payout.php') ? 'mm-sidebar__link--active' : ''; ?>" href="list_payout.php">
                      <i data-feather="file-plus" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Payout List</span>
@@ -133,7 +133,7 @@
                   </div>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event Facility">
                   <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_facility.php','list_facility.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
                      <i data-feather="globe" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Event Facility</span>
@@ -144,7 +144,7 @@
                   </ul>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event Restriction">
                   <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_restriction.php','list_restriction.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
                      <i data-feather="shield-off" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Event Restriction</span>
@@ -162,7 +162,7 @@
                   </div>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="User List">
                   <a class="sidebar-link sidebar-title link-nav mm-sidebar__link <?php echo ($mm_current_page === 'list_user.php') ? 'mm-sidebar__link--active' : ''; ?>" href="list_user.php">
                      <i data-feather="users" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">User List</span>
@@ -201,7 +201,7 @@
          </a>
          <div class="back-btn"><i class="fa fa-angle-left"></i></div>
          <div class="toggle-sidebar mm-sidebar__toggle">
-            <i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i>
+            <i class="status_toggle middle sidebar-toggle" data-feather="chevrons-left"> </i>
          </div>
       </div>
       <div class="logo-icon-wrapper mm-sidebar__logo-collapsed">
@@ -229,7 +229,7 @@
                   </div>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Dashboard">
                   <a class="sidebar-link sidebar-title link-nav mm-sidebar__link <?php echo ($mm_current_page === 'dashboard.php') ? 'mm-sidebar__link--active' : ''; ?>" href="dashboard.php">
                      <i data-feather="home" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Dashboard</span>
@@ -243,7 +243,7 @@
                   </div>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event">
                   <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_event.php','list_event.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
                      <i data-feather="cast" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Event</span>
@@ -254,7 +254,7 @@
                   </ul>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event Type & Price">
                   <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_etype.php','list_etype.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
                      <i data-feather="cast" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Event Type & Price</span>
@@ -265,7 +265,7 @@
                   </ul>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Cover Images">
                   <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_cover.php','list_cover.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
                      <i data-feather="image" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Cover Images</span>
@@ -276,7 +276,7 @@
                   </ul>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event Gallery">
                   <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_gallery.php','list_gallery.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
                      <i data-feather="image" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Event Gallery</span>
@@ -287,7 +287,7 @@
                   </ul>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event Artist">
                   <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_artist.php','list_artist.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
                      <i data-feather="users" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Event Artist</span>
@@ -298,7 +298,7 @@
                   </ul>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Event Coupon">
                   <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_coupon.php','list_coupon.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
                      <i data-feather="gift" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Event Coupon</span>
@@ -316,7 +316,7 @@
                   </div>
                </li>
 
-               <li class="sidebar-list mm-sidebar__item">
+               <li class="sidebar-list mm-sidebar__item" data-tooltip="Payout">
                   <a class="sidebar-link sidebar-title mm-sidebar__link <?php echo in_array($mm_current_page, ['add_payout.php','list_epayout.php']) ? 'mm-sidebar__link--active' : ''; ?>" href="javascript:void(0);">
                      <i data-feather="file-plus" class="mm-sidebar__icon"></i>
                      <span class="mm-sidebar__label">Payout</span>

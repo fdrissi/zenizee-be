@@ -2,15 +2,12 @@
 <div class="page-header mm-header">
   <div class="header-wrapper row m-0">
 
-    <!-- Logo + Sidebar Toggle -->
+    <!-- Logo (toggle moved to sidebar) -->
     <div class="header-logo-wrapper col-auto p-0">
       <div class="logo-wrapper">
         <a href="dashboard.php">
           <img class="img-fluid" src="<?php echo $set['weblogo']; ?>" alt="">
         </a>
-      </div>
-      <div class="toggle-sidebar">
-        <i class="status_toggle middle sidebar-toggle" data-feather="menu"></i>
       </div>
     </div>
 

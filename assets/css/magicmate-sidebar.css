@@ -33,15 +33,26 @@
 
 .mm-sidebar .logo-wrapper,
 .mm-sidebar .mm-sidebar__logo {
-  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: var(--mm-space-4) var(--mm-space-4) var(--mm-space-4) var(--mm-space-5) !important;
   border-bottom: 1px solid var(--mm-border-subtle) !important;
   background: transparent !important;
   margin-bottom: 0 !important;
 }
 
-.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .logo-wrapper,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .logo-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: var(--mm-space-4) var(--mm-space-4) var(--mm-space-4) var(--mm-space-5) !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  background: transparent !important;
+}
+
 .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .logo-icon-wrapper {
-  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4) !important;
+  padding: var(--mm-space-3) !important;
   border-bottom: 1px solid var(--mm-border-subtle) !important;
   background: transparent !important;
 }
@@ -50,6 +61,8 @@
   display: flex;
   align-items: center;
   text-decoration: none !important;
+  flex: 1;
+  min-width: 0;
 }
 
 .mm-sidebar .mm-sidebar__logo-img {
@@ -69,51 +82,78 @@
   border-bottom: 1px solid var(--mm-border-subtle) !important;
   padding: var(--mm-space-3) !important;
   background: transparent !important;
+  text-align: center !important;
 }
 
 .mm-sidebar .mm-sidebar__logo-collapsed img {
   border-radius: var(--mm-radius-sm);
 }
 
+/* Hide Cuba's back-btn in logo area */
+.mm-sidebar .logo-wrapper .back-btn {
+  display: none !important;
+}
 
-/* ─── 3. TOGGLE BUTTON ────────────────────────────────────────── */
-/* Hide the sidebar's toggle — the header already has one */
+
+/* ─── 3. TOGGLE BUTTON — Visible in sidebar, right of logo ───── */
 
 .mm-sidebar .toggle-sidebar,
 .mm-sidebar .mm-sidebar__toggle {
-  display: none !important;
+  display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  border-radius: var(--mm-radius-md) !important;
+  background: var(--mm-neutral-50) !important;
+  border: 1px solid var(--mm-neutral-100) !important;
+  cursor: pointer !important;
   transition: background var(--mm-duration-fast) ease,
+              border-color var(--mm-duration-fast) ease,
               transform var(--mm-duration-base) var(--mm-ease-spring) !important;
-  border: none !important;
-  cursor: pointer;
+  flex-shrink: 0 !important;
+  margin-left: var(--mm-space-2) !important;
+  padding: 0 !important;
+  position: relative !important;
+  /* Reset Cuba float/position */
+  float: none !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
 }
 
 .mm-sidebar .toggle-sidebar i,
 .mm-sidebar .toggle-sidebar svg,
 .mm-sidebar .mm-sidebar__toggle i,
 .mm-sidebar .mm-sidebar__toggle svg {
-  width: 16px !important;
-  height: 16px !important;
+  width: 14px !important;
+  height: 14px !important;
   color: var(--mm-neutral-500) !important;
   stroke: var(--mm-neutral-500) !important;
   transition: color var(--mm-duration-fast) ease,
-              stroke var(--mm-duration-fast) ease,
-              transform var(--mm-duration-base) var(--mm-ease-spring) !important;
+              stroke var(--mm-duration-fast) ease !important;
 }
 
 .mm-sidebar .toggle-sidebar:hover,
 .mm-sidebar .mm-sidebar__toggle:hover {
-  background: var(--mm-neutral-200) !important;
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-200) !important;
 }
 
 .mm-sidebar .toggle-sidebar:hover i,
 .mm-sidebar .toggle-sidebar:hover svg,
 .mm-sidebar .mm-sidebar__toggle:hover i,
 .mm-sidebar .mm-sidebar__toggle:hover svg {
-  color: var(--mm-primary-500) !important;
-  stroke: var(--mm-primary-500) !important;
+  color: var(--mm-primary-600) !important;
+  stroke: var(--mm-primary-600) !important;
+}
+
+/* In collapsed mode, show the toggle in the collapsed logo area */
+.mm-sidebar.sidebar-wrapper.close_icon .logo-icon-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 
@@ -187,6 +227,7 @@
   padding: 1px var(--mm-space-3) !important;
   margin: 0 !important;
   list-style: none !important;
+  position: relative !important;
 }
 
 .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links > li {
@@ -598,7 +639,7 @@ body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sideba
   display: none !important;
 }
 
-.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon:hover .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu a {
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon:hover .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu {
   display: none !important;
 }
 
@@ -612,7 +653,7 @@ body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sideba
 }
 
 .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon:hover .logo-icon-wrapper {
-  display: block !important;
+  display: flex !important;
 }
 
 /* *** Compact active state — clean gold icon highlight *** */
@@ -675,7 +716,192 @@ body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sideba
 }
 
 
-/* ─── 14. MOBILE SIDEBAR ─────────────────────────────────────── */
+/* ─── 14. COMPACT MODE — Floating Popover Submenus ─────────────── */
+
+/* In compact mode, force-hide submenus normally (overrides Cuba's accordion) */
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-submenu,
+.mm-sidebar.sidebar-wrapper.close_icon .mm-sidebar__submenu {
+  display: none !important;
+  position: absolute !important;
+}
+
+/* On hover of a sidebar-list that has a submenu, show floating popover */
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list:hover > .sidebar-submenu,
+.mm-sidebar.sidebar-wrapper.close_icon .mm-sidebar__item:hover > .mm-sidebar__submenu {
+  display: block !important;
+  position: absolute !important;
+  left: 100% !important;
+  top: 0 !important;
+  min-width: 180px !important;
+  width: max-content !important;
+  max-width: 240px !important;
+  background: var(--mm-neutral-0) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+  padding: var(--mm-space-2) !important;
+  margin-left: 4px !important;
+  z-index: 1100 !important;
+  animation: mm-popover-enter 150ms ease forwards;
+}
+
+@keyframes mm-popover-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Popover left-pointing arrow */
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list:hover > .sidebar-submenu::before,
+.mm-sidebar.sidebar-wrapper.close_icon .mm-sidebar__item:hover > .mm-sidebar__submenu::before {
+  display: block !important;
+  content: '' !important;
+  position: absolute !important;
+  top: 12px !important;
+  left: -6px !important;
+  width: 10px !important;
+  height: 10px !important;
+  background: var(--mm-neutral-0) !important;
+  border-left: 1px solid var(--mm-border-subtle) !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  transform: rotate(45deg) !important;
+  z-index: -1 !important;
+}
+
+/* Style popover submenu links */
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list:hover > .sidebar-submenu li a,
+.mm-sidebar.sidebar-wrapper.close_icon .mm-sidebar__item:hover > .mm-sidebar__submenu .mm-sidebar__submenu-link {
+  display: flex !important;
+  align-items: center !important;
+  padding: 7px var(--mm-space-3) !important;
+  margin: 0 !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-xs) !important;
+  font-weight: 500 !important;
+  color: var(--mm-text-secondary) !important;
+  text-decoration: none !important;
+  border-radius: var(--mm-radius-md) !important;
+  border-left: none !important;
+  background: transparent !important;
+  transition: all var(--mm-duration-fast) ease !important;
+  white-space: nowrap !important;
+  text-align: left !important;
+}
+
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list:hover > .sidebar-submenu li a:hover,
+.mm-sidebar.sidebar-wrapper.close_icon .mm-sidebar__item:hover > .mm-sidebar__submenu .mm-sidebar__submenu-link:hover {
+  background: var(--mm-neutral-50) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list:hover > .sidebar-submenu li a.active,
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list:hover > .sidebar-submenu li a.mm-sidebar__submenu-link--active,
+.mm-sidebar.sidebar-wrapper.close_icon .mm-sidebar__item:hover > .mm-sidebar__submenu .mm-sidebar__submenu-link--active {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-600) !important;
+  font-weight: 600 !important;
+}
+
+/* Also override Cuba's close_icon :hover submenu display that hides links */
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon:hover .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu a {
+  display: none !important;
+}
+
+/* But re-show them inside the floating popover */
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-list:hover > .sidebar-submenu,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon:hover .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-list:hover > .sidebar-submenu {
+  display: block !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-list:hover > .sidebar-submenu li a,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon:hover .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-list:hover > .sidebar-submenu li a {
+  display: flex !important;
+  text-align: left !important;
+}
+
+/* Show span text inside popover submenu links */
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-list:hover > .sidebar-submenu li a span,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon:hover .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-list:hover > .sidebar-submenu li a span {
+  display: inline !important;
+}
+
+
+/* ─── 15. COMPACT MODE — Tooltips for single-link items ────────── */
+
+/* Tooltip for items WITHOUT submenus (link-nav) in compact mode */
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list[data-tooltip] > .sidebar-link.link-nav::after {
+  content: attr(data-tooltip) !important;
+  position: absolute !important;
+  left: calc(100% + 16px) !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: var(--mm-neutral-800) !important;
+  color: var(--mm-neutral-0) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 500 !important;
+  padding: 4px 10px !important;
+  border-radius: var(--mm-radius-sm) !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  transition: opacity var(--mm-duration-fast) ease !important;
+  z-index: 1100 !important;
+  box-shadow: var(--mm-shadow-md) !important;
+}
+
+/* Tooltip left-pointing caret */
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list[data-tooltip] > .sidebar-link.link-nav::before {
+  content: '' !important;
+  position: absolute !important;
+  left: calc(100% + 12px) !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  border: 4px solid transparent !important;
+  border-right-color: var(--mm-neutral-800) !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  transition: opacity var(--mm-duration-fast) ease !important;
+  z-index: 1100 !important;
+  display: block !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* Show tooltip on hover */
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list[data-tooltip]:hover > .sidebar-link.link-nav::after {
+  opacity: 1 !important;
+}
+
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list[data-tooltip]:hover > .sidebar-link.link-nav::before {
+  opacity: 1 !important;
+}
+
+/* Use data-tooltip from the <li> parent for the tooltip text */
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list[data-tooltip] > .sidebar-link.link-nav::after {
+  content: attr(data-tooltip) !important;
+}
+
+/* Inherit data-tooltip from parent li */
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list[data-tooltip] > a.link-nav::after {
+  content: attr(data-tooltip) !important;
+}
+
+/* Override: don't show tooltip on items that have submenus (they get popover instead) */
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list[data-tooltip] > .sidebar-link:not(.link-nav)::after,
+.mm-sidebar.sidebar-wrapper.close_icon .sidebar-list[data-tooltip] > .sidebar-link:not(.link-nav)::before {
+  display: none !important;
+}
+
+
+/* ─── 16. MOBILE SIDEBAR ─────────────────────────────────────── */
 
 /* Mobile back button */
 .mm-sidebar .sidebar-main .sidebar-links .back-btn .mobile-back {
@@ -720,6 +946,12 @@ body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sideba
   .mm-sidebar__footer {
     padding: var(--mm-space-3) var(--mm-space-4);
   }
+
+  /* Hide popovers on mobile (use normal accordion) */
+  .mm-sidebar.sidebar-wrapper.close_icon .sidebar-list:hover > .sidebar-submenu,
+  .mm-sidebar.sidebar-wrapper.close_icon .mm-sidebar__item:hover > .mm-sidebar__submenu {
+    display: none !important;
+  }
 }
 
 @media (max-width: 575.98px) {
@@ -729,7 +961,7 @@ body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sideba
 }
 
 
-/* ─── 15. DARK SIDEBAR OVERRIDES — Force light everywhere ─────── */
+/* ─── 17. DARK SIDEBAR OVERRIDES — Force light everywhere ─────── */
 
 body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper,
 .page-wrapper.compact-wrapper.dark-sidebar div.mm-sidebar.sidebar-wrapper,
@@ -759,7 +991,7 @@ body.dark-sidebar .mm-sidebar .sidebar-main-title div h6,
 }
 
 
-/* ─── 16. COMPACT SIDEBAR (icon-only mode) ────────────────────── */
+/* ─── 18. COMPACT SIDEBAR (icon-only mode) ────────────────────── */
 
 .page-wrapper.compact-sidebar .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a.active,
 .page-wrapper.compact-sidebar .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li .mega-menu-container li a.active {
@@ -777,7 +1009,7 @@ body.dark-sidebar .mm-sidebar .sidebar-main-title div h6,
 }
 
 
-/* ─── 17. LEFT/RIGHT ARROWS (horizontal mode helpers) ─────────── */
+/* ─── 19. LEFT/RIGHT ARROWS (horizontal mode helpers) ─────────── */
 
 .mm-sidebar .left-arrow,
 .mm-sidebar .right-arrow {
@@ -785,7 +1017,7 @@ body.dark-sidebar .mm-sidebar .sidebar-main-title div h6,
 }
 
 
-/* ─── 18. ACCORDING-MENU (chevron arrows) ─────────────────────── */
+/* ─── 20. ACCORDING-MENU (chevron arrows) ─────────────────────── */
 
 .mm-sidebar .according-menu {
   display: flex;
@@ -805,8 +1037,26 @@ body.dark-sidebar .mm-sidebar .sidebar-main-title div h6,
   transform: rotate(90deg);
 }
 
+/* Hide according-menu chevrons in compact mode (popover replaces them) */
+.mm-sidebar.sidebar-wrapper.close_icon .according-menu {
+  display: none !important;
+}
 
-/* ─── 19. PRINT — Hide sidebar ────────────────────────────────── */
+
+/* ─── 21. TOGGLE ICON FLIP IN COLLAPSED STATE ─────────────────── */
+/* The toggle icon uses chevrons-left by default. In collapsed (close_icon)
+   state, we flip it via CSS transform so it visually becomes chevrons-right.
+   This avoids needing JS to swap the icon. */
+
+.mm-sidebar.sidebar-wrapper.close_icon .toggle-sidebar i,
+.mm-sidebar.sidebar-wrapper.close_icon .toggle-sidebar svg,
+.mm-sidebar.sidebar-wrapper.close_icon .mm-sidebar__toggle i,
+.mm-sidebar.sidebar-wrapper.close_icon .mm-sidebar__toggle svg {
+  transform: rotate(180deg) !important;
+}
+
+
+/* ─── 22. PRINT — Hide sidebar ────────────────────────────────── */
 
 @media print {
   .mm-sidebar.sidebar-wrapper {
