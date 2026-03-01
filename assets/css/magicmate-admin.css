@@ -952,7 +952,7 @@ body.dark-only .pricing-block {
 /* --- 1b. Logo Area --- */
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-wrapper,
 .page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .logo-icon-wrapper {
-  padding: var(--mm-space-6) var(--mm-space-6) !important;
+  padding: 18px var(--mm-space-6) !important;
   box-shadow: none !important;
   border-bottom: 1px solid var(--mm-border-subtle) !important;
   background: var(--mm-neutral-0) !important;
