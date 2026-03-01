@@ -1,0 +1,88 @@
+/* =============================================
+   MagicMate Admin — Visual Overrides
+   Loaded AFTER Cuba style.css to override visuals.
+   Grows incrementally across phases.
+   ============================================= */
+
+/* --- Phase 0: Global Foundation --- */
+
+*,
+*::before,
+*::after {
+  font-family: var(--mm-font-sans) !important;
+}
+
+body {
+  font-family: var(--mm-font-sans) !important;
+  background-color: var(--mm-surface-page) !important;
+  color: var(--mm-text-primary) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Override Rubik/Roboto font references throughout Cuba */
+.font-roboto,
+h1, h2, h3, h4, h5, h6,
+.f-light,
+.f-w-600,
+.f-w-500,
+.f-w-400 {
+  font-family: var(--mm-font-sans) !important;
+}
+
+/* Links */
+a {
+  color: var(--mm-text-link);
+  transition: color var(--mm-duration-fast) ease;
+}
+a:hover {
+  color: var(--mm-primary-700);
+}
+
+/* Loader override */
+.loader-wrapper {
+  background-color: var(--mm-surface-page) !important;
+}
+
+/* Override Cuba's f-light utility */
+.f-light {
+  color: var(--mm-text-secondary) !important;
+}
+
+/* Override Cuba's .txt-primary, .txt-secondary */
+.txt-primary {
+  color: var(--mm-primary-500) !important;
+}
+.txt-secondary {
+  color: var(--mm-primary-600) !important;
+}
+
+/* Override Cuba's bg utilities that use purple/pink */
+.bg-primary {
+  background-color: var(--mm-primary-500) !important;
+}
+.bg-secondary {
+  background-color: var(--mm-primary-600) !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--mm-neutral-100);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--mm-neutral-300);
+  border-radius: var(--mm-radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mm-neutral-400);
+}
+
+/* Selection highlight */
+::selection {
+  background-color: var(--mm-primary-200);
+  color: var(--mm-primary-900);
+}

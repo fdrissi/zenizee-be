@@ -14,6 +14,7 @@ include 'evconfing.php';
     <title><?php echo $set['webname'];?> - Trusted Event Management App</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     
     <!-- ico-font-->
@@ -41,9 +42,12 @@ include 'evconfing.php';
     
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
-    
+    <!-- MagicMate Design System (must load last) -->
+    <link rel="stylesheet" type="text/css" href="assets/css/magicmate-tokens.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/magicmate-admin.css">
   </head>
-  <body> 
+  <body>
+    <script src="assets/js/magicmate-init.js"></script>
     <!-- loader starts-->
     <div class="loader-wrapper">
       <div class="loader"></div>

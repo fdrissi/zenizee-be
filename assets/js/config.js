@@ -1,5 +1,5 @@
-var primary = localStorage.getItem("primary") || '#7366ff';
-var secondary = localStorage.getItem("secondary") || '#f73164';
+var primary = localStorage.getItem("primary") || '#D88827';
+var secondary = localStorage.getItem("secondary") || '#B8721F';
 
 window.CubaAdminConfig = {
 	// Theme Primary Color
