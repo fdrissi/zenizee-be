@@ -582,13 +582,7 @@ body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sideba
 /* ─── 13. COLLAPSED SIDEBAR ──────────────────────────────────── */
 
 .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon {
-  width: 80px !important;
   transition: width var(--mm-duration-base) var(--mm-ease-spring) !important;
-}
-
-.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon:hover {
-  width: 265px !important;
-  box-shadow: var(--mm-shadow-lg) !important;
 }
 
 /* Hide footer text in collapsed mode */
