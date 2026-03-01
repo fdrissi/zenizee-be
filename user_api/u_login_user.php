@@ -20,6 +20,8 @@ if (isset($data['mobile']) && isset($data['password']) && !isset($data['type']))
 
         if ($chek->num_rows != 0) {
             $c = $chek->fetch_assoc();
+            $_SESSION['user_id']   = $c['id'];
+            $_SESSION['user_type'] = 'user';
             $returnArr = array(
                 "UserLogin" => $c,
                 "ResponseCode" => "200",
@@ -58,6 +60,8 @@ else if (isset($data['email']) && $data['email'] != '' && isset($data['password'
     if ($status->num_rows != 0) {
         if ($chek->num_rows != 0) {
             $c = $evmulti->query("select * from tbl_sponsore where  email='" . $email . "' and status = 1 and password='" . $password . "'")->fetch_assoc();
+            $_SESSION['user_id']   = $c['id'];
+            $_SESSION['user_type'] = 'organizer';
 
             $returnArr = array(
                 "OragnizerLogin" => $c,
@@ -89,6 +93,8 @@ else if (isset($data['email']) && $data['email'] != '' && isset($data['password'
     if ($status->num_rows != 0) {
         if ($chek->num_rows != 0) {
             $c = $evmulti->query("select * from tbl_omanager where  email='" . $email . "' and status = 1 and password='" . $password . "' and manager_type='SCANNER'")->fetch_assoc();
+            $_SESSION['user_id']   = $c['orag_id'];
+            $_SESSION['user_type'] = 'scanner';
 
             $p = array();
             $p["id"] = $c["orag_id"];
@@ -127,6 +133,8 @@ else if (isset($data['email']) && $data['email'] != '' && isset($data['password'
     if ($status->num_rows != 0) {
         if ($chek->num_rows != 0) {
             $c = $evmulti->query("select * from tbl_omanager where  email='" . $email . "' and status = 1 and password='" . $password . "' and manager_type='MANAGER'")->fetch_assoc();
+            $_SESSION['user_id']   = $c['orag_id'];
+            $_SESSION['user_type'] = 'manager';
 
             $p = array();
             $p["id"] = $c["orag_id"];

@@ -24,6 +24,14 @@ if (session_status() == PHP_SESSION_NONE) {
         }
         session_save_path($fullPath);
     }
+    session_set_cookie_params([
+        'lifetime' => 86400 * 7,
+        'path'     => '/',
+        'domain'   => '',
+        'secure'   => (($_ENV['SESSION_SECURE'] ?? 'false') === 'true'),
+        'httponly'  => true,
+        'samesite' => 'Lax',
+    ]);
     session_start();
 }
 

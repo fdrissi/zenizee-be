@@ -103,7 +103,9 @@ if ($data['name'] == '' or $data['mobile'] == '' or $data['password'] == '' or $
                 $checks = $h->evmultiinsertdata_Api($field_values, $data_values, $table);
                 
                 $c = $evmulti->query("select * from tbl_user where id=" . $check . "")->fetch_assoc();
-                
+                $_SESSION['user_id']   = $c['id'];
+                $_SESSION['user_type'] = 'user';
+
                 $returnArr = array(
                     "UserLogin" => $c,
                     "ResponseCode" => "200",
@@ -142,6 +144,8 @@ if ($data['name'] == '' or $data['mobile'] == '' or $data['password'] == '' or $
             $h            = new Event();
             $check        = $h->evmultiinsertdata_Api_Id($field_values, $data_values, $table);
             $c            = $evmulti->query("select * from tbl_user where id=" . $check . "")->fetch_assoc();
+            $_SESSION['user_id']   = $c['id'];
+            $_SESSION['user_type'] = 'user';
             $returnArr    = array(
                 "UserLogin" => $c,
                 "ResponseCode" => "200",
