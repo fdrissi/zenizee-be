@@ -32,50 +32,17 @@
   padding-left: 0 !important;
 }
 
-/* Enhance page title area specifically on dashboard */
+/* Page title — clean, no gradient */
 .page-body > .container-fluid:first-child .page-title {
-  background: linear-gradient(135deg, var(--mm-primary-50) 0%, var(--mm-neutral-0) 60%) !important;
-  border: 1px solid var(--mm-border-accent) !important;
-  border-radius: var(--mm-radius-xl) !important;
-  padding: var(--mm-space-8) var(--mm-space-8) var(--mm-space-6) !important;
-  margin: 0 0 var(--mm-space-6) 0 !important;
-  position: relative !important;
-  overflow: hidden !important;
+  background: transparent !important;
+  border: none !important;
+  padding: var(--mm-space-6) 0 var(--mm-space-4) !important;
+  margin: 0 0 var(--mm-space-5) 0 !important;
 }
 
-/* Subtle decorative element behind the title */
 .page-body > .container-fluid:first-child .page-title::before {
-  content: '';
-  position: absolute;
-  top: -30px;
-  right: -30px;
-  width: 160px;
-  height: 160px;
-  background: radial-gradient(circle, var(--mm-primary-200) 0%, transparent 70%);
-  opacity: 0.3;
-  pointer-events: none;
-  border-radius: 50%;
-}
-
-.page-body > .container-fluid:first-child .page-title .row h3 {
-  font-family: var(--mm-font-display) !important;
-  font-size: var(--mm-text-3xl) !important;
-  font-weight: 800 !important;
-  color: var(--mm-neutral-900) !important;
-  letter-spacing: -0.03em !important;
-  position: relative !important;
-  z-index: 1 !important;
-}
-
-/* Add a gold underline accent beneath heading */
-.page-body > .container-fluid:first-child .page-title .row h3::after {
-  content: '';
-  display: block;
-  width: 48px;
-  height: 3px;
-  background: var(--mm-gradient-primary);
-  border-radius: var(--mm-radius-full);
-  margin-top: var(--mm-space-2);
+  display: none !important;
+  content: none !important;
 }
 
 
@@ -495,10 +462,6 @@
   .page-body > .container-fluid:first-child .page-title::before {
     display: none;
   }
-
-  .page-body > .container-fluid:first-child .page-title {
-    border-radius: var(--mm-radius-lg) !important;
-  }
 }
 
 
@@ -529,8 +492,8 @@ body.dark-only .blink_me {
 }
 
 body.dark-only .page-body > .container-fluid:first-child .page-title {
-  background: linear-gradient(135deg, var(--mm-primary-50) 0%, var(--mm-neutral-0) 60%) !important;
-  border-color: var(--mm-border-accent) !important;
+  background: transparent !important;
+  border: none !important;
 }
 
 
