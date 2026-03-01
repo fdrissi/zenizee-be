@@ -135,8 +135,6 @@
                      </div>
                   </div>
 
-                  <hr class="mm-settings__divider" />
-
                   <!-- ═══════════════════════════════════════
                        Section 2: Push Notifications
                   ════════════════════════════════════════ -->
@@ -220,8 +218,6 @@
                      </div>
                   </div>
 
-                  <hr class="mm-settings__divider" />
-
                   <!-- ═══════════════════════════════════════
                        Section 3: SMS Provider
                   ════════════════════════════════════════ -->
@@ -284,8 +280,6 @@
                      </div>
                   </div>
 
-                  <hr class="mm-settings__divider" />
-
                   <!-- ═══════════════════════════════════════
                        Section 4: Msg91 Credentials
                   ════════════════════════════════════════ -->
@@ -328,8 +322,6 @@
                         />
                      </div>
                   </div>
-
-                  <hr class="mm-settings__divider" />
 
                   <!-- ═══════════════════════════════════════
                        Section 5: Twilio Credentials
@@ -388,8 +380,6 @@
                         <span class="mm-settings__hint">Include country code, e.g. +1234567890</span>
                      </div>
                   </div>
-
-                  <hr class="mm-settings__divider" />
 
                   <!-- ═══════════════════════════════════════
                        Section 6: Rewards & Tax
@@ -459,8 +449,6 @@
                         <span class="mm-settings__hint">Applied to all ticket purchases</span>
                      </div>
                   </div>
-
-                  <hr class="mm-settings__divider" />
 
                   <!-- Submit -->
                   <div class="mm-settings__actions">
