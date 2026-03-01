@@ -45,6 +45,7 @@ include 'evconfing.php';
     <!-- MagicMate Design System (must load last) -->
     <link rel="stylesheet" type="text/css" href="assets/css/magicmate-tokens.css">
     <link rel="stylesheet" type="text/css" href="assets/css/magicmate-admin.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/magicmate-header.css">
     <link rel="stylesheet" type="text/css" href="assets/css/magicmate-phase3-auth.css">
     <link rel="stylesheet" type="text/css" href="assets/css/magicmate-phase3-dashboard.css">
     <link rel="stylesheet" type="text/css" href="assets/css/magicmate-phase3-lists.css">

@@ -1,0 +1,768 @@
+/* =============================================
+   MagicMate Admin — Sidebar Styles
+   Premium modern SaaS sidebar (Linear/Vercel inspired)
+   Scoped under .mm-sidebar to override Cuba theme
+   ============================================= */
+
+/* ─── 1. SIDEBAR WRAPPER — Background, border, shadow ─────────── */
+
+.mm-sidebar.sidebar-wrapper {
+  background: var(--mm-surface-sidebar) !important;
+  border-right: 1px solid var(--mm-border-subtle) !important;
+  box-shadow: var(--mm-shadow-xs) !important;
+  transition: width var(--mm-duration-base) var(--mm-ease-spring),
+              box-shadow var(--mm-duration-base) ease;
+}
+
+.page-wrapper .page-body-wrapper .mm-sidebar.sidebar-wrapper {
+  background: var(--mm-surface-sidebar) !important;
+  border-right: 1px solid var(--mm-border-subtle) !important;
+  box-shadow: var(--mm-shadow-xs) !important;
+}
+
+/* Inner wrapper — flex column to push footer to bottom */
+.mm-sidebar .mm-sidebar__inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
+}
+
+
+/* ─── 2. LOGO AREA ────────────────────────────────────────────── */
+
+.mm-sidebar .logo-wrapper,
+.mm-sidebar .mm-sidebar__logo {
+  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4) !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  background: transparent !important;
+  margin-bottom: 0 !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .logo-wrapper,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .logo-icon-wrapper {
+  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4) !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  background: transparent !important;
+}
+
+.mm-sidebar .mm-sidebar__logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none !important;
+}
+
+.mm-sidebar .mm-sidebar__logo-img {
+  max-height: 36px;
+  width: auto;
+  object-fit: contain;
+  transition: opacity var(--mm-duration-fast) ease;
+}
+
+.mm-sidebar .mm-sidebar__logo-img:hover {
+  opacity: 0.85;
+}
+
+/* Collapsed logo */
+.mm-sidebar .logo-icon-wrapper,
+.mm-sidebar .mm-sidebar__logo-collapsed {
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  padding: var(--mm-space-3) !important;
+  background: transparent !important;
+}
+
+.mm-sidebar .mm-sidebar__logo-collapsed img {
+  border-radius: var(--mm-radius-sm);
+}
+
+
+/* ─── 3. TOGGLE BUTTON ────────────────────────────────────────── */
+
+.mm-sidebar .toggle-sidebar,
+.mm-sidebar .mm-sidebar__toggle {
+  background: var(--mm-neutral-100) !important;
+  border-radius: var(--mm-radius-sm) !important;
+  width: 28px !important;
+  height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background var(--mm-duration-fast) ease,
+              transform var(--mm-duration-base) var(--mm-ease-spring) !important;
+  border: none !important;
+  cursor: pointer;
+}
+
+.mm-sidebar .toggle-sidebar i,
+.mm-sidebar .toggle-sidebar svg,
+.mm-sidebar .mm-sidebar__toggle i,
+.mm-sidebar .mm-sidebar__toggle svg {
+  width: 16px !important;
+  height: 16px !important;
+  color: var(--mm-neutral-500) !important;
+  stroke: var(--mm-neutral-500) !important;
+  transition: color var(--mm-duration-fast) ease,
+              stroke var(--mm-duration-fast) ease,
+              transform var(--mm-duration-base) var(--mm-ease-spring) !important;
+}
+
+.mm-sidebar .toggle-sidebar:hover,
+.mm-sidebar .mm-sidebar__toggle:hover {
+  background: var(--mm-neutral-200) !important;
+}
+
+.mm-sidebar .toggle-sidebar:hover i,
+.mm-sidebar .toggle-sidebar:hover svg,
+.mm-sidebar .mm-sidebar__toggle:hover i,
+.mm-sidebar .mm-sidebar__toggle:hover svg {
+  color: var(--mm-primary-500) !important;
+  stroke: var(--mm-primary-500) !important;
+}
+
+
+/* ─── 4. NAVIGATION AREA ──────────────────────────────────────── */
+
+.mm-sidebar .sidebar-main,
+.mm-sidebar .mm-sidebar__nav {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links {
+  padding: var(--mm-space-2) 0 !important;
+  margin: 0 !important;
+}
+
+
+/* ─── 5. SECTION HEADERS — Uppercase, small, letter-spaced ────── */
+
+.mm-sidebar .sidebar-main-title,
+.mm-sidebar .mm-sidebar__section {
+  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-2) !important;
+  margin: 0 !important;
+  border-top: none !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-main-title {
+  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-2) !important;
+  margin: 0 !important;
+}
+
+/* First section header needs less top padding */
+.mm-sidebar .sidebar-main-title:first-of-type,
+.mm-sidebar .mm-sidebar__section:first-of-type,
+.mm-sidebar .back-btn + .sidebar-main-title,
+.mm-sidebar .back-btn + .mm-sidebar__section {
+  padding-top: var(--mm-space-3) !important;
+}
+
+.mm-sidebar .sidebar-main-title h6,
+.mm-sidebar .sidebar-main-title div h6,
+.mm-sidebar .mm-sidebar__section-label {
+  font-family: var(--mm-font-sans) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--mm-text-tertiary) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.4 !important;
+  border: none !important;
+}
+
+/* Remove Cuba's ::before on section titles */
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-main-title::before {
+  display: none !important;
+}
+
+/* Hide the section <p> tag Cuba sometimes shows */
+.mm-sidebar .sidebar-main-title p {
+  display: none !important;
+}
+
+
+/* ─── 6. MENU ITEMS — Clean, modern links ─────────────────────── */
+
+.mm-sidebar .sidebar-list,
+.mm-sidebar .mm-sidebar__item {
+  padding: 1px var(--mm-space-3) !important;
+  margin: 0 !important;
+  list-style: none !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links > li {
+  padding: 1px var(--mm-space-3) !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li {
+  padding: 1px var(--mm-space-3) !important;
+}
+
+/* Parent link styles */
+.mm-sidebar .sidebar-list > a,
+.mm-sidebar .sidebar-list > .sidebar-link,
+.mm-sidebar .mm-sidebar__link {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--mm-space-3) !important;
+  padding: var(--mm-space-2) var(--mm-space-3) !important;
+  margin: 0 !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  font-weight: 500 !important;
+  color: var(--mm-text-secondary) !important;
+  text-decoration: none !important;
+  border-radius: var(--mm-radius-md) !important;
+  border-left: 3px solid transparent !important;
+  background: transparent !important;
+  transition: all var(--mm-duration-fast) ease !important;
+  line-height: 1.5 !important;
+  position: relative !important;
+  cursor: pointer !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li a {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--mm-space-3) !important;
+  padding: var(--mm-space-2) var(--mm-space-3) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  font-weight: 500 !important;
+  color: var(--mm-text-secondary) !important;
+  text-decoration: none !important;
+  border-radius: var(--mm-radius-md) !important;
+  border-left: 3px solid transparent !important;
+  background: transparent !important;
+  transition: all var(--mm-duration-fast) ease !important;
+  line-height: 1.5 !important;
+}
+
+/* Label text */
+.mm-sidebar .mm-sidebar__label,
+.mm-sidebar .sidebar-list > a > span,
+.mm-sidebar .sidebar-link > span {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  font-weight: 500 !important;
+  color: inherit !important;
+  transition: color var(--mm-duration-fast) ease !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a span {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  font-weight: 500 !important;
+  color: inherit !important;
+}
+
+
+/* ─── 7. FEATHER ICONS — Consistent sizing ────────────────────── */
+
+.mm-sidebar .sidebar-list > a > svg,
+.mm-sidebar .sidebar-list > a > i,
+.mm-sidebar .sidebar-link > svg,
+.mm-sidebar .sidebar-link > i,
+.mm-sidebar .mm-sidebar__icon {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  stroke-width: 1.75 !important;
+  color: var(--mm-neutral-400) !important;
+  stroke: var(--mm-neutral-400) !important;
+  transition: color var(--mm-duration-fast) ease,
+              stroke var(--mm-duration-fast) ease !important;
+  flex-shrink: 0 !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a svg,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a i {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  stroke-width: 1.75 !important;
+  color: var(--mm-neutral-400) !important;
+  stroke: var(--mm-neutral-400) !important;
+}
+
+
+/* ─── 8. HOVER STATE — Subtle background shift ────────────────── */
+
+.mm-sidebar .sidebar-list > a:hover,
+.mm-sidebar .sidebar-link:hover,
+.mm-sidebar .mm-sidebar__link:hover {
+  background: var(--mm-neutral-50) !important;
+  color: var(--mm-text-primary) !important;
+  border-left-color: var(--mm-neutral-300) !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li.sidebar-list:hover > a:hover,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li a:hover {
+  background: var(--mm-neutral-50) !important;
+  color: var(--mm-text-primary) !important;
+  border-left-color: var(--mm-neutral-300) !important;
+}
+
+.mm-sidebar .sidebar-list > a:hover > svg,
+.mm-sidebar .sidebar-list > a:hover > i,
+.mm-sidebar .sidebar-link:hover > svg,
+.mm-sidebar .sidebar-link:hover > i,
+.mm-sidebar .mm-sidebar__link:hover .mm-sidebar__icon {
+  color: var(--mm-neutral-600) !important;
+  stroke: var(--mm-neutral-600) !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li:hover .sidebar-link:not(.active):hover svg,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a:hover svg,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a:hover i {
+  color: var(--mm-neutral-600) !important;
+  stroke: var(--mm-neutral-600) !important;
+}
+
+.mm-sidebar .sidebar-list > a:hover > span,
+.mm-sidebar .sidebar-link:hover > span,
+.mm-sidebar .mm-sidebar__link:hover .mm-sidebar__label {
+  color: var(--mm-text-primary) !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li:hover .sidebar-link:not(.active):hover span,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a:hover span {
+  color: var(--mm-text-primary) !important;
+}
+
+
+/* ─── 9. ACTIVE STATE — Gold left border, tinted background ───── */
+
+.mm-sidebar .sidebar-link.active,
+.mm-sidebar .sidebar-list .sidebar-link.active,
+.mm-sidebar .mm-sidebar__link--active,
+.mm-sidebar .mm-sidebar__link.active {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+  border-left-color: var(--mm-primary-500) !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+  border-left: 3px solid var(--mm-primary-500) !important;
+  border-radius: var(--mm-radius-md) !important;
+}
+
+/* Dark mode overrides — force our light styles */
+body.dark-only .page-wrapper .page-body-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active,
+body.dark-only .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active,
+body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active,
+.page-wrapper.compact-wrapper.dark-sidebar div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active,
+.page-wrapper.compact-wrapper.color-sidebar div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+/* Active item label */
+.mm-sidebar .sidebar-link.active span,
+.mm-sidebar .sidebar-list .sidebar-link.active span,
+.mm-sidebar .mm-sidebar__link--active .mm-sidebar__label,
+.mm-sidebar .mm-sidebar__link.active .mm-sidebar__label {
+  color: var(--mm-primary-700) !important;
+  font-weight: 600 !important;
+}
+
+/* Active item icon — gold */
+.mm-sidebar .sidebar-link.active svg,
+.mm-sidebar .sidebar-link.active i,
+.mm-sidebar .sidebar-list .sidebar-link.active svg,
+.mm-sidebar .mm-sidebar__link--active .mm-sidebar__icon,
+.mm-sidebar .mm-sidebar__link.active .mm-sidebar__icon {
+  color: var(--mm-primary-500) !important;
+  stroke: var(--mm-primary-500) !important;
+}
+
+/* According-menu arrow on hover */
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li:hover .according-menu i {
+  color: var(--mm-neutral-500) !important;
+}
+
+
+/* ─── 10. SUBMENUS — Indented, clean, no bullets ──────────────── */
+
+.mm-sidebar .sidebar-submenu,
+.mm-sidebar .mm-sidebar__submenu {
+  padding: var(--mm-space-1) 0 var(--mm-space-1) 0 !important;
+  margin: 0 !important;
+  list-style: none !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu {
+  padding: var(--mm-space-1) 0 var(--mm-space-1) 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* KILL the vertical line pseudo-element */
+.mm-sidebar .sidebar-submenu::before,
+.mm-sidebar .mm-sidebar__submenu::before,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu::before,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .mega-menu-container::before,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link.active ~ .sidebar-submenu::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* KILL the dot bullet pseudo-element */
+.mm-sidebar .sidebar-submenu li a::before,
+.mm-sidebar .mm-sidebar__submenu-link::before,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu li a::before,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .mega-menu-container .mega-box .link-section .submenu-title h5::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* KILL the ::after active indicator too */
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu li a::after,
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .mega-menu-container .mega-box .link-section .submenu-title h5::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Submenu items */
+.mm-sidebar .sidebar-submenu li,
+.mm-sidebar .mm-sidebar__submenu-item {
+  padding: 0 !important;
+  margin: 0 !important;
+  list-style: none !important;
+}
+
+/* Submenu links */
+.mm-sidebar .sidebar-submenu li a,
+.mm-sidebar .mm-sidebar__submenu-link {
+  display: block !important;
+  padding: 6px var(--mm-space-3) 6px 42px !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-xs) !important;
+  font-weight: 400 !important;
+  color: var(--mm-text-secondary) !important;
+  text-decoration: none !important;
+  border-radius: var(--mm-radius-sm) !important;
+  margin: 0 var(--mm-space-3) !important;
+  transition: all var(--mm-duration-fast) ease !important;
+  line-height: 1.6 !important;
+  border: none !important;
+  background: transparent !important;
+  position: relative !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu li a {
+  display: block !important;
+  padding: 6px var(--mm-space-3) 6px 42px !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-xs) !important;
+  font-weight: 400 !important;
+  color: var(--mm-text-secondary) !important;
+  text-decoration: none !important;
+  border-radius: var(--mm-radius-sm) !important;
+  margin: 0 var(--mm-space-3) !important;
+  line-height: 1.6 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Submenu link hover */
+.mm-sidebar .sidebar-submenu li a:hover,
+.mm-sidebar .mm-sidebar__submenu-link:hover {
+  color: var(--mm-text-primary) !important;
+  background: var(--mm-neutral-50) !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu li a:hover {
+  color: var(--mm-text-primary) !important;
+  background: var(--mm-neutral-50) !important;
+}
+
+/* Submenu link active */
+.mm-sidebar .sidebar-submenu li a.active,
+.mm-sidebar .mm-sidebar__submenu-link--active,
+.mm-sidebar .mm-sidebar__submenu-link.active {
+  color: var(--mm-primary-600) !important;
+  background: var(--mm-primary-50) !important;
+  font-weight: 600 !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-submenu li a.active {
+  color: var(--mm-primary-600) !important;
+  background: var(--mm-primary-50) !important;
+  font-weight: 600 !important;
+}
+
+
+/* ─── 11. SCROLLBAR — Thin, styled ────────────────────────────── */
+
+.mm-sidebar ::-webkit-scrollbar,
+.mm-sidebar .sidebar-main ::-webkit-scrollbar {
+  width: 4px !important;
+}
+
+.mm-sidebar ::-webkit-scrollbar-track,
+.mm-sidebar .sidebar-main ::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.mm-sidebar ::-webkit-scrollbar-thumb,
+.mm-sidebar .sidebar-main ::-webkit-scrollbar-thumb {
+  background: var(--mm-neutral-200) !important;
+  border-radius: var(--mm-radius-full) !important;
+}
+
+.mm-sidebar ::-webkit-scrollbar-thumb:hover,
+.mm-sidebar .sidebar-main ::-webkit-scrollbar-thumb:hover {
+  background: var(--mm-primary-300) !important;
+}
+
+/* SimpleBar scrollbar override */
+.mm-sidebar .simplebar-scrollbar::before {
+  background: var(--mm-neutral-300) !important;
+  border-radius: var(--mm-radius-full) !important;
+  width: 4px !important;
+  right: 0 !important;
+  left: auto !important;
+}
+
+
+/* ─── 12. SIDEBAR FOOTER — Subtle, anchored to bottom ─────────── */
+
+.mm-sidebar__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--mm-space-4) var(--mm-space-5);
+  border-top: 1px solid var(--mm-border-subtle);
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.mm-sidebar__footer-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-sidebar__footer-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--mm-radius-full);
+  background: var(--mm-success);
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.15);
+  flex-shrink: 0;
+}
+
+.mm-sidebar__footer-text {
+  font-family: var(--mm-font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--mm-text-tertiary);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.mm-sidebar__footer-version {
+  font-family: var(--mm-font-sans);
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--mm-neutral-300);
+  background: var(--mm-neutral-100);
+  padding: 2px 8px;
+  border-radius: var(--mm-radius-full);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+
+/* ─── 13. COLLAPSED SIDEBAR ──────────────────────────────────── */
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon {
+  width: 80px !important;
+  transition: width var(--mm-duration-base) var(--mm-ease-spring) !important;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper.close_icon:hover {
+  width: 265px !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+}
+
+/* Hide footer text in collapsed mode */
+.mm-sidebar.sidebar-wrapper.close_icon .mm-sidebar__footer-text,
+.mm-sidebar.sidebar-wrapper.close_icon .mm-sidebar__footer-version {
+  display: none;
+  opacity: 0;
+  transition: opacity var(--mm-duration-fast) ease;
+}
+
+.mm-sidebar.sidebar-wrapper.close_icon:hover .mm-sidebar__footer-text,
+.mm-sidebar.sidebar-wrapper.close_icon:hover .mm-sidebar__footer-version {
+  display: inline-block;
+  opacity: 1;
+}
+
+/* Center the dot in collapsed mode */
+.mm-sidebar.sidebar-wrapper.close_icon .mm-sidebar__footer {
+  justify-content: center;
+  padding: var(--mm-space-3);
+}
+
+.mm-sidebar.sidebar-wrapper.close_icon:hover .mm-sidebar__footer {
+  justify-content: space-between;
+  padding: var(--mm-space-4) var(--mm-space-5);
+}
+
+.mm-sidebar.sidebar-wrapper.close_icon .mm-sidebar__footer-brand {
+  gap: 0;
+}
+
+.mm-sidebar.sidebar-wrapper.close_icon:hover .mm-sidebar__footer-brand {
+  gap: var(--mm-space-2);
+}
+
+
+/* ─── 14. MOBILE SIDEBAR ─────────────────────────────────────── */
+
+/* Mobile back button */
+.mm-sidebar .sidebar-main .sidebar-links .back-btn .mobile-back {
+  display: none;
+  padding: var(--mm-space-3) var(--mm-space-4) !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  color: var(--mm-text-secondary) !important;
+  cursor: pointer;
+}
+
+.page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links .back-btn .mobile-back {
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+}
+
+@media (max-width: 991.98px) {
+  /* Mobile overlay */
+  .mm-sidebar.sidebar-wrapper {
+    position: fixed !important;
+    top: 0 !important;
+    left: -300px;
+    width: 270px !important;
+    height: 100vh !important;
+    z-index: 1050 !important;
+    box-shadow: var(--mm-shadow-xl) !important;
+    transition: left var(--mm-duration-slow) var(--mm-ease-spring),
+                transform var(--mm-duration-slow) var(--mm-ease-spring) !important;
+  }
+
+  /* When open */
+  .mm-sidebar.sidebar-wrapper:not(.close_icon) {
+    left: 0;
+  }
+
+  /* Show mobile back button */
+  .mm-sidebar .sidebar-main .sidebar-links .back-btn .mobile-back {
+    display: block;
+  }
+
+  /* Mobile footer adjustments */
+  .mm-sidebar__footer {
+    padding: var(--mm-space-3) var(--mm-space-4);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .mm-sidebar.sidebar-wrapper {
+    width: 260px !important;
+  }
+}
+
+
+/* ─── 15. DARK SIDEBAR OVERRIDES — Force light everywhere ─────── */
+
+body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper,
+.page-wrapper.compact-wrapper.dark-sidebar div.mm-sidebar.sidebar-wrapper,
+.page-wrapper.compact-wrapper.color-sidebar div.mm-sidebar.sidebar-wrapper,
+body.dark-only .page-wrapper .page-body-wrapper .mm-sidebar.sidebar-wrapper {
+  background: var(--mm-surface-sidebar) !important;
+}
+
+body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a span,
+.page-wrapper.compact-wrapper.dark-sidebar div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a span,
+.page-wrapper.compact-wrapper.color-sidebar div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a span {
+  color: var(--mm-text-secondary) !important;
+}
+
+body.dark-sidebar .page-wrapper.compact-wrapper .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a svg,
+.page-wrapper.compact-wrapper.dark-sidebar div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a svg,
+.page-wrapper.compact-wrapper.color-sidebar div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a svg {
+  color: var(--mm-neutral-400) !important;
+  stroke: var(--mm-neutral-400) !important;
+}
+
+body.dark-sidebar .mm-sidebar .sidebar-main-title h6,
+body.dark-sidebar .mm-sidebar .sidebar-main-title div h6,
+.page-wrapper.compact-wrapper.dark-sidebar .mm-sidebar .sidebar-main-title h6,
+.page-wrapper.compact-wrapper.color-sidebar .mm-sidebar .sidebar-main-title h6 {
+  color: var(--mm-text-tertiary) !important;
+}
+
+
+/* ─── 16. COMPACT SIDEBAR (icon-only mode) ────────────────────── */
+
+.page-wrapper.compact-sidebar .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a.active,
+.page-wrapper.compact-sidebar .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li .mega-menu-container li a.active {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+.page-wrapper.compact-sidebar .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li a.active span {
+  color: var(--mm-primary-700) !important;
+}
+
+.page-wrapper.compact-sidebar .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li .sidebar-submenu li a.active,
+.page-wrapper.compact-sidebar .page-body-wrapper div.mm-sidebar.sidebar-wrapper .sidebar-main .sidebar-links li .mega-menu-container li a.active {
+  color: var(--mm-primary-600) !important;
+}
+
+
+/* ─── 17. LEFT/RIGHT ARROWS (horizontal mode helpers) ─────────── */
+
+.mm-sidebar .left-arrow,
+.mm-sidebar .right-arrow {
+  display: none;
+}
+
+
+/* ─── 18. ACCORDING-MENU (chevron arrows) ─────────────────────── */
+
+.mm-sidebar .according-menu {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.mm-sidebar .according-menu i {
+  font-size: 12px !important;
+  color: var(--mm-neutral-400) !important;
+  transition: transform var(--mm-duration-base) var(--mm-ease-spring),
+              color var(--mm-duration-fast) ease !important;
+}
+
+/* Rotate chevron when open */
+.mm-sidebar .sidebar-list.active > a .according-menu i {
+  transform: rotate(90deg);
+}
+
+
+/* ─── 19. PRINT — Hide sidebar ────────────────────────────────── */
+
+@media print {
+  .mm-sidebar.sidebar-wrapper {
+    display: none !important;
+  }
+}

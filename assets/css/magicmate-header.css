@@ -1,0 +1,536 @@
+/* =============================================
+   MagicMate Admin -- Header Component
+   Premium SaaS header: glassmorphism, minimal, refined
+   Scoped under .mm-header to override Cuba defaults
+   ============================================= */
+
+/* -----------------------------------------------------------------------
+   1. HEADER CONTAINER
+   Fixed glassmorphism bar at top
+   ----------------------------------------------------------------------- */
+.mm-header.page-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 99 !important;
+  height: 62px !important;
+  background: var(--mm-surface-header) !important;
+  backdrop-filter: blur(16px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.4) !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  box-shadow: var(--mm-shadow-xs) !important;
+  padding: 0 !important;
+  transition: box-shadow var(--mm-duration-base) ease,
+              background var(--mm-duration-base) ease !important;
+}
+
+/* Slight shadow bump on scroll (applied via JS or just visual baseline) */
+.mm-header.page-header:hover {
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2. HEADER INNER WRAPPER
+   ----------------------------------------------------------------------- */
+.mm-header .header-wrapper {
+  height: 62px !important;
+  padding: 0 var(--mm-space-6) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--mm-space-4) !important;
+  margin: 0 !important;
+  flex-wrap: nowrap !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   3. LOGO AREA
+   ----------------------------------------------------------------------- */
+.mm-header .header-logo-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--mm-space-3) !important;
+  flex-shrink: 0 !important;
+}
+
+.mm-header .logo-wrapper {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.mm-header .logo-wrapper a {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.mm-header .logo-wrapper a img {
+  max-height: 32px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  transition: opacity var(--mm-duration-fast) ease !important;
+}
+
+.mm-header .logo-wrapper a:hover img {
+  opacity: 0.85 !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   4. SIDEBAR TOGGLE BUTTON
+   Round subtle button with hover feedback
+   ----------------------------------------------------------------------- */
+.mm-header .mm-header__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--mm-radius-full);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background var(--mm-duration-base) ease,
+              transform var(--mm-duration-fast) var(--mm-ease-spring);
+}
+
+.mm-header .mm-header__toggle:hover {
+  background: var(--mm-neutral-100);
+}
+
+.mm-header .mm-header__toggle:active {
+  transform: scale(0.92);
+}
+
+.mm-header .toggle-sidebar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: var(--mm-radius-full) !important;
+  background: var(--mm-neutral-50) !important;
+  border: 1px solid transparent !important;
+  cursor: pointer !important;
+  transition: all var(--mm-duration-base) ease !important;
+  flex-shrink: 0 !important;
+}
+
+.mm-header .toggle-sidebar:hover {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-100) !important;
+}
+
+.mm-header .toggle-sidebar svg,
+.mm-header .toggle-sidebar i {
+  color: var(--mm-neutral-500) !important;
+  stroke: var(--mm-neutral-500) !important;
+  width: 18px !important;
+  height: 18px !important;
+  transition: color var(--mm-duration-base) ease,
+              stroke var(--mm-duration-base) ease !important;
+}
+
+.mm-header .toggle-sidebar:hover svg,
+.mm-header .toggle-sidebar:hover i {
+  color: var(--mm-primary-600) !important;
+  stroke: var(--mm-primary-600) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   5. NAV RIGHT (right side of header)
+   ----------------------------------------------------------------------- */
+.mm-header .nav-right {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  margin-left: auto !important;
+  flex: 1 !important;
+}
+
+.mm-header .nav-right .nav-menus {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--mm-space-2) !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   6. PROFILE TRIGGER AREA
+   Avatar + Name + Role badge + Chevron
+   ----------------------------------------------------------------------- */
+.mm-header .profile-nav {
+  position: relative !important;
+}
+
+.mm-header .profile-nav .media.profile-media {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--mm-space-3) !important;
+  cursor: pointer !important;
+  padding: var(--mm-space-1) var(--mm-space-2) var(--mm-space-1) var(--mm-space-1) !important;
+  border-radius: var(--mm-radius-full) !important;
+  transition: background var(--mm-duration-base) ease !important;
+  border: none !important;
+}
+
+.mm-header .profile-nav .media.profile-media:hover {
+  background: var(--mm-neutral-50) !important;
+}
+
+/* --- Avatar --- */
+.mm-header .mm-header__avatar {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.mm-header .profile-nav .media.profile-media img {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: var(--mm-radius-full) !important;
+  object-fit: cover !important;
+  border: 2px solid var(--mm-neutral-200) !important;
+  transition: border-color var(--mm-duration-base) ease,
+              box-shadow var(--mm-duration-base) ease !important;
+}
+
+.mm-header .profile-nav .media.profile-media:hover img {
+  border-color: var(--mm-primary-300) !important;
+  box-shadow: 0 0 0 3px var(--mm-primary-50) !important;
+}
+
+/* Online indicator dot */
+.mm-header .mm-header__avatar-status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--mm-radius-full);
+  background: var(--mm-success);
+  border: 2px solid var(--mm-neutral-0);
+  z-index: 1;
+}
+
+/* --- Profile Text --- */
+.mm-header .mm-header__profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1;
+}
+
+.mm-header .mm-header__profile-name {
+  font-family: var(--mm-font-sans);
+  font-weight: 600;
+  font-size: var(--mm-text-sm);
+  color: var(--mm-neutral-800);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.mm-header .mm-header__profile-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+/* --- Role Badge --- */
+.mm-header .mm-header__role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 8px;
+  border-radius: var(--mm-radius-full);
+  font-family: var(--mm-font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.mm-header .mm-header__role-badge--admin {
+  background: var(--mm-primary-50);
+  color: var(--mm-primary-700);
+  border: 1px solid var(--mm-primary-100);
+}
+
+.mm-header .mm-header__role-badge--organizer {
+  background: var(--mm-info-light);
+  color: var(--mm-info-dark);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+}
+
+/* --- Chevron --- */
+.mm-header .mm-header__chevron {
+  display: flex;
+  align-items: center;
+  margin-left: var(--mm-space-1);
+}
+
+.mm-header .mm-header__chevron svg,
+.mm-header .mm-header__chevron i {
+  width: 14px !important;
+  height: 14px !important;
+  color: var(--mm-neutral-400) !important;
+  stroke: var(--mm-neutral-400) !important;
+  transition: transform var(--mm-duration-base) var(--mm-ease-spring),
+              color var(--mm-duration-base) ease !important;
+}
+
+/* Chevron rotation when dropdown is open (Cuba adds .active or inline display) */
+.mm-header .profile-nav.onhover-dropdown:hover .mm-header__chevron svg,
+.mm-header .profile-nav.onhover-dropdown:hover .mm-header__chevron i,
+.mm-header .profile-nav.onhover-dropdown.active .mm-header__chevron svg,
+.mm-header .profile-nav.onhover-dropdown.active .mm-header__chevron i {
+  transform: rotate(180deg) !important;
+  color: var(--mm-primary-500) !important;
+  stroke: var(--mm-primary-500) !important;
+}
+
+/* Hide Cuba's default media-body (we use our own mm-header__profile-info) */
+.mm-header .profile-nav .media.profile-media .media-body {
+  display: none !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   7. PROFILE DROPDOWN MENU
+   Clean card with pointer arrow, refined items
+   ----------------------------------------------------------------------- */
+.mm-header .profile-dropdown.onhover-show-div {
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  right: 0 !important;
+  min-width: 200px !important;
+  background: var(--mm-neutral-0) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+  padding: var(--mm-space-2) !important;
+  z-index: 100 !important;
+  overflow: visible !important;
+  /* Cuba handles show/hide via inline styles or class toggling */
+}
+
+/* Top arrow pointer */
+.mm-header .profile-dropdown.onhover-show-div::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -6px !important;
+  right: 20px !important;
+  width: 12px !important;
+  height: 12px !important;
+  background: var(--mm-neutral-0) !important;
+  border-top: 1px solid var(--mm-border-subtle) !important;
+  border-left: 1px solid var(--mm-border-subtle) !important;
+  transform: rotate(45deg) !important;
+  z-index: -1 !important;
+}
+
+/* --- Dropdown Header (user info inside dropdown) --- */
+.mm-header .mm-header__dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-3);
+  margin-bottom: var(--mm-space-1);
+  border-bottom: 1px solid var(--mm-border-subtle);
+}
+
+.mm-header .mm-header__dropdown-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--mm-radius-full);
+  object-fit: cover;
+  border: 2px solid var(--mm-primary-100);
+}
+
+.mm-header .mm-header__dropdown-name {
+  font-family: var(--mm-font-sans);
+  font-weight: 600;
+  font-size: var(--mm-text-sm);
+  color: var(--mm-neutral-800);
+}
+
+.mm-header .mm-header__dropdown-role {
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  color: var(--mm-neutral-500);
+  margin-top: 1px;
+}
+
+/* --- Dropdown Header Item (non-interactive user info at top) --- */
+.mm-header .profile-dropdown li.mm-header__dropdown-header-item {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  cursor: default !important;
+}
+
+.mm-header .profile-dropdown li.mm-header__dropdown-header-item:hover {
+  background: none !important;
+}
+
+/* --- Dropdown Items --- */
+.mm-header .profile-dropdown li {
+  list-style: none !important;
+}
+
+.mm-header .profile-dropdown li + li {
+  margin-top: 1px !important;
+}
+
+.mm-header .profile-dropdown li a {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--mm-space-3) !important;
+  padding: var(--mm-space-2) var(--mm-space-3) !important;
+  border-radius: var(--mm-radius-md) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  font-weight: 500 !important;
+  color: var(--mm-neutral-700) !important;
+  text-decoration: none !important;
+  transition: background var(--mm-duration-fast) ease,
+              color var(--mm-duration-fast) ease !important;
+  white-space: nowrap !important;
+}
+
+.mm-header .profile-dropdown li a:hover {
+  background: var(--mm-neutral-50) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+/* Dropdown item icons */
+.mm-header .profile-dropdown li a svg,
+.mm-header .profile-dropdown li a i {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0 !important;
+  color: var(--mm-neutral-400) !important;
+  stroke: var(--mm-neutral-400) !important;
+  transition: color var(--mm-duration-fast) ease,
+              stroke var(--mm-duration-fast) ease !important;
+}
+
+.mm-header .profile-dropdown li a:hover svg,
+.mm-header .profile-dropdown li a:hover i {
+  color: var(--mm-primary-500) !important;
+  stroke: var(--mm-primary-500) !important;
+}
+
+/* --- Separator before logout --- */
+.mm-header .mm-header__dropdown-separator {
+  height: 1px;
+  background: var(--mm-border-subtle);
+  margin: var(--mm-space-1) var(--mm-space-2);
+}
+
+/* --- Logout Item: Red tint on hover --- */
+.mm-header .mm-header__dropdown-logout a:hover {
+  background: var(--mm-error-light) !important;
+  color: var(--mm-error) !important;
+}
+
+.mm-header .mm-header__dropdown-logout a:hover svg,
+.mm-header .mm-header__dropdown-logout a:hover i {
+  color: var(--mm-error) !important;
+  stroke: var(--mm-error) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   8. RESPONSIVE BEHAVIOR
+   ----------------------------------------------------------------------- */
+
+/* Tablet + smaller desktop: compact profile */
+@media (max-width: 991px) {
+  .mm-header .mm-header__profile-info {
+    display: none !important;
+  }
+
+  .mm-header .mm-header__chevron {
+    display: none !important;
+  }
+
+  .mm-header .profile-nav .media.profile-media {
+    padding: var(--mm-space-1) !important;
+    border-radius: var(--mm-radius-full) !important;
+  }
+}
+
+/* Mobile: more compact header */
+@media (max-width: 767px) {
+  .mm-header.page-header {
+    height: 56px !important;
+  }
+
+  .mm-header .header-wrapper {
+    height: 56px !important;
+    padding: 0 var(--mm-space-4) !important;
+  }
+
+  .mm-header .logo-wrapper a img {
+    max-height: 28px !important;
+  }
+
+  .mm-header .toggle-sidebar {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .mm-header .profile-nav .media.profile-media img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .mm-header .mm-header__dropdown-header {
+    display: flex;
+  }
+
+  .mm-header .profile-dropdown.onhover-show-div {
+    right: -8px !important;
+    min-width: 180px !important;
+  }
+
+  .mm-header .profile-dropdown.onhover-show-div::before {
+    right: 16px !important;
+  }
+}
+
+/* Very small mobile */
+@media (max-width: 480px) {
+  .mm-header .header-wrapper {
+    padding: 0 var(--mm-space-3) !important;
+  }
+}
+
+
+/* -----------------------------------------------------------------------
+   9. ANIMATION / ENTRANCE
+   Subtle fade-in for the dropdown
+   ----------------------------------------------------------------------- */
+@keyframes mm-dropdown-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* When Cuba shows the dropdown (display changes to block) */
+.mm-header .profile-dropdown.onhover-show-div[style*="display: block"],
+.mm-header .profile-dropdown.onhover-show-div[style*="display:block"],
+.mm-header .profile-nav.onhover-dropdown:hover .profile-dropdown.onhover-show-div {
+  animation: mm-dropdown-enter var(--mm-duration-base) var(--mm-ease-spring) forwards !important;
+}
