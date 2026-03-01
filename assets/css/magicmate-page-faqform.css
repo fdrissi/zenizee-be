@@ -1,0 +1,596 @@
+/* =====================================================================
+   MagicMate — FAQ Form (Add / Edit)
+   Custom-built form layout for add/edit FAQ.
+   BEM prefix: mm-faqform__*
+   Uses design tokens from magicmate-tokens.css exclusively.
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-faqform {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER (title + back link)
+   ============================================================= */
+
+.mm-faqform__header {
+  margin-bottom: var(--mm-space-8);
+  animation: mm-faqform-fadeIn 0.4s ease both;
+}
+
+.mm-faqform__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+  margin-bottom: var(--mm-space-4);
+}
+
+.mm-faqform__back:hover {
+  color: var(--mm-primary-600);
+}
+
+.mm-faqform__back svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.mm-faqform__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-3xl);
+  font-weight: 800;
+  color: var(--mm-text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-faqform__subtitle {
+  font-size: var(--mm-text-base);
+  font-weight: 400;
+  color: var(--mm-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+
+/* =============================================================
+   2. FORM CARD
+   ============================================================= */
+
+.mm-faqform__card {
+  background: var(--mm-surface-card);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-2xl);
+  padding: var(--mm-space-10);
+  box-shadow: var(--mm-shadow-sm);
+  animation: mm-faqform-slideUp 0.5s ease 0.1s both;
+  transition: box-shadow var(--mm-duration-slow) ease;
+}
+
+.mm-faqform__card:hover {
+  box-shadow: var(--mm-shadow-md);
+}
+
+
+/* =============================================================
+   3. FORM LAYOUT
+   ============================================================= */
+
+.mm-faqform__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-8);
+}
+
+
+/* =============================================================
+   4. FIELD GROUP
+   ============================================================= */
+
+.mm-faqform__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+.mm-faqform__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  letter-spacing: 0.01em;
+}
+
+.mm-faqform__label-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+  color: var(--mm-primary-500);
+  flex-shrink: 0;
+}
+
+.mm-faqform__label-hint {
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  margin-left: var(--mm-space-1);
+}
+
+
+/* =============================================================
+   5. TEXT INPUT
+   ============================================================= */
+
+.mm-faqform__input {
+  width: 100%;
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 500;
+  color: var(--mm-text-primary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  outline: none;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-faqform__input::placeholder {
+  color: var(--mm-text-tertiary);
+  font-weight: 400;
+}
+
+.mm-faqform__input:hover {
+  border-color: var(--mm-neutral-300);
+}
+
+.mm-faqform__input:focus {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-neutral-0);
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1);
+}
+
+/* Large variant for the question field */
+.mm-faqform__input--lg {
+  padding: var(--mm-space-5) var(--mm-space-6);
+  font-size: var(--mm-text-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-radius: var(--mm-radius-xl);
+}
+
+
+/* =============================================================
+   6. TEXTAREA (Answer field)
+   ============================================================= */
+
+.mm-faqform__textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: var(--mm-space-5) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-base);
+  font-weight: 400;
+  color: var(--mm-text-primary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-xl);
+  outline: none;
+  line-height: 1.7;
+  resize: vertical;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-faqform__textarea::placeholder {
+  color: var(--mm-text-tertiary);
+  font-weight: 400;
+}
+
+.mm-faqform__textarea:hover {
+  border-color: var(--mm-neutral-300);
+}
+
+.mm-faqform__textarea:focus {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-neutral-0);
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1);
+}
+
+
+/* =============================================================
+   7. STATUS TOGGLE (segmented control)
+   ============================================================= */
+
+.mm-faqform__status-group {
+  display: flex;
+  gap: var(--mm-space-3);
+}
+
+.mm-faqform__status-option {
+  flex: 1;
+  position: relative;
+}
+
+.mm-faqform__status-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mm-faqform__status-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  transition:
+    color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    border-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  user-select: none;
+}
+
+.mm-faqform__status-label:hover {
+  border-color: var(--mm-neutral-300);
+  background: var(--mm-neutral-0);
+}
+
+.mm-faqform__status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform var(--mm-duration-fast) var(--mm-ease-spring);
+}
+
+.mm-faqform__status-dot--publish {
+  background: var(--mm-success);
+}
+
+.mm-faqform__status-dot--unpublish {
+  background: var(--mm-neutral-400);
+}
+
+/* Selected state -- Published */
+.mm-faqform__status-option input[type="radio"]:checked + .mm-faqform__status-label--publish {
+  color: var(--mm-success-dark);
+  background: var(--mm-success-light);
+  border-color: var(--mm-success);
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.08);
+}
+
+.mm-faqform__status-option input[type="radio"]:checked + .mm-faqform__status-label--publish .mm-faqform__status-dot {
+  transform: scale(1.3);
+}
+
+/* Selected state -- Unpublished */
+.mm-faqform__status-option input[type="radio"]:checked + .mm-faqform__status-label--unpublish {
+  color: var(--mm-neutral-700);
+  background: var(--mm-neutral-100);
+  border-color: var(--mm-neutral-400);
+  box-shadow: 0 0 0 4px rgba(120, 113, 108, 0.06);
+}
+
+.mm-faqform__status-option input[type="radio"]:checked + .mm-faqform__status-label--unpublish .mm-faqform__status-dot {
+  transform: scale(1.3);
+}
+
+
+/* =============================================================
+   8. DIVIDER
+   ============================================================= */
+
+.mm-faqform__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--mm-border-subtle);
+  border: none;
+  margin: 0;
+}
+
+
+/* =============================================================
+   9. SUBMIT AREA
+   ============================================================= */
+
+.mm-faqform__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+  padding-top: var(--mm-space-2);
+}
+
+.mm-faqform__submit {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-5) var(--mm-space-8);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring),
+    box-shadow var(--mm-duration-base) ease;
+  box-shadow: 0 4px 16px rgba(216, 136, 39, 0.25), 0 1px 4px rgba(216, 136, 39, 0.15);
+}
+
+.mm-faqform__submit:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(216, 136, 39, 0.35), 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-faqform__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-faqform__submit svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.mm-faqform__cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-3) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+}
+
+.mm-faqform__cancel:hover {
+  color: var(--mm-text-primary);
+}
+
+
+/* =============================================================
+   10. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-faqform-fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mm-faqform-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =============================================================
+   11. RESPONSIVE -- Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-faqform {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-faqform__card {
+    padding: var(--mm-space-8);
+  }
+}
+
+
+/* =============================================================
+   12. RESPONSIVE -- Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-faqform {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    max-width: 100%;
+  }
+
+  .mm-faqform__card {
+    padding: var(--mm-space-6);
+    border-radius: var(--mm-radius-xl);
+  }
+
+  .mm-faqform__title {
+    font-size: var(--mm-text-2xl);
+  }
+
+  .mm-faqform__input--lg {
+    padding: var(--mm-space-4) var(--mm-space-5);
+    font-size: var(--mm-text-lg);
+  }
+
+  .mm-faqform__textarea {
+    padding: var(--mm-space-4) var(--mm-space-4);
+    min-height: 150px;
+  }
+
+  .mm-faqform__status-group {
+    flex-direction: column;
+  }
+}
+
+
+/* =============================================================
+   13. RESPONSIVE -- Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-faqform {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-faqform__header {
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-faqform__card {
+    padding: var(--mm-space-5);
+    border-radius: var(--mm-radius-lg);
+  }
+
+  .mm-faqform__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-faqform__form {
+    gap: var(--mm-space-6);
+  }
+
+  .mm-faqform__input--lg {
+    font-size: var(--mm-text-md);
+  }
+
+  .mm-faqform__textarea {
+    min-height: 120px;
+    font-size: var(--mm-text-sm);
+  }
+}
+
+
+/* =============================================================
+   14. DARK MODE KILL (light only)
+   ============================================================= */
+
+body.dark-only .mm-faqform__card {
+  background: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-faqform__input,
+body.dark-only .mm-faqform__textarea {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-faqform__title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-faqform__label {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-faqform__status-label {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-secondary) !important;
+}
+
+body.dark-only .mm-faqform__status-option input[type="radio"]:checked + .mm-faqform__status-label--publish {
+  background: var(--mm-success-light) !important;
+  border-color: var(--mm-success) !important;
+  color: var(--mm-success-dark) !important;
+}
+
+body.dark-only .mm-faqform__status-option input[type="radio"]:checked + .mm-faqform__status-label--unpublish {
+  background: var(--mm-neutral-100) !important;
+  border-color: var(--mm-neutral-400) !important;
+  color: var(--mm-neutral-700) !important;
+}
+
+
+/* =============================================================
+   15. CUBA OVERRIDE -- Scoped to .mm-faqform
+   ============================================================= */
+
+/* Kill any inherited Cuba card/form styles */
+.mm-faqform .card,
+.mm-faqform .card-body,
+.mm-faqform .card-footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.mm-faqform .form-group {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mm-faqform .form-control {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.mm-faqform .page-title {
+  display: none !important;
+}
+
+.mm-faqform .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.mm-faqform .size-column {
+  display: contents !important;
+}
+
+.mm-faqform .col-sm-12 {
+  display: contents !important;
+  padding: 0 !important;
+  max-width: none !important;
+  flex: none !important;
+}
+
+.mm-faqform .row {
+  display: contents !important;
+}
