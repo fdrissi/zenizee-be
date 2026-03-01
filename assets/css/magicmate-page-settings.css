@@ -699,8 +699,10 @@
 }
 
 .mm-settings .select2-container--default .select2-selection--single {
-  height: auto;
-  padding: var(--mm-space-4) var(--mm-space-5);
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--mm-space-5);
   font-family: var(--mm-font-sans);
   font-size: var(--mm-text-md);
   font-weight: 500;
@@ -728,10 +730,12 @@
 
 .mm-settings .select2-container--default .select2-selection--single .select2-selection__rendered {
   padding: 0;
-  line-height: 1.5;
+  line-height: 48px;
   color: var(--mm-text-primary);
   font-size: var(--mm-text-md);
   font-weight: 500;
+  display: flex;
+  align-items: center;
 }
 
 .mm-settings .select2-container--default .select2-selection--single .select2-selection__placeholder {
@@ -743,6 +747,9 @@
   height: 100%;
   top: 0;
   right: var(--mm-space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mm-settings .select2-container--default .select2-selection--single .select2-selection__arrow b {
