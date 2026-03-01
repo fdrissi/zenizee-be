@@ -1573,3 +1573,1954 @@ body.dark-only .page-wrapper .page-body-wrapper .page-body .card:not(.email-body
   display: none !important;
   content: none !important;
 }
+
+
+/* ========== PHASE 2 — CORE COMPONENTS ========== */
+/* Comprehensive re-skin of all reusable Bootstrap / Cuba components
+   to match the MagicMate front-office warm gold aesthetic.
+   Uses design tokens from magicmate-tokens.css exclusively.
+   ----------------------------------------------------------------------- */
+
+
+/* -----------------------------------------------------------------------
+   2-1. BUTTONS
+   ----------------------------------------------------------------------- */
+
+/* --- 2-1a. Base button reset --- */
+.btn {
+  font-family: var(--mm-font-sans) !important;
+  font-weight: 600 !important;
+  border-radius: var(--mm-radius-md) !important;
+  transition: all var(--mm-duration-base) ease !important;
+  -webkit-tap-highlight-color: transparent;
+  letter-spacing: 0.01em;
+  line-height: 1.5 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sizing consistency */
+.btn.btn-xs {
+  padding: 4px 10px !important;
+  font-size: var(--mm-text-xs) !important;
+}
+.btn.btn-sm,
+.btn-group-sm > .btn {
+  padding: 6px 14px !important;
+  font-size: var(--mm-text-sm) !important;
+}
+.btn:not(.btn-xs):not(.btn-sm):not(.btn-lg):not(.btn-xl) {
+  padding: 8px 20px !important;
+  font-size: var(--mm-text-base) !important;
+}
+.btn.btn-lg,
+.btn-group-lg > .btn {
+  padding: 12px 28px !important;
+  font-size: var(--mm-text-md) !important;
+}
+
+/* --- 2-1b. Primary button --- */
+.btn-primary {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+.btn-primary:hover {
+  background-color: var(--mm-primary-600) !important;
+  border-color: var(--mm-primary-600) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-md) !important;
+  transform: translateY(-1px);
+}
+.btn-primary:focus,
+.btn-primary:focus-visible {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.3) !important;
+  outline: none !important;
+}
+.btn-primary:active,
+.btn-primary.active {
+  background-color: var(--mm-primary-700) !important;
+  border-color: var(--mm-primary-700) !important;
+  box-shadow: var(--mm-shadow-xs) !important;
+  transform: translateY(0);
+}
+.btn-primary:not([disabled]):not(.disabled).active {
+  background-color: var(--mm-primary-700) !important;
+  border-color: var(--mm-primary-700) !important;
+}
+.btn-primary:not([disabled]):not(.disabled).active:hover,
+.btn-primary:not([disabled]):not(.disabled).active:focus,
+.btn-primary:not([disabled]):not(.disabled).active:active {
+  background-color: var(--mm-primary-700) !important;
+  border-color: var(--mm-primary-700) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.btn-primary.disabled,
+.btn-primary:disabled {
+  background-color: var(--mm-primary-300) !important;
+  border-color: var(--mm-primary-300) !important;
+  color: var(--mm-neutral-0) !important;
+  opacity: 0.7 !important;
+  cursor: not-allowed;
+  box-shadow: none !important;
+}
+
+/* --- 2-1c. Secondary button --- */
+.btn-secondary {
+  background-color: var(--mm-primary-600) !important;
+  border-color: var(--mm-primary-600) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+.btn-secondary:hover {
+  background-color: var(--mm-primary-700) !important;
+  border-color: var(--mm-primary-700) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-md) !important;
+  transform: translateY(-1px);
+}
+.btn-secondary:focus,
+.btn-secondary:focus-visible {
+  background-color: var(--mm-primary-600) !important;
+  border-color: var(--mm-primary-600) !important;
+  box-shadow: 0 0 0 3px rgba(184, 114, 31, 0.3) !important;
+  outline: none !important;
+}
+.btn-secondary:active,
+.btn-secondary.active {
+  background-color: var(--mm-primary-800) !important;
+  border-color: var(--mm-primary-800) !important;
+  transform: translateY(0);
+}
+.btn-secondary:not([disabled]):not(.disabled).active {
+  background-color: var(--mm-primary-800) !important;
+  border-color: var(--mm-primary-800) !important;
+}
+.btn-secondary:not([disabled]):not(.disabled).active:hover,
+.btn-secondary:not([disabled]):not(.disabled).active:focus,
+.btn-secondary:not([disabled]):not(.disabled).active:active {
+  background-color: var(--mm-primary-800) !important;
+  border-color: var(--mm-primary-800) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.btn-secondary.disabled,
+.btn-secondary:disabled {
+  background-color: var(--mm-primary-300) !important;
+  border-color: var(--mm-primary-300) !important;
+  opacity: 0.7 !important;
+  box-shadow: none !important;
+}
+
+/* --- 2-1d. Success button --- */
+.btn-success {
+  background-color: var(--mm-success) !important;
+  border-color: var(--mm-success) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+.btn-success:hover {
+  background-color: var(--mm-success-dark) !important;
+  border-color: var(--mm-success-dark) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-md) !important;
+  transform: translateY(-1px);
+}
+.btn-success:focus,
+.btn-success:focus-visible {
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.3) !important;
+  outline: none !important;
+}
+.btn-success:active,
+.btn-success.active {
+  background-color: var(--mm-success-dark) !important;
+  border-color: var(--mm-success-dark) !important;
+  transform: translateY(0);
+}
+.btn-success:not([disabled]):not(.disabled).active {
+  background-color: var(--mm-success-dark) !important;
+  border-color: var(--mm-success-dark) !important;
+}
+.btn-success.disabled,
+.btn-success:disabled {
+  background-color: var(--mm-success) !important;
+  border-color: var(--mm-success) !important;
+  opacity: 0.6 !important;
+  box-shadow: none !important;
+}
+
+/* --- 2-1e. Danger button --- */
+.btn-danger {
+  background-color: var(--mm-error) !important;
+  border-color: var(--mm-error) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+.btn-danger:hover {
+  background-color: var(--mm-error-dark) !important;
+  border-color: var(--mm-error-dark) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-md) !important;
+  transform: translateY(-1px);
+}
+.btn-danger:focus,
+.btn-danger:focus-visible {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.3) !important;
+  outline: none !important;
+}
+.btn-danger:active,
+.btn-danger.active {
+  background-color: var(--mm-error-dark) !important;
+  border-color: var(--mm-error-dark) !important;
+  transform: translateY(0);
+}
+.btn-danger:not([disabled]):not(.disabled).active {
+  background-color: var(--mm-error-dark) !important;
+  border-color: var(--mm-error-dark) !important;
+}
+.btn-danger.disabled,
+.btn-danger:disabled {
+  background-color: var(--mm-error) !important;
+  border-color: var(--mm-error) !important;
+  opacity: 0.6 !important;
+  box-shadow: none !important;
+}
+
+/* --- 2-1f. Warning button --- */
+.btn-warning {
+  background-color: var(--mm-warning) !important;
+  border-color: var(--mm-warning) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+.btn-warning:hover {
+  background-color: var(--mm-warning-dark) !important;
+  border-color: var(--mm-warning-dark) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-md) !important;
+  transform: translateY(-1px);
+}
+.btn-warning:focus,
+.btn-warning:focus-visible {
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3) !important;
+  outline: none !important;
+}
+.btn-warning:active,
+.btn-warning.active {
+  background-color: var(--mm-warning-dark) !important;
+  border-color: var(--mm-warning-dark) !important;
+  transform: translateY(0);
+}
+.btn-warning.disabled,
+.btn-warning:disabled {
+  background-color: var(--mm-warning) !important;
+  border-color: var(--mm-warning) !important;
+  opacity: 0.6 !important;
+  box-shadow: none !important;
+}
+
+/* --- 2-1g. Info button --- */
+.btn-info {
+  background-color: var(--mm-info) !important;
+  border-color: var(--mm-info) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+.btn-info:hover {
+  background-color: var(--mm-info-dark) !important;
+  border-color: var(--mm-info-dark) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-md) !important;
+  transform: translateY(-1px);
+}
+.btn-info:focus,
+.btn-info:focus-visible {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
+  outline: none !important;
+}
+.btn-info:active,
+.btn-info.active {
+  background-color: var(--mm-info-dark) !important;
+  border-color: var(--mm-info-dark) !important;
+  transform: translateY(0);
+}
+.btn-info.disabled,
+.btn-info:disabled {
+  background-color: var(--mm-info) !important;
+  border-color: var(--mm-info) !important;
+  opacity: 0.6 !important;
+  box-shadow: none !important;
+}
+
+/* --- 2-1h. Light button --- */
+.btn-light {
+  background-color: var(--mm-neutral-100) !important;
+  border-color: var(--mm-neutral-200) !important;
+  color: var(--mm-neutral-700) !important;
+  box-shadow: none !important;
+}
+.btn-light:hover {
+  background-color: var(--mm-neutral-200) !important;
+  border-color: var(--mm-neutral-300) !important;
+  color: var(--mm-neutral-800) !important;
+  transform: translateY(-1px);
+}
+.btn-light:focus,
+.btn-light:focus-visible {
+  box-shadow: 0 0 0 3px rgba(168, 162, 158, 0.2) !important;
+  outline: none !important;
+}
+
+/* --- 2-1i. Dark button --- */
+.btn-dark {
+  background-color: var(--mm-neutral-800) !important;
+  border-color: var(--mm-neutral-800) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+.btn-dark:hover {
+  background-color: var(--mm-neutral-900) !important;
+  border-color: var(--mm-neutral-900) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-md) !important;
+  transform: translateY(-1px);
+}
+.btn-dark:focus,
+.btn-dark:focus-visible {
+  box-shadow: 0 0 0 3px rgba(41, 37, 36, 0.3) !important;
+  outline: none !important;
+}
+
+/* --- 2-1j. Outline Primary --- */
+.btn-outline-primary {
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-primary-500) !important;
+  background-color: transparent !important;
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-md) !important;
+}
+.btn-outline-primary.disabled {
+  color: var(--mm-primary-300) !important;
+  border-color: var(--mm-primary-300) !important;
+}
+
+/* --- 2-1k. Outline Secondary --- */
+.btn-outline-secondary {
+  border-color: var(--mm-primary-600) !important;
+  color: var(--mm-primary-600) !important;
+  background-color: transparent !important;
+}
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus,
+.btn-outline-secondary:active,
+.btn-outline-secondary.active {
+  background-color: var(--mm-primary-600) !important;
+  border-color: var(--mm-primary-600) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.btn-outline-secondary.disabled {
+  color: var(--mm-primary-300) !important;
+  border-color: var(--mm-primary-300) !important;
+}
+
+/* --- 2-1l. Outline Success --- */
+.btn-outline-success {
+  border-color: var(--mm-success) !important;
+  color: var(--mm-success) !important;
+  background-color: transparent !important;
+}
+.btn-outline-success:hover,
+.btn-outline-success:focus,
+.btn-outline-success:active,
+.btn-outline-success.active {
+  background-color: var(--mm-success) !important;
+  border-color: var(--mm-success) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.btn-outline-success.disabled {
+  color: var(--mm-success) !important;
+  opacity: 0.5;
+}
+
+/* --- 2-1m. Outline Danger --- */
+.btn-outline-danger {
+  border-color: var(--mm-error) !important;
+  color: var(--mm-error) !important;
+  background-color: transparent !important;
+}
+.btn-outline-danger:hover,
+.btn-outline-danger:focus,
+.btn-outline-danger:active,
+.btn-outline-danger.active {
+  background-color: var(--mm-error) !important;
+  border-color: var(--mm-error) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.btn-outline-danger.disabled {
+  color: var(--mm-error) !important;
+  opacity: 0.5;
+}
+
+/* --- 2-1n. Outline Info --- */
+.btn-outline-info {
+  border-color: var(--mm-info) !important;
+  color: var(--mm-info) !important;
+  background-color: transparent !important;
+}
+.btn-outline-info:hover,
+.btn-outline-info:focus,
+.btn-outline-info:active,
+.btn-outline-info.active {
+  background-color: var(--mm-info) !important;
+  border-color: var(--mm-info) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.btn-outline-info.disabled {
+  color: var(--mm-info) !important;
+  opacity: 0.5;
+}
+
+/* --- 2-1o. Outline Warning --- */
+.btn-outline-warning {
+  border-color: var(--mm-warning) !important;
+  color: var(--mm-warning) !important;
+  background-color: transparent !important;
+}
+.btn-outline-warning:hover,
+.btn-outline-warning:focus,
+.btn-outline-warning:active,
+.btn-outline-warning.active {
+  background-color: var(--mm-warning) !important;
+  border-color: var(--mm-warning) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.btn-outline-warning.disabled {
+  color: var(--mm-warning) !important;
+  opacity: 0.5;
+}
+
+/* --- 2-1p. Outline Light --- */
+.btn-outline-light {
+  border-color: var(--mm-neutral-200) !important;
+  color: var(--mm-neutral-600) !important;
+  background-color: transparent !important;
+}
+.btn-outline-light:hover,
+.btn-outline-light:focus,
+.btn-outline-light:active,
+.btn-outline-light.active {
+  background-color: var(--mm-neutral-100) !important;
+  border-color: var(--mm-neutral-300) !important;
+  color: var(--mm-neutral-800) !important;
+}
+
+/* --- 2-1q. Outline Dark --- */
+.btn-outline-dark {
+  border-color: var(--mm-neutral-700) !important;
+  color: var(--mm-neutral-700) !important;
+  background-color: transparent !important;
+}
+.btn-outline-dark:hover,
+.btn-outline-dark:focus,
+.btn-outline-dark:active,
+.btn-outline-dark.active {
+  background-color: var(--mm-neutral-800) !important;
+  border-color: var(--mm-neutral-800) !important;
+  color: var(--mm-neutral-0) !important;
+}
+
+/* --- 2-1r. Button groups --- */
+.btn-group > .btn,
+.btn-group-vertical > .btn {
+  border-radius: 0 !important;
+}
+.btn-group > .btn:first-child,
+.btn-group-vertical > .btn:first-child {
+  border-top-left-radius: var(--mm-radius-md) !important;
+  border-bottom-left-radius: var(--mm-radius-md) !important;
+}
+.btn-group > .btn:last-child,
+.btn-group-vertical > .btn:last-child {
+  border-top-right-radius: var(--mm-radius-md) !important;
+  border-bottom-right-radius: var(--mm-radius-md) !important;
+}
+.btn-group > .btn + .btn {
+  margin-left: -1px;
+}
+
+/* --- 2-1s. Gradient buttons (Cuba-specific) --- */
+.btn-primary-gradien {
+  background: var(--mm-gradient-primary) !important;
+  border: none !important;
+  color: var(--mm-neutral-0) !important;
+  border-radius: var(--mm-radius-md) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+.btn-primary-gradien:hover {
+  background: var(--mm-gradient-primary-hover) !important;
+  box-shadow: var(--mm-shadow-md) !important;
+  transform: translateY(-1px);
+}
+
+
+/* -----------------------------------------------------------------------
+   2-2. CARDS
+   ----------------------------------------------------------------------- */
+
+/* --- 2-2a. Base card --- */
+.card {
+  background-color: var(--mm-surface-card) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  box-shadow: var(--mm-shadow-xs) !important;
+  transition: box-shadow var(--mm-duration-base) ease, transform var(--mm-duration-base) ease !important;
+  margin-bottom: var(--mm-space-6) !important;
+  overflow: hidden;
+}
+.card:hover {
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+
+/* --- 2-2b. Card header --- */
+.card .card-header {
+  background-color: var(--mm-surface-card) !important;
+  border-bottom: 1px solid var(--mm-border-default) !important;
+  padding: var(--mm-space-5) var(--mm-space-6) !important;
+  border-top-left-radius: var(--mm-radius-lg) !important;
+  border-top-right-radius: var(--mm-radius-lg) !important;
+}
+.card .card-header h4,
+.card .card-header h5,
+.card .card-header h6 {
+  font-family: var(--mm-font-display) !important;
+  font-weight: 700 !important;
+  color: var(--mm-text-primary) !important;
+  margin-bottom: 0 !important;
+  letter-spacing: -0.01em;
+}
+.card .card-header > span {
+  font-size: var(--mm-text-sm) !important;
+  color: var(--mm-text-secondary) !important;
+  letter-spacing: 0 !important;
+}
+.card .card-header.card-no-border {
+  border-bottom: none !important;
+}
+.card .card-header .card-header-right {
+  background-color: var(--mm-surface-card) !important;
+}
+.card .card-header .card-header-right i {
+  color: var(--mm-neutral-500) !important;
+  transition: color var(--mm-duration-fast) ease;
+}
+.card .card-header .card-header-right i:hover {
+  color: var(--mm-primary-500) !important;
+}
+
+/* --- 2-2c. Card body --- */
+.card .card-body {
+  padding: var(--mm-space-6) !important;
+  background-color: transparent !important;
+}
+
+/* --- 2-2d. Card footer --- */
+.card .card-footer {
+  background-color: var(--mm-neutral-50) !important;
+  border-top: 1px solid var(--mm-border-default) !important;
+  padding: var(--mm-space-4) var(--mm-space-6) !important;
+  border-bottom-left-radius: var(--mm-radius-lg) !important;
+  border-bottom-right-radius: var(--mm-radius-lg) !important;
+}
+
+/* --- 2-2e. Dark mode card override (kill Cuba dark) --- */
+body.dark-only .page-wrapper .page-body-wrapper .page-body .card:not(.email-body) {
+  background-color: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+  box-shadow: var(--mm-shadow-xs) !important;
+}
+body.dark-only .card .card-header,
+body.dark-only .card .card-footer {
+  background-color: var(--mm-surface-card) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2-3. FORMS
+   ----------------------------------------------------------------------- */
+
+/* --- 2-3a. Form controls --- */
+.form-control {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+  color: var(--mm-text-primary) !important;
+  background-color: var(--mm-neutral-0) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  padding: 8px 14px !important;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease !important;
+  height: auto !important;
+  min-height: 40px;
+}
+.form-control::placeholder {
+  color: var(--mm-text-tertiary) !important;
+  font-weight: 400;
+}
+.form-control:focus {
+  border-color: var(--mm-primary-400) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.15) !important;
+  outline: none !important;
+  background-color: var(--mm-neutral-0) !important;
+}
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: var(--mm-neutral-100) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-secondary) !important;
+  opacity: 1 !important;
+}
+textarea.form-control {
+  min-height: 80px;
+}
+
+/* --- 2-3b. Form select --- */
+.form-select {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+  color: var(--mm-text-primary) !important;
+  background-color: var(--mm-neutral-0) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  padding: 8px 36px 8px 14px !important;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease !important;
+  min-height: 40px;
+}
+.form-select:focus {
+  border-color: var(--mm-primary-400) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.15) !important;
+  outline: none !important;
+}
+
+/* --- 2-3c. Form labels --- */
+.form-label,
+label:not(.btn):not(.custom-control-label):not(.form-check-label) {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  font-weight: 600 !important;
+  color: var(--mm-neutral-600) !important;
+  margin-bottom: 6px !important;
+}
+
+/* --- 2-3d. Checkboxes & radios --- */
+.form-check-input {
+  border-color: var(--mm-neutral-300) !important;
+  border-radius: var(--mm-radius-xs) !important;
+  width: 18px !important;
+  height: 18px !important;
+  transition: background-color var(--mm-duration-fast) ease, border-color var(--mm-duration-fast) ease !important;
+}
+.form-check-input[type="radio"] {
+  border-radius: 50% !important;
+}
+.form-check-input:checked {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+}
+.form-check-input:focus {
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.2) !important;
+  border-color: var(--mm-primary-400) !important;
+}
+.form-check-input:checked[type=checkbox] {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+}
+.form-check-label {
+  font-family: var(--mm-font-sans) !important;
+  color: var(--mm-text-primary) !important;
+  font-size: var(--mm-text-base) !important;
+  margin-left: 4px;
+}
+
+/* --- 2-3e. Form validation --- */
+.form-control.is-valid,
+.was-validated .form-control:valid {
+  border-color: var(--mm-success) !important;
+}
+.form-control.is-valid:focus,
+.was-validated .form-control:valid:focus {
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15) !important;
+}
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+  border-color: var(--mm-error) !important;
+}
+.form-control.is-invalid:focus,
+.was-validated .form-control:invalid:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15) !important;
+}
+.valid-feedback {
+  color: var(--mm-success) !important;
+  font-size: var(--mm-text-sm) !important;
+}
+.invalid-feedback {
+  color: var(--mm-error) !important;
+  font-size: var(--mm-text-sm) !important;
+}
+
+/* --- 2-3f. Input groups --- */
+.input-group-text {
+  background-color: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-secondary) !important;
+  font-size: var(--mm-text-base) !important;
+  border-radius: var(--mm-radius-md) !important;
+}
+.input-group > .form-control:not(:first-child),
+.input-group > .form-select:not(:first-child) {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+.input-group > .form-control:not(:last-child),
+.input-group > .form-select:not(:last-child) {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+/* --- 2-3g. Theme-form Cuba override --- */
+.theme-form .form-control:focus {
+  border-color: var(--mm-primary-400) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.15) !important;
+}
+.theme-form select.form-control:not([size]):not([multiple]) {
+  border-color: var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+}
+
+/* Cuba dark mode form overrides */
+body.dark-only .form-control,
+body.dark-only .form-select {
+  background-color: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2-4. TABLES & DATATABLES
+   ----------------------------------------------------------------------- */
+
+/* --- 2-4a. Base table --- */
+.table {
+  font-family: var(--mm-font-sans) !important;
+  color: var(--mm-text-primary) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+.table > thead > tr > th,
+.table > thead > tr > td {
+  background-color: var(--mm-neutral-50) !important;
+  font-family: var(--mm-font-display) !important;
+  font-weight: 600 !important;
+  font-size: var(--mm-text-sm) !important;
+  color: var(--mm-neutral-600) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 12px 16px !important;
+  border-bottom: 2px solid var(--mm-border-default) !important;
+  border-top: none !important;
+  white-space: nowrap;
+}
+.table > tbody > tr > td,
+.table > tbody > tr > th {
+  padding: 12px 16px !important;
+  vertical-align: middle !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  font-size: var(--mm-text-base) !important;
+  color: var(--mm-text-primary) !important;
+}
+.table > tbody > tr:last-child > td {
+  border-bottom: none !important;
+}
+
+/* --- 2-4b. Striped table --- */
+.table-striped > tbody > tr:nth-of-type(odd) > td,
+.table-striped > tbody > tr:nth-of-type(odd) > th {
+  background-color: var(--mm-neutral-50) !important;
+}
+.table-striped > tbody > tr:nth-of-type(even) > td,
+.table-striped > tbody > tr:nth-of-type(even) > th {
+  background-color: var(--mm-neutral-0) !important;
+}
+
+/* --- 2-4c. Hover table --- */
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+  background-color: var(--mm-primary-50) !important;
+  transition: background-color var(--mm-duration-fast) ease;
+}
+
+/* --- 2-4d. Bordered table --- */
+.table-bordered,
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tbody > tr > th {
+  border-color: var(--mm-border-default) !important;
+}
+
+/* --- 2-4e. DataTables wrapper --- */
+.dataTables_wrapper {
+  font-family: var(--mm-font-sans) !important;
+}
+.dataTables_wrapper table.dataTable {
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  overflow: hidden;
+}
+.dataTables_wrapper table.dataTable thead th,
+.dataTables_wrapper table.dataTable thead td {
+  background-color: var(--mm-neutral-50) !important;
+  font-family: var(--mm-font-display) !important;
+  font-weight: 600 !important;
+  font-size: var(--mm-text-sm) !important;
+  color: var(--mm-neutral-600) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 12px 16px !important;
+  border-bottom: 2px solid var(--mm-border-default) !important;
+}
+.dataTables_wrapper table.dataTable tbody td {
+  padding: 12px 16px !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  font-size: var(--mm-text-base) !important;
+}
+.dataTables_wrapper table.dataTable tbody tr:hover td {
+  background-color: var(--mm-primary-50) !important;
+}
+.dataTables_wrapper table.dataTable tbody tr.odd td {
+  background-color: var(--mm-neutral-50);
+}
+.dataTables_wrapper table.dataTable tbody tr.even td {
+  background-color: var(--mm-neutral-0);
+}
+.dataTables_wrapper table.dataTable tbody tr.odd:hover td,
+.dataTables_wrapper table.dataTable tbody tr.even:hover td {
+  background-color: var(--mm-primary-50) !important;
+}
+
+/* --- 2-4f. DataTables pagination --- */
+.dataTables_wrapper .dataTables_paginate {
+  border: none !important;
+  border-radius: var(--mm-radius-md) !important;
+  padding: var(--mm-space-3) 0 !important;
+  margin-top: var(--mm-space-4) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-end;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  font-weight: 500 !important;
+  padding: 6px 12px !important;
+  margin: 0 2px !important;
+  border-radius: var(--mm-radius-sm) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  color: var(--mm-text-secondary) !important;
+  background: var(--mm-neutral-0) !important;
+  transition: all var(--mm-duration-fast) ease !important;
+  cursor: pointer;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+  background: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+  font-weight: 600 !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-300) !important;
+  color: var(--mm-primary-700) !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  background: var(--mm-primary-600) !important;
+  border-color: var(--mm-primary-600) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+  color: var(--mm-text-tertiary) !important;
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-subtle) !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+/* --- 2-4g. DataTables search input --- */
+.dataTables_wrapper .dataTables_filter {
+  margin-bottom: var(--mm-space-5) !important;
+}
+.dataTables_wrapper .dataTables_filter input[type=search] {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  padding: 8px 14px !important;
+  height: 40px !important;
+  background-color: var(--mm-neutral-0) !important;
+  color: var(--mm-text-primary) !important;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease !important;
+}
+.dataTables_wrapper .dataTables_filter input[type=search]:focus {
+  border-color: var(--mm-primary-400) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.15) !important;
+  outline: none !important;
+}
+.dataTables_wrapper .dataTables_filter label {
+  font-family: var(--mm-font-sans) !important;
+  color: var(--mm-text-secondary) !important;
+  font-weight: 500 !important;
+}
+
+/* --- 2-4h. DataTables length selector --- */
+.dataTables_wrapper .dataTables_length {
+  margin-bottom: var(--mm-space-5) !important;
+}
+.dataTables_wrapper .dataTables_length label {
+  font-family: var(--mm-font-sans) !important;
+  color: var(--mm-text-secondary) !important;
+  font-weight: 500 !important;
+}
+.dataTables_wrapper .dataTables_length select {
+  font-family: var(--mm-font-sans) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  padding: 4px 10px !important;
+  height: 36px !important;
+  background-color: var(--mm-neutral-0) !important;
+  color: var(--mm-text-primary) !important;
+}
+.dataTables_wrapper .dataTables_length select:focus {
+  border-color: var(--mm-primary-400) !important;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.15) !important;
+  outline: none !important;
+}
+
+/* --- 2-4i. DataTables info --- */
+.dataTables_wrapper .dataTables_info {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  color: var(--mm-text-secondary) !important;
+  padding-top: var(--mm-space-3) !important;
+}
+
+/* --- 2-4j. dt-ext pagination (extended DataTables) --- */
+.dt-ext .dataTables_wrapper .dataTables_paginate .paginate_button {
+  border-radius: var(--mm-radius-sm) !important;
+  margin: 0 2px !important;
+}
+.dt-ext .dataTables_wrapper .dataTables_paginate .page-link {
+  color: var(--mm-text-secondary) !important;
+  border-color: var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-sm) !important;
+}
+.dt-ext .dataTables_wrapper .dataTables_paginate .page-item.active .page-link {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-neutral-0) !important;
+}
+
+/* Cuba dark mode table overrides */
+body.dark-only .page-wrapper .page-body-wrapper .page-body .card:not(.email-body) .dataTables_wrapper .dataTables_length select {
+  background-color: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+body.dark-only .page-wrapper .page-body-wrapper .page-body .card:not(.email-body) .dataTables_wrapper .dataTables_filter input[type=search] {
+  background-color: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+body.dark-only .page-wrapper .page-body-wrapper .page-body .card:not(.email-body) .dataTables_wrapper .dataTables_paginate .paginate_button {
+  color: var(--mm-text-secondary) !important;
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+}
+body.dark-only .page-wrapper .page-body-wrapper .page-body .card:not(.email-body) .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+body.dark-only .page-wrapper .page-body-wrapper .page-body .card:not(.email-body) .dataTables_wrapper .dataTables_paginate .paginate_button:active {
+  background: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-neutral-0) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2-5. BADGES & LABELS
+   ----------------------------------------------------------------------- */
+
+/* --- 2-5a. Base badge --- */
+.badge {
+  font-family: var(--mm-font-sans) !important;
+  font-weight: 600 !important;
+  font-size: var(--mm-text-xs) !important;
+  letter-spacing: 0.02em;
+  padding: 4px 10px !important;
+  border-radius: var(--mm-radius-full) !important;
+  line-height: 1.4;
+}
+
+/* --- 2-5b. Solid badge variants --- */
+.badge-primary,
+.badge.bg-primary,
+.badge.badge-primary {
+  background-color: var(--mm-primary-500) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.badge-secondary,
+.badge.bg-secondary,
+.badge.badge-secondary {
+  background-color: var(--mm-primary-600) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.badge-success,
+.badge.bg-success,
+.badge.badge-success {
+  background-color: var(--mm-success) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.badge-danger,
+.badge.bg-danger,
+.badge.badge-danger {
+  background-color: var(--mm-error) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.badge-warning,
+.badge.bg-warning,
+.badge.badge-warning {
+  background-color: var(--mm-warning) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.badge-info,
+.badge.bg-info,
+.badge.badge-info {
+  background-color: var(--mm-info) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.badge-light,
+.badge.bg-light,
+.badge.badge-light {
+  background-color: var(--mm-neutral-100) !important;
+  color: var(--mm-neutral-700) !important;
+}
+.badge-dark,
+.badge.bg-dark,
+.badge.badge-dark {
+  background-color: var(--mm-neutral-800) !important;
+  color: var(--mm-neutral-0) !important;
+}
+
+/* --- 2-5c. Soft / light badge variants --- */
+.badge.badge-light-primary,
+.badge-soft-primary {
+  background-color: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+.badge.badge-light-secondary,
+.badge-soft-secondary {
+  background-color: var(--mm-primary-100) !important;
+  color: var(--mm-primary-800) !important;
+}
+.badge.badge-light-success,
+.badge-soft-success {
+  background-color: var(--mm-success-light) !important;
+  color: var(--mm-success-dark) !important;
+}
+.badge.badge-light-danger,
+.badge-soft-danger {
+  background-color: var(--mm-error-light) !important;
+  color: var(--mm-error-dark) !important;
+}
+.badge.badge-light-warning,
+.badge-soft-warning {
+  background-color: var(--mm-warning-light) !important;
+  color: var(--mm-warning-dark) !important;
+}
+.badge.badge-light-info,
+.badge-soft-info {
+  background-color: var(--mm-info-light) !important;
+  color: var(--mm-info-dark) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2-6. ALERTS
+   ----------------------------------------------------------------------- */
+
+/* --- 2-6a. Base alert --- */
+.alert {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+  border-radius: var(--mm-radius-md) !important;
+  padding: var(--mm-space-4) var(--mm-space-5) !important;
+  border-width: 1px !important;
+  border-left-width: 4px !important;
+}
+
+/* --- 2-6b. Alert Primary --- */
+.alert-primary {
+  background-color: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-200) !important;
+  border-left-color: var(--mm-primary-500) !important;
+  color: var(--mm-primary-800) !important;
+}
+.alert-primary .alert-link {
+  color: var(--mm-primary-700) !important;
+  font-weight: 700;
+}
+.alert-primary .btn-close {
+  filter: none !important;
+}
+.alert-primary hr {
+  border-top-color: var(--mm-primary-200) !important;
+}
+
+/* --- 2-6c. Alert Secondary --- */
+.alert-secondary {
+  background-color: var(--mm-primary-100) !important;
+  border-color: var(--mm-primary-200) !important;
+  border-left-color: var(--mm-primary-600) !important;
+  color: var(--mm-primary-800) !important;
+}
+.alert-secondary .alert-link {
+  color: var(--mm-primary-700) !important;
+}
+
+/* --- 2-6d. Alert Success --- */
+.alert-success {
+  background-color: var(--mm-success-light) !important;
+  border-color: #bbf7d0 !important;
+  border-left-color: var(--mm-success) !important;
+  color: var(--mm-success-dark) !important;
+}
+.alert-success .alert-link {
+  color: var(--mm-success-dark) !important;
+}
+
+/* --- 2-6e. Alert Danger --- */
+.alert-danger {
+  background-color: var(--mm-error-light) !important;
+  border-color: #fecaca !important;
+  border-left-color: var(--mm-error) !important;
+  color: var(--mm-error-dark) !important;
+}
+.alert-danger .alert-link {
+  color: var(--mm-error-dark) !important;
+}
+
+/* --- 2-6f. Alert Warning --- */
+.alert-warning {
+  background-color: var(--mm-warning-light) !important;
+  border-color: #fde68a !important;
+  border-left-color: var(--mm-warning) !important;
+  color: var(--mm-warning-dark) !important;
+}
+.alert-warning .alert-link {
+  color: var(--mm-warning-dark) !important;
+}
+
+/* --- 2-6g. Alert Info --- */
+.alert-info {
+  background-color: var(--mm-info-light) !important;
+  border-color: #bfdbfe !important;
+  border-left-color: var(--mm-info) !important;
+  color: var(--mm-info-dark) !important;
+}
+.alert-info .alert-link {
+  color: var(--mm-info-dark) !important;
+}
+
+/* --- 2-6h. Alert Light / Dark --- */
+.alert-light {
+  background-color: var(--mm-neutral-50) !important;
+  border-color: var(--mm-neutral-200) !important;
+  border-left-color: var(--mm-neutral-400) !important;
+  color: var(--mm-neutral-700) !important;
+}
+.alert-dark {
+  background-color: var(--mm-neutral-100) !important;
+  border-color: var(--mm-neutral-300) !important;
+  border-left-color: var(--mm-neutral-700) !important;
+  color: var(--mm-neutral-800) !important;
+}
+
+/* --- 2-6i. Alert dismissible close button --- */
+.alert-dismissible .btn-close,
+.alert .btn-close,
+.alert .close {
+  color: inherit !important;
+  opacity: 0.6 !important;
+  filter: none !important;
+  transition: opacity var(--mm-duration-fast) ease;
+}
+.alert-dismissible .btn-close:hover,
+.alert .btn-close:hover,
+.alert .close:hover {
+  opacity: 1 !important;
+}
+
+/* --- 2-6j. Cuba list-group .alert.light variants --- */
+.list-group .alert-primary.light {
+  background-color: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+.list-group .alert-success.light {
+  background-color: var(--mm-success-light) !important;
+  color: var(--mm-success-dark) !important;
+}
+.list-group .alert-danger.light {
+  background-color: var(--mm-error-light) !important;
+  color: var(--mm-error-dark) !important;
+}
+.list-group .alert-warning.light {
+  background-color: var(--mm-warning-light) !important;
+  color: var(--mm-warning-dark) !important;
+}
+.list-group .alert-info.light {
+  background-color: var(--mm-info-light) !important;
+  color: var(--mm-info-dark) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2-7. MODALS
+   ----------------------------------------------------------------------- */
+
+/* --- 2-7a. Modal backdrop --- */
+.modal-backdrop {
+  background-color: rgba(28, 25, 23, 0.5) !important;
+}
+.modal-backdrop.show {
+  opacity: 1 !important;
+}
+
+/* --- 2-7b. Modal content --- */
+.modal-content {
+  background-color: var(--mm-surface-card) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+  border-radius: var(--mm-radius-xl) !important;
+  box-shadow: var(--mm-shadow-xl) !important;
+  overflow: hidden;
+}
+.modal-dialog .modal-content {
+  border-radius: var(--mm-radius-xl) !important;
+}
+
+/* --- 2-7c. Modal header --- */
+.modal-header {
+  background-color: var(--mm-surface-card) !important;
+  border-bottom: 1px solid var(--mm-border-default) !important;
+  padding: var(--mm-space-5) var(--mm-space-6) !important;
+}
+.modal-header .modal-title {
+  font-family: var(--mm-font-display) !important;
+  font-weight: 700 !important;
+  font-size: var(--mm-text-lg) !important;
+  color: var(--mm-text-primary) !important;
+}
+.modal-header .btn-close,
+.modal-header .close {
+  color: var(--mm-neutral-500) !important;
+  opacity: 0.7 !important;
+  transition: opacity var(--mm-duration-fast) ease;
+  filter: none !important;
+}
+.modal-header .btn-close:hover,
+.modal-header .close:hover {
+  opacity: 1 !important;
+  color: var(--mm-neutral-800) !important;
+}
+
+/* --- 2-7d. Modal body --- */
+.modal-body {
+  padding: var(--mm-space-6) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+/* --- 2-7e. Modal footer --- */
+.modal-footer {
+  background-color: var(--mm-neutral-50) !important;
+  border-top: 1px solid var(--mm-border-default) !important;
+  padding: var(--mm-space-4) var(--mm-space-6) !important;
+}
+
+/* --- 2-7f. Modal open animation --- */
+.modal.fade .modal-dialog {
+  transition: transform var(--mm-duration-slow) var(--mm-ease-spring), opacity var(--mm-duration-base) ease !important;
+  transform: scale(0.95) translateY(-20px);
+}
+.modal.show .modal-dialog {
+  transform: scale(1) translateY(0);
+}
+
+/* --- 2-7g. Cuba dark mode modal overrides --- */
+body.dark-only .modal-content {
+  background-color: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+body.dark-only .modal-content .modal-header {
+  background-color: var(--mm-surface-card) !important;
+  border-bottom-color: var(--mm-border-default) !important;
+}
+body.dark-only .modal-content .modal-footer {
+  background-color: var(--mm-neutral-50) !important;
+  border-top-color: var(--mm-border-default) !important;
+}
+body.dark-only .modal-header .close,
+body.dark-only .modal-header .btn-close {
+  color: var(--mm-neutral-500) !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2-8. DROPDOWNS
+   ----------------------------------------------------------------------- */
+
+/* --- 2-8a. Dropdown menu --- */
+.dropdown-menu {
+  background-color: var(--mm-surface-card) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+  padding: var(--mm-space-2) !important;
+  min-width: 180px;
+  animation: mm-dropdown-in var(--mm-duration-base) var(--mm-ease-spring);
+}
+
+@keyframes mm-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --- 2-8b. Dropdown items --- */
+.dropdown-menu .dropdown-item {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+  color: var(--mm-text-primary) !important;
+  padding: 8px 14px !important;
+  border-radius: var(--mm-radius-sm) !important;
+  transition: background-color var(--mm-duration-fast) ease, color var(--mm-duration-fast) ease !important;
+}
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+  background-color: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+.dropdown-menu .dropdown-item.active,
+.dropdown-menu .dropdown-item:active {
+  background-color: var(--mm-primary-500) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.dropdown-menu .dropdown-item.disabled {
+  color: var(--mm-text-tertiary) !important;
+  pointer-events: none;
+}
+
+/* --- 2-8c. Dropdown divider --- */
+.dropdown-menu .dropdown-divider {
+  border-top-color: var(--mm-border-subtle) !important;
+  margin: var(--mm-space-1) 0 !important;
+}
+
+/* --- 2-8d. Dropdown header --- */
+.dropdown-menu .dropdown-header {
+  font-family: var(--mm-font-display) !important;
+  font-weight: 600 !important;
+  font-size: var(--mm-text-xs) !important;
+  color: var(--mm-text-tertiary) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 14px 4px !important;
+}
+
+/* --- 2-8e. Cuba dropdown toggle override --- */
+.dropdown .dropdown-toggle.btn-primary {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+}
+
+/* Cuba dark mode dropdown override */
+body.dark-only .dropdown-menu {
+  background-color: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+}
+body.dark-only .dropdown-menu .dropdown-item {
+  color: var(--mm-text-primary) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2-9. PAGINATION
+   ----------------------------------------------------------------------- */
+
+/* --- 2-9a. Pagination base --- */
+.pagination {
+  gap: 4px;
+}
+.page-link {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  font-weight: 500 !important;
+  color: var(--mm-text-secondary) !important;
+  background-color: var(--mm-neutral-0) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-sm) !important;
+  padding: 6px 12px !important;
+  transition: all var(--mm-duration-fast) ease !important;
+}
+.page-link:hover {
+  background-color: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-300) !important;
+  color: var(--mm-primary-700) !important;
+  z-index: 1;
+}
+.page-link:focus {
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.15) !important;
+  z-index: 2;
+}
+
+/* --- 2-9b. Active page --- */
+.page-item.active .page-link {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-neutral-0) !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+  font-weight: 600 !important;
+  z-index: 3;
+}
+.page-item.active .page-link:hover {
+  background-color: var(--mm-primary-600) !important;
+  border-color: var(--mm-primary-600) !important;
+  color: var(--mm-neutral-0) !important;
+}
+
+/* --- 2-9c. Disabled page --- */
+.page-item.disabled .page-link {
+  color: var(--mm-text-tertiary) !important;
+  background-color: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-subtle) !important;
+  cursor: not-allowed;
+}
+
+/* --- 2-9d. Rounded pagination items --- */
+.page-item:first-child .page-link {
+  border-top-left-radius: var(--mm-radius-md) !important;
+  border-bottom-left-radius: var(--mm-radius-md) !important;
+}
+.page-item:last-child .page-link {
+  border-top-right-radius: var(--mm-radius-md) !important;
+  border-bottom-right-radius: var(--mm-radius-md) !important;
+}
+
+/* --- 2-9e. Pagination sizing --- */
+.pagination-lg .page-link {
+  padding: 10px 18px !important;
+  font-size: var(--mm-text-md) !important;
+}
+.pagination-sm .page-link {
+  padding: 4px 8px !important;
+  font-size: var(--mm-text-xs) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2-10. TABS & NAV PILLS
+   ----------------------------------------------------------------------- */
+
+/* --- 2-10a. Nav tabs --- */
+.nav-tabs {
+  border-bottom: 2px solid var(--mm-border-default) !important;
+}
+.nav-tabs .nav-link {
+  font-family: var(--mm-font-display) !important;
+  font-weight: 500 !important;
+  font-size: var(--mm-text-base) !important;
+  color: var(--mm-text-secondary) !important;
+  padding: var(--mm-space-3) var(--mm-space-4) !important;
+  border: none !important;
+  border-bottom: 2px solid transparent !important;
+  margin-bottom: -2px !important;
+  background: transparent !important;
+  transition: color var(--mm-duration-fast) ease, border-color var(--mm-duration-fast) ease !important;
+  border-radius: 0 !important;
+}
+.nav-tabs .nav-link:hover {
+  color: var(--mm-primary-500) !important;
+  border-bottom-color: var(--mm-primary-300) !important;
+  background: transparent !important;
+}
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: var(--mm-primary-600) !important;
+  font-weight: 600 !important;
+  border-bottom-color: var(--mm-primary-500) !important;
+  background: transparent !important;
+}
+.nav-tabs .nav-link:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* --- 2-10b. Nav pills --- */
+.nav-pills .nav-link {
+  font-family: var(--mm-font-display) !important;
+  font-weight: 500 !important;
+  font-size: var(--mm-text-base) !important;
+  color: var(--mm-text-secondary) !important;
+  padding: 8px 18px !important;
+  border-radius: var(--mm-radius-full) !important;
+  background-color: transparent !important;
+  transition: all var(--mm-duration-fast) ease !important;
+}
+.nav-pills .nav-link:hover {
+  background-color: var(--mm-primary-50) !important;
+  color: var(--mm-primary-600) !important;
+}
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: var(--mm-primary-500) !important;
+  color: var(--mm-neutral-0) !important;
+  font-weight: 600 !important;
+  box-shadow: var(--mm-shadow-sm) !important;
+}
+
+/* --- 2-10c. Generic nav-link for sidebar or standalone --- */
+.nav .nav-link {
+  font-family: var(--mm-font-sans) !important;
+  transition: color var(--mm-duration-fast) ease !important;
+}
+
+/* --- 2-10d. Cuba tab-content override --- */
+.tab-content {
+  padding: var(--mm-space-5) 0 0 0 !important;
+}
+.tab-content .tab-pane {
+  font-family: var(--mm-font-sans) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2-11. PROGRESS BARS
+   ----------------------------------------------------------------------- */
+
+/* --- 2-11a. Progress wrapper --- */
+.progress {
+  background-color: var(--mm-neutral-100) !important;
+  border-radius: var(--mm-radius-full) !important;
+  height: 8px !important;
+  overflow: hidden !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* --- 2-11b. Progress bar fill --- */
+.progress-bar {
+  background-color: var(--mm-primary-500) !important;
+  border-radius: var(--mm-radius-full) !important;
+  transition: width var(--mm-duration-slow) ease !important;
+}
+
+/* --- 2-11c. Progress bar variants --- */
+.progress-bar.bg-success,
+.progress-bar-success {
+  background-color: var(--mm-success) !important;
+}
+.progress-bar.bg-danger,
+.progress-bar-danger {
+  background-color: var(--mm-error) !important;
+}
+.progress-bar.bg-warning,
+.progress-bar-warning {
+  background-color: var(--mm-warning) !important;
+}
+.progress-bar.bg-info,
+.progress-bar-info {
+  background-color: var(--mm-info) !important;
+}
+.progress-bar.bg-secondary {
+  background-color: var(--mm-primary-600) !important;
+}
+
+/* --- 2-11d. Progress sizing --- */
+.progress.progress-lg,
+.progress-lg {
+  height: 14px !important;
+}
+.progress.progress-sm,
+.progress-sm {
+  height: 5px !important;
+}
+
+/* --- 2-11e. Striped progress bars (keep bootstrap animation) --- */
+.progress-bar-striped {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  ) !important;
+  background-size: 1rem 1rem;
+}
+
+
+/* -----------------------------------------------------------------------
+   2-12. TOOLTIPS & POPOVERS
+   ----------------------------------------------------------------------- */
+
+/* --- 2-12a. Tooltip --- */
+.tooltip .tooltip-inner {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-xs) !important;
+  font-weight: 500;
+  background-color: var(--mm-neutral-800) !important;
+  color: var(--mm-neutral-0) !important;
+  border-radius: var(--mm-radius-sm) !important;
+  padding: 6px 12px !important;
+  box-shadow: var(--mm-shadow-md);
+  max-width: 250px;
+}
+.tooltip .tooltip-arrow::before {
+  border-top-color: var(--mm-neutral-800) !important;
+}
+.bs-tooltip-bottom .tooltip-arrow::before,
+.bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
+  border-bottom-color: var(--mm-neutral-800) !important;
+}
+.bs-tooltip-start .tooltip-arrow::before,
+.bs-tooltip-auto[data-popper-placement^="left"] .tooltip-arrow::before {
+  border-left-color: var(--mm-neutral-800) !important;
+}
+.bs-tooltip-end .tooltip-arrow::before,
+.bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
+  border-right-color: var(--mm-neutral-800) !important;
+}
+
+/* --- 2-12b. Popover --- */
+.popover {
+  font-family: var(--mm-font-sans) !important;
+  background-color: var(--mm-surface-card) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+}
+.popover-header {
+  font-family: var(--mm-font-display) !important;
+  font-weight: 600 !important;
+  font-size: var(--mm-text-base) !important;
+  background-color: var(--mm-neutral-50) !important;
+  border-bottom: 1px solid var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+  padding: var(--mm-space-3) var(--mm-space-4) !important;
+  border-top-left-radius: var(--mm-radius-lg) !important;
+  border-top-right-radius: var(--mm-radius-lg) !important;
+}
+.popover-body {
+  font-size: var(--mm-text-base) !important;
+  color: var(--mm-text-primary) !important;
+  padding: var(--mm-space-3) var(--mm-space-4) !important;
+}
+.popover .popover-arrow::before {
+  border-color: var(--mm-border-subtle) !important;
+}
+.popover .popover-arrow::after {
+  border-color: var(--mm-surface-card) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2-13. SWITCHES / TOGGLE
+   ----------------------------------------------------------------------- */
+
+/* --- 2-13a. Form switch --- */
+.form-switch .form-check-input {
+  width: 42px !important;
+  height: 24px !important;
+  border-radius: var(--mm-radius-full) !important;
+  background-color: var(--mm-neutral-300) !important;
+  border: none !important;
+  cursor: pointer;
+  transition: background-color var(--mm-duration-fast) ease !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e") !important;
+}
+.form-switch .form-check-input:checked {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+}
+.form-switch .form-check-input:focus {
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.2) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e") !important;
+}
+.form-switch .form-check-input:not(:checked):focus {
+  background-color: var(--mm-neutral-400) !important;
+}
+
+/* --- 2-13b. Cuba custom switch overrides --- */
+.media-body .icon-state .switch-state,
+.icon-state .switch-state {
+  background-color: var(--mm-neutral-300);
+}
+.media-body .icon-state input:checked ~ .switch-state,
+.icon-state input:checked ~ .switch-state {
+  background-color: var(--mm-primary-500) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2-14. ADDITIONAL COMPONENTS
+   ----------------------------------------------------------------------- */
+
+/* --- 2-14a. List groups --- */
+.list-group-item {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+  color: var(--mm-text-primary) !important;
+  background-color: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+  padding: var(--mm-space-3) var(--mm-space-4) !important;
+  transition: background-color var(--mm-duration-fast) ease !important;
+}
+.list-group-item:hover {
+  background-color: var(--mm-neutral-50) !important;
+}
+.list-group-item.active {
+  background-color: var(--mm-primary-500) !important;
+  border-color: var(--mm-primary-500) !important;
+  color: var(--mm-neutral-0) !important;
+}
+.list-group-item-action:hover,
+.list-group-item-action:focus {
+  background-color: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+/* --- 2-14b. Breadcrumbs --- */
+.breadcrumb {
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-sm) !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+}
+.breadcrumb-item a {
+  color: var(--mm-primary-500) !important;
+  text-decoration: none !important;
+}
+.breadcrumb-item a:hover {
+  color: var(--mm-primary-700) !important;
+  text-decoration: underline !important;
+}
+.breadcrumb-item.active {
+  color: var(--mm-text-secondary) !important;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+  color: var(--mm-text-tertiary) !important;
+}
+
+/* --- 2-14c. Close button --- */
+.btn-close {
+  opacity: 0.5 !important;
+  transition: opacity var(--mm-duration-fast) ease !important;
+}
+.btn-close:hover {
+  opacity: 1 !important;
+}
+
+/* --- 2-14d. Accordion (Cuba default-according) --- */
+.default-according .card {
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-md) !important;
+  margin-bottom: var(--mm-space-2) !important;
+}
+.default-according .card + .card {
+  margin-top: 0 !important;
+}
+.default-according .card .card-header {
+  background-color: var(--mm-neutral-50) !important;
+  border-bottom: 1px solid var(--mm-border-default) !important;
+  padding: var(--mm-space-3) var(--mm-space-4) !important;
+}
+.default-according .card .card-header h5 {
+  font-size: var(--mm-text-base) !important;
+  font-weight: 600 !important;
+  color: var(--mm-text-primary) !important;
+}
+.default-according .card .btn-link {
+  font-family: var(--mm-font-sans) !important;
+  color: var(--mm-primary-600) !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+}
+.default-according .card .btn-link:hover,
+.default-according .card .btn-link:focus {
+  color: var(--mm-primary-700) !important;
+  text-decoration: none !important;
+}
+
+/* --- 2-14e. Toast --- */
+.toast {
+  font-family: var(--mm-font-sans) !important;
+  background-color: var(--mm-surface-card) !important;
+  border: 1px solid var(--mm-border-subtle) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+}
+.toast-header {
+  background-color: var(--mm-neutral-50) !important;
+  border-bottom: 1px solid var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+  font-weight: 600 !important;
+  border-top-left-radius: var(--mm-radius-lg) !important;
+  border-top-right-radius: var(--mm-radius-lg) !important;
+}
+.toast-body {
+  color: var(--mm-text-primary) !important;
+  font-size: var(--mm-text-base) !important;
+}
+
+/* --- 2-14f. Spinner overrides --- */
+.spinner-border {
+  color: var(--mm-primary-500) !important;
+}
+.spinner-grow {
+  color: var(--mm-primary-500) !important;
+}
+
+/* --- 2-14g. Background utility overrides --- */
+.bg-primary {
+  background-color: var(--mm-primary-500) !important;
+}
+.bg-secondary {
+  background-color: var(--mm-primary-600) !important;
+}
+.bg-success {
+  background-color: var(--mm-success) !important;
+}
+.bg-danger {
+  background-color: var(--mm-error) !important;
+}
+.bg-warning {
+  background-color: var(--mm-warning) !important;
+}
+.bg-info {
+  background-color: var(--mm-info) !important;
+}
+.bg-light {
+  background-color: var(--mm-neutral-100) !important;
+}
+.bg-dark {
+  background-color: var(--mm-neutral-800) !important;
+}
+
+/* --- 2-14h. Text color utility overrides --- */
+.text-primary {
+  color: var(--mm-primary-500) !important;
+}
+.text-secondary {
+  color: var(--mm-primary-600) !important;
+}
+.text-success {
+  color: var(--mm-success) !important;
+}
+.text-danger {
+  color: var(--mm-error) !important;
+}
+.text-warning {
+  color: var(--mm-warning) !important;
+}
+.text-info {
+  color: var(--mm-info) !important;
+}
+.text-muted {
+  color: var(--mm-text-secondary) !important;
+}
+
+/* --- 2-14i. Border color utility overrides --- */
+.border-primary {
+  border-color: var(--mm-primary-500) !important;
+}
+.border-secondary {
+  border-color: var(--mm-primary-600) !important;
+}
+.border-success {
+  border-color: var(--mm-success) !important;
+}
+.border-danger {
+  border-color: var(--mm-error) !important;
+}
+.border-warning {
+  border-color: var(--mm-warning) !important;
+}
+.border-info {
+  border-color: var(--mm-info) !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   PHASE 2 — RESPONSIVE ADJUSTMENTS
+   ----------------------------------------------------------------------- */
+
+@media (max-width: 575.98px) {
+  /* Smaller modal padding on mobile */
+  .modal-body {
+    padding: var(--mm-space-4) !important;
+  }
+  .modal-header {
+    padding: var(--mm-space-3) var(--mm-space-4) !important;
+  }
+  .modal-footer {
+    padding: var(--mm-space-3) var(--mm-space-4) !important;
+  }
+
+  /* Table font size reduction on mobile */
+  .table > thead > tr > th,
+  .table > tbody > tr > td {
+    font-size: var(--mm-text-xs) !important;
+    padding: 8px 10px !important;
+  }
+
+  /* DataTables responsive */
+  .dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 4px 8px !important;
+    font-size: var(--mm-text-xs) !important;
+  }
+
+  /* Button sizing on mobile */
+  .btn:not(.btn-xs):not(.btn-sm):not(.btn-lg):not(.btn-xl) {
+    padding: 7px 16px !important;
+  }
+}
+
+/* ========== END PHASE 2 — CORE COMPONENTS ========== */
