@@ -294,9 +294,9 @@
   stroke: var(--mm-primary-500) !important;
 }
 
-/* Hide Cuba's default media-body (we use our own mm-header__profile-info) */
+/* Override Cuba's media-body defaults — now merged with mm-header__profile-info */
 .mm-header .profile-nav .media.profile-media .media-body {
-  display: none !important;
+  margin-left: 0 !important;
 }
 
 

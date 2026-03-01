@@ -28,11 +28,7 @@
                   <img class="b-r-10" src="<?php echo $sdata['img']; ?>" width="36" height="36" alt="<?php echo htmlspecialchars($sdata['title']); ?>">
                   <span class="mm-header__avatar-status"></span>
                 </div>
-                <div class="media-body">
-                  <span><?php echo $sdata['title']; ?></span>
-                  <p class="mb-0 font-roboto">Organizer <i data-feather="chevron-down"></i></p>
-                </div>
-                <div class="mm-header__profile-info">
+                <div class="media-body mm-header__profile-info">
                   <span class="mm-header__profile-name"><?php echo htmlspecialchars($sdata['title']); ?></span>
                   <div class="mm-header__profile-meta">
                     <span class="mm-header__role-badge mm-header__role-badge--organizer">Organizer</span>
@@ -78,11 +74,7 @@
                   <img class="b-r-10" src="images/5.png" width="36" height="36" alt="Admin">
                   <span class="mm-header__avatar-status"></span>
                 </div>
-                <div class="media-body">
-                  <span>Main Admin</span>
-                  <p class="mb-0 font-roboto">Admin <i data-feather="chevron-down"></i></p>
-                </div>
-                <div class="mm-header__profile-info">
+                <div class="media-body mm-header__profile-info">
                   <span class="mm-header__profile-name">Main Admin</span>
                   <div class="mm-header__profile-meta">
                     <span class="mm-header__role-badge mm-header__role-badge--admin">Admin</span>

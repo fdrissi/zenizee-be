@@ -77,14 +77,11 @@
 
 
 /* ─── 3. TOGGLE BUTTON ────────────────────────────────────────── */
+/* Hide the sidebar's toggle — the header already has one */
 
 .mm-sidebar .toggle-sidebar,
 .mm-sidebar .mm-sidebar__toggle {
-  background: var(--mm-neutral-100) !important;
-  border-radius: var(--mm-radius-sm) !important;
-  width: 28px !important;
-  height: 28px !important;
-  display: flex !important;
+  display: none !important;
   align-items: center !important;
   justify-content: center !important;
   transition: background var(--mm-duration-fast) ease,
