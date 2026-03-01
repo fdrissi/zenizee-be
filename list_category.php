@@ -51,7 +51,7 @@
       <div class="page-body">
 
          <!-- ═══════════════════════════════════════════════════════
-              MAGICMATE CATEGORY LIST — Custom Layout
+              ZENIZEE CATEGORY LIST — Custom Layout
               ═══════════════════════════════════════════════════════ -->
          <div class="mm-catlist">
 

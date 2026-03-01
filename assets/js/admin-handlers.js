@@ -1,5 +1,5 @@
 /**
- * admin-handlers.js - MagicMate Admin Panel Client-Side Logic
+ * admin-handlers.js - Zenizee Admin Panel Client-Side Logic
  *
  * Replaces the obfuscated tbl_etom JS blob with clean, readable code.
  * Provides: AJAX form submission, status toggle, input masks,

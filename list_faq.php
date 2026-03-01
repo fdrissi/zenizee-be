@@ -47,7 +47,7 @@
       <div class="page-body">
 
          <!-- ═══════════════════════════════════════════════════════
-              MAGICMATE FAQ LIST — Custom Layout
+              ZENIZEE FAQ LIST — Custom Layout
               ═══════════════════════════════════════════════════════ -->
          <div class="mm-faqlist">
 

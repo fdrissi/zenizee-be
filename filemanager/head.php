@@ -42,7 +42,7 @@ include 'evconfing.php';
     
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
-    <!-- MagicMate Design System (must load last) -->
+    <!-- Zenizee Design System (must load last) -->
     <link rel="stylesheet" type="text/css" href="assets/css/magicmate-tokens.css">
     <link rel="stylesheet" type="text/css" href="assets/css/magicmate-admin.css">
     <link rel="stylesheet" type="text/css" href="assets/css/magicmate-phase3-auth.css">

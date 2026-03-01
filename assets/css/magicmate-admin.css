@@ -1,5 +1,5 @@
 /* =============================================
-   MagicMate Admin — Visual Overrides
+   Zenizee Admin — Visual Overrides
    Loaded AFTER Cuba style.css to override visuals.
    Grows incrementally across phases.
    ============================================= */
@@ -1598,7 +1598,7 @@ body.dark-only .page-wrapper .page-body-wrapper .page-body .card:not(.email-body
 
 /* ========== PHASE 2 — CORE COMPONENTS ========== */
 /* Comprehensive re-skin of all reusable Bootstrap / Cuba components
-   to match the MagicMate front-office warm gold aesthetic.
+   to match the Zenizee front-office warm gold aesthetic.
    Uses design tokens from magicmate-tokens.css exclusively.
    ----------------------------------------------------------------------- */
 

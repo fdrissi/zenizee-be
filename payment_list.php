@@ -39,7 +39,7 @@
       <div class="page-body">
 
          <!-- ═══════════════════════════════════════════════════════
-              MAGICMATE PAYMENT GATEWAY LIST — Custom Layout
+              ZENIZEE PAYMENT GATEWAY LIST — Custom Layout
               ═══════════════════════════════════════════════════════ -->
          <div class="mm-paylist">
 

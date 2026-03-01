@@ -20,7 +20,7 @@
       <div class="page-body">
 
          <!-- ═══════════════════════════════════════════════════════
-              MAGICMATE ORGANIZER LIST — Custom Card Layout
+              ZENIZEE ORGANIZER LIST — Custom Card Layout
               ═══════════════════════════════════════════════════════ -->
          <div class="mm-orglist">
 

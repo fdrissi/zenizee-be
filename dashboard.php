@@ -74,7 +74,7 @@
       <div class="page-body">
 
          <!-- ═══════════════════════════════════════════════════════
-              MAGICMATE DASHBOARD — Custom Layout
+              ZENIZEE DASHBOARD — Custom Layout
               ═══════════════════════════════════════════════════════ -->
          <div class="mm-dash">
 

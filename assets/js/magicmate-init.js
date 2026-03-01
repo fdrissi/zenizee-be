@@ -1,5 +1,5 @@
 /**
- * MagicMate Admin — Initialization
+ * Zenizee Admin — Initialization
  * One-time migration: clears Cuba's cached purple palette from localStorage.
  */
 (function() {

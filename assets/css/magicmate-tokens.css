@@ -1,5 +1,5 @@
 /* =============================================
-   MagicMate Admin — Design Tokens
+   Zenizee Admin — Design Tokens
    Overrides Cuba theme variables + adds new tokens
    ============================================= */
 
@@ -27,7 +27,7 @@
   --f-light: #57534E;
   --view-border-marker: #FDD9A4;
 
-  /* === MAGICMATE DESIGN TOKENS (matching frontoffice) === */
+  /* === ZENIZEE DESIGN TOKENS (matching frontoffice) === */
   /* Primary (warm gold) */
   --mm-primary-50: #FFF8EE;
   --mm-primary-100: #FEEFD6;

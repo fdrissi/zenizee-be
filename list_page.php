@@ -47,7 +47,7 @@
       <div class="page-body">
 
          <!-- ═══════════════════════════════════════════════════════
-              MAGICMATE PAGE LIST — Custom Layout
+              ZENIZEE PAGE LIST — Custom Layout
               ═══════════════════════════════════════════════════════ -->
          <div class="mm-pagelist">
 
