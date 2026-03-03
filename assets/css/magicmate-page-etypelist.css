@@ -1,0 +1,871 @@
+/* =====================================================================
+   MagicMate — Event Type & Pricing List Page
+   Card grid for ticket type / pricing tier management.
+   Uses design tokens from magicmate-tokens.css exclusively.
+   BEM prefix: mm-etypelist__*
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-etypelist {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER — Back link + Title bar
+   ============================================================= */
+
+.mm-etypelist__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--mm-space-8);
+  animation: mm-etypelist-fadeIn 0.45s ease both;
+}
+
+.mm-etypelist__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+/* Back link */
+.mm-etypelist__back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-500);
+  text-decoration: none;
+  margin-bottom: var(--mm-space-2);
+  transition: color var(--mm-duration-fast) ease;
+}
+
+.mm-etypelist__back-link:hover {
+  color: var(--mm-primary-600);
+  text-decoration: none;
+}
+
+.mm-etypelist__back-link svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-etypelist__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-etypelist__subtitle {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Header icon accent */
+.mm-etypelist__header-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  border-radius: var(--mm-radius-xl);
+  flex-shrink: 0;
+  margin-top: var(--mm-space-5);
+}
+
+.mm-etypelist__header-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--mm-primary-600);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =============================================================
+   2. STATS BAR — Quick summary strip
+   ============================================================= */
+
+.mm-etypelist__stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-6);
+  padding: var(--mm-space-4) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-etypelist-fadeUp 0.45s ease 0.05s both;
+}
+
+.mm-etypelist__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-etypelist__stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-etypelist__stat-dot--total {
+  background: var(--mm-primary-500);
+}
+
+.mm-etypelist__stat-dot--published {
+  background: var(--mm-success);
+}
+
+.mm-etypelist__stat-dot--unpublished {
+  background: var(--mm-neutral-400);
+}
+
+.mm-etypelist__stat-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1;
+}
+
+.mm-etypelist__stat-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-left: -4px;
+}
+
+.mm-etypelist__stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================
+   3. TOOLBAR — Search + Filter
+   ============================================================= */
+
+.mm-etypelist__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  margin-bottom: var(--mm-space-6);
+  flex-wrap: wrap;
+  animation: mm-etypelist-fadeUp 0.45s ease 0.1s both;
+}
+
+.mm-etypelist__search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.mm-etypelist__search-icon {
+  position: absolute;
+  left: var(--mm-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.mm-etypelist__search-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-etypelist__search-input {
+  width: 100%;
+  padding: var(--mm-space-3) var(--mm-space-4) var(--mm-space-3) 44px;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-900);
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-etypelist__search-input::placeholder {
+  color: var(--mm-neutral-400);
+  font-weight: 400;
+}
+
+.mm-etypelist__search-input:focus {
+  border-color: var(--mm-primary-300);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.08);
+}
+
+/* Filter buttons group */
+.mm-etypelist__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+/* Event filter pills — secondary row appearance */
+.mm-etypelist__filters--events {
+  flex-basis: 100%;
+  margin-top: var(--mm-space-1);
+}
+
+.mm-etypelist__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-full);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-600);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.mm-etypelist__filter-btn:hover {
+  border-color: var(--mm-primary-200);
+  color: var(--mm-primary-700);
+  background: var(--mm-primary-50);
+}
+
+.mm-etypelist__filter-btn--active {
+  background: var(--mm-primary-500);
+  border-color: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+}
+
+.mm-etypelist__filter-btn--active:hover {
+  background: var(--mm-primary-600);
+  border-color: var(--mm-primary-600);
+  color: #fff;
+}
+
+/* Event filter pills — subtle outline style when active */
+.mm-etypelist__filter-btn--event.mm-etypelist__filter-btn--active {
+  background: var(--mm-primary-100);
+  border-color: var(--mm-primary-300);
+  color: var(--mm-primary-800);
+  box-shadow: none;
+}
+
+.mm-etypelist__filter-btn--event.mm-etypelist__filter-btn--active:hover {
+  background: var(--mm-primary-200);
+  border-color: var(--mm-primary-400);
+  color: var(--mm-primary-900);
+}
+
+.mm-etypelist__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--mm-radius-full);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mm-etypelist__filter-btn:not(.mm-etypelist__filter-btn--active) .mm-etypelist__filter-count {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-etypelist__filter-btn--active .mm-etypelist__filter-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+
+/* =============================================================
+   4. CARD GRID — 3 columns desktop
+   ============================================================= */
+
+.mm-etypelist__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--mm-space-5);
+  animation: mm-etypelist-fadeUp 0.45s ease 0.15s both;
+}
+
+
+/* =============================================================
+   5. EVENT TYPE CARD
+   ============================================================= */
+
+.mm-etypelist__card {
+  position: relative;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  overflow: hidden;
+  transition: all var(--mm-duration-base) ease;
+  animation: mm-etypelist-cardIn 0.5s var(--mm-ease-spring) both;
+  animation-delay: calc(var(--card-index, 0) * 0.05s + 0.15s);
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-etypelist__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mm-shadow-card-hover);
+  border-color: var(--mm-primary-200);
+}
+
+/* ── Card Price Band (top accent area) ── */
+.mm-etypelist__card-price-band {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-6) var(--mm-space-5);
+  background: var(--mm-gradient-primary);
+  min-height: 90px;
+}
+
+.mm-etypelist__card-price-band--muted {
+  background: linear-gradient(135deg, var(--mm-neutral-300) 0%, var(--mm-neutral-400) 100%);
+}
+
+.mm-etypelist__card-price {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-3xl);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.mm-etypelist__card-currency {
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  vertical-align: super;
+  margin-right: 2px;
+  opacity: 0.85;
+}
+
+/* Card index chip (top-left in price band) */
+.mm-etypelist__card-index {
+  position: absolute;
+  top: var(--mm-space-3);
+  left: var(--mm-space-3);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--mm-radius-md);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Card Body ── */
+.mm-etypelist__card-body {
+  padding: var(--mm-space-4) var(--mm-space-5) var(--mm-space-3);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+/* Event name tag — subtle chip */
+.mm-etypelist__card-event-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  border-radius: var(--mm-radius-full);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--mm-primary-700);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  line-height: 1.4;
+  align-self: flex-start;
+}
+
+.mm-etypelist__card-event-tag svg {
+  width: 11px;
+  height: 11px;
+  stroke: var(--mm-primary-500);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* Type name — bold title */
+.mm-etypelist__card-type-name {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Meta items row (ticket limit, etc.) */
+.mm-etypelist__card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-4);
+  flex-wrap: wrap;
+}
+
+.mm-etypelist__card-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+}
+
+.mm-etypelist__card-meta-item svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* ── Badge row ── */
+.mm-etypelist__card-badges {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: var(--mm-space-1);
+}
+
+.mm-etypelist__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--mm-radius-full);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.mm-etypelist__badge svg {
+  width: 11px;
+  height: 11px;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.mm-etypelist__badge--published {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+}
+
+.mm-etypelist__badge--published svg {
+  stroke: var(--mm-success);
+}
+
+.mm-etypelist__badge--unpublished {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-etypelist__badge--unpublished svg {
+  stroke: var(--mm-neutral-500);
+}
+
+/* ── Card footer (actions) ── */
+.mm-etypelist__card-actions {
+  display: flex;
+  align-items: center;
+  padding: var(--mm-space-3) var(--mm-space-5);
+  border-top: 1px solid var(--mm-border-subtle);
+}
+
+.mm-etypelist__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--mm-radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--mm-duration-fast) ease;
+  line-height: 1;
+}
+
+.mm-etypelist__action-btn svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-etypelist__action-btn--edit {
+  background: var(--mm-primary-50);
+  color: var(--mm-primary-700);
+}
+
+.mm-etypelist__action-btn--edit svg {
+  stroke: var(--mm-primary-600);
+}
+
+.mm-etypelist__action-btn--edit:hover {
+  background: var(--mm-primary-100);
+  color: var(--mm-primary-800);
+  text-decoration: none;
+}
+
+
+/* =============================================================
+   6. EMPTY STATE
+   ============================================================= */
+
+.mm-etypelist__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  text-align: center;
+  animation: mm-etypelist-fadeIn 0.5s ease 0.2s both;
+}
+
+.mm-etypelist__empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border-radius: var(--mm-radius-2xl);
+  margin-bottom: var(--mm-space-5);
+}
+
+.mm-etypelist__empty-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-etypelist__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-700);
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-etypelist__empty-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+
+/* =============================================================
+   7. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-etypelist-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mm-etypelist-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mm-etypelist-cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =============================================================
+   8. RESPONSIVE — Tablet (2 columns)
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-etypelist {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-etypelist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE — Mobile (1 column)
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-etypelist {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-etypelist__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mm-space-4);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-etypelist__header-icon {
+    display: none;
+  }
+
+  .mm-etypelist__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-etypelist__stats-bar {
+    gap: var(--mm-space-4);
+    padding: var(--mm-space-3) var(--mm-space-4);
+    flex-wrap: wrap;
+  }
+
+  .mm-etypelist__stat-separator {
+    display: none;
+  }
+
+  .mm-etypelist__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mm-etypelist__search-wrap {
+    max-width: none;
+  }
+
+  .mm-etypelist__filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: var(--mm-space-1);
+  }
+
+  .mm-etypelist__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mm-etypelist__grid {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-3);
+  }
+
+  .mm-etypelist__card-price-band {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    min-height: 72px;
+  }
+
+  .mm-etypelist__card-price {
+    font-size: var(--mm-text-2xl);
+  }
+
+  .mm-etypelist__card-body {
+    padding: var(--mm-space-3) var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-etypelist__card-actions {
+    padding: var(--mm-space-3) var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   10. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-etypelist__card,
+body.dark-only .mm-etypelist__stats-bar {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-etypelist__card-price-band {
+  background: var(--mm-gradient-primary) !important;
+}
+
+body.dark-only .mm-etypelist__card-price-band--muted {
+  background: linear-gradient(135deg, var(--mm-neutral-300) 0%, var(--mm-neutral-400) 100%) !important;
+}
+
+body.dark-only .mm-etypelist__card-type-name,
+body.dark-only .mm-etypelist__title,
+body.dark-only .mm-etypelist__stat-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-etypelist__subtitle,
+body.dark-only .mm-etypelist__stat-label,
+body.dark-only .mm-etypelist__back-link {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .mm-etypelist__search-input {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-etypelist__filter-btn:not(.mm-etypelist__filter-btn--active) {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-600) !important;
+}
+
+body.dark-only .mm-etypelist__action-btn--edit {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+body.dark-only .mm-etypelist__card-event-tag {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-100) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+body.dark-only .mm-etypelist__card-meta-item {
+  color: var(--mm-neutral-500) !important;
+}
+
+
+/* =============================================================
+   11. CUBA OVERRIDES — Scoped to .mm-etypelist
+   ============================================================= */
+
+.mm-etypelist .page-title,
+.mm-etypelist .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.mm-etypelist .page-title::before {
+  display: none !important;
+}
+
+.mm-etypelist .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.mm-etypelist .page-title {
+  display: none !important;
+}
+
+.mm-etypelist .blink_me {
+  display: none !important;
+}
+
+.mm-etypelist .size-column {
+  display: none !important;
+}
+
+.mm-etypelist .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
