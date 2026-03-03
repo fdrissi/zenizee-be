@@ -1,0 +1,926 @@
+/* =====================================================================
+   MagicMate — Add / Edit Cover Image Page
+   Custom-built form layout for adding and editing event cover images.
+   BEM prefix: mm-coveredit__*
+   Uses design tokens from magicmate-tokens.css exclusively.
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-coveredit {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER (back link + title + subtitle)
+   ============================================================= */
+
+.mm-coveredit__header {
+  margin-bottom: var(--mm-space-8);
+  animation: mm-coveredit-fadeIn 0.4s ease both;
+}
+
+.mm-coveredit__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+  margin-bottom: var(--mm-space-4);
+}
+
+.mm-coveredit__back:hover {
+  color: var(--mm-primary-600);
+}
+
+.mm-coveredit__back svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.mm-coveredit__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-3xl);
+  font-weight: 800;
+  color: var(--mm-text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-coveredit__subtitle {
+  font-size: var(--mm-text-base);
+  font-weight: 400;
+  color: var(--mm-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mm-coveredit__subtitle strong {
+  font-weight: 600;
+  color: var(--mm-text-primary);
+}
+
+
+/* =============================================================
+   2. FORM CARD
+   ============================================================= */
+
+.mm-coveredit__card {
+  background: var(--mm-surface-card);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-2xl);
+  padding: var(--mm-space-10);
+  box-shadow: var(--mm-shadow-sm);
+  animation: mm-coveredit-slideUp 0.5s ease 0.1s both;
+  transition: box-shadow var(--mm-duration-slow) ease;
+}
+
+.mm-coveredit__card:hover {
+  box-shadow: var(--mm-shadow-md);
+}
+
+
+/* =============================================================
+   3. FORM LAYOUT
+   ============================================================= */
+
+.mm-coveredit__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-8);
+}
+
+
+/* =============================================================
+   4. SECTIONS (grouped fields with icon header)
+   ============================================================= */
+
+.mm-coveredit__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-6);
+  animation: mm-coveredit-fadeIn 0.45s ease both;
+}
+
+.mm-coveredit__section:nth-child(1) { animation-delay: 0.15s; }
+.mm-coveredit__section:nth-child(3) { animation-delay: 0.20s; }
+.mm-coveredit__section:nth-child(5) { animation-delay: 0.25s; }
+.mm-coveredit__section:nth-child(7) { animation-delay: 0.30s; }
+
+.mm-coveredit__section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-4);
+}
+
+.mm-coveredit__section-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--mm-radius-lg);
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-border-accent);
+  color: var(--mm-primary-600);
+  flex-shrink: 0;
+}
+
+.mm-coveredit__section-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.8;
+}
+
+.mm-coveredit__section-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 2px;
+}
+
+.mm-coveredit__section-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.mm-coveredit__section-desc {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+
+/* =============================================================
+   5. FIELD GROUP
+   ============================================================= */
+
+.mm-coveredit__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+.mm-coveredit__label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  letter-spacing: 0.01em;
+}
+
+.mm-coveredit__hint {
+  font-size: var(--mm-text-xs);
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  line-height: 1.4;
+}
+
+
+/* =============================================================
+   6. SELECT INPUT (event dropdown)
+   ============================================================= */
+
+.mm-coveredit__select {
+  width: 100%;
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 500;
+  color: var(--mm-text-primary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  outline: none;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2378716C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--mm-space-4) center;
+  padding-right: var(--mm-space-10);
+}
+
+.mm-coveredit__select:hover {
+  border-color: var(--mm-neutral-300);
+}
+
+.mm-coveredit__select:focus {
+  border-color: var(--mm-primary-400);
+  background-color: var(--mm-neutral-0);
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1);
+}
+
+/* Select2 overrides scoped to mm-coveredit */
+.mm-coveredit .select2-container {
+  width: 100% !important;
+}
+
+.mm-coveredit .select2-container--default .select2-selection--single {
+  height: auto !important;
+  padding: var(--mm-space-4) var(--mm-space-5) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-md) !important;
+  font-weight: 500 !important;
+  color: var(--mm-text-primary) !important;
+  background: var(--mm-neutral-50) !important;
+  border: 2px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  outline: none !important;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+}
+
+.mm-coveredit .select2-container--default .select2-selection--single:hover {
+  border-color: var(--mm-neutral-300) !important;
+}
+
+.mm-coveredit .select2-container--default.select2-container--focus .select2-selection--single,
+.mm-coveredit .select2-container--default.select2-container--open .select2-selection--single {
+  border-color: var(--mm-primary-400) !important;
+  background: var(--mm-neutral-0) !important;
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1) !important;
+}
+
+.mm-coveredit .select2-container--default .select2-selection--single .select2-selection__rendered {
+  padding: 0 !important;
+  line-height: 1.5 !important;
+  color: var(--mm-text-primary) !important;
+}
+
+.mm-coveredit .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 100% !important;
+  right: var(--mm-space-4) !important;
+}
+
+
+/* =============================================================
+   7. IMAGE UPLOAD (drag-and-drop style)
+   ============================================================= */
+
+.mm-coveredit__upload {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-8) var(--mm-space-6);
+  background: var(--mm-neutral-50);
+  border: 2px dashed var(--mm-neutral-300);
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+  text-align: center;
+}
+
+.mm-coveredit__upload:hover {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-primary-50);
+  transform: translateY(-1px);
+}
+
+.mm-coveredit__upload:hover .mm-coveredit__upload-icon {
+  color: var(--mm-primary-500);
+  transform: scale(1.05);
+}
+
+.mm-coveredit__upload-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.mm-coveredit__upload-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--mm-radius-full);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  color: var(--mm-neutral-400);
+  transition:
+    color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+}
+
+.mm-coveredit__upload-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.8;
+}
+
+.mm-coveredit__upload-label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  margin: 0;
+}
+
+.mm-coveredit__upload-label span {
+  color: var(--mm-primary-500);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mm-coveredit__upload-hint {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+  margin: 0;
+}
+
+
+/* =============================================================
+   8. IMAGE PREVIEW (current cover image)
+   ============================================================= */
+
+.mm-coveredit__preview {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-4);
+  padding: var(--mm-space-4);
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  margin-top: var(--mm-space-3);
+}
+
+.mm-coveredit__preview-thumb {
+  width: 100px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: var(--mm-radius-md);
+  border: 1px solid var(--mm-border-default);
+  background: var(--mm-neutral-0);
+  flex-shrink: 0;
+}
+
+.mm-coveredit__preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mm-coveredit__preview-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mm-coveredit__preview-note {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+}
+
+
+/* =============================================================
+   9. TOGGLE GROUP (segmented radio — Publish / Unpublish)
+   ============================================================= */
+
+.mm-coveredit__toggle-group {
+  display: flex;
+  gap: var(--mm-space-3);
+}
+
+.mm-coveredit__toggle-option {
+  flex: 1;
+  position: relative;
+}
+
+.mm-coveredit__toggle-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mm-coveredit__toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  transition:
+    color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    border-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  user-select: none;
+}
+
+.mm-coveredit__toggle-label:hover {
+  border-color: var(--mm-neutral-300);
+  background: var(--mm-neutral-0);
+}
+
+.mm-coveredit__toggle-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform var(--mm-duration-fast) var(--mm-ease-spring);
+}
+
+.mm-coveredit__toggle-dot--active {
+  background: var(--mm-success);
+}
+
+.mm-coveredit__toggle-dot--inactive {
+  background: var(--mm-neutral-400);
+}
+
+/* Selected state — Publish (Active) */
+.mm-coveredit__toggle-option input[type="radio"]:checked + .mm-coveredit__toggle-label--active {
+  color: var(--mm-success-dark);
+  background: var(--mm-success-light);
+  border-color: var(--mm-success);
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.08);
+}
+
+.mm-coveredit__toggle-option input[type="radio"]:checked + .mm-coveredit__toggle-label--active .mm-coveredit__toggle-dot {
+  transform: scale(1.3);
+}
+
+/* Selected state — Unpublish (Inactive) */
+.mm-coveredit__toggle-option input[type="radio"]:checked + .mm-coveredit__toggle-label--inactive {
+  color: var(--mm-neutral-700);
+  background: var(--mm-neutral-100);
+  border-color: var(--mm-neutral-400);
+  box-shadow: 0 0 0 4px rgba(120, 113, 108, 0.06);
+}
+
+.mm-coveredit__toggle-option input[type="radio"]:checked + .mm-coveredit__toggle-label--inactive .mm-coveredit__toggle-dot {
+  transform: scale(1.3);
+}
+
+
+/* =============================================================
+   10. DIVIDER
+   ============================================================= */
+
+.mm-coveredit__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--mm-border-subtle);
+  border: none;
+  margin: 0;
+}
+
+
+/* =============================================================
+   11. SUBMIT AREA
+   ============================================================= */
+
+.mm-coveredit__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+  padding-top: var(--mm-space-2);
+}
+
+.mm-coveredit__submit {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-5) var(--mm-space-8);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring),
+    box-shadow var(--mm-duration-base) ease;
+  box-shadow: 0 4px 16px rgba(216, 136, 39, 0.25), 0 1px 4px rgba(216, 136, 39, 0.15);
+}
+
+.mm-coveredit__submit:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(216, 136, 39, 0.35), 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-coveredit__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-coveredit__submit svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.mm-coveredit__cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-3) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+}
+
+.mm-coveredit__cancel:hover {
+  color: var(--mm-text-primary);
+}
+
+
+/* =============================================================
+   12. EMPTY / NOT-FOUND STATE
+   ============================================================= */
+
+.mm-coveredit__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  gap: var(--mm-space-4);
+}
+
+.mm-coveredit__empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--mm-radius-full);
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-400);
+  margin-bottom: var(--mm-space-2);
+}
+
+.mm-coveredit__empty-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke-width: 1.6;
+}
+
+.mm-coveredit__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.mm-coveredit__empty-desc {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-text-secondary);
+  margin: 0;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+.mm-coveredit__empty-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-4) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 700;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: var(--mm-space-2);
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring),
+    box-shadow var(--mm-duration-base) ease;
+  box-shadow: 0 4px 16px rgba(216, 136, 39, 0.25), 0 1px 4px rgba(216, 136, 39, 0.15);
+}
+
+.mm-coveredit__empty-btn:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(216, 136, 39, 0.35), 0 2px 8px rgba(216, 136, 39, 0.2);
+  color: var(--mm-neutral-0);
+}
+
+.mm-coveredit__empty-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+
+/* =============================================================
+   13. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-coveredit-fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mm-coveredit-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =============================================================
+   14. RESPONSIVE — Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-coveredit {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-coveredit__card {
+    padding: var(--mm-space-8);
+  }
+}
+
+
+/* =============================================================
+   15. RESPONSIVE — Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-coveredit {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    max-width: 100%;
+  }
+
+  .mm-coveredit__card {
+    padding: var(--mm-space-6);
+    border-radius: var(--mm-radius-xl);
+  }
+
+  .mm-coveredit__title {
+    font-size: var(--mm-text-2xl);
+  }
+
+  .mm-coveredit__toggle-group {
+    flex-direction: column;
+  }
+
+  .mm-coveredit__upload {
+    padding: var(--mm-space-6) var(--mm-space-4);
+  }
+
+  .mm-coveredit__section-header {
+    gap: var(--mm-space-3);
+  }
+
+  .mm-coveredit__section-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mm-coveredit__section-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mm-coveredit__preview {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mm-coveredit__preview-thumb {
+    width: 100%;
+    height: auto;
+    max-height: 120px;
+  }
+}
+
+
+/* =============================================================
+   16. RESPONSIVE — Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-coveredit {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-coveredit__header {
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-coveredit__card {
+    padding: var(--mm-space-5);
+    border-radius: var(--mm-radius-lg);
+  }
+
+  .mm-coveredit__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-coveredit__form {
+    gap: var(--mm-space-6);
+  }
+
+  .mm-coveredit__section {
+    gap: var(--mm-space-4);
+  }
+
+  .mm-coveredit__empty {
+    padding: var(--mm-space-8) var(--mm-space-4);
+  }
+
+  .mm-coveredit__empty-icon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .mm-coveredit__empty-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+
+/* =============================================================
+   17. DARK MODE KILL (light only)
+   ============================================================= */
+
+body.dark-only .mm-coveredit__card {
+  background: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-coveredit__select {
+  background-color: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-coveredit .select2-container--default .select2-selection--single {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-coveredit__upload {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-neutral-300) !important;
+}
+
+body.dark-only .mm-coveredit__title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-coveredit__label {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-coveredit__section-title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-coveredit__section-icon {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-border-accent) !important;
+}
+
+body.dark-only .mm-coveredit__toggle-label {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-secondary) !important;
+}
+
+body.dark-only .mm-coveredit__toggle-option input[type="radio"]:checked + .mm-coveredit__toggle-label--active {
+  background: var(--mm-success-light) !important;
+  border-color: var(--mm-success) !important;
+  color: var(--mm-success-dark) !important;
+}
+
+body.dark-only .mm-coveredit__toggle-option input[type="radio"]:checked + .mm-coveredit__toggle-label--inactive {
+  background: var(--mm-neutral-100) !important;
+  border-color: var(--mm-neutral-400) !important;
+  color: var(--mm-neutral-700) !important;
+}
+
+body.dark-only .mm-coveredit__preview {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+}
+
+body.dark-only .mm-coveredit__empty-icon {
+  background: var(--mm-neutral-100) !important;
+  color: var(--mm-neutral-400) !important;
+}
+
+
+/* =============================================================
+   18. CUBA OVERRIDE — Scoped to .mm-coveredit
+   ============================================================= */
+
+/* Kill any inherited Cuba card/form styles */
+.mm-coveredit .card,
+.mm-coveredit .card-body,
+.mm-coveredit .card-footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.mm-coveredit .form-group {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mm-coveredit .form-control {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.mm-coveredit .page-title {
+  display: none !important;
+}
+
+.mm-coveredit .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.mm-coveredit .size-column {
+  display: contents !important;
+}
+
+.mm-coveredit .col-sm-12 {
+  display: contents !important;
+  padding: 0 !important;
+  max-width: none !important;
+  flex: none !important;
+}
+
+.mm-coveredit .row {
+  display: contents !important;
+}

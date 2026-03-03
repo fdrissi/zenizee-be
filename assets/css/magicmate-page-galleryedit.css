@@ -1,0 +1,925 @@
+/* =====================================================================
+   MagicMate — Add / Edit Gallery Page
+   Custom-built form layout for adding and editing gallery images.
+   BEM prefix: mm-galleryedit__*
+   Uses design tokens from magicmate-tokens.css exclusively.
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-galleryedit {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER (back link + title + subtitle)
+   ============================================================= */
+
+.mm-galleryedit__header {
+  margin-bottom: var(--mm-space-8);
+  animation: mm-galleryedit-fadeIn 0.4s ease both;
+}
+
+.mm-galleryedit__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+  margin-bottom: var(--mm-space-4);
+}
+
+.mm-galleryedit__back:hover {
+  color: var(--mm-primary-600);
+}
+
+.mm-galleryedit__back svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.mm-galleryedit__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-3xl);
+  font-weight: 800;
+  color: var(--mm-text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-galleryedit__subtitle {
+  font-size: var(--mm-text-base);
+  font-weight: 400;
+  color: var(--mm-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mm-galleryedit__subtitle strong {
+  font-weight: 600;
+  color: var(--mm-text-primary);
+}
+
+
+/* =============================================================
+   2. FORM CARD
+   ============================================================= */
+
+.mm-galleryedit__card {
+  background: var(--mm-surface-card);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-2xl);
+  padding: var(--mm-space-10);
+  box-shadow: var(--mm-shadow-sm);
+  animation: mm-galleryedit-slideUp 0.5s ease 0.1s both;
+  transition: box-shadow var(--mm-duration-slow) ease;
+}
+
+.mm-galleryedit__card:hover {
+  box-shadow: var(--mm-shadow-md);
+}
+
+
+/* =============================================================
+   3. FORM LAYOUT
+   ============================================================= */
+
+.mm-galleryedit__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-8);
+}
+
+
+/* =============================================================
+   4. SECTIONS (grouped fields with icon header)
+   ============================================================= */
+
+.mm-galleryedit__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-6);
+  animation: mm-galleryedit-fadeIn 0.45s ease both;
+}
+
+.mm-galleryedit__section:nth-child(2) { animation-delay: 0.15s; }
+.mm-galleryedit__section:nth-child(4) { animation-delay: 0.20s; }
+.mm-galleryedit__section:nth-child(6) { animation-delay: 0.25s; }
+
+.mm-galleryedit__section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-4);
+}
+
+.mm-galleryedit__section-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--mm-radius-lg);
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-border-accent);
+  color: var(--mm-primary-600);
+  flex-shrink: 0;
+}
+
+.mm-galleryedit__section-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.8;
+}
+
+.mm-galleryedit__section-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 2px;
+}
+
+.mm-galleryedit__section-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.mm-galleryedit__section-desc {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+
+/* =============================================================
+   5. FIELD GROUP
+   ============================================================= */
+
+.mm-galleryedit__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+.mm-galleryedit__label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  letter-spacing: 0.01em;
+}
+
+.mm-galleryedit__hint {
+  font-size: var(--mm-text-xs);
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  line-height: 1.4;
+}
+
+
+/* =============================================================
+   6. SELECT INPUT (styled native + select2 override)
+   ============================================================= */
+
+.mm-galleryedit__select {
+  width: 100%;
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 500;
+  color: var(--mm-text-primary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  outline: none;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2378716C' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 44px;
+}
+
+.mm-galleryedit__select:hover {
+  border-color: var(--mm-neutral-300);
+}
+
+.mm-galleryedit__select:focus {
+  border-color: var(--mm-primary-400);
+  background-color: var(--mm-neutral-0);
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1);
+}
+
+/* Select2 overrides within gallery edit scope */
+.mm-galleryedit .select2-container {
+  width: 100% !important;
+}
+
+.mm-galleryedit .select2-container--default .select2-selection--single {
+  height: auto !important;
+  padding: var(--mm-space-4) var(--mm-space-5) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-md) !important;
+  font-weight: 500 !important;
+  color: var(--mm-text-primary) !important;
+  background: var(--mm-neutral-50) !important;
+  border: 2px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  outline: none !important;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box !important;
+}
+
+.mm-galleryedit .select2-container--default .select2-selection--single:hover {
+  border-color: var(--mm-neutral-300) !important;
+}
+
+.mm-galleryedit .select2-container--default.select2-container--open .select2-selection--single {
+  border-color: var(--mm-primary-400) !important;
+  background: var(--mm-neutral-0) !important;
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1) !important;
+}
+
+.mm-galleryedit .select2-container--default .select2-selection--single .select2-selection__rendered {
+  padding: 0 !important;
+  line-height: normal !important;
+  color: var(--mm-text-primary) !important;
+}
+
+.mm-galleryedit .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 100% !important;
+  right: 12px !important;
+}
+
+.mm-galleryedit .select2-container--default .select2-selection--single .select2-selection__placeholder {
+  color: var(--mm-text-tertiary) !important;
+}
+
+
+/* =============================================================
+   7. IMAGE UPLOAD (drag-and-drop style)
+   ============================================================= */
+
+.mm-galleryedit__upload {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-8) var(--mm-space-6);
+  background: var(--mm-neutral-50);
+  border: 2px dashed var(--mm-neutral-300);
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+  text-align: center;
+}
+
+.mm-galleryedit__upload:hover {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-primary-50);
+  transform: translateY(-1px);
+}
+
+.mm-galleryedit__upload:hover .mm-galleryedit__upload-icon {
+  color: var(--mm-primary-500);
+  transform: scale(1.05);
+}
+
+.mm-galleryedit__upload-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.mm-galleryedit__upload-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--mm-radius-full);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  color: var(--mm-neutral-400);
+  transition:
+    color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+}
+
+.mm-galleryedit__upload-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.8;
+}
+
+.mm-galleryedit__upload-label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  margin: 0;
+}
+
+.mm-galleryedit__upload-label span {
+  color: var(--mm-primary-500);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mm-galleryedit__upload-hint {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+  margin: 0;
+}
+
+
+/* =============================================================
+   8. IMAGE PREVIEW (current gallery image)
+   ============================================================= */
+
+.mm-galleryedit__preview {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-4);
+  padding: var(--mm-space-4);
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  margin-top: var(--mm-space-3);
+}
+
+.mm-galleryedit__preview-thumb {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: var(--mm-radius-md);
+  border: 1px solid var(--mm-border-default);
+  background: var(--mm-neutral-0);
+  flex-shrink: 0;
+}
+
+.mm-galleryedit__preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mm-galleryedit__preview-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mm-galleryedit__preview-note {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+}
+
+
+/* =============================================================
+   9. TOGGLE GROUP (segmented radio — Publish / Unpublish)
+   ============================================================= */
+
+.mm-galleryedit__toggle-group {
+  display: flex;
+  gap: var(--mm-space-3);
+}
+
+.mm-galleryedit__toggle-option {
+  flex: 1;
+  position: relative;
+}
+
+.mm-galleryedit__toggle-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mm-galleryedit__toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  transition:
+    color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    border-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  user-select: none;
+}
+
+.mm-galleryedit__toggle-label:hover {
+  border-color: var(--mm-neutral-300);
+  background: var(--mm-neutral-0);
+}
+
+.mm-galleryedit__toggle-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform var(--mm-duration-fast) var(--mm-ease-spring);
+}
+
+.mm-galleryedit__toggle-dot--active {
+  background: var(--mm-success);
+}
+
+.mm-galleryedit__toggle-dot--inactive {
+  background: var(--mm-neutral-400);
+}
+
+/* Selected state — Publish (active) */
+.mm-galleryedit__toggle-option input[type="radio"]:checked + .mm-galleryedit__toggle-label--active {
+  color: var(--mm-success-dark);
+  background: var(--mm-success-light);
+  border-color: var(--mm-success);
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.08);
+}
+
+.mm-galleryedit__toggle-option input[type="radio"]:checked + .mm-galleryedit__toggle-label--active .mm-galleryedit__toggle-dot {
+  transform: scale(1.3);
+}
+
+/* Selected state — Unpublish (inactive) */
+.mm-galleryedit__toggle-option input[type="radio"]:checked + .mm-galleryedit__toggle-label--inactive {
+  color: var(--mm-neutral-700);
+  background: var(--mm-neutral-100);
+  border-color: var(--mm-neutral-400);
+  box-shadow: 0 0 0 4px rgba(120, 113, 108, 0.06);
+}
+
+.mm-galleryedit__toggle-option input[type="radio"]:checked + .mm-galleryedit__toggle-label--inactive .mm-galleryedit__toggle-dot {
+  transform: scale(1.3);
+}
+
+
+/* =============================================================
+   10. DIVIDER
+   ============================================================= */
+
+.mm-galleryedit__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--mm-border-subtle);
+  border: none;
+  margin: 0;
+}
+
+
+/* =============================================================
+   11. SUBMIT AREA
+   ============================================================= */
+
+.mm-galleryedit__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+  padding-top: var(--mm-space-2);
+}
+
+.mm-galleryedit__submit {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-5) var(--mm-space-8);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring),
+    box-shadow var(--mm-duration-base) ease;
+  box-shadow: 0 4px 16px rgba(216, 136, 39, 0.25), 0 1px 4px rgba(216, 136, 39, 0.15);
+}
+
+.mm-galleryedit__submit:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(216, 136, 39, 0.35), 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-galleryedit__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-galleryedit__submit svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.mm-galleryedit__cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-3) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+}
+
+.mm-galleryedit__cancel:hover {
+  color: var(--mm-text-primary);
+}
+
+
+/* =============================================================
+   12. EMPTY STATE (gallery not found fallback)
+   ============================================================= */
+
+.mm-galleryedit__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  gap: var(--mm-space-4);
+}
+
+.mm-galleryedit__empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--mm-radius-full);
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-400);
+  margin-bottom: var(--mm-space-2);
+}
+
+.mm-galleryedit__empty-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke-width: 1.5;
+}
+
+.mm-galleryedit__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-text-primary);
+  margin: 0;
+}
+
+.mm-galleryedit__empty-desc {
+  font-size: var(--mm-text-sm);
+  color: var(--mm-text-tertiary);
+  margin: 0;
+  max-width: 360px;
+  line-height: 1.5;
+}
+
+.mm-galleryedit__empty-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-3) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring),
+    box-shadow var(--mm-duration-base) ease;
+  box-shadow: 0 4px 12px rgba(216, 136, 39, 0.2);
+  margin-top: var(--mm-space-2);
+}
+
+.mm-galleryedit__empty-action:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(216, 136, 39, 0.3);
+  color: var(--mm-neutral-0);
+}
+
+.mm-galleryedit__empty-action svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+
+/* =============================================================
+   13. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-galleryedit-fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mm-galleryedit-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =============================================================
+   14. RESPONSIVE — Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-galleryedit {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-galleryedit__card {
+    padding: var(--mm-space-8);
+  }
+}
+
+
+/* =============================================================
+   15. RESPONSIVE — Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-galleryedit {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    max-width: 100%;
+  }
+
+  .mm-galleryedit__card {
+    padding: var(--mm-space-6);
+    border-radius: var(--mm-radius-xl);
+  }
+
+  .mm-galleryedit__title {
+    font-size: var(--mm-text-2xl);
+  }
+
+  .mm-galleryedit__toggle-group {
+    flex-direction: column;
+  }
+
+  .mm-galleryedit__upload {
+    padding: var(--mm-space-6) var(--mm-space-4);
+  }
+
+  .mm-galleryedit__section-header {
+    gap: var(--mm-space-3);
+  }
+
+  .mm-galleryedit__section-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mm-galleryedit__section-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+
+/* =============================================================
+   16. RESPONSIVE — Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-galleryedit {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-galleryedit__header {
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-galleryedit__card {
+    padding: var(--mm-space-5);
+    border-radius: var(--mm-radius-lg);
+  }
+
+  .mm-galleryedit__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-galleryedit__form {
+    gap: var(--mm-space-6);
+  }
+
+  .mm-galleryedit__section {
+    gap: var(--mm-space-4);
+  }
+
+  .mm-galleryedit__preview-thumb {
+    width: 60px;
+    height: 45px;
+  }
+
+  .mm-galleryedit__empty {
+    padding: var(--mm-space-8) var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   17. DARK MODE KILL (light only)
+   ============================================================= */
+
+body.dark-only .mm-galleryedit__card {
+  background: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-galleryedit__select {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-galleryedit__upload {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-neutral-300) !important;
+}
+
+body.dark-only .mm-galleryedit__title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-galleryedit__label {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-galleryedit__section-title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-galleryedit__section-icon {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-border-accent) !important;
+}
+
+body.dark-only .mm-galleryedit__toggle-label {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-secondary) !important;
+}
+
+body.dark-only .mm-galleryedit__toggle-option input[type="radio"]:checked + .mm-galleryedit__toggle-label--active {
+  background: var(--mm-success-light) !important;
+  border-color: var(--mm-success) !important;
+  color: var(--mm-success-dark) !important;
+}
+
+body.dark-only .mm-galleryedit__toggle-option input[type="radio"]:checked + .mm-galleryedit__toggle-label--inactive {
+  background: var(--mm-neutral-100) !important;
+  border-color: var(--mm-neutral-400) !important;
+  color: var(--mm-neutral-700) !important;
+}
+
+body.dark-only .mm-galleryedit__preview {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+}
+
+body.dark-only .mm-galleryedit__empty-icon {
+  background: var(--mm-neutral-100) !important;
+}
+
+body.dark-only .mm-galleryedit__empty-title {
+  color: var(--mm-text-primary) !important;
+}
+
+/* Select2 dark mode kill */
+body.dark-only .mm-galleryedit .select2-container--default .select2-selection--single {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-galleryedit .select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: var(--mm-text-primary) !important;
+}
+
+
+/* =============================================================
+   18. CUBA OVERRIDE — Scoped to .mm-galleryedit
+   ============================================================= */
+
+/* Kill any inherited Cuba card/form styles */
+.mm-galleryedit .card,
+.mm-galleryedit .card-body,
+.mm-galleryedit .card-footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.mm-galleryedit .form-group {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mm-galleryedit .form-control {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.mm-galleryedit .page-title {
+  display: none !important;
+}
+
+.mm-galleryedit .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.mm-galleryedit .size-column {
+  display: contents !important;
+}
+
+.mm-galleryedit .col-sm-12 {
+  display: contents !important;
+  padding: 0 !important;
+  max-width: none !important;
+  flex: none !important;
+}
+
+.mm-galleryedit .row {
+  display: contents !important;
+}
+
+/* Hide the Cuba page-title bar */
+.mm-galleryedit ~ .container-fluid .page-title,
+.page-body > .container-fluid:first-child .page-title {
+  display: none !important;
+}

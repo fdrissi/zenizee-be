@@ -1,0 +1,799 @@
+/* =====================================================================
+   MagicMate — Cover Image List Page
+   A card grid for managing event cover images (landscape-oriented).
+   Uses design tokens from magicmate-tokens.css exclusively.
+   BEM prefix: mm-coverlist__*
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-coverlist {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER — Title bar with back link
+   ============================================================= */
+
+/* Back link */
+.mm-coverlist__back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-500);
+  text-decoration: none;
+  margin-bottom: var(--mm-space-2);
+  transition: color var(--mm-duration-fast) ease;
+}
+
+.mm-coverlist__back-link:hover {
+  color: var(--mm-primary-600);
+  text-decoration: none;
+}
+
+.mm-coverlist__back-link svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-coverlist__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--mm-space-8);
+  animation: mm-coverlist-fadeIn 0.45s ease both;
+}
+
+.mm-coverlist__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+.mm-coverlist__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-coverlist__subtitle {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Header icon accent */
+.mm-coverlist__header-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  border-radius: var(--mm-radius-xl);
+  flex-shrink: 0;
+}
+
+.mm-coverlist__header-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--mm-primary-600);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =============================================================
+   2. STATS BAR — Quick summary strip
+   ============================================================= */
+
+.mm-coverlist__stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-6);
+  padding: var(--mm-space-4) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-coverlist-fadeUp 0.45s ease 0.05s both;
+}
+
+.mm-coverlist__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-coverlist__stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-coverlist__stat-dot--total {
+  background: var(--mm-primary-500);
+}
+
+.mm-coverlist__stat-dot--published {
+  background: var(--mm-success);
+}
+
+.mm-coverlist__stat-dot--unpublished {
+  background: var(--mm-neutral-400);
+}
+
+.mm-coverlist__stat-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1;
+}
+
+.mm-coverlist__stat-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-left: -4px;
+}
+
+.mm-coverlist__stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================
+   3. TOOLBAR — Search + Filter
+   ============================================================= */
+
+.mm-coverlist__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-coverlist-fadeUp 0.45s ease 0.1s both;
+}
+
+.mm-coverlist__search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.mm-coverlist__search-icon {
+  position: absolute;
+  left: var(--mm-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.mm-coverlist__search-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-coverlist__search-input {
+  width: 100%;
+  padding: var(--mm-space-3) var(--mm-space-4) var(--mm-space-3) 44px;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-900);
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-coverlist__search-input::placeholder {
+  color: var(--mm-neutral-400);
+  font-weight: 400;
+}
+
+.mm-coverlist__search-input:focus {
+  border-color: var(--mm-primary-300);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.08);
+}
+
+/* Filter buttons group */
+.mm-coverlist__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-coverlist__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-full);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-600);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.mm-coverlist__filter-btn:hover {
+  border-color: var(--mm-primary-200);
+  color: var(--mm-primary-700);
+  background: var(--mm-primary-50);
+}
+
+.mm-coverlist__filter-btn--active {
+  background: var(--mm-primary-500);
+  border-color: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+}
+
+.mm-coverlist__filter-btn--active:hover {
+  background: var(--mm-primary-600);
+  border-color: var(--mm-primary-600);
+  color: #fff;
+}
+
+.mm-coverlist__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--mm-radius-full);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mm-coverlist__filter-btn:not(.mm-coverlist__filter-btn--active) .mm-coverlist__filter-count {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-coverlist__filter-btn--active .mm-coverlist__filter-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+/* Filter divider (between status and event name pills) */
+.mm-coverlist__filter-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+  margin: 0 var(--mm-space-1);
+}
+
+
+/* =============================================================
+   4. CARD GRID — 3 columns (landscape cards need more width)
+   ============================================================= */
+
+.mm-coverlist__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--mm-space-5);
+  animation: mm-coverlist-fadeUp 0.45s ease 0.15s both;
+}
+
+
+/* =============================================================
+   5. COVER CARD
+   ============================================================= */
+
+.mm-coverlist__card {
+  position: relative;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  overflow: hidden;
+  transition: all var(--mm-duration-base) ease;
+  animation: mm-coverlist-cardIn 0.5s var(--mm-ease-spring) both;
+  animation-delay: calc(var(--card-index, 0) * 0.05s + 0.15s);
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-coverlist__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mm-shadow-card-hover);
+  border-color: var(--mm-primary-200);
+}
+
+/* ── Card visual area — cover image (landscape aspect ratio) ── */
+.mm-coverlist__card-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%);
+  border-bottom: 1px solid var(--mm-border-subtle);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.mm-coverlist__card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--mm-duration-slow) var(--mm-ease-spring);
+  position: absolute;
+  inset: 0;
+}
+
+.mm-coverlist__card:hover .mm-coverlist__card-image {
+  transform: scale(1.04);
+}
+
+/* Image placeholder when image missing */
+.mm-coverlist__card-no-image {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-200);
+  border-radius: var(--mm-radius-lg);
+}
+
+.mm-coverlist__card-no-image svg {
+  width: 32px;
+  height: 32px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Status badge overlay (top-right) ── */
+.mm-coverlist__status-badge {
+  position: absolute;
+  top: var(--mm-space-3);
+  right: var(--mm-space-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--mm-radius-full);
+  line-height: 1.4;
+  white-space: nowrap;
+  z-index: 2;
+  backdrop-filter: blur(8px);
+}
+
+.mm-coverlist__status-badge svg {
+  width: 11px;
+  height: 11px;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.mm-coverlist__status-badge--published {
+  background: rgba(22, 163, 74, 0.9);
+  color: #fff;
+}
+
+.mm-coverlist__status-badge--published svg {
+  stroke: #fff;
+}
+
+.mm-coverlist__status-badge--unpublished {
+  background: rgba(28, 25, 23, 0.55);
+  color: #fff;
+}
+
+.mm-coverlist__status-badge--unpublished svg {
+  stroke: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Card index (top-left) ── */
+.mm-coverlist__card-index {
+  position: absolute;
+  top: var(--mm-space-3);
+  left: var(--mm-space-3);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 25, 23, 0.45);
+  border-radius: var(--mm-radius-md);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #fff;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Card body ── */
+.mm-coverlist__card-body {
+  padding: var(--mm-space-4) var(--mm-space-4) var(--mm-space-3);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+/* Event name tag with calendar icon */
+.mm-coverlist__card-event-tag {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  min-width: 0;
+}
+
+.mm-coverlist__card-event-tag svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--mm-primary-500);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.mm-coverlist__card-event-name {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-sm);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Card footer (actions) ── */
+.mm-coverlist__card-actions {
+  display: flex;
+  align-items: center;
+  padding: var(--mm-space-3) var(--mm-space-4);
+  border-top: 1px solid var(--mm-border-subtle);
+}
+
+.mm-coverlist__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--mm-radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--mm-duration-fast) ease;
+  line-height: 1;
+}
+
+.mm-coverlist__action-btn svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-coverlist__action-btn--edit {
+  background: var(--mm-primary-50);
+  color: var(--mm-primary-700);
+}
+
+.mm-coverlist__action-btn--edit svg {
+  stroke: var(--mm-primary-600);
+}
+
+.mm-coverlist__action-btn--edit:hover {
+  background: var(--mm-primary-100);
+  color: var(--mm-primary-800);
+  text-decoration: none;
+}
+
+
+/* =============================================================
+   6. EMPTY STATE
+   ============================================================= */
+
+.mm-coverlist__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  text-align: center;
+  animation: mm-coverlist-fadeIn 0.5s ease 0.2s both;
+}
+
+.mm-coverlist__empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border-radius: var(--mm-radius-2xl);
+  margin-bottom: var(--mm-space-5);
+}
+
+.mm-coverlist__empty-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-coverlist__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-700);
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-coverlist__empty-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+
+/* =============================================================
+   7. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-coverlist-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mm-coverlist-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mm-coverlist-cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =============================================================
+   8. RESPONSIVE — Tablet (2 columns)
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-coverlist {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-coverlist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE — Mobile (1 column)
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-coverlist {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-coverlist__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mm-space-4);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-coverlist__header-icon {
+    display: none;
+  }
+
+  .mm-coverlist__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-coverlist__stats-bar {
+    gap: var(--mm-space-4);
+    padding: var(--mm-space-3) var(--mm-space-4);
+    flex-wrap: wrap;
+  }
+
+  .mm-coverlist__stat-separator {
+    display: none;
+  }
+
+  .mm-coverlist__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mm-coverlist__search-wrap {
+    max-width: none;
+  }
+
+  .mm-coverlist__filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: var(--mm-space-1);
+  }
+
+  .mm-coverlist__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mm-coverlist__grid {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   10. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-coverlist__card,
+body.dark-only .mm-coverlist__stats-bar {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-coverlist__card-visual {
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%) !important;
+}
+
+body.dark-only .mm-coverlist__card-event-name,
+body.dark-only .mm-coverlist__title,
+body.dark-only .mm-coverlist__stat-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-coverlist__subtitle,
+body.dark-only .mm-coverlist__stat-label,
+body.dark-only .mm-coverlist__back-link {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .mm-coverlist__search-input {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-coverlist__filter-btn:not(.mm-coverlist__filter-btn--active) {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-600) !important;
+}
+
+body.dark-only .mm-coverlist__action-btn--edit {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+body.dark-only .mm-coverlist__card-event-tag svg {
+  stroke: var(--mm-primary-500) !important;
+}
+
+
+/* =============================================================
+   11. CUBA OVERRIDES — Scoped to .mm-coverlist
+   ============================================================= */
+
+.mm-coverlist .page-title,
+.mm-coverlist .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.mm-coverlist .page-title::before {
+  display: none !important;
+}
+
+.mm-coverlist .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.mm-coverlist .page-title {
+  display: none !important;
+}
+
+.mm-coverlist .blink_me {
+  display: none !important;
+}
+
+.mm-coverlist .size-column {
+  display: none !important;
+}
+
+.mm-coverlist .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
