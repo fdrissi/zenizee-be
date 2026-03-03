@@ -620,6 +620,10 @@
   padding: var(--mm-space-2) var(--mm-space-3) !important;
 }
 
+.mm-eventedit .note-editor .note-toolbar .note-btn i {
+  font-family: "summernote" !important;
+}
+
 .mm-eventedit .note-editor .note-editing-area .note-editable {
   background: var(--mm-neutral-0) !important;
   color: var(--mm-text-primary) !important;
