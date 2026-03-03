@@ -383,11 +383,11 @@
 }
 
 .mm-etypelist__card-currency {
-  font-size: var(--mm-text-lg);
-  font-weight: 700;
-  vertical-align: super;
-  margin-right: 2px;
-  opacity: 0.85;
+  font-size: inherit;
+  font-weight: inherit;
+  vertical-align: baseline;
+  margin-right: 4px;
+  opacity: 1;
 }
 
 /* Card index chip (top-left in price band) */
