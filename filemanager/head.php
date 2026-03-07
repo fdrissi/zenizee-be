@@ -49,6 +49,7 @@ include 'evconfing.php';
     <link rel="stylesheet" type="text/css" href="assets/css/magicmate-phase3-dashboard.css">
     <link rel="stylesheet" type="text/css" href="assets/css/magicmate-phase3-lists.css">
     <link rel="stylesheet" type="text/css" href="assets/css/magicmate-phase3-forms.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/magicmate-upload.css">
   </head>
   <body>
     <script src="assets/js/magicmate-init.js"></script>

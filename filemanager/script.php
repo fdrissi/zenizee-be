@@ -21,3 +21,4 @@ require 'filemanager/evconfing.php';
 <script src="assets/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
 <script src="assets/js/script.js"></script>
 <script src="assets/js/admin-handlers.js"></script>
+<script src="assets/js/mm-upload.js"></script>

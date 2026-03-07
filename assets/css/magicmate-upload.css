@@ -1,0 +1,182 @@
+/* =====================================================================
+   MagicMate — Shared Upload Zone Visual Feedback
+   Works with ANY page using the mm-*__upload BEM pattern.
+   Requires: magicmate-tokens.css loaded first.
+   ===================================================================== */
+
+
+/* =============================================================
+   1. DRAG-OVER STATE
+   ============================================================= */
+
+[class*="__upload"].mm-upload--dragover {
+  border-color: var(--mm-primary-400) !important;
+  background: var(--mm-primary-50) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.12);
+}
+
+
+/* =============================================================
+   2. HAS-FILE STATE — container adjustments
+   ============================================================= */
+
+[class*="__upload"].mm-upload--has-file {
+  border-style: solid;
+  border-color: var(--mm-primary-300);
+  background: var(--mm-primary-50);
+  padding-bottom: var(--mm-space-5);
+  gap: var(--mm-space-3);
+  /* Restore default cursor — clicking remove button shouldn't trigger file picker */
+  cursor: default;
+}
+
+/* Keep the invisible input still clickable via the remove button only */
+[class*="__upload"].mm-upload--has-file [class*="__upload-input"] {
+  /* Shrink the invisible overlay so it doesn't block the remove button */
+  pointer-events: none;
+}
+
+
+/* =============================================================
+   3. HIDE DEFAULT UPLOAD CHROME WHEN FILE SELECTED
+   ============================================================= */
+
+[class*="__upload"].mm-upload--has-file [class*="__upload-icon"],
+[class*="__upload"].mm-upload--has-file [class*="__upload-label"],
+[class*="__upload"].mm-upload--has-file [class*="__upload-hint"] {
+  display: none !important;
+}
+
+
+/* =============================================================
+   4. IMAGE PREVIEW THUMBNAIL
+   ============================================================= */
+
+.mm-upload__preview {
+  display: block;
+  max-width: 100%;
+  max-height: 120px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--mm-radius-lg);
+  border: 1px solid var(--mm-border-accent);
+  background: var(--mm-surface-card);
+  box-shadow: var(--mm-shadow-sm);
+  transition: transform var(--mm-duration-base) ease;
+  pointer-events: none; /* don't intercept clicks */
+}
+
+[class*="__upload"].mm-upload--has-file:hover .mm-upload__preview {
+  transform: scale(1.02);
+}
+
+
+/* =============================================================
+   5. FILENAME TEXT
+   ============================================================= */
+
+.mm-upload__filename {
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  max-width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+
+/* =============================================================
+   6. REMOVE BUTTON  (×)
+   ============================================================= */
+
+.mm-upload__remove {
+  /* Position in top-right corner of the upload zone */
+  position: absolute;
+  top: var(--mm-space-2);
+  right: var(--mm-space-2);
+  z-index: 10;
+
+  /* Appearance */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--mm-radius-full);
+  border: 1px solid var(--mm-border-default);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--mm-text-secondary);
+  font-size: 14px;
+  line-height: 1;
+  font-family: var(--mm-font-sans);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+
+  /* Interactions */
+  transition:
+    background var(--mm-duration-fast) ease,
+    color var(--mm-duration-fast) ease,
+    border-color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring);
+  box-shadow: var(--mm-shadow-xs);
+
+  /* Ensure it sits above the invisible file input */
+  pointer-events: auto;
+}
+
+.mm-upload__remove:hover {
+  background: var(--mm-error-light);
+  color: var(--mm-error);
+  border-color: var(--mm-error);
+  transform: scale(1.1);
+}
+
+.mm-upload__remove:active {
+  transform: scale(0.95);
+}
+
+
+/* =============================================================
+   7. NON-IMAGE FILE ICON (shown when selected file isn't an image)
+   ============================================================= */
+
+.mm-upload__file-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--mm-radius-lg);
+  background: var(--mm-primary-100);
+  border: 1px solid var(--mm-border-accent);
+  color: var(--mm-primary-600);
+  pointer-events: none;
+}
+
+.mm-upload__file-icon svg {
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.8;
+}
+
+
+/* =============================================================
+   8. SMOOTH TRANSITIONS — add to the base upload container
+      (these augment the per-page styles, not replace them)
+   ============================================================= */
+
+[class*="__upload"] {
+  transition:
+    border-color var(--mm-duration-base) ease,
+    background-color var(--mm-duration-base) ease,
+    transform var(--mm-duration-base) ease,
+    box-shadow var(--mm-duration-base) ease !important;
+}
