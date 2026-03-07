@@ -76,7 +76,7 @@
                            <option value="" disabled selected>Select Event</option>
                            <?php
                               $cat = $evmulti->query(
-                                  "select * from tbl_event where sponsore_id=" . $sdata["id"] . ""
+                                  "select * from tbl_event where sponsore_id=" . $sdata["id"] . " and event_status='Pending'"
                               );
                               while ($row = $cat->fetch_assoc()) { ?>
                            <option value="<?php echo $row["id"]; ?>" <?php if (
@@ -324,7 +324,7 @@
                            <option value="" disabled selected>Select Event</option>
                            <?php
                               $cat = $evmulti->query(
-                                  "select * from tbl_event where sponsore_id=" . $sdata["id"] . ""
+                                  "select * from tbl_event where sponsore_id=" . $sdata["id"] . " and event_status='Pending'"
                               );
                               while ($row = $cat->fetch_assoc()) { ?>
                            <option value="<?php echo $row["id"]; ?>"><?php echo $row["title"]; ?></option>

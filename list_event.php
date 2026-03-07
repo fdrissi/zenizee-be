@@ -118,11 +118,11 @@
                <div class="mm-eventlist__filters">
                   <!-- Status filter group -->
                   <div class="mm-eventlist__filter-group">
-                     <button type="button" class="mm-eventlist__filter-btn mm-eventlist__filter-btn--active" data-filter="all" data-filter-group="status">
+                     <button type="button" class="mm-eventlist__filter-btn" data-filter="all" data-filter-group="status">
                         All
                         <span class="mm-eventlist__filter-count"><?php echo $totalEvents; ?></span>
                      </button>
-                     <button type="button" class="mm-eventlist__filter-btn" data-filter="Pending" data-filter-group="event_status">
+                     <button type="button" class="mm-eventlist__filter-btn mm-eventlist__filter-btn--active" data-filter="Pending" data-filter-group="event_status">
                         Pending
                         <span class="mm-eventlist__filter-count"><?php
                            $pc = 0; foreach ($events as $ev) { if ($ev['event_status'] == 'Pending') $pc++; }
@@ -352,8 +352,8 @@
    var searchInput = document.getElementById('mmEventSearch');
    var filterBtns  = document.querySelectorAll('.mm-eventlist__filter-btn');
    var grid        = document.getElementById('mmEventGrid');
-   var currentFilter = 'all';
-   var currentFilterGroup = 'status';
+   var currentFilter = 'Pending';
+   var currentFilterGroup = 'event_status';
 
    if (!searchInput || !grid) return;
 
@@ -417,6 +417,9 @@
          applyFilters();
       });
    });
+
+   // Apply default filter on page load
+   applyFilters();
 })();
 </script>
 <!-- Plugin used-->
