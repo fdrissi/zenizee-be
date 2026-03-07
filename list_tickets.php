@@ -77,6 +77,8 @@
                   $cancelledCount  = 0;
                   $totalRevenue    = 0;
                   $totalQty        = 0;
+                  $totalCommissionAmt = 0;
+                  $totalOrgEarnings   = 0;
 
                   foreach ($tickets as $tk) {
                      if ($tk['ticket_type'] == 'Booked')    $bookedCount++;
@@ -84,6 +86,11 @@
                      if ($tk['ticket_type'] == 'Cancelled') $cancelledCount++;
                      $totalRevenue += floatval($tk['total_amt']);
                      $totalQty     += intval($tk['total_ticket']);
+                     $commPct = floatval($tk['commission']);
+                     $base = floatval($tk['subtotal']) - floatval($tk['cou_amt']);
+                     $commAmt = $base * $commPct / 100;
+                     $totalCommissionAmt += $commAmt;
+                     $totalOrgEarnings += ($base - $commAmt);
                   }
             ?>
 
@@ -132,8 +139,14 @@
                <span class="mm-ticketlist__stat-separator"></span>
                <div class="mm-ticketlist__stat">
                   <span class="mm-ticketlist__stat-dot mm-ticketlist__stat-dot--revenue"></span>
-                  <span class="mm-ticketlist__stat-value"><?php echo number_format($totalRevenue, 2) . $set["currency"]; ?></span>
-                  <span class="mm-ticketlist__stat-label">Total Revenue</span>
+                  <span class="mm-ticketlist__stat-value"><?php echo number_format($totalOrgEarnings, 2) . $set["currency"]; ?></span>
+                  <span class="mm-ticketlist__stat-label">Your Earnings</span>
+               </div>
+               <span class="mm-ticketlist__stat-separator"></span>
+               <div class="mm-ticketlist__stat">
+                  <span class="mm-ticketlist__stat-dot mm-ticketlist__stat-dot--commission"></span>
+                  <span class="mm-ticketlist__stat-value"><?php echo number_format($totalCommissionAmt, 2) . $set["currency"]; ?></span>
+                  <span class="mm-ticketlist__stat-label">Commission</span>
                </div>
             </div>
 
@@ -288,6 +301,22 @@
                            <div class="mm-ticketlist__card-price-row mm-ticketlist__card-price-row--total">
                               <span class="mm-ticketlist__card-price-label">Total</span>
                               <span class="mm-ticketlist__card-price-value"><?php echo $row['total_amt'] . $set['currency']; ?></span>
+                           </div>
+                           <?php
+                              $cardCommPct = floatval($row['commission']);
+                              $cardBase = floatval($row['subtotal']) - floatval($row['cou_amt']);
+                              $cardCommAmt = $cardBase * $cardCommPct / 100;
+                              $cardNetEarn = $cardBase - $cardCommAmt;
+                           ?>
+                           <?php if ($cardCommPct > 0) { ?>
+                           <div class="mm-ticketlist__card-price-row mm-ticketlist__card-price-row--commission">
+                              <span class="mm-ticketlist__card-price-label">Commission (<?php echo intval($cardCommPct); ?>%)</span>
+                              <span class="mm-ticketlist__card-price-value">-<?php echo number_format($cardCommAmt, 2) . $set['currency']; ?></span>
+                           </div>
+                           <?php } ?>
+                           <div class="mm-ticketlist__card-price-row mm-ticketlist__card-price-row--earnings">
+                              <span class="mm-ticketlist__card-price-label">Your Earnings</span>
+                              <span class="mm-ticketlist__card-price-value"><?php echo number_format($cardNetEarn, 2) . $set['currency']; ?></span>
                            </div>
                         </div>
 

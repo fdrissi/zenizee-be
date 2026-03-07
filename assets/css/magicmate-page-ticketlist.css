@@ -160,6 +160,11 @@
   background: var(--mm-warning);
 }
 
+/* Commission stat dot */
+.mm-ticketlist__stat-dot--commission {
+  background: #e74c3c;
+}
+
 .mm-ticketlist__stat-value {
   font-family: var(--mm-font-display) !important;
   font-size: var(--mm-text-md);
@@ -622,6 +627,25 @@
   font-weight: 800;
   color: var(--mm-primary-700);
   font-size: var(--mm-text-base);
+}
+
+/* Commission row in pricing */
+.mm-ticketlist__card-price-row--commission {
+  color: #e74c3c;
+  font-size: var(--mm-text-sm, 0.85rem);
+}
+
+/* Earnings row in pricing */
+.mm-ticketlist__card-price-row--earnings {
+  border-top: 1px solid rgba(216, 136, 39, 0.3);
+  margin-top: 6px;
+  padding-top: 8px;
+  font-weight: 600;
+  color: var(--mm-primary, #D88827);
+}
+
+.mm-ticketlist__card-price-row--earnings .mm-ticketlist__card-price-value {
+  color: var(--mm-primary, #D88827);
 }
 
 
