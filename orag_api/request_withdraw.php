@@ -23,7 +23,7 @@ if ($data['orag_id'] == '' or $data['amt'] == '' or $data['r_type'] == '') {
     $total_earn     = $evmulti->query("select sum((subtotal-cou_amt) - ((subtotal-cou_amt) * commission/100)) as total_amt from tbl_ticket where sponsore_id=" . $owner_id . " and ticket_type ='Completed'")->fetch_assoc();
     $total_earns    = empty($total_earn['total_amt']) ? 0 : number_format((float) ($total_earn['total_amt']), 2, '.', '');
     $total_payout   = $evmulti->query("select sum(amt) as total_payout from payout_setting where owner_id=" . $owner_id . "")->fetch_assoc();
-    $receive_payout = empty($total_payout['total_payout']) ? 0 : number_format((float) ($total_earn['total_payout']), 2, '.', '');
+    $receive_payout = empty($total_payout['total_payout']) ? 0 : number_format((float) ($total_payout['total_payout']), 2, '.', '');
     $final_earn     = number_format((float) ($total_earns) - $receive_payout, 2, '.', '');
     
     if (floatval($amt) > floatval($set['pstore'])) {

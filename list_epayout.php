@@ -147,7 +147,7 @@
                            $row["acc_number"] .
                            "<br>" .
                            "A/C Name: " .
-                           $row["receipt_name"] .
+                           $row["acc_name"] .
                            "<br>" .
                            "IFSC CODE: " .
                            $row["ifsc"] .
@@ -253,7 +253,7 @@
                               <?php } elseif ($row["r_type"] == "BANK Transfer") { ?>
                                  <span class="mm-epayoutlist__detail-line"><?php echo htmlspecialchars($row["bank_name"]); ?></span>
                                  <span class="mm-epayoutlist__detail-line mm-epayoutlist__detail-line--sub">A/C: <?php echo htmlspecialchars($row["acc_number"]); ?></span>
-                                 <span class="mm-epayoutlist__detail-line mm-epayoutlist__detail-line--sub"><?php echo htmlspecialchars($row["receipt_name"]); ?></span>
+                                 <span class="mm-epayoutlist__detail-line mm-epayoutlist__detail-line--sub"><?php echo htmlspecialchars($row["acc_name"]); ?></span>
                               <?php } else { ?>
                                  <?php echo htmlspecialchars($row["paypal_id"]); ?>
                               <?php } ?>

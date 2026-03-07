@@ -227,7 +227,7 @@
                               </div>
                               <div class="mm-payoutlist__detail-row">
                                  <span class="mm-payoutlist__detail-key">A/C Name</span>
-                                 <span class="mm-payoutlist__detail-val"><?php echo htmlspecialchars($row["receipt_name"]); ?></span>
+                                 <span class="mm-payoutlist__detail-val"><?php echo htmlspecialchars($row["acc_name"]); ?></span>
                               </div>
                               <div class="mm-payoutlist__detail-row">
                                  <span class="mm-payoutlist__detail-key">IFSC Code</span>

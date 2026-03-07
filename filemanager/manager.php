@@ -1882,7 +1882,7 @@ else if($_POST['type'] == 'add_payout')
 	$bs = 0;
 				
 				
-				 if($finalearn == 0){}else {$bs = number_format((float)($earn)- $payout, 2, '.', ''); }
+				 $bs = number_format((float)($earn) - $payout, 2, '.', '');
 				 
 				 if(floatval($amt) > floatval($set['pstore']))
 				 {
