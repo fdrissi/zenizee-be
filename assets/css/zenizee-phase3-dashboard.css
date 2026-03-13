@@ -1,0 +1,796 @@
+/* =====================================================================
+   Zenizee Dashboard — Complete Custom Design
+   A premium, modern SaaS-style dashboard. No Cuba Admin DNA remaining.
+   Uses design tokens from zenizee-tokens.css exclusively.
+   ===================================================================== */
+
+
+/* =============================================================
+   0. DASHBOARD CONTAINER
+   ============================================================= */
+
+.mm-dash {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+/* Kill any Cuba page-title / container-fluid styling on dashboard */
+.mm-dash .page-title,
+.mm-dash .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.mm-dash .page-title::before {
+  display: none !important;
+}
+
+
+/* =============================================================
+   1. WELCOME BANNER
+   ============================================================= */
+
+.mm-dash__welcome {
+  position: relative;
+  background: var(--mm-neutral-900);
+  border-radius: var(--mm-radius-2xl);
+  padding: var(--mm-space-10) var(--mm-space-8);
+  margin-bottom: var(--mm-space-8);
+  overflow: hidden;
+  animation: mm-fadeIn 0.5s ease both;
+}
+
+.mm-dash__welcome-text {
+  position: relative;
+  z-index: 2;
+}
+
+.mm-dash__greeting {
+  font-family: var(--mm-font-display) !important;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--mm-neutral-0);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-dash__date {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-400);
+  letter-spacing: 0.01em;
+  margin: 0 0 var(--mm-space-1) 0;
+}
+
+.mm-dash__subtitle {
+  font-size: var(--mm-text-base);
+  font-weight: 400;
+  color: var(--mm-neutral-400);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Decorative orbs */
+.mm-dash__welcome-visual {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mm-dash__welcome-orb {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(216, 136, 39, 0.25) 0%, transparent 70%);
+  top: -60px;
+  right: -40px;
+  animation: mm-orbFloat 8s ease-in-out infinite;
+}
+
+.mm-dash__welcome-orb--secondary {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(233, 160, 62, 0.15) 0%, transparent 70%);
+  top: auto;
+  bottom: -40px;
+  right: 120px;
+  animation-delay: -4s;
+  animation-duration: 10s;
+}
+
+@keyframes mm-orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-12px, 8px) scale(1.05); }
+}
+
+
+/* =============================================================
+   2. HERO METRIC CARDS (Financial / top-level KPIs)
+   ============================================================= */
+
+.mm-dash__hero-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--mm-space-5);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-fadeUp 0.5s ease 0.1s both;
+}
+
+.mm-dash__hero-card {
+  position: relative;
+  border-radius: var(--mm-radius-xl);
+  padding: var(--mm-space-6) var(--mm-space-6) var(--mm-space-5);
+  overflow: hidden;
+  transition: transform var(--mm-duration-base) ease, box-shadow var(--mm-duration-slow) ease;
+}
+
+.mm-dash__hero-card:hover {
+  transform: translateY(-2px);
+}
+
+/* ── Primary variant (gold gradient) */
+.mm-dash__hero-card--primary {
+  background: linear-gradient(135deg, #D88827 0%, #E9A03E 60%, #F5BE6A 100%);
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(216, 136, 39, 0.25), 0 2px 8px rgba(216, 136, 39, 0.15);
+}
+
+.mm-dash__hero-card--primary:hover {
+  box-shadow: 0 16px 48px rgba(216, 136, 39, 0.3), 0 4px 12px rgba(216, 136, 39, 0.2);
+}
+
+.mm-dash__hero-card--primary .mm-dash__hero-label {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.mm-dash__hero-card--primary .mm-dash__hero-value {
+  color: #fff;
+}
+
+.mm-dash__hero-card--primary .mm-dash__hero-icon svg {
+  stroke: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Accent variant (warm tint) */
+.mm-dash__hero-card--accent {
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  color: var(--mm-neutral-900);
+  box-shadow: var(--mm-shadow-sm);
+}
+
+.mm-dash__hero-card--accent:hover {
+  box-shadow: var(--mm-shadow-md);
+  border-color: var(--mm-primary-200);
+}
+
+.mm-dash__hero-card--accent .mm-dash__hero-label {
+  color: var(--mm-primary-700);
+}
+
+.mm-dash__hero-card--accent .mm-dash__hero-value {
+  color: var(--mm-neutral-900);
+}
+
+.mm-dash__hero-card--accent .mm-dash__hero-icon svg {
+  stroke: var(--mm-primary-200);
+}
+
+/* ── Muted variant (neutral) */
+.mm-dash__hero-card--muted {
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  color: var(--mm-neutral-900);
+  box-shadow: var(--mm-shadow-xs);
+}
+
+.mm-dash__hero-card--muted:hover {
+  box-shadow: var(--mm-shadow-md);
+  border-color: var(--mm-neutral-200);
+}
+
+.mm-dash__hero-card--muted .mm-dash__hero-label {
+  color: var(--mm-neutral-500);
+}
+
+.mm-dash__hero-card--muted .mm-dash__hero-value {
+  color: var(--mm-neutral-800);
+}
+
+.mm-dash__hero-card--muted .mm-dash__hero-icon svg {
+  stroke: var(--mm-neutral-200);
+}
+
+/* ── Hero card inner elements */
+.mm-dash__hero-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--mm-space-3);
+}
+
+.mm-dash__hero-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.mm-dash__hero-currency {
+  font-size: inherit;
+  font-weight: 600;
+  margin-right: 4px;
+  vertical-align: baseline;
+  opacity: 1;
+}
+
+.mm-dash__hero-icon {
+  position: absolute;
+  bottom: var(--mm-space-4);
+  right: var(--mm-space-5);
+}
+
+.mm-dash__hero-icon svg {
+  width: 48px;
+  height: 48px;
+  fill: none;
+  stroke-width: 1.2;
+}
+
+
+/* =============================================================
+   3. STAT CARDS (Event counts — 4-column grid)
+   ============================================================= */
+
+.mm-dash__stats-grid {
+  display: grid;
+  gap: var(--mm-space-4);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-fadeUp 0.5s ease 0.2s both;
+}
+
+.mm-dash__stats-grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.mm-dash__stat-card {
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  padding: var(--mm-space-6);
+  transition: all var(--mm-duration-base) ease;
+  position: relative;
+}
+
+.mm-dash__stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--mm-shadow-md);
+  border-color: var(--mm-border-default);
+}
+
+.mm-dash__stat-top {
+  margin-bottom: var(--mm-space-4);
+}
+
+.mm-dash__stat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--mm-radius-lg);
+}
+
+.mm-dash__stat-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+/* Icon color variants */
+.mm-dash__stat-icon--blue {
+  background: var(--mm-info-light);
+}
+.mm-dash__stat-icon--blue svg {
+  stroke: var(--mm-info);
+}
+
+.mm-dash__stat-icon--green {
+  background: var(--mm-success-light);
+}
+.mm-dash__stat-icon--green svg {
+  stroke: var(--mm-success);
+}
+
+.mm-dash__stat-icon--amber {
+  background: var(--mm-warning-light);
+}
+.mm-dash__stat-icon--amber svg {
+  stroke: var(--mm-warning);
+}
+
+.mm-dash__stat-icon--red {
+  background: var(--mm-error-light);
+}
+.mm-dash__stat-icon--red svg {
+  stroke: var(--mm-error);
+}
+
+.mm-dash__stat-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: var(--mm-space-1);
+}
+
+.mm-dash__stat-label {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  letter-spacing: 0;
+}
+
+
+/* =============================================================
+   4. SECONDARY / MINI STATS ROW (Organizer dashboard)
+   ============================================================= */
+
+.mm-dash__secondary-row {
+  display: flex;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-5) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-fadeUp 0.5s ease 0.3s both;
+}
+
+.mm-dash__mini-stat {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-3) var(--mm-space-4);
+  border-radius: var(--mm-radius-lg);
+  transition: background var(--mm-duration-fast) ease;
+}
+
+.mm-dash__mini-stat:hover {
+  background: var(--mm-neutral-50);
+}
+
+.mm-dash__mini-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-dash__mini-dot--purple { background: #8B5CF6; }
+.mm-dash__mini-dot--blue   { background: var(--mm-info); }
+.mm-dash__mini-dot--green  { background: var(--mm-success); }
+.mm-dash__mini-dot--amber  { background: var(--mm-warning); }
+.mm-dash__mini-dot--pink   { background: #EC4899; }
+
+.mm-dash__mini-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.mm-dash__mini-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1.2;
+}
+
+.mm-dash__mini-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  line-height: 1.3;
+}
+
+
+/* =============================================================
+   5. PLATFORM OVERVIEW (Admin — 2-col asymmetric layout)
+   ============================================================= */
+
+.mm-dash__overview {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: var(--mm-space-5);
+  animation: mm-fadeUp 0.5s ease 0.3s both;
+}
+
+.mm-dash__section-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-800);
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--mm-space-5) 0;
+}
+
+/* ── Main overview card (left) */
+.mm-dash__overview-main {
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  padding: var(--mm-space-6);
+}
+
+.mm-dash__overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--mm-space-4);
+}
+
+.mm-dash__ov-item {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-4);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  background: var(--mm-neutral-50);
+  border-radius: var(--mm-radius-lg);
+  transition: all var(--mm-duration-fast) ease;
+}
+
+.mm-dash__ov-item:hover {
+  background: var(--mm-primary-50);
+  transform: translateX(2px);
+}
+
+.mm-dash__ov-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--mm-radius-md);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  flex-shrink: 0;
+}
+
+.mm-dash__ov-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--mm-primary-500);
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.mm-dash__ov-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-dash__ov-num {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.mm-dash__ov-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-top: 2px;
+}
+
+/* ── Side config list (right) */
+.mm-dash__overview-side {
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  padding: var(--mm-space-6);
+}
+
+.mm-dash__config-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mm-dash__config-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--mm-space-4) 0;
+  border-bottom: 1px solid var(--mm-border-subtle);
+}
+
+.mm-dash__config-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.mm-dash__config-item:first-child {
+  padding-top: 0;
+}
+
+.mm-dash__config-label {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-600);
+}
+
+.mm-dash__config-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  background: var(--mm-neutral-50);
+  padding: var(--mm-space-1) var(--mm-space-3);
+  border-radius: var(--mm-radius-md);
+  min-width: 40px;
+  text-align: center;
+}
+
+
+/* =============================================================
+   6. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mm-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =============================================================
+   7. RESPONSIVE — Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-dash {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-dash__hero-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--mm-space-4);
+  }
+
+  .mm-dash__hero-value {
+    font-size: 1.75rem;
+  }
+
+  .mm-dash__stats-grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mm-dash__secondary-row {
+    flex-wrap: wrap;
+  }
+
+  .mm-dash__mini-stat {
+    flex: 0 0 calc(33.333% - var(--mm-space-3));
+  }
+
+  .mm-dash__overview {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =============================================================
+   8. RESPONSIVE — Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-dash {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-dash__welcome {
+    padding: var(--mm-space-6) var(--mm-space-5);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-dash__greeting {
+    font-size: 1.5rem;
+  }
+
+  .mm-dash__welcome-visual {
+    display: none;
+  }
+
+  .mm-dash__hero-row {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-3);
+    margin-bottom: var(--mm-space-5);
+  }
+
+  .mm-dash__hero-card {
+    padding: var(--mm-space-5);
+  }
+
+  .mm-dash__hero-value {
+    font-size: 1.5rem;
+  }
+
+  .mm-dash__hero-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mm-dash__stats-grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-3);
+  }
+
+  .mm-dash__stat-card {
+    padding: var(--mm-space-5);
+  }
+
+  .mm-dash__stat-value {
+    font-size: 1.5rem;
+  }
+
+  .mm-dash__secondary-row {
+    flex-direction: column;
+    padding: var(--mm-space-4);
+  }
+
+  .mm-dash__mini-stat {
+    flex: 0 0 100%;
+  }
+
+  .mm-dash__overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE — Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-dash {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-dash__welcome {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    border-radius: var(--mm-radius-xl);
+    margin-bottom: var(--mm-space-5);
+  }
+
+  .mm-dash__greeting {
+    font-size: 1.25rem;
+  }
+
+  .mm-dash__stats-grid--4 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mm-dash__stat-card {
+    padding: var(--mm-space-4);
+  }
+
+  .mm-dash__stat-value {
+    font-size: 1.25rem;
+  }
+
+  .mm-dash__overview-main,
+  .mm-dash__overview-side {
+    padding: var(--mm-space-5);
+  }
+}
+
+
+/* =============================================================
+   10. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-dash__welcome {
+  background: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-dash__stat-card,
+body.dark-only .mm-dash__secondary-row,
+body.dark-only .mm-dash__overview-main,
+body.dark-only .mm-dash__overview-side {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-dash__hero-card--accent {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-100) !important;
+}
+
+body.dark-only .mm-dash__hero-card--muted {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-dash__stat-value,
+body.dark-only .mm-dash__mini-value,
+body.dark-only .mm-dash__ov-num,
+body.dark-only .mm-dash__config-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-dash__stat-label,
+body.dark-only .mm-dash__mini-label,
+body.dark-only .mm-dash__ov-label,
+body.dark-only .mm-dash__config-label,
+body.dark-only .mm-dash__date,
+body.dark-only .mm-dash__subtitle {
+  color: var(--mm-neutral-500) !important;
+}
+
+
+/* =============================================================
+   11. CUBA OVERRIDE — Scoped to dashboard only (.mm-dash parent)
+   ============================================================= */
+
+/* Override Cuba's card defaults inside our dashboard */
+.mm-dash .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Prevent Cuba's small-widget from ever showing inside mm-dash */
+.mm-dash .small-widget {
+  display: none !important;
+}
+
+/* Hide old Cuba page-title if it somehow appears inside mm-dash */
+.mm-dash .page-title {
+  display: none !important;
+}
+
+/* Kill blinking text inside dashboard only */
+.mm-dash .blink_me {
+  display: none !important;
+}
+
+/* Kill size-column inside dashboard only */
+.mm-dash .size-column {
+  display: none !important;
+}
+
+/* Suppress Cuba container-fluid padding inside our layout */
+.mm-dash .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}

@@ -1,0 +1,820 @@
+/* =====================================================================
+   Zenizee — Payout History (List) Page
+   Card grid for viewing payout request history.
+   Uses design tokens from zenizee-tokens.css exclusively.
+   BEM prefix: mm-epayoutlist__*
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-epayoutlist {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER — Title bar + Add button
+   ============================================================= */
+
+.mm-epayoutlist__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--mm-space-8);
+  animation: mm-epayoutlist-fadeIn 0.45s ease both;
+}
+
+.mm-epayoutlist__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+.mm-epayoutlist__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-epayoutlist__subtitle {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Add / New Request button */
+.mm-epayoutlist__add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-3) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 700;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring),
+    box-shadow var(--mm-duration-base) ease;
+  box-shadow: 0 4px 14px rgba(216, 136, 39, 0.2), 0 1px 3px rgba(216, 136, 39, 0.1);
+  flex-shrink: 0;
+}
+
+.mm-epayoutlist__add-btn:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(216, 136, 39, 0.3), 0 2px 6px rgba(216, 136, 39, 0.15);
+  text-decoration: none;
+  color: var(--mm-neutral-0);
+}
+
+.mm-epayoutlist__add-btn:active {
+  transform: translateY(0);
+}
+
+.mm-epayoutlist__add-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =============================================================
+   2. STATS BAR — Quick summary strip
+   ============================================================= */
+
+.mm-epayoutlist__stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-6);
+  padding: var(--mm-space-4) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-epayoutlist-fadeUp 0.45s ease 0.05s both;
+}
+
+.mm-epayoutlist__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-epayoutlist__stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-epayoutlist__stat-dot--total {
+  background: var(--mm-primary-500);
+}
+
+.mm-epayoutlist__stat-dot--pending {
+  background: var(--mm-warning);
+}
+
+.mm-epayoutlist__stat-dot--completed {
+  background: var(--mm-success);
+}
+
+.mm-epayoutlist__stat-dot--amount {
+  background: var(--mm-info);
+}
+
+.mm-epayoutlist__stat-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1;
+}
+
+.mm-epayoutlist__stat-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-left: -4px;
+}
+
+.mm-epayoutlist__stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================
+   3. TOOLBAR — Search + Filter
+   ============================================================= */
+
+.mm-epayoutlist__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-epayoutlist-fadeUp 0.45s ease 0.1s both;
+}
+
+.mm-epayoutlist__search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.mm-epayoutlist__search-icon {
+  position: absolute;
+  left: var(--mm-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.mm-epayoutlist__search-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-epayoutlist__search-input {
+  width: 100%;
+  padding: var(--mm-space-3) var(--mm-space-4) var(--mm-space-3) 44px;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-900);
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-epayoutlist__search-input::placeholder {
+  color: var(--mm-neutral-400);
+  font-weight: 400;
+}
+
+.mm-epayoutlist__search-input:focus {
+  border-color: var(--mm-primary-300);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.08);
+}
+
+/* Filter buttons group */
+.mm-epayoutlist__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-epayoutlist__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-full);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-600);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.mm-epayoutlist__filter-btn:hover {
+  border-color: var(--mm-primary-200);
+  color: var(--mm-primary-700);
+  background: var(--mm-primary-50);
+}
+
+.mm-epayoutlist__filter-btn--active {
+  background: var(--mm-primary-500);
+  border-color: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+}
+
+.mm-epayoutlist__filter-btn--active:hover {
+  background: var(--mm-primary-600);
+  border-color: var(--mm-primary-600);
+  color: #fff;
+}
+
+.mm-epayoutlist__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--mm-radius-full);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mm-epayoutlist__filter-btn:not(.mm-epayoutlist__filter-btn--active) .mm-epayoutlist__filter-count {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-epayoutlist__filter-btn--active .mm-epayoutlist__filter-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+
+/* =============================================================
+   4. CARD GRID — 3 columns
+   ============================================================= */
+
+.mm-epayoutlist__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--mm-space-5);
+  animation: mm-epayoutlist-fadeUp 0.45s ease 0.15s both;
+}
+
+
+/* =============================================================
+   5. PAYOUT CARD
+   ============================================================= */
+
+.mm-epayoutlist__card {
+  position: relative;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  overflow: hidden;
+  transition: all var(--mm-duration-base) ease;
+  animation: mm-epayoutlist-cardIn 0.5s var(--mm-ease-spring) both;
+  animation-delay: calc(var(--card-index, 0) * 0.05s + 0.15s);
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-epayoutlist__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mm-shadow-card-hover);
+  border-color: var(--mm-primary-200);
+}
+
+/* ── Card top: Amount + status badge ── */
+.mm-epayoutlist__card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-3);
+}
+
+.mm-epayoutlist__card-amount {
+  display: flex;
+  align-items: baseline;
+  gap: var(--mm-space-1);
+}
+
+.mm-epayoutlist__card-currency {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-neutral-500);
+}
+
+.mm-epayoutlist__card-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* ── Status Badge ── */
+.mm-epayoutlist__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--mm-radius-full);
+  line-height: 1.4;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.mm-epayoutlist__badge svg {
+  width: 11px;
+  height: 11px;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.mm-epayoutlist__badge--pending {
+  background: var(--mm-warning-light);
+  color: var(--mm-warning-dark);
+}
+
+.mm-epayoutlist__badge--pending svg {
+  stroke: var(--mm-warning);
+}
+
+.mm-epayoutlist__badge--completed {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+}
+
+.mm-epayoutlist__badge--completed svg {
+  stroke: var(--mm-success);
+}
+
+.mm-epayoutlist__badge--rejected {
+  background: var(--mm-error-light);
+  color: var(--mm-error-dark);
+}
+
+.mm-epayoutlist__badge--rejected svg {
+  stroke: var(--mm-error);
+}
+
+
+/* ── Card body: transfer details ── */
+.mm-epayoutlist__card-body {
+  padding: 0 var(--mm-space-5) var(--mm-space-4);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+}
+
+.mm-epayoutlist__card-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--mm-space-3);
+}
+
+.mm-epayoutlist__card-row-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.mm-epayoutlist__card-row-value {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-neutral-700);
+  text-align: right;
+  word-break: break-all;
+}
+
+.mm-epayoutlist__card-row-value--detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}
+
+/* Method tag (with icon) */
+.mm-epayoutlist__method-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-1) var(--mm-space-3);
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-md);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-700);
+}
+
+.mm-epayoutlist__method-tag svg {
+  width: 13px;
+  height: 13px;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: var(--mm-primary-500);
+}
+
+/* Detail sub-lines (bank transfer) */
+.mm-epayoutlist__detail-line {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-neutral-700);
+  line-height: 1.4;
+}
+
+.mm-epayoutlist__detail-line--sub {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+}
+
+
+/* ── Card footer: proof image ── */
+.mm-epayoutlist__card-footer {
+  padding: var(--mm-space-3) var(--mm-space-5) var(--mm-space-4);
+  border-top: 1px solid var(--mm-border-subtle);
+}
+
+.mm-epayoutlist__proof {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-epayoutlist__proof-img {
+  width: 48px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: var(--mm-radius-md);
+  border: 1px solid var(--mm-border-default);
+  background: var(--mm-neutral-50);
+}
+
+.mm-epayoutlist__proof-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+
+/* =============================================================
+   6. EMPTY STATE
+   ============================================================= */
+
+.mm-epayoutlist__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  text-align: center;
+  animation: mm-epayoutlist-fadeIn 0.5s ease 0.2s both;
+}
+
+.mm-epayoutlist__empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border-radius: var(--mm-radius-2xl);
+  margin-bottom: var(--mm-space-5);
+}
+
+.mm-epayoutlist__empty-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-epayoutlist__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-700);
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-epayoutlist__empty-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0 0 var(--mm-space-5) 0;
+  max-width: 360px;
+  line-height: 1.6;
+}
+
+.mm-epayoutlist__empty-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-3) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 700;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring);
+  box-shadow: 0 4px 14px rgba(216, 136, 39, 0.2);
+}
+
+.mm-epayoutlist__empty-action:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: var(--mm-neutral-0);
+}
+
+
+/* =============================================================
+   7. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-epayoutlist-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mm-epayoutlist-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mm-epayoutlist-cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =============================================================
+   8. RESPONSIVE — Tablet (2 columns)
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-epayoutlist {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-epayoutlist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE — Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-epayoutlist {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-epayoutlist__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mm-space-4);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-epayoutlist__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-epayoutlist__stats-bar {
+    gap: var(--mm-space-4);
+    padding: var(--mm-space-3) var(--mm-space-4);
+    flex-wrap: wrap;
+  }
+
+  .mm-epayoutlist__stat-separator {
+    display: none;
+  }
+
+  .mm-epayoutlist__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mm-epayoutlist__search-wrap {
+    max-width: none;
+  }
+
+  .mm-epayoutlist__filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: var(--mm-space-1);
+  }
+
+  .mm-epayoutlist__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mm-epayoutlist__grid {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-3);
+  }
+}
+
+
+/* =============================================================
+   10. RESPONSIVE — Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-epayoutlist {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-epayoutlist__card-top {
+    padding: var(--mm-space-4) var(--mm-space-4) var(--mm-space-2);
+  }
+
+  .mm-epayoutlist__card-body {
+    padding: 0 var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-epayoutlist__card-footer {
+    padding: var(--mm-space-3) var(--mm-space-4);
+  }
+
+  .mm-epayoutlist__card-value {
+    font-size: var(--mm-text-lg);
+  }
+}
+
+
+/* =============================================================
+   11. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-epayoutlist__card,
+body.dark-only .mm-epayoutlist__stats-bar {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-epayoutlist__card-value,
+body.dark-only .mm-epayoutlist__title,
+body.dark-only .mm-epayoutlist__stat-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-epayoutlist__subtitle,
+body.dark-only .mm-epayoutlist__stat-label {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .mm-epayoutlist__search-input {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-epayoutlist__filter-btn:not(.mm-epayoutlist__filter-btn--active) {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-600) !important;
+}
+
+body.dark-only .mm-epayoutlist__method-tag {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-700) !important;
+}
+
+body.dark-only .mm-epayoutlist__card-row-value {
+  color: var(--mm-neutral-700) !important;
+}
+
+
+/* =============================================================
+   12. CUBA OVERRIDES — Scoped to .mm-epayoutlist
+   ============================================================= */
+
+.mm-epayoutlist .page-title,
+.mm-epayoutlist .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.mm-epayoutlist .page-title::before {
+  display: none !important;
+}
+
+.mm-epayoutlist .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.mm-epayoutlist .page-title {
+  display: none !important;
+}
+
+.mm-epayoutlist .blink_me {
+  display: none !important;
+}
+
+.mm-epayoutlist .size-column {
+  display: none !important;
+}
+
+.mm-epayoutlist .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}

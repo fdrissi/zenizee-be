@@ -1,0 +1,961 @@
+/* =====================================================================
+   Zenizee — Add / Edit Coupon Page
+   Custom-built form layout for adding and editing coupons.
+   BEM prefix: mm-couponedit__*
+   Uses design tokens from zenizee-tokens.css exclusively.
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-couponedit {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER (back link + title + subtitle)
+   ============================================================= */
+
+.mm-couponedit__header {
+  margin-bottom: var(--mm-space-8);
+  animation: mm-couponedit-fadeIn 0.4s ease both;
+}
+
+.mm-couponedit__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+  margin-bottom: var(--mm-space-4);
+}
+
+.mm-couponedit__back:hover {
+  color: var(--mm-primary-600);
+}
+
+.mm-couponedit__back svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.mm-couponedit__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-3xl);
+  font-weight: 800;
+  color: var(--mm-text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-couponedit__subtitle {
+  font-size: var(--mm-text-base);
+  font-weight: 400;
+  color: var(--mm-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mm-couponedit__subtitle strong {
+  font-weight: 600;
+  color: var(--mm-text-primary);
+}
+
+
+/* =============================================================
+   2. FORM CARD
+   ============================================================= */
+
+.mm-couponedit__card {
+  background: var(--mm-surface-card);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-2xl);
+  padding: var(--mm-space-10);
+  box-shadow: var(--mm-shadow-sm);
+  animation: mm-couponedit-slideUp 0.5s ease 0.1s both;
+  transition: box-shadow var(--mm-duration-slow) ease;
+}
+
+.mm-couponedit__card:hover {
+  box-shadow: var(--mm-shadow-md);
+}
+
+
+/* =============================================================
+   3. FORM LAYOUT
+   ============================================================= */
+
+.mm-couponedit__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-8);
+}
+
+
+/* =============================================================
+   4. SECTIONS (grouped fields with icon header)
+   ============================================================= */
+
+.mm-couponedit__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-6);
+  animation: mm-couponedit-fadeIn 0.45s ease both;
+}
+
+.mm-couponedit__section:nth-child(1)  { animation-delay: 0.15s; }
+.mm-couponedit__section:nth-child(3)  { animation-delay: 0.20s; }
+.mm-couponedit__section:nth-child(5)  { animation-delay: 0.25s; }
+.mm-couponedit__section:nth-child(7)  { animation-delay: 0.30s; }
+.mm-couponedit__section:nth-child(9)  { animation-delay: 0.35s; }
+.mm-couponedit__section:nth-child(11) { animation-delay: 0.40s; }
+
+.mm-couponedit__section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-4);
+}
+
+.mm-couponedit__section-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--mm-radius-lg);
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-border-accent);
+  color: var(--mm-primary-600);
+  flex-shrink: 0;
+}
+
+.mm-couponedit__section-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.8;
+}
+
+.mm-couponedit__section-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 2px;
+}
+
+.mm-couponedit__section-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.mm-couponedit__section-desc {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+
+/* =============================================================
+   5. FIELD GROUP + ROW (side by side)
+   ============================================================= */
+
+.mm-couponedit__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+.mm-couponedit__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--mm-space-6);
+}
+
+.mm-couponedit__label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  letter-spacing: 0.01em;
+}
+
+.mm-couponedit__hint {
+  font-size: var(--mm-text-xs);
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  line-height: 1.4;
+}
+
+
+/* =============================================================
+   6. TEXT INPUT
+   ============================================================= */
+
+.mm-couponedit__input {
+  width: 100%;
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 500;
+  color: var(--mm-text-primary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  outline: none;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-couponedit__input::placeholder {
+  color: var(--mm-text-tertiary);
+  font-weight: 400;
+}
+
+.mm-couponedit__input:hover {
+  border-color: var(--mm-neutral-300);
+}
+
+.mm-couponedit__input:focus {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-neutral-0);
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1);
+}
+
+
+/* =============================================================
+   7. TEXTAREA
+   ============================================================= */
+
+.mm-couponedit__textarea {
+  width: 100%;
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 500;
+  color: var(--mm-text-primary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  outline: none;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+.mm-couponedit__textarea::placeholder {
+  color: var(--mm-text-tertiary);
+  font-weight: 400;
+}
+
+.mm-couponedit__textarea:hover {
+  border-color: var(--mm-neutral-300);
+}
+
+.mm-couponedit__textarea:focus {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-neutral-0);
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1);
+}
+
+
+/* =============================================================
+   8. COUPON CODE GROUP (input + generate button)
+   ============================================================= */
+
+.mm-couponedit__code-group {
+  display: flex;
+  gap: var(--mm-space-3);
+  align-items: stretch;
+}
+
+.mm-couponedit__input--code {
+  flex: 1;
+  font-family: 'Courier New', monospace;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.mm-couponedit__generate {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-3) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-primary-700);
+  background: var(--mm-primary-50);
+  border: 2px solid var(--mm-primary-200);
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color var(--mm-duration-fast) ease,
+    border-color var(--mm-duration-fast) ease,
+    color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring);
+}
+
+.mm-couponedit__generate:hover {
+  background: var(--mm-primary-100);
+  border-color: var(--mm-primary-300);
+  color: var(--mm-primary-800);
+  transform: translateY(-1px);
+}
+
+.mm-couponedit__generate:active {
+  transform: translateY(0);
+}
+
+.mm-couponedit__generate svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+
+/* =============================================================
+   9. INPUT WITH PREFIX (currency symbol)
+   ============================================================= */
+
+.mm-couponedit__input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.mm-couponedit__input-prefix {
+  position: absolute;
+  left: var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 600;
+  color: var(--mm-text-tertiary);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mm-couponedit__input--prefixed {
+  padding-left: calc(var(--mm-space-5) + 16px);
+}
+
+
+/* =============================================================
+   10. IMAGE UPLOAD (drag-and-drop style)
+   ============================================================= */
+
+.mm-couponedit__upload {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-8) var(--mm-space-6);
+  background: var(--mm-neutral-50);
+  border: 2px dashed var(--mm-neutral-300);
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+  text-align: center;
+}
+
+.mm-couponedit__upload:hover {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-primary-50);
+  transform: translateY(-1px);
+}
+
+.mm-couponedit__upload:hover .mm-couponedit__upload-icon {
+  color: var(--mm-primary-500);
+  transform: scale(1.05);
+}
+
+.mm-couponedit__upload-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.mm-couponedit__upload-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--mm-radius-full);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  color: var(--mm-neutral-400);
+  transition:
+    color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+}
+
+.mm-couponedit__upload-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.8;
+}
+
+.mm-couponedit__upload-label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  margin: 0;
+}
+
+.mm-couponedit__upload-label span {
+  color: var(--mm-primary-500);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mm-couponedit__upload-hint {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+  margin: 0;
+}
+
+
+/* =============================================================
+   11. IMAGE PREVIEW (current coupon image)
+   ============================================================= */
+
+.mm-couponedit__preview {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-4);
+  padding: var(--mm-space-4);
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  margin-top: var(--mm-space-3);
+}
+
+.mm-couponedit__preview-thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: var(--mm-radius-md);
+  border: 1px solid var(--mm-border-default);
+  background: var(--mm-neutral-0);
+  flex-shrink: 0;
+  padding: var(--mm-space-1);
+}
+
+.mm-couponedit__preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mm-couponedit__preview-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mm-couponedit__preview-note {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+}
+
+
+/* =============================================================
+   12. TOGGLE GROUP (segmented radio — Publish / Unpublish)
+   ============================================================= */
+
+.mm-couponedit__toggle-group {
+  display: flex;
+  gap: var(--mm-space-3);
+}
+
+.mm-couponedit__toggle-option {
+  flex: 1;
+  position: relative;
+}
+
+.mm-couponedit__toggle-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mm-couponedit__toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  transition:
+    color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    border-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  user-select: none;
+}
+
+.mm-couponedit__toggle-label:hover {
+  border-color: var(--mm-neutral-300);
+  background: var(--mm-neutral-0);
+}
+
+.mm-couponedit__toggle-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform var(--mm-duration-fast) var(--mm-ease-spring);
+}
+
+.mm-couponedit__toggle-dot--active {
+  background: var(--mm-success);
+}
+
+.mm-couponedit__toggle-dot--inactive {
+  background: var(--mm-neutral-400);
+}
+
+/* Selected state — Publish (active) */
+.mm-couponedit__toggle-option input[type="radio"]:checked + .mm-couponedit__toggle-label--active {
+  color: var(--mm-success-dark);
+  background: var(--mm-success-light);
+  border-color: var(--mm-success);
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.08);
+}
+
+.mm-couponedit__toggle-option input[type="radio"]:checked + .mm-couponedit__toggle-label--active .mm-couponedit__toggle-dot {
+  transform: scale(1.3);
+}
+
+/* Selected state — Unpublish (inactive) */
+.mm-couponedit__toggle-option input[type="radio"]:checked + .mm-couponedit__toggle-label--inactive {
+  color: var(--mm-neutral-700);
+  background: var(--mm-neutral-100);
+  border-color: var(--mm-neutral-400);
+  box-shadow: 0 0 0 4px rgba(120, 113, 108, 0.06);
+}
+
+.mm-couponedit__toggle-option input[type="radio"]:checked + .mm-couponedit__toggle-label--inactive .mm-couponedit__toggle-dot {
+  transform: scale(1.3);
+}
+
+
+/* =============================================================
+   13. DIVIDER
+   ============================================================= */
+
+.mm-couponedit__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--mm-border-subtle);
+  border: none;
+  margin: 0;
+}
+
+
+/* =============================================================
+   14. EMPTY STATE (coupon not found fallback)
+   ============================================================= */
+
+.mm-couponedit__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--mm-space-5);
+  padding: var(--mm-space-12) var(--mm-space-6);
+  text-align: center;
+}
+
+.mm-couponedit__empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--mm-radius-full);
+  background: var(--mm-warning-light);
+  color: var(--mm-warning-dark);
+}
+
+.mm-couponedit__empty-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke-width: 1.8;
+}
+
+.mm-couponedit__empty-title {
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-base);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  margin: 0;
+  line-height: 1.6;
+  max-width: 360px;
+}
+
+
+/* =============================================================
+   15. SUBMIT AREA
+   ============================================================= */
+
+.mm-couponedit__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+  padding-top: var(--mm-space-2);
+}
+
+.mm-couponedit__submit {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-5) var(--mm-space-8);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring),
+    box-shadow var(--mm-duration-base) ease;
+  box-shadow: 0 4px 16px rgba(216, 136, 39, 0.25), 0 1px 4px rgba(216, 136, 39, 0.15);
+}
+
+.mm-couponedit__submit:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(216, 136, 39, 0.35), 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-couponedit__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-couponedit__submit svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.mm-couponedit__submit--inline {
+  width: auto;
+}
+
+.mm-couponedit__cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-3) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+}
+
+.mm-couponedit__cancel:hover {
+  color: var(--mm-text-primary);
+}
+
+
+/* =============================================================
+   16. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-couponedit-fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mm-couponedit-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =============================================================
+   17. RESPONSIVE — Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-couponedit {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-couponedit__card {
+    padding: var(--mm-space-8);
+  }
+}
+
+
+/* =============================================================
+   18. RESPONSIVE — Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-couponedit {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    max-width: 100%;
+  }
+
+  .mm-couponedit__card {
+    padding: var(--mm-space-6);
+    border-radius: var(--mm-radius-xl);
+  }
+
+  .mm-couponedit__title {
+    font-size: var(--mm-text-2xl);
+  }
+
+  .mm-couponedit__row {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-5);
+  }
+
+  .mm-couponedit__toggle-group {
+    flex-direction: column;
+  }
+
+  .mm-couponedit__upload {
+    padding: var(--mm-space-6) var(--mm-space-4);
+  }
+
+  .mm-couponedit__section-header {
+    gap: var(--mm-space-3);
+  }
+
+  .mm-couponedit__section-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mm-couponedit__section-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mm-couponedit__code-group {
+    flex-direction: column;
+  }
+}
+
+
+/* =============================================================
+   19. RESPONSIVE — Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-couponedit {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-couponedit__header {
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-couponedit__card {
+    padding: var(--mm-space-5);
+    border-radius: var(--mm-radius-lg);
+  }
+
+  .mm-couponedit__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-couponedit__form {
+    gap: var(--mm-space-6);
+  }
+
+  .mm-couponedit__section {
+    gap: var(--mm-space-4);
+  }
+
+  .mm-couponedit__preview-thumb {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+
+/* =============================================================
+   20. DARK MODE KILL (light only)
+   ============================================================= */
+
+body.dark-only .mm-couponedit__card {
+  background: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-couponedit__input,
+body.dark-only .mm-couponedit__textarea {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-couponedit__upload {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-neutral-300) !important;
+}
+
+body.dark-only .mm-couponedit__title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-couponedit__label {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-couponedit__section-title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-couponedit__section-icon {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-border-accent) !important;
+}
+
+body.dark-only .mm-couponedit__toggle-label {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-secondary) !important;
+}
+
+body.dark-only .mm-couponedit__toggle-option input[type="radio"]:checked + .mm-couponedit__toggle-label--active {
+  background: var(--mm-success-light) !important;
+  border-color: var(--mm-success) !important;
+  color: var(--mm-success-dark) !important;
+}
+
+body.dark-only .mm-couponedit__toggle-option input[type="radio"]:checked + .mm-couponedit__toggle-label--inactive {
+  background: var(--mm-neutral-100) !important;
+  border-color: var(--mm-neutral-400) !important;
+  color: var(--mm-neutral-700) !important;
+}
+
+body.dark-only .mm-couponedit__preview {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+}
+
+body.dark-only .mm-couponedit__generate {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-200) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+body.dark-only .mm-couponedit__input-prefix {
+  color: var(--mm-text-tertiary) !important;
+}
+
+
+/* =============================================================
+   21. CUBA OVERRIDE — Scoped to .mm-couponedit
+   ============================================================= */
+
+/* Kill any inherited Cuba card/form styles */
+.mm-couponedit .card,
+.mm-couponedit .card-body,
+.mm-couponedit .card-footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.mm-couponedit .form-group {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mm-couponedit .form-control {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.mm-couponedit .page-title {
+  display: none !important;
+}
+
+.mm-couponedit .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.mm-couponedit .size-column {
+  display: contents !important;
+}
+
+.mm-couponedit .col-sm-12 {
+  display: contents !important;
+  padding: 0 !important;
+  max-width: none !important;
+  flex: none !important;
+}
+
+.mm-couponedit .row {
+  display: contents !important;
+}

@@ -1,0 +1,986 @@
+/* =====================================================================
+   Zenizee — Organizer List Page
+   Card grid for managing event organizers and financial metrics.
+   Uses design tokens from zenizee-tokens.css exclusively.
+   BEM prefix: mm-orglist__*
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-orglist {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER — Title bar
+   ============================================================= */
+
+.mm-orglist__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--mm-space-8);
+  animation: mm-orglist-fadeIn 0.45s ease both;
+}
+
+.mm-orglist__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+.mm-orglist__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-orglist__subtitle {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Header icon accent */
+.mm-orglist__header-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  border-radius: var(--mm-radius-xl);
+  flex-shrink: 0;
+}
+
+.mm-orglist__header-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--mm-primary-600);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =============================================================
+   2. STATS BAR — Quick summary strip
+   ============================================================= */
+
+.mm-orglist__stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-6);
+  padding: var(--mm-space-4) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-orglist-fadeUp 0.45s ease 0.05s both;
+}
+
+.mm-orglist__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-orglist__stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-orglist__stat-dot--total {
+  background: var(--mm-primary-500);
+}
+
+.mm-orglist__stat-dot--active {
+  background: var(--mm-success);
+}
+
+.mm-orglist__stat-dot--inactive {
+  background: var(--mm-neutral-400);
+}
+
+.mm-orglist__stat-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1;
+}
+
+.mm-orglist__stat-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-left: -4px;
+}
+
+.mm-orglist__stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================
+   3. TOOLBAR — Search + Filter
+   ============================================================= */
+
+.mm-orglist__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-orglist-fadeUp 0.45s ease 0.1s both;
+}
+
+.mm-orglist__search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.mm-orglist__search-icon {
+  position: absolute;
+  left: var(--mm-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.mm-orglist__search-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-orglist__search-input {
+  width: 100%;
+  padding: var(--mm-space-3) var(--mm-space-4) var(--mm-space-3) 44px;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-900);
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-orglist__search-input::placeholder {
+  color: var(--mm-neutral-400);
+  font-weight: 400;
+}
+
+.mm-orglist__search-input:focus {
+  border-color: var(--mm-primary-300);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.08);
+}
+
+/* Filter buttons group */
+.mm-orglist__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-orglist__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-full);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-600);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.mm-orglist__filter-btn:hover {
+  border-color: var(--mm-primary-200);
+  color: var(--mm-primary-700);
+  background: var(--mm-primary-50);
+}
+
+.mm-orglist__filter-btn--active {
+  background: var(--mm-primary-500);
+  border-color: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+}
+
+.mm-orglist__filter-btn--active:hover {
+  background: var(--mm-primary-600);
+  border-color: var(--mm-primary-600);
+  color: #fff;
+}
+
+.mm-orglist__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--mm-radius-full);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mm-orglist__filter-btn:not(.mm-orglist__filter-btn--active) .mm-orglist__filter-count {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-orglist__filter-btn--active .mm-orglist__filter-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+
+/* =============================================================
+   4. CARD GRID — 3 columns desktop
+   ============================================================= */
+
+.mm-orglist__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--mm-space-5);
+  animation: mm-orglist-fadeUp 0.45s ease 0.15s both;
+}
+
+
+/* =============================================================
+   5. ORGANIZER CARD
+   ============================================================= */
+
+.mm-orglist__card {
+  position: relative;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  overflow: hidden;
+  transition: all var(--mm-duration-base) ease;
+  animation: mm-orglist-cardIn 0.5s var(--mm-ease-spring) both;
+  animation-delay: calc(var(--card-index, 0) * 0.06s + 0.15s);
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-orglist__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mm-shadow-card-hover);
+  border-color: var(--mm-primary-200);
+}
+
+
+/* ── Card top: circular avatar area ── */
+.mm-orglist__card-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%);
+  border-bottom: 1px solid var(--mm-border-subtle);
+  min-height: 120px;
+}
+
+/* Circular avatar with primary ring */
+.mm-orglist__card-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--mm-primary-200);
+  box-shadow: 0 0 0 4px var(--mm-primary-50), var(--mm-shadow-sm);
+  transition: transform var(--mm-duration-slow) var(--mm-ease-spring), box-shadow var(--mm-duration-base) ease;
+}
+
+.mm-orglist__card:hover .mm-orglist__card-avatar {
+  transform: scale(1.06);
+  box-shadow: 0 0 0 4px var(--mm-primary-100), 0 0 0 7px rgba(216, 136, 39, 0.08), var(--mm-shadow-md);
+}
+
+/* Avatar placeholder when image missing */
+.mm-orglist__card-no-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-200);
+  border: 3px solid var(--mm-neutral-300);
+  box-shadow: var(--mm-shadow-sm);
+  transition: transform var(--mm-duration-slow) var(--mm-ease-spring);
+}
+
+.mm-orglist__card:hover .mm-orglist__card-no-avatar {
+  transform: scale(1.06);
+}
+
+.mm-orglist__card-no-avatar svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Status dot (bottom-right of avatar) ── */
+.mm-orglist__status-dot {
+  position: absolute;
+  bottom: var(--mm-space-6);
+  right: calc(50% - 48px);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--mm-neutral-0);
+  z-index: 2;
+}
+
+.mm-orglist__status-dot--active {
+  background: var(--mm-success);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+}
+
+.mm-orglist__status-dot--inactive {
+  background: var(--mm-neutral-400);
+  box-shadow: 0 0 0 3px rgba(120, 113, 108, 0.1);
+}
+
+/* ── Card index (top-left of visual) ── */
+.mm-orglist__card-index {
+  position: absolute;
+  top: var(--mm-space-3);
+  left: var(--mm-space-3);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 25, 23, 0.06);
+  border-radius: var(--mm-radius-md);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--mm-neutral-500);
+  z-index: 2;
+}
+
+
+/* ── Card body ── */
+.mm-orglist__card-body {
+  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+}
+
+.mm-orglist__card-name {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mm-orglist__card-email {
+  font-size: var(--mm-text-xs);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* ── Compact metrics grid (2 columns) ── */
+.mm-orglist__metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-3);
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-lg);
+}
+
+.mm-orglist__metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mm-orglist__metric-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--mm-neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.mm-orglist__metric-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-sm);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* ── Event count pills row ── */
+.mm-orglist__event-counts {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  flex-wrap: wrap;
+}
+
+.mm-orglist__event-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--mm-space-2);
+  border-radius: var(--mm-radius-full);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.mm-orglist__event-pill--running {
+  background: var(--mm-warning-light);
+  color: var(--mm-warning-dark);
+}
+
+.mm-orglist__event-pill--completed {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+}
+
+.mm-orglist__event-pill--cancelled {
+  background: var(--mm-error-light);
+  color: var(--mm-error-dark);
+}
+
+
+/* ── Badge row ── */
+.mm-orglist__card-badges {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.mm-orglist__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--mm-radius-full);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.mm-orglist__badge svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* Active badge */
+.mm-orglist__badge--active {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+}
+
+.mm-orglist__badge--active svg {
+  stroke: var(--mm-success);
+}
+
+/* Inactive badge */
+.mm-orglist__badge--inactive {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-orglist__badge--inactive svg {
+  stroke: var(--mm-neutral-500);
+}
+
+/* Remaining earning badge */
+.mm-orglist__badge--earning {
+  background: var(--mm-primary-50);
+  color: var(--mm-primary-700);
+}
+
+.mm-orglist__badge--earning svg {
+  stroke: var(--mm-primary-500);
+}
+
+
+/* ── Card footer (actions) ── */
+.mm-orglist__card-actions {
+  display: flex;
+  align-items: center;
+  padding: var(--mm-space-3) var(--mm-space-5);
+  border-top: 1px solid var(--mm-border-subtle);
+}
+
+.mm-orglist__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--mm-radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--mm-duration-fast) ease;
+  line-height: 1;
+}
+
+.mm-orglist__action-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Edit button */
+.mm-orglist__action-btn--edit {
+  background: var(--mm-primary-50);
+  color: var(--mm-primary-700);
+}
+
+.mm-orglist__action-btn--edit svg {
+  stroke: var(--mm-primary-600);
+}
+
+.mm-orglist__action-btn--edit:hover {
+  background: var(--mm-primary-100);
+  color: var(--mm-primary-800);
+  text-decoration: none;
+}
+
+
+/* =============================================================
+   6. EMPTY STATE
+   ============================================================= */
+
+.mm-orglist__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  text-align: center;
+  animation: mm-orglist-fadeIn 0.5s ease 0.2s both;
+}
+
+.mm-orglist__empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border-radius: var(--mm-radius-2xl);
+  margin-bottom: var(--mm-space-5);
+}
+
+.mm-orglist__empty-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-orglist__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-700);
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-orglist__empty-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+
+/* =============================================================
+   7. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-orglist-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mm-orglist-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mm-orglist-cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =============================================================
+   8. RESPONSIVE — Tablet (1199px)
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-orglist {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-orglist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE — Mobile Landscape (767px)
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-orglist {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-orglist__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mm-space-4);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-orglist__header-icon {
+    display: none;
+  }
+
+  .mm-orglist__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-orglist__stats-bar {
+    gap: var(--mm-space-4);
+    padding: var(--mm-space-3) var(--mm-space-4);
+    flex-wrap: wrap;
+  }
+
+  .mm-orglist__stat-separator {
+    display: none;
+  }
+
+  .mm-orglist__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mm-orglist__search-wrap {
+    max-width: none;
+  }
+
+  .mm-orglist__filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: var(--mm-space-1);
+  }
+
+  .mm-orglist__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mm-orglist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-3);
+  }
+
+  .mm-orglist__card-visual {
+    padding: var(--mm-space-6) var(--mm-space-4);
+    min-height: 100px;
+  }
+
+  .mm-orglist__card-avatar,
+  .mm-orglist__card-no-avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .mm-orglist__card-no-avatar svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .mm-orglist__card-body {
+    padding: var(--mm-space-4);
+  }
+
+  .mm-orglist__card-actions {
+    padding: var(--mm-space-2) var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   10. RESPONSIVE — Mobile Portrait (480px)
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-orglist {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-orglist__grid {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-4);
+  }
+
+  .mm-orglist__card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .mm-orglist__card-visual {
+    width: 110px;
+    min-height: auto;
+    padding: var(--mm-space-4);
+    border-bottom: none;
+    border-right: 1px solid var(--mm-border-subtle);
+    flex-shrink: 0;
+  }
+
+  .mm-orglist__card-avatar,
+  .mm-orglist__card-no-avatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .mm-orglist__card-no-avatar svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* On mobile row layout, status dot anchors to top-right of visual */
+  .mm-orglist__status-dot {
+    bottom: auto;
+    right: var(--mm-space-2);
+    top: var(--mm-space-2);
+    width: 10px;
+    height: 10px;
+  }
+
+  .mm-orglist__card-index {
+    display: none;
+  }
+
+  .mm-orglist__card-body {
+    padding: var(--mm-space-3) var(--mm-space-4);
+    gap: var(--mm-space-2);
+  }
+
+  .mm-orglist__card-actions {
+    border-top: none;
+    border-left: 1px solid var(--mm-border-subtle);
+    padding: var(--mm-space-3);
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .mm-orglist__metrics {
+    gap: var(--mm-space-1);
+    padding: var(--mm-space-2);
+  }
+
+  .mm-orglist__metric-value {
+    font-size: var(--mm-text-xs);
+  }
+
+  .mm-orglist__event-counts {
+    gap: var(--mm-space-1);
+  }
+}
+
+
+/* =============================================================
+   11. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-orglist__card,
+body.dark-only .mm-orglist__stats-bar {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-orglist__card-visual {
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%) !important;
+}
+
+body.dark-only .mm-orglist__card-name,
+body.dark-only .mm-orglist__title,
+body.dark-only .mm-orglist__stat-value,
+body.dark-only .mm-orglist__metric-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-orglist__subtitle,
+body.dark-only .mm-orglist__stat-label,
+body.dark-only .mm-orglist__card-email,
+body.dark-only .mm-orglist__metric-label {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .mm-orglist__search-input {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-orglist__filter-btn:not(.mm-orglist__filter-btn--active) {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-600) !important;
+}
+
+body.dark-only .mm-orglist__metrics {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-orglist__action-btn--edit {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+
+/* =============================================================
+   12. CUBA OVERRIDES — Scoped to .mm-orglist
+   ============================================================= */
+
+.mm-orglist .page-title,
+.mm-orglist .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.mm-orglist .page-title::before {
+  display: none !important;
+}
+
+.mm-orglist .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.mm-orglist .page-title {
+  display: none !important;
+}
+
+.mm-orglist .blink_me {
+  display: none !important;
+}
+
+.mm-orglist .size-column {
+  display: none !important;
+}
+
+.mm-orglist .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}

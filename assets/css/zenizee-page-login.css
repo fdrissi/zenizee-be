@@ -1,0 +1,599 @@
+/* =====================================================================
+   Zenizee — Login Page (Standalone Rebuild)
+   BEM prefix: mm-login__*
+   Uses design tokens from zenizee-tokens.css exclusively.
+   Completely standalone — no Cuba theme, no sidebar, no navbar.
+   ===================================================================== */
+
+
+/* =============================================================
+   0. RESET & PAGE FOUNDATION
+   Kill any Cuba theme bleed, force light mode.
+   ============================================================= */
+
+html.mm-login-page,
+.mm-login-page body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: var(--mm-neutral-50) !important;
+  color: var(--mm-text-primary) !important;
+  font-family: var(--mm-font-sans) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Force light mode — kill dark */
+body.dark-only.mm-login-page,
+body[class*="dark"].mm-login-page {
+  background: var(--mm-neutral-50) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+/* Hide the Cuba loader */
+.mm-login-page .loader-wrapper {
+  display: none !important;
+}
+
+/* Hide any stray Cuba elements */
+.mm-login-page .page-wrapper,
+.mm-login-page .sidebar-wrapper,
+.mm-login-page .page-header,
+.mm-login-page .page-body-wrapper {
+  display: none !important;
+}
+
+
+/* =============================================================
+   1. FULL-PAGE LAYOUT
+   Centered card on gradient background
+   ============================================================= */
+
+.mm-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--mm-space-8) var(--mm-space-4);
+  background: linear-gradient(
+    145deg,
+    var(--mm-primary-50) 0%,
+    var(--mm-neutral-100) 35%,
+    var(--mm-neutral-50) 70%,
+    var(--mm-primary-50) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative radial glow behind card */
+.mm-login::before {
+  content: "";
+  position: absolute;
+  width: 650px;
+  height: 650px;
+  border-radius: var(--mm-radius-full);
+  background: radial-gradient(
+    circle,
+    rgba(216, 136, 39, 0.06) 0%,
+    rgba(216, 136, 39, 0.02) 50%,
+    transparent 70%
+  );
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Secondary decorative accent — top-right */
+.mm-login::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: var(--mm-radius-full);
+  background: radial-gradient(
+    circle,
+    rgba(216, 136, 39, 0.04) 0%,
+    transparent 70%
+  );
+  top: -60px;
+  right: -60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+/* =============================================================
+   2. LOGIN CARD WRAPPER
+   ============================================================= */
+
+.mm-login__wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  animation: mm-login-fadeUp 0.5s ease-out both;
+}
+
+
+/* =============================================================
+   3. BRANDING / LOGO
+   ============================================================= */
+
+.mm-login__brand {
+  text-align: center;
+  margin-bottom: var(--mm-space-10);
+  animation: mm-login-fadeUp 0.4s ease-out both;
+}
+
+.mm-login__logo {
+  max-height: 56px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(216, 136, 39, 0.15));
+  transition: transform var(--mm-duration-base) var(--mm-ease-spring);
+}
+
+.mm-login__logo:hover {
+  transform: scale(1.04);
+}
+
+/* Fallback text logo when no image */
+.mm-login__brand-text {
+  font-family: var(--mm-font-display);
+  font-size: var(--mm-text-3xl);
+  font-weight: 800;
+  background: var(--mm-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+
+/* =============================================================
+   4. CARD
+   ============================================================= */
+
+.mm-login__card {
+  background-color: var(--mm-surface-card);
+  border-radius: var(--mm-radius-2xl);
+  border: 1px solid var(--mm-border-subtle);
+  box-shadow: var(--mm-shadow-xl);
+  padding: var(--mm-space-12) var(--mm-space-10);
+  transition: box-shadow var(--mm-duration-slow) ease;
+  animation: mm-login-fadeUp 0.6s ease-out 0.1s both;
+}
+
+.mm-login__card:hover {
+  box-shadow: var(--mm-shadow-card-hover);
+}
+
+/* Dark mode kill on card */
+body.dark-only .mm-login__card {
+  background-color: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+
+/* =============================================================
+   5. HEADING & SUBTITLE
+   ============================================================= */
+
+.mm-login__title {
+  font-family: var(--mm-font-display);
+  font-size: var(--mm-text-2xl);
+  font-weight: 700;
+  color: var(--mm-text-primary);
+  margin: 0 0 var(--mm-space-2) 0;
+  letter-spacing: -0.02em;
+}
+
+.mm-login__subtitle {
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-base);
+  color: var(--mm-text-secondary);
+  margin: 0 0 var(--mm-space-8) 0;
+  line-height: 1.5;
+}
+
+/* Dark mode kill */
+body.dark-only .mm-login__title {
+  color: var(--mm-text-primary) !important;
+}
+body.dark-only .mm-login__subtitle {
+  color: var(--mm-text-secondary) !important;
+}
+
+
+/* =============================================================
+   6. FORM GROUPS
+   ============================================================= */
+
+.mm-login__group {
+  margin-bottom: var(--mm-space-5);
+  position: relative;
+}
+
+.mm-login__group--submit {
+  margin-bottom: 0;
+  margin-top: var(--mm-space-3);
+}
+
+
+/* =============================================================
+   7. LABELS
+   ============================================================= */
+
+.mm-login__label {
+  display: block;
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  letter-spacing: 0.01em;
+  margin-bottom: var(--mm-space-2);
+}
+
+body.dark-only .mm-login__label {
+  color: var(--mm-text-primary) !important;
+}
+
+
+/* =============================================================
+   8. INPUT WRAPPER (icon + input)
+   ============================================================= */
+
+.mm-login__input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.mm-login__input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--mm-text-tertiary);
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--mm-duration-fast) ease;
+}
+
+.mm-login__input-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.8;
+}
+
+/* When input is focused, tint the icon gold */
+.mm-login__input:focus ~ .mm-login__input-icon,
+.mm-login__input-wrap:focus-within .mm-login__input-icon {
+  color: var(--mm-primary-500);
+}
+
+
+/* =============================================================
+   9. INPUTS
+   ============================================================= */
+
+.mm-login__input {
+  width: 100%;
+  background-color: var(--mm-neutral-50);
+  border: 1.5px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  padding: 12px 16px 12px 44px !important;
+  font-size: var(--mm-text-base);
+  font-family: var(--mm-font-sans);
+  color: var(--mm-text-primary);
+  line-height: 1.5;
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease,
+              box-shadow var(--mm-duration-fast) ease,
+              background-color var(--mm-duration-fast) ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.mm-login__input::placeholder {
+  color: var(--mm-text-tertiary);
+  font-weight: 400;
+  opacity: 1;
+}
+
+.mm-login__input:hover {
+  border-color: var(--mm-primary-300);
+  background-color: var(--mm-neutral-0);
+}
+
+.mm-login__input:focus {
+  border-color: var(--mm-primary-400);
+  background-color: var(--mm-neutral-0);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.12),
+              0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* No icon variant (for select) */
+.mm-login__input--no-icon {
+  padding-left: 16px;
+}
+
+/* Dark mode kill */
+body.dark-only .mm-login__input {
+  background-color: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-login__input:focus {
+  background-color: var(--mm-neutral-0) !important;
+  border-color: var(--mm-primary-400) !important;
+}
+
+
+/* =============================================================
+   10. SELECT DROPDOWN
+   ============================================================= */
+
+.mm-login__select {
+  width: 100%;
+  background-color: var(--mm-neutral-50);
+  border: 1.5px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  padding: 12px 40px 12px 44px !important;
+  font-size: var(--mm-text-base);
+  font-family: var(--mm-font-sans);
+  color: var(--mm-text-primary);
+  line-height: 1.5;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2378716C' d='M6 8.825a.5.5 0 01-.354-.146l-3.5-3.5a.5.5 0 01.708-.708L6 7.618l3.146-3.147a.5.5 0 01.708.708l-3.5 3.5A.5.5 0 016 8.825z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 14px;
+  transition: border-color var(--mm-duration-fast) ease,
+              box-shadow var(--mm-duration-fast) ease,
+              background-color var(--mm-duration-fast) ease;
+}
+
+.mm-login__select:hover {
+  border-color: var(--mm-primary-300);
+  background-color: var(--mm-neutral-0);
+}
+
+.mm-login__select:focus {
+  border-color: var(--mm-primary-400);
+  background-color: var(--mm-neutral-0);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.12),
+              0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* When select has placeholder (empty value) selected */
+.mm-login__select:invalid,
+.mm-login__select option[value=""] {
+  color: var(--mm-text-tertiary);
+}
+
+/* When focused, tint the preceding icon */
+.mm-login__select:focus ~ .mm-login__input-icon {
+  color: var(--mm-primary-500);
+}
+
+/* Dark mode kill */
+body.dark-only .mm-login__select {
+  background-color: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+
+/* =============================================================
+   11. PASSWORD TOGGLE (show/hide)
+   ============================================================= */
+
+.mm-login__pw-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: none;
+  border: none;
+  padding: 2px 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--mm-text-tertiary);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color var(--mm-duration-fast) ease;
+}
+
+.mm-login__pw-toggle:hover {
+  color: var(--mm-primary-500);
+}
+
+.mm-login__pw-toggle svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.8;
+}
+
+
+/* =============================================================
+   12. SUBMIT BUTTON — Gold gradient
+   ============================================================= */
+
+.mm-login__submit {
+  display: block;
+  width: 100%;
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  padding: 13px 24px;
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-base);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--mm-text-inverse);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(216, 136, 39, 0.25),
+              0 1px 3px rgba(216, 136, 39, 0.15);
+  cursor: pointer;
+  line-height: 1.5;
+  text-transform: none;
+  transition: all var(--mm-duration-base) ease;
+}
+
+.mm-login__submit:hover {
+  background: var(--mm-gradient-primary-hover);
+  box-shadow: 0 6px 20px rgba(216, 136, 39, 0.35),
+              0 2px 6px rgba(216, 136, 39, 0.2);
+  transform: translateY(-1px);
+}
+
+.mm-login__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-login__submit:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.2),
+              0 4px 12px rgba(216, 136, 39, 0.25);
+}
+
+.mm-login__submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Dark mode kill */
+body.dark-only .mm-login__submit {
+  background: var(--mm-gradient-primary) !important;
+  color: var(--mm-text-inverse) !important;
+}
+
+
+/* =============================================================
+   13. ERROR / ALERT MESSAGE
+   ============================================================= */
+
+.mm-login__error {
+  background-color: var(--mm-error-light);
+  color: var(--mm-error-dark);
+  border-radius: var(--mm-radius-md);
+  padding: var(--mm-space-3) var(--mm-space-4);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  margin-bottom: var(--mm-space-5);
+  display: none;
+}
+
+.mm-login__error--visible {
+  display: block;
+}
+
+
+/* =============================================================
+   14. FOOTER / COPYRIGHT
+   ============================================================= */
+
+.mm-login__footer {
+  text-align: center;
+  margin-top: var(--mm-space-8);
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+  letter-spacing: 0.01em;
+  animation: mm-login-fadeUp 0.7s ease-out 0.2s both;
+}
+
+
+/* =============================================================
+   15. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-login-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =============================================================
+   16. RESPONSIVE
+   ============================================================= */
+
+/* Tablets and below */
+@media (max-width: 768px) {
+  .mm-login {
+    padding: var(--mm-space-6) var(--mm-space-4);
+  }
+
+  .mm-login__card {
+    padding: var(--mm-space-8) var(--mm-space-6);
+    border-radius: var(--mm-radius-xl);
+  }
+
+  .mm-login__brand {
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-login__logo {
+    max-height: 48px;
+  }
+
+  .mm-login__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-login::before {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .mm-login {
+    padding: var(--mm-space-4) var(--mm-space-3);
+    align-items: flex-start;
+    padding-top: var(--mm-space-10);
+  }
+
+  .mm-login__card {
+    padding: var(--mm-space-6) var(--mm-space-5);
+    border-radius: var(--mm-radius-lg);
+  }
+
+  .mm-login__submit {
+    padding: 12px 20px;
+  }
+
+  .mm-login__group {
+    margin-bottom: var(--mm-space-4);
+  }
+
+  .mm-login::before,
+  .mm-login::after {
+    display: none;
+  }
+}

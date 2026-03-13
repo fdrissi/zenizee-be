@@ -1,0 +1,735 @@
+/* =====================================================================
+   Zenizee — Organizer Self-Profile Edit Page
+   Custom-built form layout for organizers editing their own account.
+   BEM prefix: mm-oprofile__*
+   Uses design tokens from zenizee-tokens.css exclusively.
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-oprofile {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER (icon + title + subtitle)
+   ============================================================= */
+
+.mm-oprofile__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-5);
+  margin-bottom: var(--mm-space-8);
+  animation: mm-oprofile-fadeIn 0.4s ease both;
+}
+
+.mm-oprofile__header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--mm-radius-xl);
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-border-accent);
+  color: var(--mm-primary-600);
+  flex-shrink: 0;
+}
+
+.mm-oprofile__header-icon svg {
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.8;
+}
+
+.mm-oprofile__header-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+  padding-top: 4px;
+}
+
+.mm-oprofile__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-3xl);
+  font-weight: 800;
+  color: var(--mm-text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-oprofile__subtitle {
+  font-size: var(--mm-text-base);
+  font-weight: 400;
+  color: var(--mm-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+
+/* =============================================================
+   2. FORM CARD
+   ============================================================= */
+
+.mm-oprofile__card {
+  background: var(--mm-surface-card);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-2xl);
+  padding: var(--mm-space-10);
+  box-shadow: var(--mm-shadow-sm);
+  animation: mm-oprofile-slideUp 0.5s ease 0.1s both;
+  transition: box-shadow var(--mm-duration-slow) ease;
+}
+
+.mm-oprofile__card:hover {
+  box-shadow: var(--mm-shadow-md);
+}
+
+
+/* =============================================================
+   3. FORM LAYOUT
+   ============================================================= */
+
+.mm-oprofile__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-8);
+}
+
+
+/* =============================================================
+   4. SECTIONS (grouped fields with icon header)
+   ============================================================= */
+
+.mm-oprofile__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-6);
+  animation: mm-oprofile-fadeIn 0.4s ease both;
+}
+
+.mm-oprofile__section:nth-child(1) { animation-delay: 0.15s; }
+.mm-oprofile__section:nth-child(3) { animation-delay: 0.22s; }
+.mm-oprofile__section:nth-child(5) { animation-delay: 0.29s; }
+
+.mm-oprofile__section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-4);
+}
+
+.mm-oprofile__section-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--mm-radius-lg);
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-border-accent);
+  color: var(--mm-primary-600);
+  flex-shrink: 0;
+}
+
+.mm-oprofile__section-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.8;
+}
+
+.mm-oprofile__section-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 2px;
+}
+
+.mm-oprofile__section-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.mm-oprofile__section-desc {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+
+/* =============================================================
+   5. FIELD GROUP
+   ============================================================= */
+
+.mm-oprofile__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+.mm-oprofile__label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  letter-spacing: 0.01em;
+}
+
+.mm-oprofile__hint {
+  font-size: var(--mm-text-xs);
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  line-height: 1.4;
+}
+
+
+/* =============================================================
+   6. TEXT INPUT
+   ============================================================= */
+
+.mm-oprofile__input {
+  width: 100%;
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 500;
+  color: var(--mm-text-primary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  outline: none;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-oprofile__input::placeholder {
+  color: var(--mm-text-tertiary);
+  font-weight: 400;
+}
+
+.mm-oprofile__input:hover {
+  border-color: var(--mm-neutral-300);
+}
+
+.mm-oprofile__input:focus {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-neutral-0);
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1);
+}
+
+
+/* =============================================================
+   7. CALLOUT / INFO BOX
+   ============================================================= */
+
+.mm-oprofile__callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  background: var(--mm-info-light);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: var(--mm-radius-lg);
+  margin-top: var(--mm-space-1);
+}
+
+.mm-oprofile__callout-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--mm-info);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.mm-oprofile__callout-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.mm-oprofile__callout-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-info-dark);
+  line-height: 1.5;
+}
+
+.mm-oprofile__callout-text strong {
+  font-weight: 600;
+}
+
+
+/* =============================================================
+   8. IMAGE UPLOAD (drag-and-drop style)
+   ============================================================= */
+
+.mm-oprofile__upload {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-8) var(--mm-space-6);
+  background: var(--mm-neutral-50);
+  border: 2px dashed var(--mm-neutral-300);
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+  text-align: center;
+}
+
+.mm-oprofile__upload:hover {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-primary-50);
+  transform: translateY(-1px);
+}
+
+.mm-oprofile__upload:hover .mm-oprofile__upload-icon {
+  color: var(--mm-primary-500);
+  transform: scale(1.05);
+}
+
+.mm-oprofile__upload-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.mm-oprofile__upload-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--mm-radius-full);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  color: var(--mm-neutral-400);
+  transition:
+    color var(--mm-duration-fast) ease,
+    transform var(--mm-duration-fast) ease;
+}
+
+.mm-oprofile__upload-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.8;
+}
+
+.mm-oprofile__upload-label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  margin: 0;
+}
+
+.mm-oprofile__upload-label span {
+  color: var(--mm-primary-500);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mm-oprofile__upload-hint {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+  margin: 0;
+}
+
+
+/* =============================================================
+   9. IMAGE PREVIEW (current profile photo — circular avatar)
+   ============================================================= */
+
+.mm-oprofile__preview {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-4);
+  padding: var(--mm-space-4);
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  margin-top: var(--mm-space-3);
+}
+
+.mm-oprofile__preview-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: var(--mm-radius-md);
+  border: 2px solid var(--mm-border-default);
+  background: var(--mm-neutral-0);
+  flex-shrink: 0;
+}
+
+/* Circular avatar variant */
+.mm-oprofile__preview-thumb--circle {
+  border-radius: var(--mm-radius-full);
+  object-fit: cover;
+}
+
+.mm-oprofile__preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mm-oprofile__preview-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mm-oprofile__preview-note {
+  font-size: var(--mm-text-xs);
+  color: var(--mm-text-tertiary);
+}
+
+
+/* =============================================================
+   10. DIVIDER
+   ============================================================= */
+
+.mm-oprofile__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--mm-border-subtle);
+  border: none;
+  margin: 0;
+}
+
+
+/* =============================================================
+   11. SUBMIT AREA
+   ============================================================= */
+
+.mm-oprofile__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+  padding-top: var(--mm-space-2);
+}
+
+.mm-oprofile__submit {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-5) var(--mm-space-8);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring),
+    box-shadow var(--mm-duration-base) ease;
+  box-shadow: 0 4px 16px rgba(216, 136, 39, 0.25), 0 1px 4px rgba(216, 136, 39, 0.15);
+}
+
+.mm-oprofile__submit:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(216, 136, 39, 0.35), 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-oprofile__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-oprofile__submit svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.mm-oprofile__cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-3) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+}
+
+.mm-oprofile__cancel:hover {
+  color: var(--mm-text-primary);
+}
+
+
+/* =============================================================
+   12. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-oprofile-fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mm-oprofile-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =============================================================
+   13. RESPONSIVE — Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-oprofile {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-oprofile__card {
+    padding: var(--mm-space-8);
+  }
+}
+
+
+/* =============================================================
+   14. RESPONSIVE — Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-oprofile {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    max-width: 100%;
+  }
+
+  .mm-oprofile__card {
+    padding: var(--mm-space-6);
+    border-radius: var(--mm-radius-xl);
+  }
+
+  .mm-oprofile__title {
+    font-size: var(--mm-text-2xl);
+  }
+
+  .mm-oprofile__header {
+    gap: var(--mm-space-4);
+  }
+
+  .mm-oprofile__header-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .mm-oprofile__header-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .mm-oprofile__upload {
+    padding: var(--mm-space-6) var(--mm-space-4);
+  }
+
+  .mm-oprofile__section-header {
+    gap: var(--mm-space-3);
+  }
+
+  .mm-oprofile__section-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mm-oprofile__section-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+
+/* =============================================================
+   15. RESPONSIVE — Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-oprofile {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-oprofile__header {
+    margin-bottom: var(--mm-space-6);
+    flex-direction: column;
+    gap: var(--mm-space-3);
+  }
+
+  .mm-oprofile__card {
+    padding: var(--mm-space-5);
+    border-radius: var(--mm-radius-lg);
+  }
+
+  .mm-oprofile__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-oprofile__form {
+    gap: var(--mm-space-6);
+  }
+
+  .mm-oprofile__section {
+    gap: var(--mm-space-4);
+  }
+
+  .mm-oprofile__preview-thumb {
+    width: 48px;
+    height: 48px;
+  }
+
+  .mm-oprofile__callout {
+    padding: var(--mm-space-3) var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   16. DARK MODE KILL (light only)
+   ============================================================= */
+
+body.dark-only .mm-oprofile__card {
+  background: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-oprofile__input {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-oprofile__upload {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-neutral-300) !important;
+}
+
+body.dark-only .mm-oprofile__title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-oprofile__label {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-oprofile__section-title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-oprofile__section-icon {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-border-accent) !important;
+}
+
+body.dark-only .mm-oprofile__header-icon {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-border-accent) !important;
+}
+
+body.dark-only .mm-oprofile__preview {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+}
+
+body.dark-only .mm-oprofile__callout {
+  background: var(--mm-info-light) !important;
+}
+
+
+/* =============================================================
+   17. CUBA OVERRIDE — Scoped to .mm-oprofile
+   ============================================================= */
+
+/* Hide Cuba page title */
+.mm-oprofile ~ .page-title,
+.page-body > .page-title {
+  display: none !important;
+}
+
+/* Kill any inherited Cuba card/form styles */
+.mm-oprofile .card,
+.mm-oprofile .card-body,
+.mm-oprofile .card-footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.mm-oprofile .form-group {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mm-oprofile .form-control {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.mm-oprofile .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.mm-oprofile .size-column {
+  display: contents !important;
+}
+
+.mm-oprofile .col-sm-12 {
+  display: contents !important;
+  padding: 0 !important;
+  max-width: none !important;
+  flex: none !important;
+}
+
+.mm-oprofile .row {
+  display: contents !important;
+}

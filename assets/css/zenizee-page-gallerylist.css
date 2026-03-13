@@ -1,0 +1,848 @@
+/* =====================================================================
+   Zenizee — Gallery List Page
+   A visual card grid for event gallery image management.
+   Uses design tokens from zenizee-tokens.css exclusively.
+   BEM prefix: mm-gallerylist__*
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-gallerylist {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER — Back link + Title bar
+   ============================================================= */
+
+.mm-gallerylist__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--mm-space-8);
+  animation: mm-gallerylist-fadeIn 0.45s ease both;
+}
+
+.mm-gallerylist__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+.mm-gallerylist__back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-primary-600);
+  text-decoration: none;
+  margin-bottom: var(--mm-space-2);
+  transition: color var(--mm-duration-fast) ease;
+}
+
+.mm-gallerylist__back-link:hover {
+  color: var(--mm-primary-700);
+  text-decoration: none;
+}
+
+.mm-gallerylist__back-link svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-gallerylist__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-gallerylist__subtitle {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Header icon accent */
+.mm-gallerylist__header-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  border-radius: var(--mm-radius-xl);
+  flex-shrink: 0;
+}
+
+.mm-gallerylist__header-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--mm-primary-600);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =============================================================
+   2. STATS BAR — Quick summary strip
+   ============================================================= */
+
+.mm-gallerylist__stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-6);
+  padding: var(--mm-space-4) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-gallerylist-fadeUp 0.45s ease 0.05s both;
+}
+
+.mm-gallerylist__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-gallerylist__stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-gallerylist__stat-dot--total {
+  background: var(--mm-primary-500);
+}
+
+.mm-gallerylist__stat-dot--published {
+  background: var(--mm-success);
+}
+
+.mm-gallerylist__stat-dot--unpublished {
+  background: var(--mm-neutral-400);
+}
+
+.mm-gallerylist__stat-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1;
+}
+
+.mm-gallerylist__stat-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-left: -4px;
+}
+
+.mm-gallerylist__stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================
+   3. TOOLBAR — Search + Filters
+   ============================================================= */
+
+.mm-gallerylist__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  margin-bottom: var(--mm-space-6);
+  flex-wrap: wrap;
+  animation: mm-gallerylist-fadeUp 0.45s ease 0.1s both;
+}
+
+.mm-gallerylist__search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.mm-gallerylist__search-icon {
+  position: absolute;
+  left: var(--mm-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.mm-gallerylist__search-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-gallerylist__search-input {
+  width: 100%;
+  padding: var(--mm-space-3) var(--mm-space-4) var(--mm-space-3) 44px;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-900);
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-gallerylist__search-input::placeholder {
+  color: var(--mm-neutral-400);
+  font-weight: 400;
+}
+
+.mm-gallerylist__search-input:focus {
+  border-color: var(--mm-primary-300);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.08);
+}
+
+/* Filter buttons group */
+.mm-gallerylist__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-gallerylist__filters--events {
+  width: 100%;
+  padding-top: var(--mm-space-1);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.mm-gallerylist__filters--events::-webkit-scrollbar {
+  display: none;
+}
+
+.mm-gallerylist__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-full);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-600);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.mm-gallerylist__filter-btn:hover {
+  border-color: var(--mm-primary-200);
+  color: var(--mm-primary-700);
+  background: var(--mm-primary-50);
+}
+
+.mm-gallerylist__filter-btn--active {
+  background: var(--mm-primary-500);
+  border-color: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+}
+
+.mm-gallerylist__filter-btn--active:hover {
+  background: var(--mm-primary-600);
+  border-color: var(--mm-primary-600);
+  color: #fff;
+}
+
+/* Event filter pills — softer outline style */
+.mm-gallerylist__filter-btn--event {
+  font-size: 0.6875rem;
+  padding: var(--mm-space-1) var(--mm-space-3);
+}
+
+.mm-gallerylist__filter-btn--event.mm-gallerylist__filter-btn--active {
+  background: var(--mm-neutral-800);
+  border-color: var(--mm-neutral-800);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(28, 25, 23, 0.15);
+}
+
+.mm-gallerylist__filter-btn--event.mm-gallerylist__filter-btn--active:hover {
+  background: var(--mm-neutral-900);
+  border-color: var(--mm-neutral-900);
+  color: #fff;
+}
+
+.mm-gallerylist__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--mm-radius-full);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mm-gallerylist__filter-btn:not(.mm-gallerylist__filter-btn--active) .mm-gallerylist__filter-count {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-gallerylist__filter-btn--active .mm-gallerylist__filter-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+
+/* =============================================================
+   4. CARD GRID — 4 columns (gallery is visual)
+   ============================================================= */
+
+.mm-gallerylist__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--mm-space-5);
+  animation: mm-gallerylist-fadeUp 0.45s ease 0.15s both;
+}
+
+
+/* =============================================================
+   5. GALLERY CARD
+   ============================================================= */
+
+.mm-gallerylist__card {
+  position: relative;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  overflow: hidden;
+  transition: all var(--mm-duration-base) ease;
+  animation: mm-gallerylist-cardIn 0.5s var(--mm-ease-spring) both;
+  animation-delay: calc(var(--card-index, 0) * 0.04s + 0.15s);
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-gallerylist__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mm-shadow-card-hover);
+  border-color: var(--mm-primary-200);
+}
+
+/* ── Card visual area — gallery image (square aspect ratio) ── */
+.mm-gallerylist__card-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.mm-gallerylist__card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--mm-duration-slow) var(--mm-ease-spring);
+  position: absolute;
+  inset: 0;
+}
+
+.mm-gallerylist__card:hover .mm-gallerylist__card-image {
+  transform: scale(1.06);
+}
+
+/* Image placeholder when image is missing */
+.mm-gallerylist__card-no-image {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-200);
+  border-radius: var(--mm-radius-lg);
+}
+
+.mm-gallerylist__card-no-image svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Status badge overlay (top-right) ── */
+.mm-gallerylist__status-badge {
+  position: absolute;
+  top: var(--mm-space-3);
+  right: var(--mm-space-3);
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-radius: var(--mm-radius-full);
+  z-index: 2;
+  backdrop-filter: blur(8px);
+  line-height: 1.5;
+}
+
+.mm-gallerylist__status-badge--published {
+  background: rgba(22, 163, 74, 0.9);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25);
+}
+
+.mm-gallerylist__status-badge--unpublished {
+  background: rgba(28, 25, 23, 0.55);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(28, 25, 23, 0.15);
+}
+
+/* ── Card index (top-left) ── */
+.mm-gallerylist__card-index {
+  position: absolute;
+  top: var(--mm-space-3);
+  left: var(--mm-space-3);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 25, 23, 0.45);
+  border-radius: var(--mm-radius-md);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #fff;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Card body (event tag + edit) ── */
+.mm-gallerylist__card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--mm-space-3) var(--mm-space-4);
+  border-top: 1px solid var(--mm-border-subtle);
+  gap: var(--mm-space-3);
+}
+
+.mm-gallerylist__card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mm-gallerylist__event-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-700);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.mm-gallerylist__event-tag svg {
+  width: 12px;
+  height: 12px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* ── Action button ── */
+.mm-gallerylist__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: var(--mm-radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--mm-duration-fast) ease;
+  flex-shrink: 0;
+}
+
+.mm-gallerylist__action-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-gallerylist__action-btn--edit {
+  background: var(--mm-primary-50);
+  color: var(--mm-primary-700);
+}
+
+.mm-gallerylist__action-btn--edit svg {
+  stroke: var(--mm-primary-600);
+}
+
+.mm-gallerylist__action-btn--edit:hover {
+  background: var(--mm-primary-100);
+  color: var(--mm-primary-800);
+  text-decoration: none;
+  transform: scale(1.05);
+}
+
+.mm-gallerylist__action-btn--edit:hover svg {
+  stroke: var(--mm-primary-700);
+}
+
+
+/* =============================================================
+   6. EMPTY STATE
+   ============================================================= */
+
+.mm-gallerylist__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  text-align: center;
+  animation: mm-gallerylist-fadeIn 0.5s ease 0.2s both;
+}
+
+.mm-gallerylist__empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border-radius: var(--mm-radius-2xl);
+  margin-bottom: var(--mm-space-5);
+}
+
+.mm-gallerylist__empty-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-gallerylist__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-700);
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-gallerylist__empty-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+
+/* =============================================================
+   7. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-gallerylist-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mm-gallerylist-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mm-gallerylist-cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =============================================================
+   8. RESPONSIVE — Tablet (3 columns)
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-gallerylist {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-gallerylist__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE — Mobile Landscape (2 columns)
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-gallerylist {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-gallerylist__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mm-space-4);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-gallerylist__header-icon {
+    display: none;
+  }
+
+  .mm-gallerylist__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-gallerylist__stats-bar {
+    gap: var(--mm-space-4);
+    padding: var(--mm-space-3) var(--mm-space-4);
+    flex-wrap: wrap;
+  }
+
+  .mm-gallerylist__stat-separator {
+    display: none;
+  }
+
+  .mm-gallerylist__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mm-gallerylist__search-wrap {
+    max-width: none;
+  }
+
+  .mm-gallerylist__filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: var(--mm-space-1);
+  }
+
+  .mm-gallerylist__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mm-gallerylist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-3);
+  }
+}
+
+
+/* =============================================================
+   10. RESPONSIVE — Mobile Portrait (1 column)
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-gallerylist {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-gallerylist__grid {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-3);
+  }
+
+  .mm-gallerylist__card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .mm-gallerylist__card-visual {
+    width: 100px;
+    aspect-ratio: auto;
+    min-height: auto;
+    flex-shrink: 0;
+  }
+
+  .mm-gallerylist__card-body {
+    border-top: none;
+    border-left: 1px solid var(--mm-border-subtle);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: var(--mm-space-3);
+    gap: var(--mm-space-2);
+  }
+
+  .mm-gallerylist__card-index {
+    display: none;
+  }
+
+  .mm-gallerylist__status-badge {
+    top: var(--mm-space-2);
+    right: var(--mm-space-2);
+    font-size: 0.5625rem;
+    padding: 2px var(--mm-space-2);
+  }
+}
+
+
+/* =============================================================
+   11. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-gallerylist__card,
+body.dark-only .mm-gallerylist__stats-bar {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-gallerylist__card-visual {
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%) !important;
+}
+
+body.dark-only .mm-gallerylist__event-tag,
+body.dark-only .mm-gallerylist__title,
+body.dark-only .mm-gallerylist__stat-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-gallerylist__subtitle,
+body.dark-only .mm-gallerylist__stat-label {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .mm-gallerylist__back-link {
+  color: var(--mm-primary-600) !important;
+}
+
+body.dark-only .mm-gallerylist__search-input {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-gallerylist__filter-btn:not(.mm-gallerylist__filter-btn--active) {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-600) !important;
+}
+
+body.dark-only .mm-gallerylist__action-btn--edit {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+body.dark-only .mm-gallerylist__card-body {
+  border-color: var(--mm-border-subtle) !important;
+}
+
+
+/* =============================================================
+   12. CUBA OVERRIDES — Scoped to .mm-gallerylist
+   ============================================================= */
+
+.mm-gallerylist .page-title,
+.mm-gallerylist .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.mm-gallerylist .page-title::before {
+  display: none !important;
+}
+
+.mm-gallerylist .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.mm-gallerylist .page-title {
+  display: none !important;
+}
+
+.mm-gallerylist .blink_me {
+  display: none !important;
+}
+
+.mm-gallerylist .size-column {
+  display: none !important;
+}
+
+.mm-gallerylist .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}

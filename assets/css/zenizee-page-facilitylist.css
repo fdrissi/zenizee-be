@@ -1,0 +1,829 @@
+/* =====================================================================
+   Zenizee — Facility List Page
+   A clean card grid for event facility management.
+   Uses design tokens from zenizee-tokens.css exclusively.
+   BEM prefix: mm-facilitylist__*
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-facilitylist {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER — Title bar
+   ============================================================= */
+
+.mm-facilitylist__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--mm-space-8);
+  animation: mm-facilitylist-fadeIn 0.45s ease both;
+}
+
+.mm-facilitylist__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+.mm-facilitylist__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-facilitylist__subtitle {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Header icon accent */
+.mm-facilitylist__header-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  border-radius: var(--mm-radius-xl);
+  flex-shrink: 0;
+}
+
+.mm-facilitylist__header-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--mm-primary-600);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =============================================================
+   2. STATS BAR — Quick summary strip
+   ============================================================= */
+
+.mm-facilitylist__stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-6);
+  padding: var(--mm-space-4) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-facilitylist-fadeUp 0.45s ease 0.05s both;
+}
+
+.mm-facilitylist__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-facilitylist__stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-facilitylist__stat-dot--total {
+  background: var(--mm-primary-500);
+}
+
+.mm-facilitylist__stat-dot--active {
+  background: var(--mm-success);
+}
+
+.mm-facilitylist__stat-dot--inactive {
+  background: var(--mm-neutral-400);
+}
+
+.mm-facilitylist__stat-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1;
+}
+
+.mm-facilitylist__stat-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-left: -4px;
+}
+
+.mm-facilitylist__stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================
+   3. TOOLBAR — Search + Filter
+   ============================================================= */
+
+.mm-facilitylist__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-facilitylist-fadeUp 0.45s ease 0.1s both;
+}
+
+.mm-facilitylist__search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.mm-facilitylist__search-icon {
+  position: absolute;
+  left: var(--mm-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.mm-facilitylist__search-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-facilitylist__search-input {
+  width: 100%;
+  padding: var(--mm-space-3) var(--mm-space-4) var(--mm-space-3) 44px;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-900);
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-facilitylist__search-input::placeholder {
+  color: var(--mm-neutral-400);
+  font-weight: 400;
+}
+
+.mm-facilitylist__search-input:focus {
+  border-color: var(--mm-primary-300);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.08);
+}
+
+/* Filter buttons group */
+.mm-facilitylist__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-facilitylist__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-full);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-600);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.mm-facilitylist__filter-btn:hover {
+  border-color: var(--mm-primary-200);
+  color: var(--mm-primary-700);
+  background: var(--mm-primary-50);
+}
+
+.mm-facilitylist__filter-btn--active {
+  background: var(--mm-primary-500);
+  border-color: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+}
+
+.mm-facilitylist__filter-btn--active:hover {
+  background: var(--mm-primary-600);
+  border-color: var(--mm-primary-600);
+  color: #fff;
+}
+
+.mm-facilitylist__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--mm-radius-full);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mm-facilitylist__filter-btn:not(.mm-facilitylist__filter-btn--active) .mm-facilitylist__filter-count {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-facilitylist__filter-btn--active .mm-facilitylist__filter-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+
+/* =============================================================
+   4. CARD GRID — 4 columns (facilities are simpler/smaller)
+   ============================================================= */
+
+.mm-facilitylist__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--mm-space-5);
+  animation: mm-facilitylist-fadeUp 0.45s ease 0.15s both;
+}
+
+
+/* =============================================================
+   5. FACILITY CARD
+   ============================================================= */
+
+.mm-facilitylist__card {
+  position: relative;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  overflow: hidden;
+  transition: all var(--mm-duration-base) ease;
+  animation: mm-facilitylist-cardIn 0.5s var(--mm-ease-spring) both;
+  animation-delay: calc(var(--card-index, 0) * 0.05s + 0.15s);
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-facilitylist__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mm-shadow-card-hover);
+  border-color: var(--mm-primary-200);
+}
+
+/* ── Card visual area — facility image (rounded square) ── */
+.mm-facilitylist__card-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-5);
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%);
+  border-bottom: 1px solid var(--mm-border-subtle);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.mm-facilitylist__card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--mm-radius-lg);
+  transition: transform var(--mm-duration-slow) var(--mm-ease-spring);
+  position: absolute;
+  inset: 0;
+}
+
+.mm-facilitylist__card:hover .mm-facilitylist__card-image {
+  transform: scale(1.06);
+}
+
+/* Image placeholder when image missing */
+.mm-facilitylist__card-no-image {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-200);
+  border-radius: var(--mm-radius-lg);
+}
+
+.mm-facilitylist__card-no-image svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Status dot overlay (top-right) ── */
+.mm-facilitylist__status-dot {
+  position: absolute;
+  top: var(--mm-space-3);
+  right: var(--mm-space-3);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--mm-neutral-0);
+  z-index: 2;
+}
+
+.mm-facilitylist__status-dot--active {
+  background: var(--mm-success);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+}
+
+.mm-facilitylist__status-dot--inactive {
+  background: var(--mm-neutral-400);
+  box-shadow: 0 0 0 3px rgba(120, 113, 108, 0.1);
+}
+
+/* ── Card index (top-left) ── */
+.mm-facilitylist__card-index {
+  position: absolute;
+  top: var(--mm-space-3);
+  left: var(--mm-space-3);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 25, 23, 0.45);
+  border-radius: var(--mm-radius-md);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #fff;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Card body ── */
+.mm-facilitylist__card-body {
+  padding: var(--mm-space-4) var(--mm-space-4) var(--mm-space-3);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+.mm-facilitylist__card-name {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-sm);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Badge row ── */
+.mm-facilitylist__card-badges {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.mm-facilitylist__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--mm-radius-full);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.mm-facilitylist__badge svg {
+  width: 11px;
+  height: 11px;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.mm-facilitylist__badge--active {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+}
+
+.mm-facilitylist__badge--active svg {
+  stroke: var(--mm-success);
+}
+
+.mm-facilitylist__badge--inactive {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-facilitylist__badge--inactive svg {
+  stroke: var(--mm-neutral-500);
+}
+
+/* ── Card footer (actions) ── */
+.mm-facilitylist__card-actions {
+  display: flex;
+  align-items: center;
+  padding: var(--mm-space-3) var(--mm-space-4);
+  border-top: 1px solid var(--mm-border-subtle);
+}
+
+.mm-facilitylist__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--mm-radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--mm-duration-fast) ease;
+  line-height: 1;
+}
+
+.mm-facilitylist__action-btn svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-facilitylist__action-btn--edit {
+  background: var(--mm-primary-50);
+  color: var(--mm-primary-700);
+}
+
+.mm-facilitylist__action-btn--edit svg {
+  stroke: var(--mm-primary-600);
+}
+
+.mm-facilitylist__action-btn--edit:hover {
+  background: var(--mm-primary-100);
+  color: var(--mm-primary-800);
+  text-decoration: none;
+}
+
+
+/* =============================================================
+   6. EMPTY STATE
+   ============================================================= */
+
+.mm-facilitylist__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  text-align: center;
+  animation: mm-facilitylist-fadeIn 0.5s ease 0.2s both;
+}
+
+.mm-facilitylist__empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border-radius: var(--mm-radius-2xl);
+  margin-bottom: var(--mm-space-5);
+}
+
+.mm-facilitylist__empty-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-facilitylist__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-700);
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-facilitylist__empty-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+
+/* =============================================================
+   7. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-facilitylist-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mm-facilitylist-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mm-facilitylist-cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =============================================================
+   8. RESPONSIVE — Tablet (3 columns)
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-facilitylist {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-facilitylist__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE — Mobile Landscape (2 columns)
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-facilitylist {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-facilitylist__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mm-space-4);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-facilitylist__header-icon {
+    display: none;
+  }
+
+  .mm-facilitylist__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-facilitylist__stats-bar {
+    gap: var(--mm-space-4);
+    padding: var(--mm-space-3) var(--mm-space-4);
+    flex-wrap: wrap;
+  }
+
+  .mm-facilitylist__stat-separator {
+    display: none;
+  }
+
+  .mm-facilitylist__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mm-facilitylist__search-wrap {
+    max-width: none;
+  }
+
+  .mm-facilitylist__filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: var(--mm-space-1);
+  }
+
+  .mm-facilitylist__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mm-facilitylist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-3);
+  }
+}
+
+
+/* =============================================================
+   10. RESPONSIVE — Mobile Portrait (1 column)
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-facilitylist {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-facilitylist__grid {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-3);
+  }
+
+  .mm-facilitylist__card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .mm-facilitylist__card-visual {
+    width: 90px;
+    aspect-ratio: auto;
+    min-height: auto;
+    padding: var(--mm-space-3);
+    border-bottom: none;
+    border-right: 1px solid var(--mm-border-subtle);
+    flex-shrink: 0;
+  }
+
+  .mm-facilitylist__card-image {
+    border-radius: var(--mm-radius-md);
+  }
+
+  .mm-facilitylist__card-no-image {
+    width: 48px;
+    height: 48px;
+  }
+
+  .mm-facilitylist__status-dot {
+    top: var(--mm-space-2);
+    right: var(--mm-space-2);
+    width: 8px;
+    height: 8px;
+  }
+
+  .mm-facilitylist__card-index {
+    display: none;
+  }
+
+  .mm-facilitylist__card-body {
+    padding: var(--mm-space-3) var(--mm-space-3);
+    gap: var(--mm-space-2);
+  }
+
+  .mm-facilitylist__card-actions {
+    border-top: none;
+    border-left: 1px solid var(--mm-border-subtle);
+    padding: var(--mm-space-3);
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+
+/* =============================================================
+   11. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-facilitylist__card,
+body.dark-only .mm-facilitylist__stats-bar {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-facilitylist__card-visual {
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%) !important;
+}
+
+body.dark-only .mm-facilitylist__card-name,
+body.dark-only .mm-facilitylist__title,
+body.dark-only .mm-facilitylist__stat-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-facilitylist__subtitle,
+body.dark-only .mm-facilitylist__stat-label {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .mm-facilitylist__search-input {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-facilitylist__filter-btn:not(.mm-facilitylist__filter-btn--active) {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-600) !important;
+}
+
+body.dark-only .mm-facilitylist__action-btn--edit {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+
+/* =============================================================
+   12. CUBA OVERRIDES — Scoped to .mm-facilitylist
+   ============================================================= */
+
+.mm-facilitylist .page-title,
+.mm-facilitylist .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.mm-facilitylist .page-title::before {
+  display: none !important;
+}
+
+.mm-facilitylist .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.mm-facilitylist .page-title {
+  display: none !important;
+}
+
+.mm-facilitylist .blink_me {
+  display: none !important;
+}
+
+.mm-facilitylist .size-column {
+  display: none !important;
+}
+
+.mm-facilitylist .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}

@@ -1,0 +1,720 @@
+/* =====================================================================
+   Zenizee — Page Form (Add / Edit)
+   Custom-built form layout for add/edit page.
+   BEM prefix: mm-pageform__*
+   Uses design tokens from zenizee-tokens.css exclusively.
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-pageform {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER (title + back link)
+   ============================================================= */
+
+.mm-pageform__header {
+  margin-bottom: var(--mm-space-8);
+  animation: mm-pageform-fadeIn 0.4s ease both;
+}
+
+.mm-pageform__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+  margin-bottom: var(--mm-space-4);
+}
+
+.mm-pageform__back:hover {
+  color: var(--mm-primary-600);
+}
+
+.mm-pageform__back svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.mm-pageform__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-3xl);
+  font-weight: 800;
+  color: var(--mm-text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-pageform__subtitle {
+  font-size: var(--mm-text-base);
+  font-weight: 400;
+  color: var(--mm-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+
+/* =============================================================
+   2. FORM CARD
+   ============================================================= */
+
+.mm-pageform__card {
+  background: var(--mm-surface-card);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-2xl);
+  padding: var(--mm-space-10);
+  box-shadow: var(--mm-shadow-sm);
+  animation: mm-pageform-slideUp 0.5s ease 0.1s both;
+  transition: box-shadow var(--mm-duration-slow) ease;
+}
+
+.mm-pageform__card:hover {
+  box-shadow: var(--mm-shadow-md);
+}
+
+
+/* =============================================================
+   3. FORM LAYOUT
+   ============================================================= */
+
+.mm-pageform__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-8);
+}
+
+
+/* =============================================================
+   4. FIELD GROUP
+   ============================================================= */
+
+.mm-pageform__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+.mm-pageform__label {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-primary);
+  letter-spacing: 0.01em;
+}
+
+.mm-pageform__label-hint {
+  font-weight: 400;
+  color: var(--mm-text-tertiary);
+  margin-left: var(--mm-space-1);
+}
+
+
+/* =============================================================
+   5. TEXT INPUT
+   ============================================================= */
+
+.mm-pageform__input {
+  width: 100%;
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 500;
+  color: var(--mm-text-primary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  outline: none;
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-pageform__input::placeholder {
+  color: var(--mm-text-tertiary);
+  font-weight: 400;
+}
+
+.mm-pageform__input:hover {
+  border-color: var(--mm-neutral-300);
+}
+
+.mm-pageform__input:focus {
+  border-color: var(--mm-primary-400);
+  background: var(--mm-neutral-0);
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1);
+}
+
+/* Large variant for the page title */
+.mm-pageform__input--lg {
+  padding: var(--mm-space-5) var(--mm-space-6);
+  font-size: var(--mm-text-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-radius: var(--mm-radius-xl);
+}
+
+
+/* =============================================================
+   6. RICH TEXT EDITOR (Summernote wrapper)
+   ============================================================= */
+
+.mm-pageform__editor-wrap {
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-xl);
+  overflow: hidden;
+  background: var(--mm-neutral-0);
+  transition:
+    border-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+}
+
+.mm-pageform__editor-wrap:focus-within {
+  border-color: var(--mm-primary-400);
+  box-shadow: 0 0 0 4px rgba(216, 136, 39, 0.1);
+}
+
+/* Summernote toolbar override */
+.mm-pageform__editor-wrap .note-toolbar {
+  background: var(--mm-neutral-50) !important;
+  border-bottom: 1px solid var(--mm-border-subtle) !important;
+  padding: var(--mm-space-2) var(--mm-space-3) !important;
+  border-radius: 0 !important;
+}
+
+.mm-pageform__editor-wrap .note-toolbar .note-btn-group {
+  margin-right: var(--mm-space-1) !important;
+}
+
+.mm-pageform__editor-wrap .note-toolbar .note-btn {
+  background: var(--mm-neutral-0) !important;
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-sm) !important;
+  color: var(--mm-text-secondary) !important;
+  font-size: var(--mm-text-xs) !important;
+  font-family: inherit !important;
+  padding: 4px 8px !important;
+}
+
+/* Preserve Summernote icon font on toolbar icon elements */
+.mm-pageform__editor-wrap .note-toolbar [class^="note-icon"]::before,
+.mm-pageform__editor-wrap .note-toolbar [class*=" note-icon"]::before,
+.mm-pageform__editor-wrap .note-toolbar .note-btn i::before {
+  font-family: "summernote" !important;
+}
+
+.mm-pageform__editor-wrap .note-toolbar .note-btn:hover {
+  background: var(--mm-primary-50) !important;
+  border-color: var(--mm-primary-300) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+.mm-pageform__editor-wrap .note-toolbar .note-btn.active,
+.mm-pageform__editor-wrap .note-toolbar .note-btn:active {
+  background: var(--mm-primary-100) !important;
+  border-color: var(--mm-primary-400) !important;
+  color: var(--mm-primary-800) !important;
+}
+
+/* Summernote editing area */
+.mm-pageform__editor-wrap .note-editor {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.mm-pageform__editor-wrap .note-editor .note-editing-area {
+  background: var(--mm-neutral-0) !important;
+}
+
+.mm-pageform__editor-wrap .note-editor .note-editing-area .note-editable {
+  padding: var(--mm-space-5) var(--mm-space-6) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+  line-height: 1.7 !important;
+  color: var(--mm-text-primary) !important;
+  min-height: 240px !important;
+  background: var(--mm-neutral-0) !important;
+}
+
+.mm-pageform__editor-wrap .note-editor .note-editing-area .note-editable:focus {
+  outline: none !important;
+}
+
+.mm-pageform__editor-wrap .note-editor .note-editing-area .note-editable[contenteditable="true"]:empty::before {
+  content: "Write your page content here...";
+  color: var(--mm-text-tertiary);
+  font-weight: 400;
+}
+
+/* Summernote statusbar */
+.mm-pageform__editor-wrap .note-editor .note-statusbar {
+  background: var(--mm-neutral-50) !important;
+  border-top: 1px solid var(--mm-border-subtle) !important;
+  border-bottom-left-radius: var(--mm-radius-xl) !important;
+  border-bottom-right-radius: var(--mm-radius-xl) !important;
+}
+
+.mm-pageform__editor-wrap .note-editor .note-statusbar .note-resizebar {
+  border-top: none !important;
+  padding: var(--mm-space-1) 0 !important;
+}
+
+/* Summernote dropdown menus */
+.mm-pageform__editor-wrap .note-editor .dropdown-menu {
+  border: 1px solid var(--mm-border-default) !important;
+  border-radius: var(--mm-radius-lg) !important;
+  box-shadow: var(--mm-shadow-lg) !important;
+  padding: var(--mm-space-1) !important;
+  background: var(--mm-neutral-0) !important;
+}
+
+.mm-pageform__editor-wrap .note-editor .dropdown-item {
+  border-radius: var(--mm-radius-sm) !important;
+  font-size: var(--mm-text-sm) !important;
+  padding: var(--mm-space-2) var(--mm-space-3) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+.mm-pageform__editor-wrap .note-editor .dropdown-item:hover {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+/* Summernote placeholder */
+.mm-pageform__editor-wrap .note-placeholder {
+  padding: var(--mm-space-5) var(--mm-space-6) !important;
+  color: var(--mm-text-tertiary) !important;
+  font-family: var(--mm-font-sans) !important;
+  font-size: var(--mm-text-base) !important;
+}
+
+
+/* =============================================================
+   7. STATUS TOGGLE (segmented control)
+   ============================================================= */
+
+.mm-pageform__status-group {
+  display: flex;
+  gap: var(--mm-space-3);
+}
+
+.mm-pageform__status-option {
+  flex: 1;
+  position: relative;
+}
+
+.mm-pageform__status-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mm-pageform__status-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-4) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-text-secondary);
+  background: var(--mm-neutral-50);
+  border: 2px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  transition:
+    color var(--mm-duration-fast) ease,
+    background-color var(--mm-duration-fast) ease,
+    border-color var(--mm-duration-fast) ease,
+    box-shadow var(--mm-duration-fast) ease;
+  user-select: none;
+}
+
+.mm-pageform__status-label:hover {
+  border-color: var(--mm-neutral-300);
+  background: var(--mm-neutral-0);
+}
+
+.mm-pageform__status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform var(--mm-duration-fast) var(--mm-ease-spring);
+}
+
+.mm-pageform__status-dot--publish {
+  background: var(--mm-success);
+}
+
+.mm-pageform__status-dot--unpublish {
+  background: var(--mm-neutral-400);
+}
+
+/* Selected state -- Published */
+.mm-pageform__status-option input[type="radio"]:checked + .mm-pageform__status-label--publish {
+  color: var(--mm-success-dark);
+  background: var(--mm-success-light);
+  border-color: var(--mm-success);
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.08);
+}
+
+.mm-pageform__status-option input[type="radio"]:checked + .mm-pageform__status-label--publish .mm-pageform__status-dot {
+  transform: scale(1.3);
+}
+
+/* Selected state -- Unpublished */
+.mm-pageform__status-option input[type="radio"]:checked + .mm-pageform__status-label--unpublish {
+  color: var(--mm-neutral-700);
+  background: var(--mm-neutral-100);
+  border-color: var(--mm-neutral-400);
+  box-shadow: 0 0 0 4px rgba(120, 113, 108, 0.06);
+}
+
+.mm-pageform__status-option input[type="radio"]:checked + .mm-pageform__status-label--unpublish .mm-pageform__status-dot {
+  transform: scale(1.3);
+}
+
+
+/* =============================================================
+   8. DIVIDER
+   ============================================================= */
+
+.mm-pageform__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--mm-border-subtle);
+  border: none;
+  margin: 0;
+}
+
+
+/* =============================================================
+   9. SUBMIT AREA
+   ============================================================= */
+
+.mm-pageform__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+  padding-top: var(--mm-space-2);
+}
+
+.mm-pageform__submit {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-5) var(--mm-space-8);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring),
+    box-shadow var(--mm-duration-base) ease;
+  box-shadow: 0 4px 16px rgba(216, 136, 39, 0.25), 0 1px 4px rgba(216, 136, 39, 0.15);
+}
+
+.mm-pageform__submit:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(216, 136, 39, 0.35), 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-pageform__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-pageform__submit svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.mm-pageform__cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-3) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--mm-duration-fast) ease;
+}
+
+.mm-pageform__cancel:hover {
+  color: var(--mm-text-primary);
+}
+
+
+/* =============================================================
+   10. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-pageform-fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mm-pageform-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =============================================================
+   11. RESPONSIVE -- Tablet
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-pageform {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-pageform__card {
+    padding: var(--mm-space-8);
+  }
+}
+
+
+/* =============================================================
+   12. RESPONSIVE -- Mobile Landscape
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-pageform {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    max-width: 100%;
+  }
+
+  .mm-pageform__card {
+    padding: var(--mm-space-6);
+    border-radius: var(--mm-radius-xl);
+  }
+
+  .mm-pageform__title {
+    font-size: var(--mm-text-2xl);
+  }
+
+  .mm-pageform__input--lg {
+    padding: var(--mm-space-4) var(--mm-space-5);
+    font-size: var(--mm-text-lg);
+  }
+
+  .mm-pageform__status-group {
+    flex-direction: column;
+  }
+
+  .mm-pageform__editor-wrap .note-editor .note-editing-area .note-editable {
+    padding: var(--mm-space-4) var(--mm-space-4) !important;
+    min-height: 180px !important;
+  }
+
+  .mm-pageform__editor-wrap .note-toolbar {
+    padding: var(--mm-space-2) var(--mm-space-2) !important;
+  }
+}
+
+
+/* =============================================================
+   13. RESPONSIVE -- Mobile Portrait
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-pageform {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-pageform__header {
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-pageform__card {
+    padding: var(--mm-space-5);
+    border-radius: var(--mm-radius-lg);
+  }
+
+  .mm-pageform__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-pageform__form {
+    gap: var(--mm-space-6);
+  }
+
+  .mm-pageform__input--lg {
+    font-size: var(--mm-text-md);
+  }
+
+  .mm-pageform__editor-wrap .note-editor .note-editing-area .note-editable {
+    min-height: 150px !important;
+    font-size: var(--mm-text-sm) !important;
+  }
+
+  .mm-pageform__editor-wrap .note-toolbar .note-btn {
+    padding: 3px 6px !important;
+    font-size: 11px !important;
+  }
+}
+
+
+/* =============================================================
+   14. DARK MODE KILL (light only)
+   ============================================================= */
+
+body.dark-only .mm-pageform__card {
+  background: var(--mm-surface-card) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-pageform__input {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-pageform__editor-wrap {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+}
+
+body.dark-only .mm-pageform__editor-wrap .note-toolbar {
+  background: var(--mm-neutral-50) !important;
+}
+
+body.dark-only .mm-pageform__editor-wrap .note-toolbar .note-btn {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-secondary) !important;
+}
+
+body.dark-only .mm-pageform__editor-wrap .note-editor .note-editing-area .note-editable {
+  background: var(--mm-neutral-0) !important;
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-pageform__title {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-pageform__label {
+  color: var(--mm-text-primary) !important;
+}
+
+body.dark-only .mm-pageform__status-label {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-text-secondary) !important;
+}
+
+body.dark-only .mm-pageform__status-option input[type="radio"]:checked + .mm-pageform__status-label--publish {
+  background: var(--mm-success-light) !important;
+  border-color: var(--mm-success) !important;
+  color: var(--mm-success-dark) !important;
+}
+
+body.dark-only .mm-pageform__status-option input[type="radio"]:checked + .mm-pageform__status-label--unpublish {
+  background: var(--mm-neutral-100) !important;
+  border-color: var(--mm-neutral-400) !important;
+  color: var(--mm-neutral-700) !important;
+}
+
+
+/* =============================================================
+   15. CUBA OVERRIDE -- Scoped to .mm-pageform
+   ============================================================= */
+
+/* Kill any inherited Cuba card/form styles */
+.mm-pageform .card,
+.mm-pageform .card-body,
+.mm-pageform .card-footer {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.mm-pageform .form-group {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mm-pageform .form-control {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.mm-pageform .page-title {
+  display: none !important;
+}
+
+.mm-pageform .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.mm-pageform .size-column {
+  display: contents !important;
+}
+
+.mm-pageform .col-sm-12 {
+  display: contents !important;
+  padding: 0 !important;
+  max-width: none !important;
+  flex: none !important;
+}
+
+.mm-pageform .row {
+  display: contents !important;
+}
+
+/* Make sure the Summernote note-frame does not inherit Cuba resets */
+.mm-pageform .note-editor.note-frame {
+  all: unset;
+  display: block;
+  box-sizing: border-box;
+}
+
+/* Kill Cuba's textarea styling for the hidden summernote source */
+.mm-pageform textarea.summernote {
+  display: none !important;
+}

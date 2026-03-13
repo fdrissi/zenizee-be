@@ -1,0 +1,1105 @@
+/* =====================================================================
+   Zenizee -- Ticket List Page
+   Card grid for managing event tickets with pricing, status, and reviews.
+   Uses design tokens from zenizee-tokens.css exclusively.
+   BEM prefix: mm-ticketlist__*
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-ticketlist {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER -- Title bar with back link
+   ============================================================= */
+
+.mm-ticketlist__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-neutral-500);
+  text-decoration: none;
+  margin-bottom: var(--mm-space-4);
+  transition: color var(--mm-duration-fast) ease;
+  animation: mm-ticketlist-fadeIn 0.35s ease both;
+}
+
+.mm-ticketlist__back:hover {
+  color: var(--mm-primary-600);
+  text-decoration: none;
+}
+
+.mm-ticketlist__back svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-ticketlist__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--mm-space-8);
+  animation: mm-ticketlist-fadeIn 0.45s ease both;
+}
+
+.mm-ticketlist__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+.mm-ticketlist__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-ticketlist__subtitle {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mm-ticketlist__subtitle strong {
+  color: var(--mm-neutral-700);
+  font-weight: 700;
+}
+
+/* Header icon accent */
+.mm-ticketlist__header-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  border-radius: var(--mm-radius-xl);
+  flex-shrink: 0;
+}
+
+.mm-ticketlist__header-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--mm-primary-600);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =============================================================
+   2. STATS BAR -- Quick summary strip
+   ============================================================= */
+
+.mm-ticketlist__stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-6);
+  padding: var(--mm-space-4) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-ticketlist-fadeUp 0.45s ease 0.05s both;
+}
+
+.mm-ticketlist__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-ticketlist__stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-ticketlist__stat-dot--total {
+  background: var(--mm-primary-500);
+}
+
+.mm-ticketlist__stat-dot--booked {
+  background: var(--mm-info);
+}
+
+.mm-ticketlist__stat-dot--completed {
+  background: var(--mm-success);
+}
+
+.mm-ticketlist__stat-dot--cancelled {
+  background: var(--mm-error);
+}
+
+.mm-ticketlist__stat-dot--revenue {
+  background: var(--mm-warning);
+}
+
+/* Commission stat dot */
+.mm-ticketlist__stat-dot--commission {
+  background: #e74c3c;
+}
+
+.mm-ticketlist__stat-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1;
+}
+
+.mm-ticketlist__stat-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-left: -4px;
+}
+
+.mm-ticketlist__stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================
+   3. TOOLBAR -- Search + Filter Pills
+   ============================================================= */
+
+.mm-ticketlist__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-ticketlist-fadeUp 0.45s ease 0.1s both;
+  flex-wrap: wrap;
+}
+
+.mm-ticketlist__search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+  min-width: 200px;
+}
+
+.mm-ticketlist__search-icon {
+  position: absolute;
+  left: var(--mm-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.mm-ticketlist__search-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-ticketlist__search-input {
+  width: 100%;
+  padding: var(--mm-space-3) var(--mm-space-4) var(--mm-space-3) 44px;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-900);
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-ticketlist__search-input::placeholder {
+  color: var(--mm-neutral-400);
+  font-weight: 400;
+}
+
+.mm-ticketlist__search-input:focus {
+  border-color: var(--mm-primary-300);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.08);
+}
+
+/* Filter buttons group */
+.mm-ticketlist__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  flex-wrap: wrap;
+}
+
+.mm-ticketlist__filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-ticketlist__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-full);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-600);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.mm-ticketlist__filter-btn:hover {
+  border-color: var(--mm-primary-200);
+  color: var(--mm-primary-700);
+  background: var(--mm-primary-50);
+}
+
+.mm-ticketlist__filter-btn--active {
+  background: var(--mm-primary-500);
+  border-color: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+}
+
+.mm-ticketlist__filter-btn--active:hover {
+  background: var(--mm-primary-600);
+  border-color: var(--mm-primary-600);
+  color: #fff;
+}
+
+.mm-ticketlist__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--mm-radius-full);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mm-ticketlist__filter-btn:not(.mm-ticketlist__filter-btn--active) .mm-ticketlist__filter-count {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-ticketlist__filter-btn--active .mm-ticketlist__filter-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+
+/* =============================================================
+   4. CARD GRID -- 3 columns desktop
+   ============================================================= */
+
+.mm-ticketlist__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--mm-space-5);
+  animation: mm-ticketlist-fadeUp 0.45s ease 0.15s both;
+}
+
+
+/* =============================================================
+   5. TICKET CARD
+   ============================================================= */
+
+.mm-ticketlist__card {
+  position: relative;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  overflow: hidden;
+  transition: all var(--mm-duration-base) ease;
+  animation: mm-ticketlist-cardIn 0.5s var(--mm-ease-spring) both;
+  animation-delay: calc(var(--card-index, 0) * 0.06s + 0.15s);
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-ticketlist__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mm-shadow-card-hover);
+  border-color: var(--mm-primary-200);
+}
+
+
+/* -- Card header: Ticket ID + Status -- */
+
+.mm-ticketlist__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--mm-space-4) var(--mm-space-5);
+  border-bottom: 1px solid var(--mm-border-subtle);
+  background: var(--mm-neutral-50);
+}
+
+.mm-ticketlist__card-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-ticketlist__card-index {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-500);
+  border-radius: var(--mm-radius-md);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.mm-ticketlist__card-id-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.mm-ticketlist__card-id-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--mm-neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.mm-ticketlist__card-id {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-sm);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1.2;
+}
+
+
+/* -- Status badges -- */
+
+.mm-ticketlist__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--mm-radius-full);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.mm-ticketlist__badge svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* Booked badge */
+.mm-ticketlist__badge--booked {
+  background: var(--mm-info-light);
+  color: var(--mm-info-dark);
+}
+
+.mm-ticketlist__badge--booked svg {
+  stroke: var(--mm-info);
+}
+
+/* Completed badge */
+.mm-ticketlist__badge--completed {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+}
+
+.mm-ticketlist__badge--completed svg {
+  stroke: var(--mm-success);
+}
+
+/* Cancelled badge */
+.mm-ticketlist__badge--cancelled {
+  background: var(--mm-error-light);
+  color: var(--mm-error-dark);
+}
+
+.mm-ticketlist__badge--cancelled svg {
+  stroke: var(--mm-error);
+}
+
+
+/* -- Card body -- */
+
+.mm-ticketlist__card-body {
+  padding: var(--mm-space-5);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+}
+
+
+/* -- Info rows (customer, type, qty, payment) -- */
+
+.mm-ticketlist__card-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-3);
+}
+
+.mm-ticketlist__card-row--customer {
+  padding-bottom: var(--mm-space-3);
+  border-bottom: 1px solid var(--mm-border-subtle);
+  margin-bottom: var(--mm-space-1);
+}
+
+.mm-ticketlist__card-row-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border-radius: var(--mm-radius-md);
+  flex-shrink: 0;
+}
+
+.mm-ticketlist__card-row--customer .mm-ticketlist__card-row-icon {
+  background: var(--mm-primary-50);
+}
+
+.mm-ticketlist__card-row-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--mm-neutral-500);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-ticketlist__card-row--customer .mm-ticketlist__card-row-icon svg {
+  stroke: var(--mm-primary-600);
+}
+
+.mm-ticketlist__card-row-icon--payment {
+  background: var(--mm-success-light) !important;
+}
+
+.mm-ticketlist__card-row-icon--payment svg {
+  stroke: var(--mm-success) !important;
+}
+
+.mm-ticketlist__card-row-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.mm-ticketlist__card-row-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--mm-neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.mm-ticketlist__card-row-value {
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-neutral-800);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.mm-ticketlist__card-row--customer .mm-ticketlist__card-row-value {
+  font-size: var(--mm-text-base);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+}
+
+.mm-ticketlist__card-txn {
+  display: block;
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  font-family: monospace;
+  margin-top: 2px;
+  word-break: break-all;
+}
+
+
+/* -- Pricing breakdown -- */
+
+.mm-ticketlist__card-pricing {
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-lg);
+  padding: var(--mm-space-3) var(--mm-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+.mm-ticketlist__card-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mm-ticketlist__card-price-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+}
+
+.mm-ticketlist__card-price-value {
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-700);
+}
+
+.mm-ticketlist__card-price-row--discount .mm-ticketlist__card-price-value {
+  color: var(--mm-success);
+}
+
+.mm-ticketlist__card-price-row--total {
+  padding-top: var(--mm-space-2);
+  border-top: 1px dashed var(--mm-border-default);
+  margin-top: var(--mm-space-1);
+}
+
+.mm-ticketlist__card-price-row--total .mm-ticketlist__card-price-label {
+  font-weight: 700;
+  color: var(--mm-neutral-800);
+  font-size: var(--mm-text-sm);
+}
+
+.mm-ticketlist__card-price-row--total .mm-ticketlist__card-price-value {
+  font-family: var(--mm-font-display) !important;
+  font-weight: 800;
+  color: var(--mm-primary-700);
+  font-size: var(--mm-text-base);
+}
+
+/* Commission row in pricing */
+.mm-ticketlist__card-price-row--commission {
+  color: #e74c3c;
+  font-size: var(--mm-text-sm, 0.85rem);
+}
+
+/* Earnings row in pricing */
+.mm-ticketlist__card-price-row--earnings {
+  border-top: 1px solid rgba(216, 136, 39, 0.3);
+  margin-top: 6px;
+  padding-top: 8px;
+  font-weight: 600;
+  color: var(--mm-primary, #D88827);
+}
+
+.mm-ticketlist__card-price-row--earnings .mm-ticketlist__card-price-value {
+  color: var(--mm-primary, #D88827);
+}
+
+
+/* -- Cancel comment -- */
+
+.mm-ticketlist__card-cancel-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-3);
+  background: var(--mm-error-light);
+  border-radius: var(--mm-radius-md);
+  border: 1px solid rgba(220, 38, 38, 0.12);
+}
+
+.mm-ticketlist__card-cancel-note svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--mm-error);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.mm-ticketlist__card-cancel-note span {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-error-dark);
+  line-height: 1.5;
+}
+
+
+/* -- Review section -- */
+
+.mm-ticketlist__card-review {
+  padding: var(--mm-space-3);
+  background: var(--mm-warning-light);
+  border-radius: var(--mm-radius-md);
+  border: 1px solid rgba(245, 158, 11, 0.12);
+}
+
+.mm-ticketlist__card-review-stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: var(--mm-space-2);
+}
+
+.mm-ticketlist__star {
+  width: 14px;
+  height: 14px;
+  stroke: var(--mm-warning);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-ticketlist__star--filled {
+  fill: var(--mm-warning);
+  stroke: var(--mm-warning);
+}
+
+.mm-ticketlist__card-review-text {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--mm-warning-dark);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mm-ticketlist__card-no-review {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-3);
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-md);
+}
+
+.mm-ticketlist__card-no-review svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.mm-ticketlist__card-no-review span {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-400);
+}
+
+
+/* =============================================================
+   6. EMPTY STATE
+   ============================================================= */
+
+.mm-ticketlist__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  text-align: center;
+  animation: mm-ticketlist-fadeIn 0.5s ease 0.2s both;
+}
+
+.mm-ticketlist__empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border-radius: var(--mm-radius-2xl);
+  margin-bottom: var(--mm-space-5);
+}
+
+.mm-ticketlist__empty-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-ticketlist__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-700);
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-ticketlist__empty-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  max-width: 360px;
+  line-height: 1.6;
+}
+
+.mm-ticketlist__empty-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  margin-top: var(--mm-space-5);
+  padding: var(--mm-space-3) var(--mm-space-6);
+  background: var(--mm-gradient-primary);
+  color: #fff;
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 700;
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  text-decoration: none;
+  transition: all var(--mm-duration-fast) ease;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+}
+
+.mm-ticketlist__empty-btn:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(216, 136, 39, 0.35);
+  color: #fff;
+  text-decoration: none;
+}
+
+.mm-ticketlist__empty-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =============================================================
+   7. HIDDEN DATATABLE -- preserve for JS dependency
+   ============================================================= */
+
+.mm-ticketlist__hidden-table {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  padding: 0;
+  margin: -1px;
+}
+
+
+/* =============================================================
+   8. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-ticketlist-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mm-ticketlist-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mm-ticketlist-cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE -- Tablet (1199px)
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-ticketlist {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-ticketlist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-4);
+  }
+
+  .mm-ticketlist__stats-bar {
+    flex-wrap: wrap;
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   10. RESPONSIVE -- Mobile Landscape (767px)
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-ticketlist {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-ticketlist__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mm-space-4);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-ticketlist__header-icon {
+    display: none;
+  }
+
+  .mm-ticketlist__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-ticketlist__stats-bar {
+    gap: var(--mm-space-4);
+    padding: var(--mm-space-3) var(--mm-space-4);
+    flex-wrap: wrap;
+  }
+
+  .mm-ticketlist__stat-separator {
+    display: none;
+  }
+
+  .mm-ticketlist__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mm-ticketlist__search-wrap {
+    max-width: none;
+  }
+
+  .mm-ticketlist__filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: var(--mm-space-1);
+  }
+
+  .mm-ticketlist__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mm-ticketlist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-3);
+  }
+
+  .mm-ticketlist__card-body {
+    padding: var(--mm-space-4);
+  }
+
+  .mm-ticketlist__card-header {
+    padding: var(--mm-space-3) var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   11. RESPONSIVE -- Mobile Portrait (480px)
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-ticketlist {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-ticketlist__grid {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-4);
+  }
+
+  .mm-ticketlist__card-body {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-ticketlist__card-header {
+    padding: var(--mm-space-3);
+  }
+
+  .mm-ticketlist__card-pricing {
+    padding: var(--mm-space-2) var(--mm-space-3);
+  }
+}
+
+
+/* =============================================================
+   12. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-ticketlist__card,
+body.dark-only .mm-ticketlist__stats-bar {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-ticketlist__card-header {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-ticketlist__card-id,
+body.dark-only .mm-ticketlist__title,
+body.dark-only .mm-ticketlist__stat-value,
+body.dark-only .mm-ticketlist__card-row-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-ticketlist__subtitle,
+body.dark-only .mm-ticketlist__stat-label,
+body.dark-only .mm-ticketlist__card-row-label,
+body.dark-only .mm-ticketlist__card-id-label,
+body.dark-only .mm-ticketlist__card-price-label {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .mm-ticketlist__search-input {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-ticketlist__filter-btn:not(.mm-ticketlist__filter-btn--active) {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-600) !important;
+}
+
+body.dark-only .mm-ticketlist__card-pricing {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-ticketlist__card-row-icon {
+  background: var(--mm-neutral-100) !important;
+}
+
+body.dark-only .mm-ticketlist__card-no-review {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+
+/* =============================================================
+   13. CUBA OVERRIDES -- Scoped to .mm-ticketlist
+   ============================================================= */
+
+.mm-ticketlist .page-title,
+.mm-ticketlist .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.mm-ticketlist .page-title::before {
+  display: none !important;
+}
+
+.mm-ticketlist .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.mm-ticketlist .page-title {
+  display: none !important;
+}
+
+.mm-ticketlist .blink_me {
+  display: none !important;
+}
+
+.mm-ticketlist .size-column {
+  display: none !important;
+}
+
+.mm-ticketlist .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}

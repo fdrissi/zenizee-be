@@ -1,0 +1,1426 @@
+/* =====================================================================
+   Zenizee — User List Page
+   Card grid for managing registered users with status toggle.
+   Uses design tokens from zenizee-tokens.css exclusively.
+   BEM prefix: mm-userlist__*
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-userlist {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER — Title bar
+   ============================================================= */
+
+.mm-userlist__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--mm-space-8);
+  animation: mm-userlist-fadeIn 0.45s ease both;
+}
+
+.mm-userlist__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+.mm-userlist__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-userlist__subtitle {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Header icon accent */
+.mm-userlist__header-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  border-radius: var(--mm-radius-xl);
+  flex-shrink: 0;
+}
+
+.mm-userlist__header-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--mm-primary-600);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =============================================================
+   2. STATS BAR — Quick summary strip
+   ============================================================= */
+
+.mm-userlist__stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-6);
+  padding: var(--mm-space-4) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-userlist-fadeUp 0.45s ease 0.05s both;
+}
+
+.mm-userlist__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-userlist__stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-userlist__stat-dot--total {
+  background: var(--mm-primary-500);
+}
+
+.mm-userlist__stat-dot--active {
+  background: var(--mm-success);
+}
+
+.mm-userlist__stat-dot--inactive {
+  background: var(--mm-neutral-400);
+}
+
+.mm-userlist__stat-dot--wallet {
+  background: var(--mm-info);
+}
+
+.mm-userlist__stat-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1;
+}
+
+.mm-userlist__stat-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-left: -4px;
+}
+
+.mm-userlist__stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================
+   3. TOOLBAR — Search + Filter
+   ============================================================= */
+
+.mm-userlist__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-userlist-fadeUp 0.45s ease 0.1s both;
+}
+
+.mm-userlist__search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 420px;
+}
+
+.mm-userlist__search-icon {
+  position: absolute;
+  left: var(--mm-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.mm-userlist__search-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-userlist__search-input {
+  width: 100%;
+  padding: var(--mm-space-3) var(--mm-space-4) var(--mm-space-3) 44px;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-900);
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-userlist__search-input::placeholder {
+  color: var(--mm-neutral-400);
+  font-weight: 400;
+}
+
+.mm-userlist__search-input:focus {
+  border-color: var(--mm-primary-300);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.08);
+}
+
+/* Filter buttons group */
+.mm-userlist__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-userlist__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-full);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-600);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.mm-userlist__filter-btn:hover {
+  border-color: var(--mm-primary-200);
+  color: var(--mm-primary-700);
+  background: var(--mm-primary-50);
+}
+
+.mm-userlist__filter-btn--active {
+  background: var(--mm-primary-500);
+  border-color: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+}
+
+.mm-userlist__filter-btn--active:hover {
+  background: var(--mm-primary-600);
+  border-color: var(--mm-primary-600);
+  color: #fff;
+}
+
+.mm-userlist__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--mm-radius-full);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mm-userlist__filter-btn:not(.mm-userlist__filter-btn--active) .mm-userlist__filter-count {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-userlist__filter-btn--active .mm-userlist__filter-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+
+/* =============================================================
+   4. CARD GRID — 4 columns desktop (users are simpler cards)
+   ============================================================= */
+
+.mm-userlist__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--mm-space-5);
+  animation: mm-userlist-fadeUp 0.45s ease 0.15s both;
+}
+
+
+/* =============================================================
+   5. USER CARD
+   ============================================================= */
+
+.mm-userlist__card {
+  position: relative;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  overflow: hidden;
+  transition: all var(--mm-duration-base) ease;
+  animation: mm-userlist-cardIn 0.5s var(--mm-ease-spring) both;
+  animation-delay: calc(var(--card-index, 0) * 0.04s + 0.15s);
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-userlist__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mm-shadow-card-hover);
+  border-color: var(--mm-primary-200);
+}
+
+
+/* ── Card top: circular avatar area ── */
+.mm-userlist__card-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-6) var(--mm-space-5);
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%);
+  border-bottom: 1px solid var(--mm-border-subtle);
+  min-height: 100px;
+}
+
+/* Circular avatar with primary ring */
+.mm-userlist__card-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--mm-primary-200);
+  box-shadow: 0 0 0 4px var(--mm-primary-50), var(--mm-shadow-sm);
+  transition: transform var(--mm-duration-slow) var(--mm-ease-spring), box-shadow var(--mm-duration-base) ease;
+}
+
+.mm-userlist__card:hover .mm-userlist__card-avatar {
+  transform: scale(1.06);
+  box-shadow: 0 0 0 4px var(--mm-primary-100), 0 0 0 7px rgba(216, 136, 39, 0.08), var(--mm-shadow-md);
+}
+
+/* Avatar placeholder with initials */
+.mm-userlist__card-no-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-gradient-primary);
+  border: 3px solid var(--mm-primary-200);
+  box-shadow: 0 0 0 4px var(--mm-primary-50), var(--mm-shadow-sm);
+  transition: transform var(--mm-duration-slow) var(--mm-ease-spring);
+}
+
+.mm-userlist__card:hover .mm-userlist__card-no-avatar {
+  transform: scale(1.06);
+}
+
+.mm-userlist__card-initials {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Status dot (bottom-right of avatar) ── */
+.mm-userlist__status-dot {
+  position: absolute;
+  bottom: var(--mm-space-4);
+  right: calc(50% - 44px);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--mm-neutral-0);
+  z-index: 2;
+}
+
+.mm-userlist__status-dot--active {
+  background: var(--mm-success);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+}
+
+.mm-userlist__status-dot--inactive {
+  background: var(--mm-neutral-400);
+  box-shadow: 0 0 0 3px rgba(120, 113, 108, 0.1);
+}
+
+/* ── Card index (top-left of visual) ── */
+.mm-userlist__card-index {
+  position: absolute;
+  top: var(--mm-space-3);
+  left: var(--mm-space-3);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 25, 23, 0.06);
+  border-radius: var(--mm-radius-md);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--mm-neutral-500);
+  z-index: 2;
+}
+
+
+/* ── Card body ── */
+.mm-userlist__card-body {
+  padding: var(--mm-space-4) var(--mm-space-5) var(--mm-space-4);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+}
+
+.mm-userlist__card-name {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+
+
+/* ── Contact info (email, phone) ── */
+.mm-userlist__card-contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+.mm-userlist__card-email,
+.mm-userlist__card-phone {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-xs);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mm-userlist__card-email svg,
+.mm-userlist__card-phone svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+
+/* ── Details grid (2 columns) ── */
+.mm-userlist__details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-3);
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-lg);
+}
+
+.mm-userlist__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mm-userlist__detail-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--mm-neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.mm-userlist__detail-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-800);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mm-userlist__detail-value--wallet {
+  color: var(--mm-primary-700);
+  font-weight: 700;
+}
+
+.mm-userlist__detail-value--code {
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace !important;
+  font-size: 0.6875rem;
+  letter-spacing: 0.03em;
+  color: var(--mm-neutral-600);
+}
+
+
+/* ── Card footer (badge + toggle action) ── */
+.mm-userlist__card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mm-space-2);
+  padding-top: var(--mm-space-3);
+  border-top: 1px solid var(--mm-border-subtle);
+  margin-top: auto;
+}
+
+
+/* ── Status badge ── */
+.mm-userlist__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--mm-radius-full);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.mm-userlist__badge svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* Active badge */
+.mm-userlist__badge--active {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+}
+
+.mm-userlist__badge--active svg {
+  stroke: var(--mm-success);
+}
+
+/* Inactive badge */
+.mm-userlist__badge--inactive {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-userlist__badge--inactive svg {
+  stroke: var(--mm-neutral-500);
+}
+
+
+/* ── Toggle status button (drop class for AJAX handler) ── */
+.mm-userlist__toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-family: var(--mm-font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  border-radius: var(--mm-radius-md);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  line-height: 1.4;
+  white-space: nowrap;
+  border: none;
+}
+
+.mm-userlist__toggle-btn svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* Deactivate button (currently active user) */
+.mm-userlist__toggle-btn--deactivate {
+  background: var(--mm-error-light);
+  color: var(--mm-error-dark);
+}
+
+.mm-userlist__toggle-btn--deactivate svg {
+  stroke: var(--mm-error);
+}
+
+.mm-userlist__toggle-btn--deactivate:hover {
+  background: var(--mm-error);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.25);
+}
+
+.mm-userlist__toggle-btn--deactivate:hover svg {
+  stroke: #fff;
+}
+
+/* Activate button (currently inactive user) */
+.mm-userlist__toggle-btn--activate {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+}
+
+.mm-userlist__toggle-btn--activate svg {
+  stroke: var(--mm-success);
+}
+
+.mm-userlist__toggle-btn--activate:hover {
+  background: var(--mm-success);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25);
+}
+
+.mm-userlist__toggle-btn--activate:hover svg {
+  stroke: #fff;
+}
+
+
+/* =============================================================
+   6. EMPTY STATE
+   ============================================================= */
+
+.mm-userlist__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  text-align: center;
+  animation: mm-userlist-fadeIn 0.5s ease 0.2s both;
+}
+
+.mm-userlist__empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border-radius: var(--mm-radius-2xl);
+  margin-bottom: var(--mm-space-5);
+}
+
+.mm-userlist__empty-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-userlist__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-700);
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-userlist__empty-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+
+/* =============================================================
+   7. HIDDEN DATATABLE (preserves JS dependency)
+   ============================================================= */
+
+.mm-userlist__hidden-table {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  padding: 0;
+  margin: -1px;
+}
+
+
+/* =============================================================
+   8. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-userlist-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mm-userlist-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mm-userlist-cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE — Large Desktop (1399px) 3 columns
+   ============================================================= */
+
+@media (max-width: 1399px) {
+  .mm-userlist__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--mm-space-5);
+  }
+}
+
+
+/* =============================================================
+   10. RESPONSIVE — Tablet (1199px) 2 columns
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-userlist {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-userlist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   11. RESPONSIVE — Mobile Landscape (767px)
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-userlist {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-userlist__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mm-space-4);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-userlist__header-icon {
+    display: none;
+  }
+
+  .mm-userlist__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-userlist__stats-bar {
+    gap: var(--mm-space-4);
+    padding: var(--mm-space-3) var(--mm-space-4);
+    flex-wrap: wrap;
+  }
+
+  .mm-userlist__stat-separator {
+    display: none;
+  }
+
+  .mm-userlist__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mm-userlist__search-wrap {
+    max-width: none;
+  }
+
+  .mm-userlist__filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: var(--mm-space-1);
+  }
+
+  .mm-userlist__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mm-userlist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-3);
+  }
+
+  .mm-userlist__card-visual {
+    padding: var(--mm-space-5) var(--mm-space-4);
+    min-height: 90px;
+  }
+
+  .mm-userlist__card-avatar,
+  .mm-userlist__card-no-avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .mm-userlist__card-initials {
+    font-size: var(--mm-text-base);
+  }
+
+  .mm-userlist__card-body {
+    padding: var(--mm-space-3) var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   12. RESPONSIVE — Mobile Portrait (480px) 1 column
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-userlist {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-userlist__grid {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-4);
+  }
+
+  .mm-userlist__card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .mm-userlist__card-visual {
+    width: 110px;
+    min-height: auto;
+    padding: var(--mm-space-4);
+    border-bottom: none;
+    border-right: 1px solid var(--mm-border-subtle);
+    flex-shrink: 0;
+  }
+
+  .mm-userlist__card-avatar,
+  .mm-userlist__card-no-avatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .mm-userlist__card-initials {
+    font-size: var(--mm-text-sm);
+  }
+
+  /* On mobile row layout, status dot anchors to top-right of visual */
+  .mm-userlist__status-dot {
+    bottom: auto;
+    right: var(--mm-space-2);
+    top: var(--mm-space-2);
+    width: 10px;
+    height: 10px;
+  }
+
+  .mm-userlist__card-index {
+    display: none;
+  }
+
+  .mm-userlist__card-body {
+    padding: var(--mm-space-3) var(--mm-space-4);
+    gap: var(--mm-space-2);
+  }
+
+  .mm-userlist__card-name {
+    text-align: left;
+    font-size: var(--mm-text-sm);
+  }
+
+  .mm-userlist__details {
+    gap: var(--mm-space-1);
+    padding: var(--mm-space-2);
+  }
+
+  .mm-userlist__detail-value {
+    font-size: 0.6875rem;
+  }
+
+  .mm-userlist__card-footer {
+    flex-wrap: wrap;
+    gap: var(--mm-space-1);
+  }
+}
+
+
+/* =============================================================
+   13. ADMIN CARD VARIANTS
+   ============================================================= */
+
+.mm-userlist__stat-dot--admin {
+  background: var(--mm-info, #0ea5e9);
+}
+
+/* Admin badge */
+.mm-userlist__badge--admin {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.mm-userlist__badge--admin svg {
+  stroke: #0ea5e9;
+}
+
+/* Admin card visual — blue gradient */
+.mm-userlist__card-visual--admin {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-bottom-color: #bfdbfe;
+}
+
+.mm-userlist__card-no-avatar--admin {
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  border-color: #93c5fd;
+}
+
+/* Admin card subtle left accent */
+.mm-userlist__card--admin {
+  border-left: 3px solid #0ea5e9;
+}
+
+.mm-userlist__card--admin:hover {
+  border-color: #0ea5e9;
+  border-left-color: #0ea5e9;
+}
+
+
+/* =============================================================
+   14. EDIT BUTTON
+   ============================================================= */
+
+.mm-userlist__edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-family: var(--mm-font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  border-radius: var(--mm-radius-md);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  background: var(--mm-primary-50);
+  color: var(--mm-primary-700);
+  border: none;
+  white-space: nowrap;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.mm-userlist__edit-btn svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.mm-userlist__edit-btn:hover {
+  background: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+  text-decoration: none;
+}
+
+
+/* =============================================================
+   15. EDIT USER MODAL
+   ============================================================= */
+
+.mm-userlist__modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 25, 23, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: mm-userlist-fadeIn 0.2s ease both;
+}
+
+.mm-userlist__modal-overlay--active {
+  display: flex;
+}
+
+.mm-userlist__modal {
+  background: var(--mm-neutral-0);
+  border-radius: var(--mm-radius-2xl);
+  padding: 0;
+  max-width: 520px;
+  width: 92%;
+  box-shadow: var(--mm-shadow-xl);
+  animation: mm-userlist-modalIn 0.3s var(--mm-ease-spring) both;
+  overflow: hidden;
+}
+
+.mm-userlist__modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--mm-space-5) var(--mm-space-6);
+  border-bottom: 1px solid var(--mm-border-subtle);
+  background: var(--mm-neutral-50);
+}
+
+.mm-userlist__modal-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-userlist__modal-title svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--mm-primary-500);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-userlist__modal-close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border: none;
+  border-radius: var(--mm-radius-md);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+}
+
+.mm-userlist__modal-close svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--mm-neutral-500);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-userlist__modal-close:hover {
+  background: var(--mm-error-light);
+}
+
+.mm-userlist__modal-close:hover svg {
+  stroke: var(--mm-error);
+}
+
+/* Form layout */
+.mm-userlist__edit-form {
+  padding: var(--mm-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-4);
+}
+
+.mm-userlist__form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--mm-space-4);
+}
+
+.mm-userlist__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-2);
+}
+
+.mm-userlist__form-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mm-userlist__form-input {
+  width: 100%;
+  padding: var(--mm-space-3) var(--mm-space-4);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-900);
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-userlist__form-input::placeholder {
+  color: var(--mm-neutral-400);
+  font-weight: 400;
+}
+
+.mm-userlist__form-input:focus {
+  border-color: var(--mm-primary-300);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.08);
+}
+
+select.mm-userlist__form-input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2378716c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+/* Modal actions */
+.mm-userlist__modal-actions {
+  display: flex;
+  gap: var(--mm-space-3);
+  justify-content: flex-end;
+  padding-top: var(--mm-space-2);
+  border-top: 1px solid var(--mm-border-subtle);
+  margin-top: var(--mm-space-2);
+}
+
+.mm-userlist__modal-btn {
+  padding: var(--mm-space-3) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--mm-radius-lg);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-userlist__modal-btn--cancel {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-700);
+}
+
+.mm-userlist__modal-btn--cancel:hover {
+  background: var(--mm-neutral-200);
+}
+
+.mm-userlist__modal-btn--save {
+  background: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(216, 136, 39, 0.25);
+}
+
+.mm-userlist__modal-btn--save:hover {
+  background: var(--mm-primary-600);
+  box-shadow: 0 6px 16px rgba(216, 136, 39, 0.3);
+}
+
+.mm-userlist__modal-btn--save svg {
+  width: 14px;
+  height: 14px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@keyframes mm-userlist-modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Modal responsive */
+@media (max-width: 480px) {
+  .mm-userlist__form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .mm-userlist__modal {
+    width: 96%;
+  }
+
+  .mm-userlist__modal-actions {
+    flex-direction: column;
+  }
+
+  .mm-userlist__modal-btn {
+    justify-content: center;
+  }
+}
+
+
+/* =============================================================
+   16. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-userlist__card,
+body.dark-only .mm-userlist__stats-bar {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-userlist__card-visual {
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%) !important;
+}
+
+body.dark-only .mm-userlist__card-name,
+body.dark-only .mm-userlist__title,
+body.dark-only .mm-userlist__stat-value,
+body.dark-only .mm-userlist__detail-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-userlist__subtitle,
+body.dark-only .mm-userlist__stat-label,
+body.dark-only .mm-userlist__card-email,
+body.dark-only .mm-userlist__card-phone,
+body.dark-only .mm-userlist__detail-label {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .mm-userlist__search-input {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-userlist__filter-btn:not(.mm-userlist__filter-btn--active) {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-600) !important;
+}
+
+body.dark-only .mm-userlist__details {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-userlist__toggle-btn--deactivate {
+  background: var(--mm-error-light) !important;
+  color: var(--mm-error-dark) !important;
+}
+
+body.dark-only .mm-userlist__toggle-btn--activate {
+  background: var(--mm-success-light) !important;
+  color: var(--mm-success-dark) !important;
+}
+
+body.dark-only .mm-userlist__edit-btn {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+body.dark-only .mm-userlist__modal,
+body.dark-only .mm-userlist__modal-header {
+  background: var(--mm-neutral-0) !important;
+}
+
+body.dark-only .mm-userlist__modal-title {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-userlist__form-input {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-userlist__form-label {
+  color: var(--mm-neutral-600) !important;
+}
+
+body.dark-only .mm-userlist__card--admin .mm-userlist__card-visual {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%) !important;
+}
+
+
+/* =============================================================
+   17. CUBA OVERRIDES — Scoped to .mm-userlist
+   ============================================================= */
+
+.mm-userlist .page-title,
+.mm-userlist .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.mm-userlist .page-title::before {
+  display: none !important;
+}
+
+.mm-userlist .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.mm-userlist .page-title {
+  display: none !important;
+}
+
+.mm-userlist .blink_me {
+  display: none !important;
+}
+
+.mm-userlist .size-column {
+  display: none !important;
+}
+
+.mm-userlist .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+
+/* =============================================================
+   18. ADD ADMIN BUTTON
+   ============================================================= */
+
+.mm-userlist__add-admin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-3) var(--mm-space-5);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-neutral-0);
+  background: var(--mm-gradient-primary);
+  border: none;
+  border-radius: var(--mm-radius-xl);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--mm-duration-base) ease,
+    transform var(--mm-duration-fast) var(--mm-ease-spring),
+    box-shadow var(--mm-duration-base) ease;
+  box-shadow: 0 4px 14px rgba(216, 136, 39, 0.25), 0 1px 4px rgba(216, 136, 39, 0.15);
+}
+
+.mm-userlist__add-admin-btn:hover {
+  background: var(--mm-gradient-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(216, 136, 39, 0.35), 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-userlist__add-admin-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.2);
+}
+
+.mm-userlist__add-admin-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

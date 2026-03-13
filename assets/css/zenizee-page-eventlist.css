@@ -1,0 +1,1111 @@
+/* =====================================================================
+   Zenizee — Event List Page
+   Card grid for managing events with image banners and action buttons.
+   Uses design tokens from zenizee-tokens.css exclusively.
+   BEM prefix: mm-eventlist__*
+   ===================================================================== */
+
+
+/* =============================================================
+   0. PAGE CONTAINER
+   ============================================================= */
+
+.mm-eventlist {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--mm-space-8) var(--mm-space-6);
+  font-family: var(--mm-font-sans);
+}
+
+
+/* =============================================================
+   1. PAGE HEADER — Title bar with back link
+   ============================================================= */
+
+.mm-eventlist__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-sm);
+  font-weight: 600;
+  color: var(--mm-neutral-500);
+  text-decoration: none;
+  margin-bottom: var(--mm-space-4);
+  transition: color var(--mm-duration-fast) ease;
+  animation: mm-eventlist-fadeIn 0.35s ease both;
+}
+
+.mm-eventlist__back:hover {
+  color: var(--mm-primary-600);
+  text-decoration: none;
+}
+
+.mm-eventlist__back svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-eventlist__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--mm-space-8);
+  animation: mm-eventlist-fadeIn 0.45s ease both;
+}
+
+.mm-eventlist__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-1);
+}
+
+.mm-eventlist__title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-2xl);
+  font-weight: 800;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.mm-eventlist__subtitle {
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Header icon accent */
+.mm-eventlist__header-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-50);
+  border: 1px solid var(--mm-primary-100);
+  border-radius: var(--mm-radius-xl);
+  flex-shrink: 0;
+}
+
+.mm-eventlist__header-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--mm-primary-600);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =============================================================
+   2. STATS BAR — Quick summary strip
+   ============================================================= */
+
+.mm-eventlist__stats-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-6);
+  padding: var(--mm-space-4) var(--mm-space-6);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-eventlist-fadeUp 0.45s ease 0.05s both;
+}
+
+.mm-eventlist__stat {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+}
+
+.mm-eventlist__stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mm-eventlist__stat-dot--total {
+  background: var(--mm-primary-500);
+}
+
+.mm-eventlist__stat-dot--published {
+  background: var(--mm-success);
+}
+
+.mm-eventlist__stat-dot--pending {
+  background: var(--mm-warning);
+}
+
+.mm-eventlist__stat-dot--tickets {
+  background: var(--mm-info);
+}
+
+.mm-eventlist__stat-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1;
+}
+
+.mm-eventlist__stat-label {
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  margin-left: -4px;
+}
+
+.mm-eventlist__stat-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================
+   3. TOOLBAR — Search + Filter Pills
+   ============================================================= */
+
+.mm-eventlist__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  margin-bottom: var(--mm-space-6);
+  animation: mm-eventlist-fadeUp 0.45s ease 0.1s both;
+  flex-wrap: wrap;
+}
+
+.mm-eventlist__search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+  min-width: 200px;
+}
+
+.mm-eventlist__search-icon {
+  position: absolute;
+  left: var(--mm-space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.mm-eventlist__search-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-eventlist__search-input {
+  width: 100%;
+  padding: var(--mm-space-3) var(--mm-space-4) var(--mm-space-3) 44px;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-lg);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-sm);
+  font-weight: 500;
+  color: var(--mm-neutral-900);
+  outline: none;
+  transition: border-color var(--mm-duration-fast) ease, box-shadow var(--mm-duration-fast) ease;
+  box-sizing: border-box;
+}
+
+.mm-eventlist__search-input::placeholder {
+  color: var(--mm-neutral-400);
+  font-weight: 400;
+}
+
+.mm-eventlist__search-input:focus {
+  border-color: var(--mm-primary-300);
+  box-shadow: 0 0 0 3px rgba(216, 136, 39, 0.08);
+}
+
+/* Filter buttons group */
+.mm-eventlist__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  flex-wrap: wrap;
+}
+
+.mm-eventlist__filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+}
+
+.mm-eventlist__filter-group-label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--mm-neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  margin-right: var(--mm-space-1);
+}
+
+.mm-eventlist__filter-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--mm-border-default);
+  flex-shrink: 0;
+  margin: 0 var(--mm-space-2);
+}
+
+.mm-eventlist__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-4);
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-default);
+  border-radius: var(--mm-radius-full);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  color: var(--mm-neutral-600);
+  cursor: pointer;
+  transition: all var(--mm-duration-fast) ease;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.mm-eventlist__filter-btn:hover {
+  border-color: var(--mm-primary-200);
+  color: var(--mm-primary-700);
+  background: var(--mm-primary-50);
+}
+
+.mm-eventlist__filter-btn--active {
+  background: var(--mm-primary-500);
+  border-color: var(--mm-primary-500);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216, 136, 39, 0.25);
+}
+
+.mm-eventlist__filter-btn--active:hover {
+  background: var(--mm-primary-600);
+  border-color: var(--mm-primary-600);
+  color: #fff;
+}
+
+.mm-eventlist__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--mm-radius-full);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mm-eventlist__filter-btn:not(.mm-eventlist__filter-btn--active) .mm-eventlist__filter-count {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-eventlist__filter-btn--active .mm-eventlist__filter-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+
+/* =============================================================
+   4. CARD GRID — 3 columns desktop
+   ============================================================= */
+
+.mm-eventlist__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--mm-space-5);
+  animation: mm-eventlist-fadeUp 0.45s ease 0.15s both;
+}
+
+
+/* =============================================================
+   5. EVENT CARD
+   ============================================================= */
+
+.mm-eventlist__card {
+  position: relative;
+  background: var(--mm-neutral-0);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-xl);
+  overflow: hidden;
+  transition: all var(--mm-duration-base) ease;
+  animation: mm-eventlist-cardIn 0.5s var(--mm-ease-spring) both;
+  animation-delay: calc(var(--card-index, 0) * 0.06s + 0.15s);
+  display: flex;
+  flex-direction: column;
+}
+
+.mm-eventlist__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mm-shadow-card-hover);
+  border-color: var(--mm-primary-200);
+}
+
+
+/* ── Card top: Event banner image ── */
+.mm-eventlist__card-image-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 52%;  /* ~16:9ish landscape ratio */
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%);
+}
+
+.mm-eventlist__card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--mm-duration-slow) ease;
+}
+
+.mm-eventlist__card:hover .mm-eventlist__card-image {
+  transform: scale(1.04);
+}
+
+/* Placeholder when no image */
+.mm-eventlist__card-no-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--mm-neutral-100) 0%, var(--mm-neutral-200) 100%);
+}
+
+.mm-eventlist__card-no-image svg {
+  width: 40px;
+  height: 40px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.6;
+}
+
+/* Card index overlay (top-left of image) */
+.mm-eventlist__card-index {
+  position: absolute;
+  top: var(--mm-space-3);
+  left: var(--mm-space-3);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 25, 23, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: var(--mm-radius-md);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #fff;
+  z-index: 2;
+}
+
+/* Category badge overlay (top-right of image) */
+.mm-eventlist__card-category {
+  position: absolute;
+  top: var(--mm-space-3);
+  right: var(--mm-space-3);
+  display: inline-flex;
+  align-items: center;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: var(--mm-radius-full);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--mm-primary-700);
+  z-index: 2;
+  white-space: nowrap;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ── Card body ── */
+.mm-eventlist__card-body {
+  padding: var(--mm-space-5) var(--mm-space-5) var(--mm-space-4);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mm-space-3);
+}
+
+.mm-eventlist__card-name {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-md);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Date/time line */
+.mm-eventlist__card-datetime {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mm-eventlist__card-date {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-600);
+  line-height: 1.4;
+}
+
+.mm-eventlist__card-date svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.mm-eventlist__card-time {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  font-size: var(--mm-text-xs);
+  font-weight: 500;
+  color: var(--mm-neutral-500);
+  line-height: 1.4;
+}
+
+.mm-eventlist__card-time svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+
+/* ── Tickets sold metric ── */
+.mm-eventlist__card-metric {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-3);
+  padding: var(--mm-space-3);
+  background: var(--mm-neutral-50);
+  border: 1px solid var(--mm-border-subtle);
+  border-radius: var(--mm-radius-lg);
+}
+
+.mm-eventlist__card-metric-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-primary-50);
+  border-radius: var(--mm-radius-md);
+  flex-shrink: 0;
+}
+
+.mm-eventlist__card-metric-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--mm-primary-600);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-eventlist__card-metric-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.mm-eventlist__card-metric-value {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-sm);
+  font-weight: 700;
+  color: var(--mm-neutral-900);
+  line-height: 1.2;
+}
+
+.mm-eventlist__card-metric-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--mm-neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+
+/* ── Status badges row ── */
+.mm-eventlist__card-badges {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.mm-eventlist__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--mm-space-1) var(--mm-space-3);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--mm-radius-full);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.mm-eventlist__badge svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* Published badge */
+.mm-eventlist__badge--published {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+}
+
+.mm-eventlist__badge--published svg {
+  stroke: var(--mm-success);
+}
+
+/* Unpublished badge */
+.mm-eventlist__badge--unpublished {
+  background: var(--mm-neutral-100);
+  color: var(--mm-neutral-600);
+}
+
+.mm-eventlist__badge--unpublished svg {
+  stroke: var(--mm-neutral-500);
+}
+
+/* Event status: Pending */
+.mm-eventlist__badge--pending {
+  background: var(--mm-warning-light);
+  color: var(--mm-warning-dark);
+}
+
+.mm-eventlist__badge--pending svg {
+  stroke: var(--mm-warning);
+}
+
+/* Event status: Completed */
+.mm-eventlist__badge--completed {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+}
+
+.mm-eventlist__badge--completed svg {
+  stroke: var(--mm-success);
+}
+
+/* Event status: Cancelled */
+.mm-eventlist__badge--cancelled {
+  background: var(--mm-error-light);
+  color: var(--mm-error-dark);
+}
+
+.mm-eventlist__badge--cancelled svg {
+  stroke: var(--mm-error);
+}
+
+
+/* ── Card footer (actions) ── */
+.mm-eventlist__card-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-3) var(--mm-space-5);
+  border-top: 1px solid var(--mm-border-subtle);
+  flex-wrap: wrap;
+}
+
+.mm-eventlist__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mm-space-2);
+  padding: var(--mm-space-2) var(--mm-space-3);
+  font-family: var(--mm-font-sans);
+  font-size: var(--mm-text-xs);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--mm-radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--mm-duration-fast) ease;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.mm-eventlist__action-btn svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Edit button */
+.mm-eventlist__action-btn--edit {
+  background: var(--mm-primary-50);
+  color: var(--mm-primary-700);
+}
+
+.mm-eventlist__action-btn--edit svg {
+  stroke: var(--mm-primary-600);
+}
+
+.mm-eventlist__action-btn--edit:hover {
+  background: var(--mm-primary-100);
+  color: var(--mm-primary-800);
+  text-decoration: none;
+}
+
+/* Tickets button */
+.mm-eventlist__action-btn--tickets {
+  background: var(--mm-info-light);
+  color: var(--mm-info-dark);
+}
+
+.mm-eventlist__action-btn--tickets svg {
+  stroke: var(--mm-info);
+}
+
+.mm-eventlist__action-btn--tickets:hover {
+  background: #BFDBFE;
+  color: var(--mm-info-dark);
+  text-decoration: none;
+}
+
+/* Complete button */
+.mm-eventlist__action-btn--complete {
+  background: var(--mm-success-light);
+  color: var(--mm-success-dark);
+}
+
+.mm-eventlist__action-btn--complete svg {
+  stroke: var(--mm-success);
+}
+
+.mm-eventlist__action-btn--complete:hover {
+  background: #BBF7D0;
+  color: var(--mm-success-dark);
+  text-decoration: none;
+}
+
+/* Cancel button */
+.mm-eventlist__action-btn--cancel {
+  background: var(--mm-error-light);
+  color: var(--mm-error-dark);
+}
+
+.mm-eventlist__action-btn--cancel svg {
+  stroke: var(--mm-error);
+}
+
+.mm-eventlist__action-btn--cancel:hover {
+  background: #FECACA;
+  color: var(--mm-error-dark);
+  text-decoration: none;
+}
+
+/* Spacer to push cancel to right */
+.mm-eventlist__action-spacer {
+  flex: 1;
+}
+
+
+/* =============================================================
+   6. EMPTY STATE
+   ============================================================= */
+
+.mm-eventlist__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mm-space-12) var(--mm-space-6);
+  text-align: center;
+  animation: mm-eventlist-fadeIn 0.5s ease 0.2s both;
+}
+
+.mm-eventlist__empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mm-neutral-100);
+  border-radius: var(--mm-radius-2xl);
+  margin-bottom: var(--mm-space-5);
+}
+
+.mm-eventlist__empty-icon svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--mm-neutral-400);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mm-eventlist__empty-title {
+  font-family: var(--mm-font-display) !important;
+  font-size: var(--mm-text-lg);
+  font-weight: 700;
+  color: var(--mm-neutral-700);
+  margin: 0 0 var(--mm-space-2) 0;
+}
+
+.mm-eventlist__empty-text {
+  font-size: var(--mm-text-sm);
+  font-weight: 400;
+  color: var(--mm-neutral-500);
+  margin: 0;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+
+/* =============================================================
+   7. HIDDEN DATATABLE — preserve for JS dependency
+   ============================================================= */
+
+.mm-eventlist__hidden-table {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  padding: 0;
+  margin: -1px;
+}
+
+
+/* =============================================================
+   8. ANIMATIONS
+   ============================================================= */
+
+@keyframes mm-eventlist-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes mm-eventlist-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mm-eventlist-cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =============================================================
+   9. RESPONSIVE — Tablet (1199px)
+   ============================================================= */
+
+@media (max-width: 1199px) {
+  .mm-eventlist {
+    padding: var(--mm-space-6) var(--mm-space-5);
+  }
+
+  .mm-eventlist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-4);
+  }
+}
+
+
+/* =============================================================
+   10. RESPONSIVE — Mobile Landscape (767px)
+   ============================================================= */
+
+@media (max-width: 767px) {
+  .mm-eventlist {
+    padding: var(--mm-space-5) var(--mm-space-4);
+  }
+
+  .mm-eventlist__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--mm-space-4);
+    margin-bottom: var(--mm-space-6);
+  }
+
+  .mm-eventlist__header-icon {
+    display: none;
+  }
+
+  .mm-eventlist__title {
+    font-size: var(--mm-text-xl);
+  }
+
+  .mm-eventlist__stats-bar {
+    gap: var(--mm-space-4);
+    padding: var(--mm-space-3) var(--mm-space-4);
+    flex-wrap: wrap;
+  }
+
+  .mm-eventlist__stat-separator {
+    display: none;
+  }
+
+  .mm-eventlist__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mm-eventlist__search-wrap {
+    max-width: none;
+  }
+
+  .mm-eventlist__filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: var(--mm-space-1);
+  }
+
+  .mm-eventlist__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mm-eventlist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mm-space-3);
+  }
+
+  .mm-eventlist__card-body {
+    padding: var(--mm-space-4);
+  }
+
+  .mm-eventlist__card-actions {
+    padding: var(--mm-space-2) var(--mm-space-4);
+  }
+
+  .mm-eventlist__filter-divider {
+    display: none;
+  }
+}
+
+
+/* =============================================================
+   11. RESPONSIVE — Mobile Portrait (480px)
+   ============================================================= */
+
+@media (max-width: 480px) {
+  .mm-eventlist {
+    padding: var(--mm-space-4) var(--mm-space-3);
+  }
+
+  .mm-eventlist__grid {
+    grid-template-columns: 1fr;
+    gap: var(--mm-space-4);
+  }
+
+  .mm-eventlist__card-name {
+    font-size: var(--mm-text-sm);
+  }
+
+  .mm-eventlist__card-actions {
+    padding: var(--mm-space-2) var(--mm-space-3);
+  }
+
+  .mm-eventlist__action-btn {
+    padding: var(--mm-space-1) var(--mm-space-2);
+    font-size: 0.6875rem;
+  }
+
+  .mm-eventlist__action-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+
+/* =============================================================
+   12. DARK MODE KILL (keep light)
+   ============================================================= */
+
+body.dark-only .mm-eventlist__card,
+body.dark-only .mm-eventlist__stats-bar {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-eventlist__card-image-wrap {
+  background: linear-gradient(135deg, var(--mm-neutral-50) 0%, var(--mm-neutral-100) 100%) !important;
+}
+
+body.dark-only .mm-eventlist__card-name,
+body.dark-only .mm-eventlist__title,
+body.dark-only .mm-eventlist__stat-value,
+body.dark-only .mm-eventlist__card-metric-value {
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-eventlist__subtitle,
+body.dark-only .mm-eventlist__stat-label,
+body.dark-only .mm-eventlist__card-date,
+body.dark-only .mm-eventlist__card-time,
+body.dark-only .mm-eventlist__card-metric-label {
+  color: var(--mm-neutral-500) !important;
+}
+
+body.dark-only .mm-eventlist__search-input {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-900) !important;
+}
+
+body.dark-only .mm-eventlist__filter-btn:not(.mm-eventlist__filter-btn--active) {
+  background: var(--mm-neutral-0) !important;
+  border-color: var(--mm-border-default) !important;
+  color: var(--mm-neutral-600) !important;
+}
+
+body.dark-only .mm-eventlist__card-metric {
+  background: var(--mm-neutral-50) !important;
+  border-color: var(--mm-border-subtle) !important;
+}
+
+body.dark-only .mm-eventlist__action-btn--edit {
+  background: var(--mm-primary-50) !important;
+  color: var(--mm-primary-700) !important;
+}
+
+body.dark-only .mm-eventlist__action-btn--tickets {
+  background: var(--mm-info-light) !important;
+  color: var(--mm-info-dark) !important;
+}
+
+body.dark-only .mm-eventlist__action-btn--complete {
+  background: var(--mm-success-light) !important;
+  color: var(--mm-success-dark) !important;
+}
+
+body.dark-only .mm-eventlist__action-btn--cancel {
+  background: var(--mm-error-light) !important;
+  color: var(--mm-error-dark) !important;
+}
+
+
+/* =============================================================
+   13. CUBA OVERRIDES — Scoped to .mm-eventlist
+   ============================================================= */
+
+.mm-eventlist .page-title,
+.mm-eventlist .container-fluid {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.mm-eventlist .page-title::before {
+  display: none !important;
+}
+
+.mm-eventlist .card {
+  margin-bottom: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.mm-eventlist .page-title {
+  display: none !important;
+}
+
+.mm-eventlist .blink_me {
+  display: none !important;
+}
+
+.mm-eventlist .size-column {
+  display: none !important;
+}
+
+.mm-eventlist .container-fluid {
+  padding: 0 !important;
+  margin: 0 !important;
+}
